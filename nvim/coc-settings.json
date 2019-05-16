@@ -1,0 +1,33 @@
+{
+    "languageserver": {
+       "ccls": {
+            "command": "ccls",
+            "filetypes": [
+                "c",
+                "cpp",
+                "hpp",
+                "objc",
+                "objcpp"
+            ],
+            "initializationOptions": {
+                "cache": {
+                  "directory": "/tmp/.ccls-cache",
+                }
+            },
+            "rootPatterns": [
+                ".ccls",
+                "compile_commands.json",
+                ".vim/",
+                ".git/",
+                ".hg/",
+                ".svn/",
+            ]
+        }, 
+    },
+    "suggest.detailField": "abbr",
+    "suggest.noselect": true,
+    "suggest.preferCompleteThanJumpPlaceholder": true,
+    "suggest.timeout": 500,
+    "suggest.triggerAfterInsertEnter": true,
+    "suggest.triggerCompletionWait": 50
+}
