@@ -12,7 +12,7 @@ set cursorcolumn              " 高亮列
 set cursorline                " 高亮显示当前行
 set ttimeoutlen=0             " 设置<ESC>键响应时间
 set virtualedit=block,onemore " 允许光标出现在最后一个字符的后面
-set laststatus=0              " 总是显示状态栏
+set laststatus=2              " 总是显示状态栏
 set showtabline=2
 "set autochdir
 "set foldmethod=indent
@@ -213,6 +213,7 @@ filetype plugin indent on     " required!
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " tagbar
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+vnoremap // y/<c-r>"<CR>
 nnoremap <localleader>g :TagbarToggle<CR>
 let g:tagbar_width=25
 let g:tagbar_type_go = {
@@ -522,7 +523,6 @@ function! s:filter_footer(lines) abort
 	\ 'repeat(" ", (&columns / 2) - (longest_line / 2)) . v:val')
 	return centered_lines
 endfunction
-
 
 let g:startify_custom_header = s:filter_header(startify#fortune#cowsay())
 let g:startify_custom_footer = s:filter_footer(g:startify_custom_foote)
