@@ -22,7 +22,7 @@
                 ".hg/",
                 ".svn/",
             ]
-        }, 
+        },
     },
     "suggest.detailField": "abbr",
     "suggest.noselect": true,

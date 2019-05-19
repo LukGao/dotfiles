@@ -15,11 +15,6 @@ set virtualedit=block,onemore " 允许光标出现在最后一个字符的后面
 set laststatus=2              " 总是显示状态栏
 set showtabline=2
 "set autochdir
-"set foldmethod=indent
-"set nofoldenable
-
-""set fdm=syntax
-"set foldlevelstart=99
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 代码缩进和排版
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -98,7 +93,7 @@ Plug 'taigacute/spaceline.vim'
 Plug 'liuchengxu/space-vim-dark'
 Plug 'tpope/vim-fugitive'
 Plug 'neoclide/coc.nvim',               {'tag': '*', 'do': { -> coc#util#install()}}
-Plug 'mg979/vim-visual-multi',          {'branch': 'test','for':['go','cc','c','cpp','py']} "多行编辑
+Plug 'mg979/vim-visual-multi',          {'branch': 'test','for':['go','vim','cc','c','cpp','py']} "多行编辑
 Plug 'mbbill/undotree'                  " 后悔药
 Plug 'mhinz/vim-startify'               " 启动页
 Plug 'Yggdroot/LeaderF'                 " 神器，函数，文件，搜索
@@ -115,8 +110,12 @@ Plug 'lfv89/vim-interestingwords',      {'for':['go','c','cpp','cc','py']}      
 Plug 'honza/vim-snippets'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'tpope/vim-abolish'
-call plug#end()
-
+Plug 'voldikss/vim-translate-me'
+Plug 'haya14busa/incsearch.vim'
+Plug 'easymotion/vim-easymotion'
+Plug 'haya14busa/incsearch-easymotion.vim'
+Plug 'haya14busa/incsearch-fuzzy.vim'
+call plug#end() 
 
 nnoremap <localleader>ft :Autoformat<CR>
 
@@ -174,8 +173,8 @@ nnoremap <silent> <localleader>ck  :<C-u>CocPrev<CR>
 nnoremap <silent> <localleader>cr  :<C-u>CocListResume<CR>
 nmap <silent> ]c <Plug>(coc-diagnostic-prev)
 nmap <silent> [c <Plug>(coc-diagnostic-next)
-vmap <leader>cf  <Plug>(coc-format-selected)
-nmap <leader>cf  <Plug>(coc-format-selected)
+vmap <localleader>cf  <Plug>(coc-format-selected)
+nmap <localleader>cf  <Plug>(coc-format-selected)
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
@@ -200,10 +199,6 @@ endfunction
 inoremap <silent><expr> <c-space> coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
-" For conceal markers.
-if has('conceal')
-  set conceallevel=2 concealcursor=niv
-endif
 set updatetime=300
 au CursorHold * sil call CocActionAsync('highlight')
 au CursorHoldI * sil call CocActionAsync('showSignatureHelp')
@@ -213,7 +208,6 @@ filetype plugin indent on     " required!
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " tagbar
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-vnoremap // y/<c-r>"<CR>
 nnoremap <localleader>g :TagbarToggle<CR>
 let g:tagbar_width=25
 let g:tagbar_type_go = {
@@ -530,4 +524,44 @@ set viminfo='100,n$HOME/.vim/files/info/viminfo
 let g:startify_padding_left = 30
 let g:better_whitespace_enabled=1
 let g:strip_whitespace_confirm=0
-autocmd FileType cpp,c,go autocmd BufEnter <buffer> EnableStripWhitespaceOnSave
+autocmd FileType sh,cpp,c,go autocmd BufEnter <buffer> EnableStripWhitespaceOnSave
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" incsearch
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" easymotion
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map  <localleader>  <Plug>（easymotion - prefix）
+" Move to line
+map <localleader>l <Plug>(easymotion-bd-jk)
+nmap <localleader>l <Plug>(easymotion-overwin-line)
+" Move to word
+map  <localleader>w <Plug>(easymotion-bd-w)
+nmap <localleader>w <Plug>(easymotion-overwin-w)
+
+function! s:config_easyfuzzymotion(...) abort
+  return extend(copy({
+  \   'converters': [incsearch#config#fuzzyword#converter()],
+  \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
+  \   'keymap': {"\<CR>": '<Over>(easymotion)'},
+  \   'is_expr': 0,
+  \   'is_stay': 1
+  \ }), get(a:, 1, {}))
+endfunction
+
+"nmap s <Plug>(easymotion-overwin-f2)
+"
+noremap <silent><expr> s  incsearch#go(<SID>config_easyfuzzymotion())
+map <localleader>/ <Plug>(incsearch-fuzzy-/)
+
+vnoremap // y/<c-r>"<CR>   "
+
+" <Leader>t 翻译光标下的文本，在命令行回显翻译内容
+nmap <silent> <leader>t <Plug>Translate
+vmap <silent> <leader>t <Plug>TranslateV
+" leader>w 翻译光标下的文本，在窗口中显示翻译内容
+nmap <silent> <leader>w <Plug>TranslateW
+vmap <silent> <leader>w <Plug>TranslateWV
+let g:vtm_default_api="youdao"
