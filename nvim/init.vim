@@ -400,11 +400,11 @@ let g:lightline = {
       \ },
       \ 'tabline': {
       \   'left': [['buffers']],
-      \   'right': [['thinkvim']],
+      \   'right': [['ooknn']],
       \ },
       \ 'component': {
       \   'lineinfo': "\ue265 %3l:%-2v",
-      \   'thinkvim': 'ﴔ ',
+      \   'ooknn': "\uf299 ",
       \ },
       \ 'component_expand': {
       \   'buffers': 'lightline#bufferline#buffers',
@@ -583,9 +583,11 @@ if has('termguicolors')
 endif
 
 set background=dark
+colorscheme gruvbox9_hard
 let g:gruvbox_filetype_hi_groups = 1
 let g:gruvbox_plugin_hi_groups = 1
-colorscheme gruvbox9_hard
+let g:gruvbox_transp_bg = 1
+
 
 hi Whitespace ctermfg=96 guifg=#725972 guibg=NONE ctermbg=NONE
 
