@@ -56,3 +56,4 @@ alias zf='z -I'      # 使用 fzf 对多个结果进行选择
 alias zb='z -b'      # 快速回到父目录
 alias on='nvim $(fzf --height 40% --reverse)'
 alias ok='nvim'
+alias tmux='tmux -2'
