@@ -93,7 +93,7 @@ Plug 'taigacute/spaceline.vim'
 "Plug 'liuchengxu/space-vim-dark'
 Plug 'tpope/vim-fugitive'
 Plug 'taigacute/gruvbox9'
-
+Plug 'MattesGroeger/vim-bookmarks'
 Plug 'neoclide/coc.nvim',               {'tag': '*', 'do': { -> coc#util#install()}}
 Plug 'mg979/vim-visual-multi',          {'branch': 'test','for':['go','vim','cc','c','cpp','py']} "多行编辑
 Plug 'mbbill/undotree'                  " 后悔药
@@ -603,3 +603,9 @@ highlight def link Defx_filename_3_Untracked Comment
 highlight def link Defx_filename_3_Unknown Comment
 highlight def link Defx_filename_3_Renamed Title
 highlight def link Defx_filename_3_Unmerged Label
+
+
+highlight BookmarkSign ctermbg=NONE ctermfg=160
+highlight BookmarkLine ctermbg=194 ctermfg=NONE
+let g:bookmark_sign = '⚑'
+let g:bookmark_highlight_lines = 1
