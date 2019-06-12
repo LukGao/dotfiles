@@ -8,12 +8,13 @@ set nocompatible              " 设置不兼容原始vi模式
 set t_Co=256                  " 开启256色支持
 set nu
 set showcmd                   " select模式下显示选中的行数
-set cursorcolumn              " 高亮列
-set cursorline                " 高亮显示当前行
+"set cursorcolumn              " 高亮列
+"set cursorline                " 高亮显示当前行
 set ttimeoutlen=0             " 设置<ESC>键响应时间
 set virtualedit=block,onemore " 允许光标出现在最后一个字符的后面
 set laststatus=2              " 总是显示状态栏
 set showtabline=2
+"set noshowmode
 "set autochdir
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 代码缩进和排版
@@ -26,6 +27,7 @@ set smarttab                " 在行和段开始处使用制表符
 set nowrap                  " 禁止折行
 set backspace=2             " 使用回车键正常处理indent,eol,start等
 set sidescroll=10           " 设置向右滚动字符数
+set t_Co=256
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 代码补全
@@ -86,13 +88,17 @@ nnoremap <leader><leader>c :PlugClean<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
 Plug 'ryanoasis/vim-devicons'
 Plug 'itchyny/lightline.vim'
 Plug 'mengelbrecht/lightline-bufferline'
 Plug 'taigacute/spaceline.vim'
-"Plug 'liuchengxu/space-vim-dark'
-Plug 'tpope/vim-fugitive'
+Plug 'liuchengxu/space-vim-dark'
 Plug 'taigacute/gruvbox9'
+Plug 'google/vim-colorscheme-primary'
+Plug 'chxuan/change-colorscheme'
+Plug 'liuchengxu/vista.vim'
+Plug 'octol/vim-cpp-enhanced-highlight'
 
 Plug 'neoclide/coc.nvim',               {'tag': '*', 'do': { -> coc#util#install()}}
 Plug 'mg979/vim-visual-multi',          {'branch': 'test','for':['go','vim','cc','c','cpp','py']} "多行编辑
@@ -133,7 +139,7 @@ nnoremap <localleader>n :NERDTreeToggle <CR>
 let nerdtreequitonopen = 0
 let NERDTreeShowHidden=0
 let nerdchristmastree=1
-"let g:nerdtreewinsize = 15
+let g:nerdtreewinsize = 15
 let g:NERDTreeDirArrowExpandable = '▷'
 let g:NERDTreeDirArrowCollapsible = '▼'
 let NERDTreeAutoCenter=1
@@ -351,8 +357,8 @@ map  <localleader>  <Plug>（easymotion - prefix）
 map <localleader>l <Plug>(easymotion-bd-jk)
 nmap <localleader>l <Plug>(easymotion-overwin-line)
 " Move to word
-map  <localleader>w <Plug>(easymotion-bd-w)
-nmap <localleader>w <Plug>(easymotion-overwin-w)
+map  <localleader>sd <Plug>(easymotion-bd-w)
+nmap <localleader>sd <Plug>(easymotion-overwin-w)
 
 function! s:config_easyfuzzymotion(...) abort
   return extend(copy({
@@ -583,16 +589,16 @@ if has('termguicolors')
 endif
 
 set background=dark
-colorscheme gruvbox9_hard
+"colorscheme gruvbox9_hard
+"colorscheme space-vim-dark
+"colorscheme primary
 let g:gruvbox_filetype_hi_groups = 1
 let g:gruvbox_plugin_hi_groups = 1
 let g:gruvbox_transp_bg = 1
 
 
 hi Whitespace ctermfg=96 guifg=#725972 guibg=NONE ctermbg=NONE
-
 hi default CocHighlightText  guibg=#725972 ctermbg=96
-
 " ---------------------------------------------------------
 hi PMenuSel ctermfg=252 ctermbg=106 guifg=#d0d0d0 guibg=#859900 guisp=#859900 cterm=NONE gui=NONE
 
@@ -603,3 +609,19 @@ highlight def link Defx_filename_3_Untracked Comment
 highlight def link Defx_filename_3_Unknown Comment
 highlight def link Defx_filename_3_Renamed Title
 highlight def link Defx_filename_3_Unmerged Label
+
+
+nnoremap <silent> <F9> :PreviousColorScheme<cr>
+inoremap <silent> <F9> <esc> :PreviousColorScheme<cr>
+nnoremap <silent> <F10> :NextColorScheme<cr>
+inoremap <silent> <F10> <esc> :NextColorScheme<cr>
+nnoremap <silent> <F11> :RandomColorScheme<cr>
+inoremap <silent> <F11> <esc> :RandomColorScheme<cr>
+nnoremap <silent> <F12> :ShowColorScheme<cr>
+inoremap <silent> <F12> <esc> :ShowColorScheme<cr>
+let g:cpp_class_scope_highlight = 1
+let g:cpp_member_variable_highlight = 1
+let g:cpp_class_decl_highlight = 1
+let g:cpp_experimental_simple_template_highlight = 1
+let g:cpp_experimental_template_highlight = 1
+let g:cpp_concepts_highlight = 1
