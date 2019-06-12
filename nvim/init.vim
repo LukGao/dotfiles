@@ -100,6 +100,7 @@ Plug 'chxuan/change-colorscheme'
 Plug 'liuchengxu/vista.vim'
 Plug 'octol/vim-cpp-enhanced-highlight'
 
+Plug 'MattesGroeger/vim-bookmarks'
 Plug 'neoclide/coc.nvim',               {'tag': '*', 'do': { -> coc#util#install()}}
 Plug 'mg979/vim-visual-multi',          {'branch': 'test','for':['go','vim','cc','c','cpp','py']} "多行编辑
 Plug 'mbbill/undotree'                  " 后悔药
@@ -625,3 +626,7 @@ let g:cpp_class_decl_highlight = 1
 let g:cpp_experimental_simple_template_highlight = 1
 let g:cpp_experimental_template_highlight = 1
 let g:cpp_concepts_highlight = 1
+highlight BookmarkSign ctermbg=NONE ctermfg=160
+highlight BookmarkLine ctermbg=194 ctermfg=NONE
+let g:bookmark_sign = '⚑'
+let g:bookmark_highlight_lines = 1
