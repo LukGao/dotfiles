@@ -590,7 +590,7 @@ if has('termguicolors')
 endif
 
 set background=dark
-"colorscheme gruvbox9_hard
+colorscheme gruvbox9_hard
 "colorscheme space-vim-dark
 "colorscheme primary
 let g:gruvbox_filetype_hi_groups = 1
@@ -630,3 +630,4 @@ highlight BookmarkSign ctermbg=NONE ctermfg=160
 highlight BookmarkLine ctermbg=194 ctermfg=NONE
 let g:bookmark_sign = '⚑'
 let g:bookmark_highlight_lines = 1
+let g:interestingWordsGUIColors = ['#EE7AE9','#8B7B8B','#9B30FF','#8B8B7A','#aeee00', '#ff0000','#40E0D0', '#b88823', '#ffa724', '#ff2c4b']
