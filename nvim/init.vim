@@ -8,13 +8,13 @@ set nocompatible              " 设置不兼容原始vi模式
 set t_Co=256                  " 开启256色支持
 set nu
 set showcmd                   " select模式下显示选中的行数
-"set cursorcolumn              " 高亮列
-"set cursorline                " 高亮显示当前行
+set cursorcolumn              " 高亮列
+set cursorline                " 高亮显示当前行
 set ttimeoutlen=0             " 设置<ESC>键响应时间
 set virtualedit=block,onemore " 允许光标出现在最后一个字符的后面
 set laststatus=2              " 总是显示状态栏
 set showtabline=2
-"set noshowmode
+set noshowmode
 "set autochdir
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 代码缩进和排版
@@ -92,13 +92,12 @@ Plug 'tpope/vim-fugitive'
 Plug 'ryanoasis/vim-devicons'
 Plug 'itchyny/lightline.vim'
 Plug 'mengelbrecht/lightline-bufferline'
-Plug 'taigacute/spaceline.vim'
 Plug 'liuchengxu/space-vim-dark'
 Plug 'taigacute/gruvbox9'
 Plug 'google/vim-colorscheme-primary'
 Plug 'chxuan/change-colorscheme'
 Plug 'liuchengxu/vista.vim'
-Plug 'octol/vim-cpp-enhanced-highlight'
+"Plug 'octol/vim-cpp-enhanced-highlight'
 
 Plug 'MattesGroeger/vim-bookmarks'
 Plug 'neoclide/coc.nvim',               {'tag': '*', 'do': { -> coc#util#install()}}
@@ -429,8 +428,8 @@ let g:lightline = {
       \   'fileformat': 'LightLineFileformat',
       \ },
       \ 'component_type': {'buffers': 'tabsel'},
-      \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2"},
-      \ 'subseparator': { 'left': "\uf09b ", 'right': "\ue0b3"}
+      \ 'separator': { 'left': "", 'right': ""},
+      \ 'subseparator': { 'left': "", 'right': ""}
       \ }
 
 function! LightlineMode()
