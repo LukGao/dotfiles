@@ -399,7 +399,7 @@ let g:lightline = {
       \ 'colorscheme': 'gruvbox9',
       \ 'active': {
       \   'left': [ ['homemode'],
-      \             ['fugitive', 'gitgutter'],['filename']],
+      \             ['filename']],
       \   'right':[ ['lineinfo'],
       \             ['percent'], ['fileformat'],['fileencoding'] ],
       \ },
@@ -409,11 +409,11 @@ let g:lightline = {
       \ },
       \ 'tabline': {
       \   'left': [['buffers']],
-      \   'right': [['ooknn']],
+      \   'right': [[ 'gitgutter','fugitive' , 'ooknn'] ]
       \ },
       \ 'component': {
       \   'lineinfo': "\ue265 %3l:%-2v",
-      \   'ooknn': "\uf299 ",
+      \   'ooknn': "\ue7c5",
       \ },
       \ 'component_expand': {
       \   'buffers': 'lightline#bufferline#buffers',
