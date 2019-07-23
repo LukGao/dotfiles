@@ -16,12 +16,12 @@ tar zxf ripgrep-0.10.0-x86_64-unknown-linux-musl.tar.gz
 ln -s `pwd`/fd-v7.3.0-x86_64-unknown-linux-musl/fd $HOME/bin/fd
 ln -s `pwd`/ripgrep-0.10.0-x86_64-unknown-linux-musl/rg $HOME/bin/rg
 
-yum install -y ruby rubygems tig htop
+sudo yum install -y ruby rubygems tig htop
 
-gem install coderay rouge
+sduo gem install coderay rouge
 
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 
 ~/.fzf/install
 
-
+git config --global alias.tree "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative --all"
