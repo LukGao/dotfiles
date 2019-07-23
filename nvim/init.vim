@@ -20,9 +20,9 @@ set noshowmode
 " 代码缩进和排版
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set expandtab               " 将制表符扩展为空格
-set tabstop=2               " 设置编辑时制表符占用空格数
-set shiftwidth=2            " 设置格式化时制表符占用空格数
-set softtabstop=2           " 设置2个空格为制表符
+set tabstop=4               " 设置编辑时制表符占用空格数
+set shiftwidth=4            " 设置格式化时制表符占用空格数
+set softtabstop=4           " 设置2个空格为制表符
 set smarttab                " 在行和段开始处使用制表符
 set nowrap                  " 禁止折行
 set backspace=2             " 使用回车键正常处理indent,eol,start等
@@ -59,6 +59,7 @@ set helplang=cn
 set termencoding=utf-8
 set encoding=utf8
 set fileencodings=utf8,ucs-bom,gbk,cp936,gb2312,gb18030
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 快捷键设置
@@ -97,11 +98,13 @@ Plug 'taigacute/gruvbox9'
 Plug 'google/vim-colorscheme-primary'
 Plug 'chxuan/change-colorscheme'
 Plug 'liuchengxu/vista.vim'
-"Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim' 
+Plug 'fatih/vim-go'
 
 Plug 'MattesGroeger/vim-bookmarks'
 Plug 'neoclide/coc.nvim',               {'tag': '*', 'do': { -> coc#util#install()}}
-Plug 'mg979/vim-visual-multi',          {'branch': 'test','for':['go','vim','cc','c','cpp','py']} "多行编辑
+Plug 'mg979/vim-visual-multi',          {'branch': 'test'} "多行编辑
 Plug 'mbbill/undotree'                  " 后悔药
 Plug 'mhinz/vim-startify'               " 启动页
 Plug 'Yggdroot/LeaderF'                 " 神器，函数，文件，搜索
@@ -123,7 +126,7 @@ Plug 'haya14busa/incsearch.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'haya14busa/incsearch-easymotion.vim'
 Plug 'haya14busa/incsearch-fuzzy.vim'
-call plug#end() 
+call plug#end()
 
 nnoremap <localleader>ft :Autoformat<CR>
 
@@ -314,27 +317,27 @@ command! Jsonf :execute '%!python -m json.tool'
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" startify 
+" startify
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:startify_custom_foote = [
-            \ '+------------------------------+',
-            \ '|  1.01 ^ 365 =  37.78         |',
-            \ '+----------------+-------------+',
-            \]
+      \ '+------------------------------+',
+      \ '|  1.01 ^ 365 =  37.78         |',
+      \ '+----------------+-------------+',
+      \]
 function! s:filter_header(lines) abort
-	let longest_line   = max(map(copy(a:lines), 'strwidth(v:val)'))
-	let longest_line   = 30
-	let centered_lines = map(copy(a:lines),
-	\ 'repeat(" ", (&columns / 2) - (longest_line / 2)) . v:val')
-	return centered_lines
+  let longest_line   = max(map(copy(a:lines), 'strwidth(v:val)'))
+  let longest_line   = 30
+  let centered_lines = map(copy(a:lines),
+        \ 'repeat(" ", (&columns / 2) - (longest_line / 2)) . v:val')
+  return centered_lines
 endfunction
 
 function! s:filter_footer(lines) abort
-	let longest_line   = min(map(copy(a:lines), 'strwidth(v:val)'))
-	let longest_line   = 25
-	let centered_lines = map(copy(a:lines),
-	\ 'repeat(" ", (&columns / 2) - (longest_line / 2)) . v:val')
-	return centered_lines
+  let longest_line   = min(map(copy(a:lines), 'strwidth(v:val)'))
+  let longest_line   = 25
+  let centered_lines = map(copy(a:lines),
+        \ 'repeat(" ", (&columns / 2) - (longest_line / 2)) . v:val')
+  return centered_lines
 endfunction
 
 let g:startify_custom_header = s:filter_header(startify#fortune#cowsay())
@@ -343,7 +346,8 @@ set viminfo='100,n$HOME/.vim/files/info/viminfo
 let g:startify_padding_left = 30
 let g:better_whitespace_enabled=1
 let g:strip_whitespace_confirm=0
-autocmd FileType sh,cpp,c,go autocmd BufEnter <buffer> EnableStripWhitespaceOnSave
+nnoremap <silent> <localleader>pa :StripWhitespace<CR>
+"autocmd FileType sh,cpp,c,go autocmd BufEnter <buffer> EnableStripWhitespaceOnSave
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " incsearch
@@ -362,12 +366,12 @@ nmap <localleader>sd <Plug>(easymotion-overwin-w)
 
 function! s:config_easyfuzzymotion(...) abort
   return extend(copy({
-  \   'converters': [incsearch#config#fuzzyword#converter()],
-  \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
-  \   'keymap': {"\<CR>": '<Over>(easymotion)'},
-  \   'is_expr': 0,
-  \   'is_stay': 1
-  \ }), get(a:, 1, {}))
+        \   'converters': [incsearch#config#fuzzyword#converter()],
+        \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
+        \   'keymap': {"\<CR>": '<Over>(easymotion)'},
+        \   'is_expr': 0,
+        \   'is_stay': 1
+        \ }), get(a:, 1, {}))
 endfunction
 
 "nmap s <Plug>(easymotion-overwin-f2)
@@ -383,7 +387,6 @@ vmap <silent> <leader>t <Plug>TranslateV
 " leader>w 翻译光标下的文本，在窗口中显示翻译内容
 nmap <silent> <leader>w <Plug>TranslateW
 vmap <silent> <leader>w <Plug>TranslateWV
-let g:vtm_default_api="youdao"
 
 
 
@@ -510,7 +513,7 @@ function! LightLineCocWarn() abort
   if get(info, 'warning', 0)
     call add(warnmsgs, warning_sign . info['warning'])
   endif
- return trim(join(warnmsgs, ' ') . ' ' . get(g:, 'coc_status', ''))
+  return trim(join(warnmsgs, ' ') . ' ' . get(g:, 'coc_status', ''))
 endfunction
 
 autocmd User CocDiagnosticChange call lightline#update()
@@ -532,8 +535,8 @@ function! LightLineGitGutter()
   return join(ret, ' ')
 endfunction
 
-function! LightLineFname() 
-  let icon = (strlen(&filetype) ? ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') 
+function! LightLineFname()
+  let icon = (strlen(&filetype) ? ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft')
   let filename = LightLineFilename()
   let ret = [filename,icon]
   if filename == ''
@@ -585,7 +588,7 @@ set t_Co=256
 
 " Enable true color
 if has('termguicolors')
-	set termguicolors
+  set termguicolors
 endif
 
 set background=dark
@@ -630,3 +633,106 @@ highlight BookmarkLine ctermbg=194 ctermfg=NONE
 let g:bookmark_sign = '⚑'
 let g:bookmark_highlight_lines = 1
 let g:interestingWordsGUIColors = ['#EE7AE9','#8B7B8B','#9B30FF','#8B8B7A','#aeee00', '#ff0000','#40E0D0', '#b88823', '#ffa724', '#ff2c4b']
+
+
+
+
+nnoremap <silent> <leader>fc :Colors<CR>
+nnoremap <silent> <leader>fb :Buffers<CR>
+nnoremap <silent> <leader>ff :call Fzf_dev()<CR>
+nnoremap <silent> <leader>fr :Rg<CR>
+nnoremap <silent> <leader>fw :Rg <C-R><C-W><CR>
+
+"autocmd! FileType fzf
+"autocmd  FileType fzf set laststatus=0 noshowmode noruler
+  "\| autocmd BufLeave <buffer> set laststatus=0 showmode ruler
+
+" Customize fzf colors to match your color scheme
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', '#5f5f87'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
+let g:fzf_commits_log_options = '--graph --color=always
+  \ --format="%C(yellow)%h%C(red)%d%C(reset)
+  \ - %C(bold green)(%ar)%C(reset) %s %C(blue)<%an>%C(reset)"'
+
+"let $FZF_DEFAULT_COMMAND = 'ag --hidden -l -g ""'
+" ripgrep
+if executable('rg')
+  let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
+  set grepprg=rg\ --vimgrep
+  command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+endif
+
+let $FZF_DEFAULT_OPTS='--layout=reverse'
+let g:fzf_layout = { 'window': 'call FloatingFZF()' }
+
+function! FloatingFZF()
+  let buf = nvim_create_buf(v:false, v:true)
+  call setbufvar(buf, 'number', 'no')
+
+  let height = float2nr(&lines/2)
+  let width = float2nr(&columns - (&columns * 2 / 10))
+  "let width = &columns
+  let row = float2nr(&lines / 3)
+  let col = float2nr((&columns - width) / 3)
+
+  let opts = {
+        \ 'relative': 'editor',
+        \ 'row': row,
+        \ 'col': col,
+        \ 'width': width,
+        \ 'height':height,
+        \ }
+  let win =  nvim_open_win(buf, v:true, opts)
+  call setwinvar(win, '&number', 0)
+  call setwinvar(win, '&relativenumber', 0)
+endfunction
+
+" Files + devicons
+function! Fzf_dev()
+  let l:fzf_files_options = ' --preview "rougify {2..-1} | head -'.&lines.'"'
+
+  function! s:files()
+    let l:files = split(system($FZF_DEFAULT_COMMAND), '\n')
+    return s:prepend_icon(l:files)
+  endfunction
+
+  function! s:prepend_icon(candidates)
+    let l:result = []
+    for l:candidate in a:candidates
+      let l:filename = fnamemodify(l:candidate, ':p:t')
+      let l:icon = WebDevIconsGetFileTypeSymbol(l:filename, isdirectory(l:filename))
+      call add(l:result, printf('%s %s', l:icon, l:candidate))
+    endfor
+
+    return l:result
+  endfunction
+
+  function! s:edit_file(item)
+    let l:pos = stridx(a:item, ' ')
+    let l:file_path = a:item[pos+1:-1]
+    execute 'silent e' l:file_path
+  endfunction
+
+  call fzf#run({
+        \ 'source': <sid>files(),
+        \ 'sink':   function('s:edit_file'),
+        \ 'options': '-m ' . l:fzf_files_options,
+        \ 'down':    '40%' ,
+        \ 'window': 'call FloatingFZF()'})
+
+endfunction
+
+
