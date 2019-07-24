@@ -110,7 +110,6 @@ Plug 'mhinz/vim-startify'               " 启动页
 Plug 'Yggdroot/LeaderF'                 " 神器，函数，文件，搜索
 Plug 'luochen1990/rainbow'              " 多彩括号
 Plug 'jiangmiao/auto-pairs'             " 括号补全
-Plug 'chxuan/prepare-code'              " 代码片段
 Plug 'Chiel92/vim-autoformat' ,         {'for':['c','cpp','cc']}
 Plug 'scrooloose/nerdtree',             { 'on':'NERDTreeToggle'}
 Plug 'majutsushi/tagbar',               { 'on':'TagbarToggle'}
@@ -399,7 +398,7 @@ let g:lightline = {
       \ 'colorscheme': 'gruvbox9',
       \ 'active': {
       \   'left': [ ['homemode'],
-      \             ['filename']],
+      \            [ 'cocerror','cocwarn'] , ['filename']],
       \   'right':[ ['lineinfo'],
       \             ['percent'], ['fileformat'],['fileencoding'] ],
       \ },
