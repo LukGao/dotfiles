@@ -93,21 +93,16 @@ Plug 'tpope/vim-fugitive'
 Plug 'ryanoasis/vim-devicons'
 Plug 'itchyny/lightline.vim'
 Plug 'mengelbrecht/lightline-bufferline'
-Plug 'liuchengxu/space-vim-dark'
 Plug 'taigacute/gruvbox9'
-Plug 'google/vim-colorscheme-primary'
-Plug 'chxuan/change-colorscheme'
-Plug 'liuchengxu/vista.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim' 
+Plug 'junegunn/fzf.vim'
 Plug 'fatih/vim-go'
 
-Plug 'MattesGroeger/vim-bookmarks'
+Plug 'MattesGroeger/vim-bookmarks' " 书签
 Plug 'neoclide/coc.nvim',               {'tag': '*', 'do': { -> coc#util#install()}}
 Plug 'mg979/vim-visual-multi',          {'branch': 'test'} "多行编辑
 Plug 'mbbill/undotree'                  " 后悔药
 Plug 'mhinz/vim-startify'               " 启动页
-Plug 'Yggdroot/LeaderF'                 " 神器，函数，文件，搜索
 Plug 'luochen1990/rainbow'              " 多彩括号
 Plug 'jiangmiao/auto-pairs'             " 括号补全
 Plug 'Chiel92/vim-autoformat' ,         {'for':['c','cpp','cc']}
@@ -118,25 +113,21 @@ Plug 'tpope/vim-surround',              {'for':['go','c','cpp','cc','py']}      
 Plug 'scrooloose/nerdcommenter',        {'for':['go','c','cpp','cc','py']}                  " 注释插件
 Plug 'lfv89/vim-interestingwords',      {'for':['go','c','cpp','cc','py']}                  " 单词标记
 Plug 'honza/vim-snippets'
-Plug 'ntpeters/vim-better-whitespace'
-Plug 'tpope/vim-abolish'
+Plug 'ntpeters/vim-better-whitespace',  {'for':['go','c','cpp','cc','py']} " 去除空格
+Plug 'tpope/vim-abolish'            ,  {'for':['go','c','cpp','cc','py']}  " 命名风格转换
 Plug 'voldikss/vim-translate-me'
-Plug 'haya14busa/incsearch.vim'
-Plug 'easymotion/vim-easymotion'
-Plug 'haya14busa/incsearch-easymotion.vim'
-Plug 'haya14busa/incsearch-fuzzy.vim'
 call plug#end()
 
 nnoremap <localleader>ft :Autoformat<CR>
 
 
 
-imap <C-l> <Plug>(coc-snippets-expand)
-vmap <C-j> <Plug>(coc-snippets-select)
 let g:python3_host_prog  = '/usr/bin/python3'
 
 let g:space_vim_plugin_hi_groups = 1
-"nerdtree
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" nerdtree
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <localleader>n :NERDTreeToggle <CR>
 let nerdtreequitonopen = 0
 let NERDTreeShowHidden=0
@@ -158,7 +149,12 @@ let g:nerdtreeindicatormapcustom = {
       \ "unknown"   : "?"
       \ }
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" coc
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+imap <C-l> <Plug>(coc-snippets-expand)
+vmap <C-j> <Plug>(coc-snippets-select)
 let g:coc_snippet_next = '<TAB>'
 let g:coc_snippet_prev = '<S-TAB>'
 let g:coc_status_error_sign = '•'
@@ -250,31 +246,15 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 特殊技能
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+vnoremap // y/<c-r>"<CR>   "
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g'\"" | endif " 打开文件自动定位到最后编辑的位置
 nnoremap zpr :setlocal foldexpr=(getline(v:lnum)=~@/)?0:(getline(v:lnum-1)=~@/)\\|\\|(getline(v:lnum+1)=~@/)?1:2 foldmethod=expr foldlevel=0 foldcolumn=2<CR>:set foldmethod=manual<CR><CR>
 let g:rainbow_active = 1
 let g:prepare_code_plugin_path = expand($HOME . "/.vim/plugged/prepare-code")
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" vim-go
+" gitgutter
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:go_fmt_command = "goimports"
-let g:go_highlight_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_function_calls = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_extra_types = 1
-let g:go_highlight_build_constraints = 1
-nmap <localleader>gv <Plug>(go-def-vertical)
-nmap <localleader>gi <Plug>(go-info)
-nmap <localleader>gd <Plug>(go-doc)
-nmap <localleader>gr <Plug>(go-run)
-nmap <localleader>gb <Plug>(go-build)
-nmap <localleader>gt <Plug>(go-test)
-nmap <localleader>gc <Plug>(go-coverage)
-nmap <localleader>gr <Plug>(go-rename)
-
 
 let g:gitgutter_sign_added = '▎'
 let g:gitgutter_sign_modified = '▎'
@@ -288,24 +268,6 @@ highlight GitGutterDelete ctermfg=52 guifg=#600000 ctermbg=NONE guibg=NONE
 highlight GitGutterChangeDelete ctermfg=52 guifg=#600000 ctermbg=NONE guibg=NONE
 au TextChangedI * GitGutter
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" LeaderF
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-noremap <localleader>m :LeaderfMru<cr>
-noremap <localleader>t :LeaderfTag<cr>
-let g:Lf_StlSeparator = { 'left': '', 'right': '', 'font': '' }
-let g:Lf_RootMarkers = ['.project', '.root', '.svn', '.git']
-let g:Lf_WorkingDirectoryMode = 'Ac'
-let g:Lf_WindowHeight = 0.20
-let g:Lf_CacheDirectory = expand('~/.vim/cache')
-let g:Lf_ShowRelativePath = 0
-let g:Lf_HideHelp = 1
-let g:Lf_PreviewResult = {'Function':0, 'Colorscheme':1}
-let g:Lf_WildIgnore = {
-      \ 'dir': ['.svn','.git','.hg','.vscode','.wine','.deepinwine','.oh-my-zsh'],
-      \ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]']
-      \}
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " json 格式化
@@ -345,40 +307,16 @@ set viminfo='100,n$HOME/.vim/files/info/viminfo
 let g:startify_padding_left = 30
 let g:better_whitespace_enabled=1
 let g:strip_whitespace_confirm=0
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" space
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <silent> <localleader>pa :StripWhitespace<CR>
-"autocmd FileType sh,cpp,c,go autocmd BufEnter <buffer> EnableStripWhitespaceOnSave
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" incsearch
+" translate
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" easymotion
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map  <localleader>  <Plug>（easymotion - prefix）
-" Move to line
-map <localleader>l <Plug>(easymotion-bd-jk)
-nmap <localleader>l <Plug>(easymotion-overwin-line)
-" Move to word
-map  <localleader>sd <Plug>(easymotion-bd-w)
-nmap <localleader>sd <Plug>(easymotion-overwin-w)
-
-function! s:config_easyfuzzymotion(...) abort
-  return extend(copy({
-        \   'converters': [incsearch#config#fuzzyword#converter()],
-        \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
-        \   'keymap': {"\<CR>": '<Over>(easymotion)'},
-        \   'is_expr': 0,
-        \   'is_stay': 1
-        \ }), get(a:, 1, {}))
-endfunction
-
-"nmap s <Plug>(easymotion-overwin-f2)
-"
-noremap <silent><expr> s  incsearch#go(<SID>config_easyfuzzymotion())
-map <localleader>/ <Plug>(incsearch-fuzzy-/)
-
-vnoremap // y/<c-r>"<CR>   "
 
 " <Leader>t 翻译光标下的文本，在命令行回显翻译内容
 nmap <silent> <leader>t <Plug>Translate
