@@ -8,8 +8,8 @@ set nocompatible              " 设置不兼容原始vi模式
 set t_Co=256                  " 开启256色支持
 set nu
 set showcmd                   " select模式下显示选中的行数
-"set cursorcolumn              " 高亮列
-"set cursorline                " 高亮显示当前行
+set cursorcolumn              " 高亮列
+set cursorline                " 高亮显示当前行
 set ttimeoutlen=0             " 设置<ESC>键响应时间
 set virtualedit=block,onemore " 允许光标出现在最后一个字符的后面
 set laststatus=2              " 总是显示状态栏
@@ -20,9 +20,9 @@ set noshowmode
 " 代码缩进和排版
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set expandtab               " 将制表符扩展为空格
-set tabstop=4               " 设置编辑时制表符占用空格数
-set shiftwidth=4            " 设置格式化时制表符占用空格数
-set softtabstop=4           " 设置2个空格为制表符
+set tabstop=2               " 设置编辑时制表符占用空格数
+set shiftwidth=2            " 设置格式化时制表符占用空格数
+set softtabstop=2           " 设置2个空格为制表符
 set smarttab                " 在行和段开始处使用制表符
 set nowrap                  " 禁止折行
 set backspace=2             " 使用回车键正常处理indent,eol,start等
@@ -60,7 +60,6 @@ set termencoding=utf-8
 set encoding=utf8
 set fileencodings=utf8,ucs-bom,gbk,cp936,gb2312,gb18030
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 快捷键设置
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -93,24 +92,24 @@ Plug 'tpope/vim-fugitive'
 Plug 'ryanoasis/vim-devicons'
 Plug 'itchyny/lightline.vim'
 Plug 'mengelbrecht/lightline-bufferline'
-Plug 'taigacute/gruvbox9'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-Plug 'fatih/vim-go'
-Plug 'sainnhe/vim-color-forest-night'
 Plug 'liuchengxu/space-vim-dark'
-Plug 'sainnhe/vim-color-vanilla-cake'
-Plug 'sainnhe/vim-color-atlantis'
+Plug 'taigacute/gruvbox9'
 Plug 'google/vim-colorscheme-primary'
 Plug 'chxuan/change-colorscheme'
-
-Plug 'MattesGroeger/vim-bookmarks' " 书签
+Plug 'liuchengxu/vista.vim'
+"Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'hotoo/pangu.vim'
+Plug 'MattesGroeger/vim-bookmarks'
 Plug 'neoclide/coc.nvim',               {'tag': '*', 'do': { -> coc#util#install()}}
-Plug 'mg979/vim-visual-multi',          {'branch': 'test'} "多行编辑
+Plug 'mg979/vim-visual-multi',          {'branch': 'test','for':['go','vim','cc','c','cpp','py']} "多行编辑
 Plug 'mbbill/undotree'                  " 后悔药
 Plug 'mhinz/vim-startify'               " 启动页
+Plug 'Yggdroot/LeaderF'                 " 神器，函数，文件，搜索
 Plug 'luochen1990/rainbow'              " 多彩括号
 Plug 'jiangmiao/auto-pairs'             " 括号补全
+Plug 'chxuan/prepare-code',              {'for':['c','cpp','cc']} " 代码片段
+
 Plug 'Chiel92/vim-autoformat' ,         {'for':['c','cpp','cc']}
 Plug 'scrooloose/nerdtree',             { 'on':'NERDTreeToggle'}
 Plug 'majutsushi/tagbar',               { 'on':'TagbarToggle'}
@@ -119,21 +118,25 @@ Plug 'tpope/vim-surround',              {'for':['go','c','cpp','cc','py']}      
 Plug 'scrooloose/nerdcommenter',        {'for':['go','c','cpp','cc','py']}                  " 注释插件
 Plug 'lfv89/vim-interestingwords',      {'for':['go','c','cpp','cc','py']}                  " 单词标记
 Plug 'honza/vim-snippets'
-Plug 'ntpeters/vim-better-whitespace',  {'for':['go','c','cpp','cc','py']} " 去除空格
-Plug 'tpope/vim-abolish'            ,  {'for':['go','c','cpp','cc','py']}  " 命名风格转换
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'tpope/vim-abolish'
 Plug 'voldikss/vim-translate-me'
-call plug#end()
+Plug 'haya14busa/incsearch.vim'
+Plug 'easymotion/vim-easymotion'
+Plug 'haya14busa/incsearch-easymotion.vim'
+Plug 'haya14busa/incsearch-fuzzy.vim'
+call plug#end() 
 
 nnoremap <localleader>ft :Autoformat<CR>
 
 
 
+imap <C-l> <Plug>(coc-snippets-expand)
+vmap <C-j> <Plug>(coc-snippets-select)
 let g:python3_host_prog  = '/usr/bin/python3'
 
 let g:space_vim_plugin_hi_groups = 1
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" nerdtree
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"nerdtree
 nnoremap <localleader>n :NERDTreeToggle <CR>
 let nerdtreequitonopen = 0
 let NERDTreeShowHidden=0
@@ -155,12 +158,7 @@ let g:nerdtreeindicatormapcustom = {
       \ "unknown"   : "?"
       \ }
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" coc
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-imap <C-l> <Plug>(coc-snippets-expand)
-vmap <C-j> <Plug>(coc-snippets-select)
 let g:coc_snippet_next = '<TAB>'
 let g:coc_snippet_prev = '<S-TAB>'
 let g:coc_status_error_sign = '•'
@@ -201,7 +199,6 @@ endfunction
 inoremap <silent><expr> <c-space> coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
-
 set updatetime=300
 au CursorHold * sil call CocActionAsync('highlight')
 au CursorHoldI * sil call CocActionAsync('showSignatureHelp')
@@ -253,15 +250,31 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 特殊技能
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-vnoremap // y/<c-r>"<CR>   "
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g'\"" | endif " 打开文件自动定位到最后编辑的位置
 nnoremap zpr :setlocal foldexpr=(getline(v:lnum)=~@/)?0:(getline(v:lnum-1)=~@/)\\|\\|(getline(v:lnum+1)=~@/)?1:2 foldmethod=expr foldlevel=0 foldcolumn=2<CR>:set foldmethod=manual<CR><CR>
 let g:rainbow_active = 1
 let g:prepare_code_plugin_path = expand($HOME . "/.vim/plugged/prepare-code")
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" gitgutter
+" vim-go
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:go_fmt_command = "goimports"
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_build_constraints = 1
+nmap <localleader>gv <Plug>(go-def-vertical)
+nmap <localleader>gi <Plug>(go-info)
+nmap <localleader>gd <Plug>(go-doc)
+nmap <localleader>gr <Plug>(go-run)
+nmap <localleader>gb <Plug>(go-build)
+nmap <localleader>gt <Plug>(go-test)
+nmap <localleader>gc <Plug>(go-coverage)
+nmap <localleader>gr <Plug>(go-rename)
+
 
 let g:gitgutter_sign_added = '▎'
 let g:gitgutter_sign_modified = '▎'
@@ -277,6 +290,24 @@ au TextChangedI * GitGutter
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" LeaderF
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+noremap <localleader>m :LeaderfMru<cr>
+noremap <localleader>t :LeaderfTag<cr>
+let g:Lf_StlSeparator = { 'left': '', 'right': '', 'font': '' }
+let g:Lf_RootMarkers = ['.project', '.root', '.svn', '.git']
+let g:Lf_WorkingDirectoryMode = 'Ac'
+let g:Lf_WindowHeight = 0.20
+let g:Lf_CacheDirectory = expand('~/.vim/cache')
+let g:Lf_ShowRelativePath = 0
+let g:Lf_HideHelp = 1
+let g:Lf_PreviewResult = {'Function':0, 'Colorscheme':1}
+let g:Lf_WildIgnore = {
+      \ 'dir': ['.svn','.git','.hg','.vscode','.wine','.deepinwine','.oh-my-zsh'],
+      \ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]']
+      \}
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " json 格式化
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 command! Jsonf :execute '%!python -m json.tool'
@@ -285,27 +316,27 @@ command! Jsonf :execute '%!python -m json.tool'
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" startify
+" startify 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:startify_custom_foote = [
-      \ '+------------------------------+',
-      \ '|  1.01 ^ 365 =  37.78         |',
-      \ '+----------------+-------------+',
-      \]
+            \ '+------------------------------+',
+            \ '|  1.01 ^ 365 =  37.78         |',
+            \ '+----------------+-------------+',
+            \]
 function! s:filter_header(lines) abort
-  let longest_line   = max(map(copy(a:lines), 'strwidth(v:val)'))
-  let longest_line   = 30
-  let centered_lines = map(copy(a:lines),
-        \ 'repeat(" ", (&columns / 2) - (longest_line / 2)) . v:val')
-  return centered_lines
+	let longest_line   = max(map(copy(a:lines), 'strwidth(v:val)'))
+	let longest_line   = 30
+	let centered_lines = map(copy(a:lines),
+	\ 'repeat(" ", (&columns / 2) - (longest_line / 2)) . v:val')
+	return centered_lines
 endfunction
 
 function! s:filter_footer(lines) abort
-  let longest_line   = min(map(copy(a:lines), 'strwidth(v:val)'))
-  let longest_line   = 25
-  let centered_lines = map(copy(a:lines),
-        \ 'repeat(" ", (&columns / 2) - (longest_line / 2)) . v:val')
-  return centered_lines
+	let longest_line   = min(map(copy(a:lines), 'strwidth(v:val)'))
+	let longest_line   = 25
+	let centered_lines = map(copy(a:lines),
+	\ 'repeat(" ", (&columns / 2) - (longest_line / 2)) . v:val')
+	return centered_lines
 endfunction
 
 let g:startify_custom_header = s:filter_header(startify#fortune#cowsay())
@@ -314,16 +345,39 @@ set viminfo='100,n$HOME/.vim/files/info/viminfo
 let g:startify_padding_left = 30
 let g:better_whitespace_enabled=1
 let g:strip_whitespace_confirm=0
+autocmd FileType sh,cpp,c,go autocmd BufEnter <buffer> EnableStripWhitespaceOnSave
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" space
+" incsearch
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <silent> <localleader>pa :StripWhitespace<CR>
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" translate
+" easymotion
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map  <localleader>  <Plug>（easymotion - prefix）
+" Move to line
+map <localleader>l <Plug>(easymotion-bd-jk)
+nmap <localleader>l <Plug>(easymotion-overwin-line)
+" Move to word
+map  <localleader>sd <Plug>(easymotion-bd-w)
+nmap <localleader>sd <Plug>(easymotion-overwin-w)
+
+function! s:config_easyfuzzymotion(...) abort
+  return extend(copy({
+  \   'converters': [incsearch#config#fuzzyword#converter()],
+  \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
+  \   'keymap': {"\<CR>": '<Over>(easymotion)'},
+  \   'is_expr': 0,
+  \   'is_stay': 1
+  \ }), get(a:, 1, {}))
+endfunction
+
+"nmap s <Plug>(easymotion-overwin-f2)
+"
+noremap <silent><expr> s  incsearch#go(<SID>config_easyfuzzymotion())
+map <localleader>/ <Plug>(incsearch-fuzzy-/)
+
+vnoremap // y/<c-r>"<CR>   "
 
 " <Leader>t 翻译光标下的文本，在命令行回显翻译内容
 nmap <silent> <leader>t <Plug>Translate
@@ -340,10 +394,10 @@ vmap <silent> <leader>w <Plug>TranslateWV
 
 
 let g:lightline = {
-      \ 'colorscheme': 'atlantis',
+      \ 'colorscheme': 'gruvbox9',
       \ 'active': {
       \   'left': [ ['homemode'],
-      \            [ 'cocerror','cocwarn'] , ['filename']],
+      \             ['fugitive', 'gitgutter'],['filename']],
       \   'right':[ ['lineinfo'],
       \             ['percent'], ['fileformat'],['fileencoding'] ],
       \ },
@@ -353,11 +407,11 @@ let g:lightline = {
       \ },
       \ 'tabline': {
       \   'left': [['buffers']],
-      \   'right': [[ 'gitgutter','fugitive' , 'ooknn'] ]
+      \   'right': [['ooknn']],
       \ },
       \ 'component': {
       \   'lineinfo': "\ue265 %3l:%-2v",
-      \   'ooknn': "\ue7c5",
+      \   'ooknn': "\uf299 ",
       \ },
       \ 'component_expand': {
       \   'buffers': 'lightline#bufferline#buffers',
@@ -457,7 +511,7 @@ function! LightLineCocWarn() abort
   if get(info, 'warning', 0)
     call add(warnmsgs, warning_sign . info['warning'])
   endif
-  return trim(join(warnmsgs, ' ') . ' ' . get(g:, 'coc_status', ''))
+ return trim(join(warnmsgs, ' ') . ' ' . get(g:, 'coc_status', ''))
 endfunction
 
 autocmd User CocDiagnosticChange call lightline#update()
@@ -479,8 +533,8 @@ function! LightLineGitGutter()
   return join(ret, ' ')
 endfunction
 
-function! LightLineFname()
-  let icon = (strlen(&filetype) ? ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft')
+function! LightLineFname() 
+  let icon = (strlen(&filetype) ? ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') 
   let filename = LightLineFilename()
   let ret = [filename,icon]
   if filename == ''
@@ -532,16 +586,13 @@ set t_Co=256
 
 " Enable true color
 if has('termguicolors')
-  set termguicolors
+	set termguicolors
 endif
 
 set background=dark
 colorscheme gruvbox9_hard
-colorscheme space-vim-dark
+"colorscheme space-vim-dark
 "colorscheme primary
-"colorscheme forest-night
-"colorscheme vanilla-cake 
-"colorscheme atlantis
 let g:gruvbox_filetype_hi_groups = 1
 let g:gruvbox_plugin_hi_groups = 1
 let g:gruvbox_transp_bg = 1
@@ -580,106 +631,3 @@ highlight BookmarkLine ctermbg=194 ctermfg=NONE
 let g:bookmark_sign = '⚑'
 let g:bookmark_highlight_lines = 1
 let g:interestingWordsGUIColors = ['#EE7AE9','#8B7B8B','#9B30FF','#8B8B7A','#aeee00', '#ff0000','#40E0D0', '#b88823', '#ffa724', '#ff2c4b']
-
-
-
-
-nnoremap <silent> <leader>fc :Colors<CR>
-nnoremap <silent> <leader>fb :Buffers<CR>
-nnoremap <silent> <leader>ff :call Fzf_dev()<CR>
-nnoremap <silent> <leader>fr :Rg<CR>
-nnoremap <silent> <leader>fw :Rg <C-R><C-W><CR>
-
-"autocmd! FileType fzf
-"autocmd  FileType fzf set laststatus=0 noshowmode noruler
-  "\| autocmd BufLeave <buffer> set laststatus=0 showmode ruler
-
-" Customize fzf colors to match your color scheme
-let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', '#5f5f87'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'border':  ['fg', 'Ignore'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
-
-let g:fzf_commits_log_options = '--graph --color=always
-  \ --format="%C(yellow)%h%C(red)%d%C(reset)
-  \ - %C(bold green)(%ar)%C(reset) %s %C(blue)<%an>%C(reset)"'
-
-"let $FZF_DEFAULT_COMMAND = 'ag --hidden -l -g ""'
-" ripgrep
-if executable('rg')
-  let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
-  set grepprg=rg\ --vimgrep
-  command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
-endif
-
-let $FZF_DEFAULT_OPTS='--layout=reverse'
-let g:fzf_layout = { 'window': 'call FloatingFZF()' }
-
-function! FloatingFZF()
-  let buf = nvim_create_buf(v:false, v:true)
-  call setbufvar(buf, 'number', 'no')
-
-  let height = float2nr(&lines/2)
-  let width = float2nr(&columns - (&columns * 2 / 10))
-  "let width = &columns
-  let row = float2nr(&lines / 3)
-  let col = float2nr((&columns - width) / 3)
-
-  let opts = {
-        \ 'relative': 'editor',
-        \ 'row': row,
-        \ 'col': col,
-        \ 'width': width,
-        \ 'height':height,
-        \ }
-  let win =  nvim_open_win(buf, v:true, opts)
-  call setwinvar(win, '&number', 0)
-  call setwinvar(win, '&relativenumber', 0)
-endfunction
-
-" Files + devicons
-function! Fzf_dev()
-  let l:fzf_files_options = ' --preview "rougify {2..-1} | head -'.&lines.'"'
-
-  function! s:files()
-    let l:files = split(system($FZF_DEFAULT_COMMAND), '\n')
-    return s:prepend_icon(l:files)
-  endfunction
-
-  function! s:prepend_icon(candidates)
-    let l:result = []
-    for l:candidate in a:candidates
-      let l:filename = fnamemodify(l:candidate, ':p:t')
-      let l:icon = WebDevIconsGetFileTypeSymbol(l:filename, isdirectory(l:filename))
-      call add(l:result, printf('%s %s', l:icon, l:candidate))
-    endfor
-
-    return l:result
-  endfunction
-
-  function! s:edit_file(item)
-    let l:pos = stridx(a:item, ' ')
-    let l:file_path = a:item[pos+1:-1]
-    execute 'silent e' l:file_path
-  endfunction
-
-  call fzf#run({
-        \ 'source': <sid>files(),
-        \ 'sink':   function('s:edit_file'),
-        \ 'options': '-m ' . l:fzf_files_options,
-        \ 'down':    '40%' ,
-        \ 'window': 'call FloatingFZF()'})
-
-endfunction
-
-
