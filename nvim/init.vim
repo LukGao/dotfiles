@@ -93,16 +93,16 @@ Plug 'tpope/vim-fugitive'
 Plug 'ryanoasis/vim-devicons'
 Plug 'itchyny/lightline.vim'
 Plug 'mengelbrecht/lightline-bufferline'
-Plug 'taigacute/gruvbox9'
+"Plug 'taigacute/gruvbox9'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'fatih/vim-go'
-Plug 'sainnhe/vim-color-forest-night'
+Plug 'fatih/vim-go',{'for':'go'}
+"Plug 'sainnhe/vim-color-forest-night'
 Plug 'liuchengxu/space-vim-dark'
-Plug 'sainnhe/vim-color-vanilla-cake'
+"Plug 'sainnhe/vim-color-vanilla-cake'
 Plug 'sainnhe/vim-color-atlantis'
-Plug 'google/vim-colorscheme-primary'
-Plug 'chxuan/change-colorscheme'
+"Plug 'google/vim-colorscheme-primary'
+"Plug 'chxuan/change-colorscheme'
 
 Plug 'MattesGroeger/vim-bookmarks' " 书签
 Plug 'neoclide/coc.nvim',               {'tag': '*', 'do': { -> coc#util#install()}}
@@ -219,6 +219,10 @@ au CursorHold * sil call CocActionAsync('highlight')
 au CursorHoldI * sil call CocActionAsync('showSignatureHelp')
 filetype plugin indent on     " required!
 
+" todolist
+nnoremap <localleader>tc :CocCommand todolist.clearRemind<CR>
+nnoremap <localleader>td :CocCommand todolist.create<CR>
+nnoremap <localleader>lt ::CocList todolist<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " tagbar
@@ -548,7 +552,7 @@ if has('termguicolors')
 endif
 
 set background=dark
-colorscheme gruvbox9_hard
+"colorscheme gruvbox9_hard
 colorscheme space-vim-dark
 "colorscheme primary
 "colorscheme forest-night
@@ -601,7 +605,7 @@ nnoremap <silent> <leader>fb :Buffers<CR>
 nnoremap <silent> <leader>ff :call Fzf_dev()<CR>
 nnoremap <silent> <leader>fr :Rg<CR>
 nnoremap <silent> <leader>fw :Rg <C-R><C-W><CR>
-
+nnoremap <silent> <localleader>m :History<CR>
 "autocmd! FileType fzf
 "autocmd  FileType fzf set laststatus=0 noshowmode noruler
   "\| autocmd BufLeave <buffer> set laststatus=0 showmode ruler
