@@ -103,7 +103,7 @@ Plug 'liuchengxu/space-vim-dark'
 Plug 'sainnhe/vim-color-atlantis'
 "Plug 'google/vim-colorscheme-primary'
 "Plug 'chxuan/change-colorscheme'
-
+Plug 'vim-utils/vim-man'
 Plug 'MattesGroeger/vim-bookmarks' " 书签
 Plug 'neoclide/coc.nvim',               {'tag': '*', 'do': { -> coc#util#install()}}
 Plug 'mg979/vim-visual-multi',          {'branch': 'test'} "多行编辑
@@ -697,4 +697,6 @@ function! Fzf_dev()
         \ 'window': 'call FloatingFZF()'})
 
 endfunction
+
+map <leader>v <Plug>(Vman)
 
