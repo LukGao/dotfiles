@@ -104,4 +104,5 @@ result/*
 
 # Perf
 perf.*
-
+# mac os
+.DS_Store

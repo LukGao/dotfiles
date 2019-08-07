@@ -1,27 +1,76 @@
 #!/bin/bash
-if [ ! -d "$HOME/bin"  ]; then
-    mkdir $HOME/bin
-fi
 
-git clone --depth 1 https://github.com/skywind3000/z.lua.git ~/.z.lua
+function check_tools_dir()
+{
+    if [ ! -d "$HOME/bin"  ]; then
+        mkdir $HOME/bin
+    fi
 
-wget -c https://github.com/sharkdp/fd/releases/download/v7.3.0/fd-v7.3.0-x86_64-unknown-linux-musl.tar.gz
+    if [ ! -d "./tools"  ]; then
+        mkdir tools 
+    fi
+}
 
-wget -c https://github.com/BurntSushi/ripgrep/releases/download/0.10.0/ripgrep-0.10.0-x86_64-unknown-linux-musl.tar.gz
+function install_tools()
+{
+    cd tools
 
-tar zxf fd-v7.3.0-x86_64-unknown-linux-musl.tar.gz
+    git clone --depth 1 https://github.com/skywind3000/z.lua.git ~/.z.lua
 
-tar zxf ripgrep-0.10.0-x86_64-unknown-linux-musl.tar.gz
+    wget -c https://github.com/sharkdp/fd/releases/download/v7.3.0/fd-v7.3.0-x86_64-unknown-linux-musl.tar.gz
 
-ln -s `pwd`/fd-v7.3.0-x86_64-unknown-linux-musl/fd $HOME/bin/fd
-ln -s `pwd`/ripgrep-0.10.0-x86_64-unknown-linux-musl/rg $HOME/bin/rg
+    wget -c https://github.com/BurntSushi/ripgrep/releases/download/0.10.0/ripgrep-0.10.0-x86_64-unknown-linux-musl.tar.gz
 
-sudo yum install -y ruby rubygems tig htop
+    tar zxf fd-v7.3.0-x86_64-unknown-linux-musl.tar.gz
 
-sduo gem install coderay rouge
+    tar zxf ripgrep-0.10.0-x86_64-unknown-linux-musl.tar.gz
 
-git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+    ln -s `pwd`/fd-v7.3.0-x86_64-unknown-linux-musl/fd $HOME/bin/fd
+    ln -s `pwd`/ripgrep-0.10.0-x86_64-unknown-linux-musl/rg $HOME/bin/rg
 
-~/.fzf/install
+    ${SUDO} gem install coderay rouge
 
-git config --global alias.tree "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative --all"
+    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+
+    ~/.fzf/install
+
+    git config --global alias.tree "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative --all"
+
+    cd -
+}
+
+
+function centos_install_tools()
+{
+    ${InstallCommand}  ruby rubygems tig htop lua
+    install_tools
+}
+
+function ubuntu_install_tools()
+{
+    ${InstallCommand}  ruby rubygems tig htop tmux lua5.1
+    install_tools
+}
+
+# 在linux平台安装 tools
+function install_tools_on_linux()
+{
+    check_tools_dir
+    type=${OsName}
+    echo "linux platform type: "${type}
+
+    if [ ${type} == "ubuntu" ]; then
+        ubuntu_install_tools
+    elif [ ${type} == "centos" ]; then
+        centos_install_tools
+    else
+        echo "not support this linux platform type: "${type}
+    fi
+}
+
+function main()
+{
+    install_tools_on_linux
+}
+
+main
