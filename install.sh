@@ -48,16 +48,24 @@ function install_tools_on_linux()
     ${InstallCommand}  git wget curl 
 }
 
+function clone_install_repository()
+{
+    git clone https://github.com/ooknn/dotfiles.git
+    cd dotfiles 
+    bash nvim_install.sh && bash shell_tools.sh
+    cd -
+}
+
 
 # main函数
 function main()
 {
     type=`get_platform_type`
-
     echo "platform type: "${type}
 
     if [ ${type} == "Linux" ]; then
-        install_tools_on_linux && bash nvim_install.sh && bash shell_tools.sh
+        install_tools_on_linux 
+        clone_install_repository
     else
         echo "not support platform type: "${type}
     fi
