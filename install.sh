@@ -43,6 +43,7 @@ function get_linux_platform_type()
 # 确认安装命令
 function install_tools_on_linux()
 {
+    check_user
     get_linux_platform_type
     ${InstallCommand}  git wget curl 
 }
@@ -56,7 +57,7 @@ function main()
     echo "platform type: "${type}
 
     if [ ${type} == "Linux" ]; then
-        install_tools_on_linux
+        install_tools_on_linux && bash nvim_install.sh && bash shell_tools.sh
     else
         echo "not support platform type: "${type}
     fi
@@ -65,4 +66,3 @@ function main()
 # 调用main函数
 main
 
-git clone https://github.com/ooknn/dotfiles.git && cd dotfiles &&  bash nvim_install.sh && bash shell_tools.sh
