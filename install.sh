@@ -27,13 +27,13 @@ function get_linux_platform_type()
     export OS_NAME=$( cat /etc/os-release | grep ^NAME | cut -d'=' -f2 | sed 's/\"//gI' )    
     case "$OS_NAME" in    
       "CentOS Linux")    
-        InstallCommand=" ${SUDO} yum install -y "
-        OsName="centos"
+        export InstallCommand=" ${SUDO} yum install -y "
+        export OsName="centos"
         echo "centos" # centos redhat系列
       ;;    
       "Ubuntu")    
-        OsName="ubuntu"
-        InstallCommand=" ${SUDO} apt install -y "
+        export OsName="ubuntu"
+        export InstallCommand=" ${SUDO} apt install -y "
         echo "ubuntu" # debian ubuntu系列
       ;;    
       *)    
