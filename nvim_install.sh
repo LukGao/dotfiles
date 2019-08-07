@@ -96,6 +96,8 @@ function begin_install_vimplus()
     clone_config_from_git
     # 安装插件
     install_vim_plugin
+    #
+    copy_config
 }
 
 # 在ubuntu发行版安装vimplus
