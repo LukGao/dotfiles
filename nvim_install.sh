@@ -48,44 +48,20 @@ function install_nvim()
     fi    
     
     echo "export PATH=$HOME/bin:$PATH" >> $HOME/.bashrc
-    cd dotfiles 
     wget -c https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz
     tar zxf nvim-linux64.tar.gz && ln -sf `pwd`/nvim-linux64/bin/nvim $HOME/bin/nvim
-    cd -
 }
 
-
-# 从 github clone 配置
-function clone_config()
-{
-    git clone https://github.com/ooknn/dotfiles.git 
-}
 function link_nvim_config()
 {
-    cd dotfiles && ln -sf `pwd`/nvim/init.vim $HOME/.config/nvim/init.vim && ln -sf `pwd`/nvim/coc-settings.json $HOME/.config/nvim/coc-settings.json && cd -
+    ln -sf `pwd`/nvim/init.vim $HOME/.config/nvim/init.vim && ln -sf `pwd`/nvim/coc-settings.json $HOME/.config/nvim/coc-settings.json 
 }
-
-# 从 github clone 配置
-function clone_or_update_config()
-{
-    path=`pwd`/dotfiles    
-    echo ${path}    
-    if [ ! -d ${path} ]; then    
-        echo "clone config"
-        install_nodejs    
-        clone_config
-        install_nvim
-        link_nvim_config
-    else    
-        echo "update config"    
-        update_config
-    fi    
-}
-
 
 function clone_config_from_git()
 {
-    clone_or_update_config
+    install_nodejs    
+    install_nvim
+    link_nvim_config
 }
 
 # 下载插件管理软件vim-plug

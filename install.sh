@@ -50,8 +50,10 @@ function install_tools_on_linux()
 
 function clone_install_repository()
 {
-    curl https://raw.githubusercontent.com/ooknn/dotfiles/master/nvim_install.sh | bash 
-    curl https://raw.githubusercontent.com/ooknn/dotfiles/master/shell_tools.sh | bash
+    git clone https://github.com/ooknn/dotfiles.git 
+    cd dotfiles
+    bash nvim_install.sh && bash shell_tools.sh
+    cd -
 }
 
 
