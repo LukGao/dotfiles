@@ -48,7 +48,7 @@ function install_nvim()
     fi    
     
     echo "export PATH=$HOME/bin:$PATH" >> $HOME/.bashrc
-    cd config 
+    cd dotfiles 
     wget -c https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz
     tar zxf nvim-linux64.tar.gz && ln -sf `pwd`/nvim-linux64/bin/nvim $HOME/bin/nvim
     cd -
@@ -58,17 +58,17 @@ function install_nvim()
 # 从 github clone 配置
 function clone_config()
 {
-    git clone https://github.com/ooknn/config.git 
+    git clone https://github.com/ooknn/dotfiles.git 
 }
 function link_nvim_config()
 {
-    cd config && ln -sf `pwd`/nvim/init.vim $HOME/.config/nvim/init.vim && ln -sf `pwd`/nvim/coc-settings.json $HOME/.config/nvim/coc-settings.json && cd -
+    cd dotfiles && ln -sf `pwd`/nvim/init.vim $HOME/.config/nvim/init.vim && ln -sf `pwd`/nvim/coc-settings.json $HOME/.config/nvim/coc-settings.json && cd -
 }
 
 # 从 github clone 配置
 function clone_or_update_config()
 {
-    path=`pwd`/config    
+    path=`pwd`/dotfiles    
     echo ${path}    
     if [ ! -d ${path} ]; then    
         echo "clone config"
@@ -144,8 +144,10 @@ function install_vimplus_on_linux()
     echo "linux platform type: "${type}
     if [ ${type} == "ubuntu" ]; then
         install_vimplus_on_ubuntu
-    else [ ${type} == "centos" ]; then
+    elif [ ${type} == "centos" ]; then
         install_vimplus_on_centos
+    else
+        echo "install failed"
     fi
 }
 
