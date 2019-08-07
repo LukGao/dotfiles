@@ -50,7 +50,7 @@ function install_tools_on_linux()
 
 function clone_install_repository()
 {
-    git clone https://github.com/ooknn/dotfiles.git 
+    git clone --depth=1 https://github.com/ooknn/dotfiles.git 
     cd dotfiles
     bash nvim_install.sh && bash shell_tools.sh
     cd -

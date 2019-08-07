@@ -30,14 +30,14 @@ function install_nodejs()
     curl -sL install-node.now.sh/lts | ${SUDO}  bash
 }
 
-
-
-# 更新配置
-function update_config()
+# 拷贝配置文件
+function copy_config()
 {
-    cd config && git pull && cd -
+    echo "source `pwd`/bashrc" >> $HOME/.bash_profile
+    cat .inputrc > $HOME/.inputrc
+    cat .tmux.conf > $HOME/.tmux.conf
+    cat .clang-format > $HOME/.clang-format
 }
-
 
 # 安装nvim
 function install_nvim()
