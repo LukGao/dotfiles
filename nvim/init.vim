@@ -93,16 +93,14 @@ Plug 'tpope/vim-fugitive'
 Plug 'ryanoasis/vim-devicons'
 Plug 'itchyny/lightline.vim'
 Plug 'mengelbrecht/lightline-bufferline'
-"Plug 'taigacute/gruvbox9'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+
 Plug 'fatih/vim-go',{'for':'go'}
-"Plug 'sainnhe/vim-color-forest-night'
+
 Plug 'liuchengxu/space-vim-dark'
-"Plug 'sainnhe/vim-color-vanilla-cake'
 Plug 'sainnhe/vim-color-atlantis'
-"Plug 'google/vim-colorscheme-primary'
-"Plug 'chxuan/change-colorscheme'
+
 Plug 'vim-utils/vim-man'
 Plug 'MattesGroeger/vim-bookmarks' " 书签
 Plug 'neoclide/coc.nvim',               {'tag': '*', 'do': { -> coc#util#install()}}
