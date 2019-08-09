@@ -1,5 +1,7 @@
 #!/bin/bash
 
+NvimConfigDir=$HOME/.config/nvim
+
 # 安装centos发行版必要软件
 function install_prepare_software_on_centos()
 {
@@ -18,30 +20,35 @@ function install_prepare_software_on_ubuntu()
 # 安装vim插件
 function install_vim_plugin()
 {
+    cd ${Pwd}
     echo "run PlugInstall"
     export PATH=$HOME/bin:$PATH 
     nvim +'PlugInstall --sync' +'PlugUpdate' +qa!
-    cd $HOME/.vim/plugged/coc.nvim && ./install.sh && cd -
+    cd $HOME/.vim/plugged/coc.nvim && ./install.sh 
+    cd -
 }
 
 # 安装nodejs
 function install_nodejs()
 {
+    cd ${Pwd}
     curl -sL install-node.now.sh/lts | ${SUDO}  bash
 }
 
 # 拷贝配置文件
 function copy_config()
 {
-    echo "source `pwd`/bashrc" >> $HOME/.bash_profile
-    cat .inputrc > $HOME/.inputrc
-    cat .tmux.conf > $HOME/.tmux.conf
-    cat .clang-format > $HOME/.clang-format
+    cd ${Pwd}
+    echo "source ${Pwd}/dotfiles/bashrc" >> $HOME/.bashrc
+    cat ${Pwd}/dotfiles/.inputrc > $HOME/.inputrc
+    cat ${Pwd}/dotfiles/.tmux.conf > $HOME/.tmux.conf
+    cat ${Pwd}/dotfiles/.clang-format > $HOME/.clang-format
 }
 
 # 安装nvim
 function install_nvim()
 {
+    cd ${Pwd}
     path=$HOME/bin
     if [ ! -d ${path} ]; then    
         mkdir ${path}
@@ -54,7 +61,8 @@ function install_nvim()
 
 function link_nvim_config()
 {
-    ln -sf `pwd`/nvim/init.vim $HOME/.config/nvim/init.vim && ln -sf `pwd`/nvim/coc-settings.json $HOME/.config/nvim/coc-settings.json 
+    cd ${Pwd}
+    ln -sf ${Pwd}/dotfiles/nvim/init.vim ${NvimConfigDir}/init.vim && ln -sf ${Pwd}/dotfiles/nvim/coc-settings.json ${NvimConfigDir}/coc-settings.json 
 }
 
 function clone_config_from_git()
@@ -67,6 +75,7 @@ function clone_config_from_git()
 # 下载插件管理软件vim-plug
 function download_vim_plug()
 {
+    cd ${Pwd}
     curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 }
 
@@ -132,6 +141,10 @@ function install_vimplus_on_linux()
 # main函数
 function main()
 {
+    echo "OsName : ${OsName}"
+    echo "SUDO : ${SUDO}"
+    echo "InstallCommand : ${InstallCommand}"
+    echo "Pwd : ${Pwd}"
     install_vimplus_on_linux
 }
 

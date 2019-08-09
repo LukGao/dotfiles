@@ -1,16 +1,17 @@
 #!/bin/bash
 
-SUDO="sudo"
-InstallCommand=""
-OsName=""
+export SUDO="sudo"
+export InstallCommand=""
+export OsName=""
+export Pwd=`pwd`
 
 function check_user()
 {
     if [[ `id -u` -eq 0 ]];then
         echo "root用户!"
-        SUDO=""
+        export SUDO=""
     else
-        SUDO="sudo"
+        export SUDO="sudo"
         echo "非root用户!"
     fi
 }
