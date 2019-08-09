@@ -88,38 +88,37 @@ nnoremap <leader><leader>c :PlugClean<cr>
 " 插件安装LINX
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
-Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-fugitive'
-Plug 'ryanoasis/vim-devicons'
-Plug 'itchyny/lightline.vim'
-Plug 'mengelbrecht/lightline-bufferline'
+"Plug 'airblade/vim-gitgutter'
+"Plug 'tpope/vim-fugitive'
+"Plug 'ryanoasis/vim-devicons'
+"Plug 'itchyny/lightline.vim'
+"Plug 'mengelbrecht/lightline-bufferline'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-
 Plug 'fatih/vim-go',{'for':'go'}
 
-Plug 'liuchengxu/space-vim-dark'
-Plug 'sainnhe/vim-color-atlantis'
+"Plug 'liuchengxu/space-vim-dark'
+"Plug 'sainnhe/vim-color-atlantis'
 
-Plug 'vim-utils/vim-man'
-Plug 'MattesGroeger/vim-bookmarks' " 书签
-Plug 'neoclide/coc.nvim',               {'tag': '*', 'do': { -> coc#util#install()}}
-Plug 'mg979/vim-visual-multi',          {'branch': 'test'} "多行编辑
-Plug 'mbbill/undotree'                  " 后悔药
-Plug 'mhinz/vim-startify'               " 启动页
-Plug 'luochen1990/rainbow'              " 多彩括号
-Plug 'jiangmiao/auto-pairs'             " 括号补全
-Plug 'Chiel92/vim-autoformat' ,         {'for':['c','cpp','cc']}
-Plug 'scrooloose/nerdtree',             { 'on':'NERDTreeToggle'}
-Plug 'majutsushi/tagbar',               { 'on':'TagbarToggle'}
-Plug 'tpope/vim-endwise',               {'for':['c','cpp','cc']}                            " endif补全
-Plug 'tpope/vim-surround',              {'for':['go','c','cpp','cc','py']}                  " 成双成对编辑
-Plug 'scrooloose/nerdcommenter',        {'for':['go','c','cpp','cc','py']}                  " 注释插件
-Plug 'lfv89/vim-interestingwords',      {'for':['go','c','cpp','cc','py']}                  " 单词标记
-Plug 'honza/vim-snippets'
-Plug 'ntpeters/vim-better-whitespace',  {'for':['go','c','cpp','cc','py']} " 去除空格
-Plug 'tpope/vim-abolish'            ,  {'for':['go','c','cpp','cc','py']}  " 命名风格转换
-Plug 'voldikss/vim-translate-me'
+"Plug 'vim-utils/vim-man'
+"Plug 'MattesGroeger/vim-bookmarks' " 书签
+"Plug 'neoclide/coc.nvim',               {'tag': '*', 'do': { -> coc#util#install()}}
+"Plug 'mg979/vim-visual-multi',          {'branch': 'test'} "多行编辑
+"Plug 'mbbill/undotree'                  " 后悔药
+"Plug 'mhinz/vim-startify'               " 启动页
+"Plug 'luochen1990/rainbow'              " 多彩括号
+"Plug 'jiangmiao/auto-pairs'             " 括号补全
+"Plug 'Chiel92/vim-autoformat' ,         {'for':['c','cpp','cc']}
+"Plug 'scrooloose/nerdtree',             { 'on':'NERDTreeToggle'}
+"Plug 'majutsushi/tagbar',               { 'on':'TagbarToggle'}
+"Plug 'tpope/vim-endwise',               {'for':['c','cpp','cc']}                            " endif补全
+"Plug 'tpope/vim-surround',              {'for':['go','c','cpp','cc','py']}                  " 成双成对编辑
+"Plug 'scrooloose/nerdcommenter',        {'for':['go','c','cpp','cc','py']}                  " 注释插件
+"Plug 'lfv89/vim-interestingwords',      {'for':['go','c','cpp','cc','py']}                  " 单词标记
+"Plug 'honza/vim-snippets'
+"Plug 'ntpeters/vim-better-whitespace',  {'for':['go','c','cpp','cc','py']} " 去除空格
+"Plug 'tpope/vim-abolish'            ,  {'for':['go','c','cpp','cc','py']}  " 命名风格转换
+"Plug 'voldikss/vim-translate-me'
 call plug#end()
 
 nnoremap <localleader>ft :Autoformat<CR>
