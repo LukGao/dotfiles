@@ -49,11 +49,15 @@ function copy_config()
 function install_nvim()
 {
     cd ${Pwd}
-    path=$HOME/bin
-    if [ ! -d ${path} ]; then    
-        mkdir ${path}
+    if [ ! -d $HOME/bin ]; then    
+        mkdir $HOME/bin
+    fi    
+
+    if [ ! -d ${Pwd}/dotfiles/tools ]; then    
+        mkdir ${Pwd}/dotfiles/tools 
     fi    
     
+    cd ${Pwd}/dotfiles/tools
     echo "export PATH=$HOME/bin:$PATH" >> $HOME/.bashrc
     wget -c https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz
     tar zxf nvim-linux64.tar.gz && ln -sf `pwd`/nvim-linux64/bin/nvim $HOME/bin/nvim
