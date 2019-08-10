@@ -11,7 +11,10 @@ function install_prepare_software_on_centos()
 
 # 安装ubuntu发行版必要软件
 function install_prepare_software_on_ubuntu()
-{
+{    
+    # 安装nodejs
+    install_nodejs    
+ 
     ${InstallCommand} ctags build-essential python-dev python3-dev && \
     ${InstallCommand} python-pip python3-pip && \
     pip install neovim && \
@@ -103,9 +106,7 @@ function save_old_config()
 
 function begin_install_vimplus()
 {
-    # 安装nodejs
-    install_nodejs    
-    # 保存旧文件
+   # 保存旧文件
     save_old_config
     # 下载插件管理软件
     download_vim_plug
