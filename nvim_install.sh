@@ -74,7 +74,6 @@ function link_nvim_config()
 
 function clone_config_from_git()
 {
-    install_nodejs    
     install_nvim
     link_nvim_config
 }
@@ -104,6 +103,8 @@ function save_old_config()
 
 function begin_install_vimplus()
 {
+    # 安装nodejs
+    install_nodejs    
     # 保存旧文件
     save_old_config
     # 下载插件管理软件
