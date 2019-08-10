@@ -13,6 +13,9 @@ function install_prepare_software_on_centos()
 function install_prepare_software_on_ubuntu()
 {
     ${InstallCommand} ctags build-essential python-dev python3-dev 
+    python-pip python3-pip
+    pip install neovim
+    pip3 install neovim
 }
 
 
