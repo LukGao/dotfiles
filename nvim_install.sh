@@ -12,8 +12,9 @@ function install_prepare_software_on_centos()
 # 安装ubuntu发行版必要软件
 function install_prepare_software_on_ubuntu()
 {
-    ${InstallCommand} ctags build-essential python-dev python3-dev python-pip python3-pip
-    pip install neovim
+    ${InstallCommand} ctags build-essential python-dev python3-dev && \
+    ${InstallCommand} python-pip python3-pip && \
+    pip install neovim && \
     pip3 install neovim
 }
 
