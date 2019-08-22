@@ -696,3 +696,5 @@ endfunction
 
 map <leader>v <Plug>(Vman)
 
+let g:go_fmt_command = "goimports"
+

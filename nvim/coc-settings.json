@@ -57,5 +57,6 @@
     "suggest.preferCompleteThanJumpPlaceholder": true,
     "suggest.timeout": 500,
     "suggest.triggerAfterInsertEnter": true,
-    "suggest.triggerCompletionWait": 50
+    "suggest.triggerCompletionWait": 50,
+    "snippets.ultisnips.directories": ["gosnippets/UltiSnips"],
 }
