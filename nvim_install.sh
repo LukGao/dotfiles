@@ -6,6 +6,7 @@ NvimConfigDir=$HOME/.config/nvim
 function install_prepare_software_on_centos()
 {
     ${SUDO} yum whatprovides *bin/which
+    ${InstallCommand} epel-release
     ${InstallCommand} which ctags python-devel python3-devel 
 }
 
