@@ -98,6 +98,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'neoclide/coc.nvim',               {'tag': '*', 'do': { -> coc#util#install()}}
 Plug 'liuchengxu/space-vim-dark'
 Plug 'sainnhe/vim-color-atlantis'
+Plug 'chxuan/prepare-code'
 
 Plug 'fatih/vim-go',{'for':'go'}
 Plug 'vim-utils/vim-man'
