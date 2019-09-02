@@ -6,14 +6,13 @@ NvimConfigDir=$HOME/.config/nvim
 function install_prepare_software_on_centos()
 {
     ${SUDO} yum whatprovides *bin/which
+    ${InstallCommand} epel-release
     ${InstallCommand} which ctags python-devel python3-devel 
 }
 
 # 安装ubuntu发行版必要软件
 function install_prepare_software_on_ubuntu()
 {    
-    # 安装nodejs
-    install_nodejs    
  
     ${InstallCommand} ctags build-essential python-dev python3-dev && \
     ${InstallCommand} python-pip python3-pip && \
@@ -106,7 +105,9 @@ function save_old_config()
 
 function begin_install_vimplus()
 {
-   # 保存旧文件
+    # 安装nodejs
+    install_nodejs    
+    # 保存旧文件
     save_old_config
     # 下载插件管理软件
     download_vim_plug
