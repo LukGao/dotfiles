@@ -98,6 +98,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'neoclide/coc.nvim',               {'tag': '*', 'do': { -> coc#util#install()}}
 Plug 'liuchengxu/space-vim-dark'
 Plug 'sainnhe/vim-color-atlantis'
+Plug 'voldikss/vim-floaterm'
 
 Plug 'fatih/vim-go',{'for':'go'}
 Plug 'vim-utils/vim-man'
@@ -697,4 +698,6 @@ endfunction
 map <leader>v <Plug>(Vman)
 
 let g:go_fmt_command = "goimports"
+
+autocmd User Startified setlocal buflisted
 

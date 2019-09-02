@@ -106,3 +106,4 @@ result/*
 perf.*
 # mac os
 .DS_Store
+tools/
