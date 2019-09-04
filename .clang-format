@@ -12,8 +12,8 @@ AllowAllParametersOfDeclarationOnNextLine: true
 AllowShortBlocksOnASingleLine: false
 AllowShortCaseLabelsOnASingleLine: false
 AllowShortFunctionsOnASingleLine: All
-AllowShortIfStatementsOnASingleLine: true
-AllowShortLoopsOnASingleLine: true
+AllowShortIfStatementsOnASingleLine: false
+AllowShortLoopsOnASingleLine: false
 AlwaysBreakAfterDefinitionReturnType: None
 AlwaysBreakAfterReturnType: None
 AlwaysBreakBeforeMultilineStrings: true
@@ -37,7 +37,7 @@ BraceWrapping:
   SplitEmptyRecord: true
   SplitEmptyNamespace: true
 BreakBeforeBinaryOperators: None
-BreakBeforeBraces: Attach
+BreakBeforeBraces: Allman
 BreakBeforeInheritanceComma: false
 BreakInheritanceList: BeforeColon
 BreakBeforeTernaryOperators: true
@@ -46,7 +46,7 @@ BreakConstructorInitializers: BeforeColon
 BreakAfterJavaFieldAnnotations: false
 BreakStringLiterals: true
 ColumnLimit:     80
-CommentPragmas:  '^ IWYU pragma:'
+CommentPragmas:  '^  IWYU pragma:'
 CompactNamespaces: false
 ConstructorInitializerAllOnOneLineOrOnePerLine: true
 ConstructorInitializerIndentWidth: 4
@@ -60,20 +60,9 @@ ForEachMacros:
   - foreach
   - Q_FOREACH
   - BOOST_FOREACH
-IncludeBlocks:   Preserve
-IncludeCategories: 
-  - Regex:           '^<ext/.*\.h>'
-    Priority:        2
-  - Regex:           '^<.*\.h>'
-    Priority:        1
-  - Regex:           '^<.*'
-    Priority:        2
-  - Regex:           '.*'
-    Priority:        3
-IncludeIsMainRegex: '([-_](test|unittest))?$'
 IndentCaseLabels: true
 IndentPPDirectives: None
-IndentWidth:     2
+IndentWidth:     4
 IndentWrappedFunctionNames: false
 JavaScriptQuotes: Leave
 JavaScriptWrapImports: true
@@ -124,8 +113,8 @@ RawStringFormats:
     CanonicalDelimiter: ''
     BasedOnStyle:    google
 ReflowComments:  true
-SortIncludes:    true
-SortUsingDeclarations: true
+SortIncludes:    false
+SortUsingDeclarations: false
 SpaceAfterCStyleCast: false
 SpaceAfterTemplateKeyword: true
 SpaceBeforeAssignmentOperators: true
@@ -135,7 +124,7 @@ SpaceBeforeInheritanceColon: true
 SpaceBeforeParens: ControlStatements
 SpaceBeforeRangeBasedForLoopColon: true
 SpaceInEmptyParentheses: false
-SpacesBeforeTrailingComments: 2
+SpacesBeforeTrailingComments: 4
 SpacesInAngles:  false
 SpacesInContainerLiterals: true
 SpacesInCStyleCastParentheses: false
