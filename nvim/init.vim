@@ -172,7 +172,7 @@ nmap gs <Plug>(coc-git-chunkinfo)
 nmap gm <Plug>(coc-git-commit)
 nnoremap <silent> <leader>cg  :<C-u>CocList --normal gstatus<CR>
 nmap <leader>rn <Plug>(coc-rename)
-let g:coc_global_extensions =['coc-snippets','coc-prettier','coc-eslint','coc-emmet','coc-tsserver','coc-pairs','coc-json','coc-imselect','coc-highlight','coc-git','coc-emoji','coc-lists','coc-post','coc-stylelint','coc-yaml','coc-template','coc-tabnine']
+let g:coc_global_extensions =['coc-snippets','coc-python','coc-prettier','coc-eslint','coc-emmet','coc-tsserver','coc-pairs','coc-json','coc-imselect','coc-highlight','coc-git','coc-emoji','coc-lists','coc-post','coc-stylelint','coc-yaml','coc-template','coc-tabnine']
 
 "let g:coc#monitor='true'
 nnoremap <silent> <localleader>ca  :<C-u>CocList diagnostics<cr>
