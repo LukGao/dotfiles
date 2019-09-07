@@ -8,11 +8,11 @@ function install_prepare_software_on_centos()
     ${SUDO} yum whatprovides *bin/which
     ${InstallCommand} epel-release
     ${InstallCommand} which ctags python-devel python3-devel 
-    pip install neovim && \
-    pip install jedi && \
-    pip install pylint && \
-    pip3 install neovim && \
-    pip3 install jedi && \
+    pip install neovim
+    pip install jedi
+    pip install pylint
+    pip3 install neovim
+    pip3 install jedi
     pip3 install pylint
 }
 
@@ -22,11 +22,11 @@ function install_prepare_software_on_ubuntu()
  
     ${InstallCommand} ctags build-essential python-dev python3-dev && \
     ${InstallCommand} python-pip python3-pip && \
-    pip install neovim && \
-    pip install jedi && \
-    pip install pylint && \
-    pip3 install neovim && \
-    pip3 install jedi && \
+    pip install neovim
+    pip install jedi
+    pip install pylint
+    pip3 install neovim
+    pip3 install jedi
     pip3 install pylint
 }
 
