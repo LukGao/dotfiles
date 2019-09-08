@@ -101,7 +101,6 @@ Plug 'sainnhe/vim-color-atlantis'
 Plug 'voldikss/vim-floaterm'
 Plug 'chxuan/prepare-code'
 
-Plug 'fatih/vim-go',{'for':'go'}
 Plug 'vim-utils/vim-man'
 Plug 'MattesGroeger/vim-bookmarks' " 书签
 Plug 'mg979/vim-visual-multi',          {'branch': 'test'} "多行编辑
@@ -698,7 +697,7 @@ endfunction
 
 map <leader>v <Plug>(Vman)
 
-let g:go_fmt_command = "goimports"
-
 autocmd User Startified setlocal buflisted
+autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
+
 

@@ -49,7 +49,6 @@
 	"coc.source.file.priority": 10,
 	"coc.source.around.priority": 8,
 	"coc.source.emoji.priority": 3,
-	"coc.source.buffer.priority": 1,
 	"coc.source.emoji.filetypes": ["markdown", "gitcommit"],
 	"coc.source.emoji.shortcut": "E",
     "suggest.detailField": "abbr",
