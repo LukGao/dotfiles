@@ -110,7 +110,8 @@ Plug 'luochen1990/rainbow'              " 多彩括号
 Plug 'jiangmiao/auto-pairs'             " 括号补全
 Plug 'Chiel92/vim-autoformat' ,         {'for':['c','cpp','cc']}
 Plug 'scrooloose/nerdtree',             { 'on':'NERDTreeToggle'}
-Plug 'majutsushi/tagbar',               { 'on':'TagbarToggle'}
+"Plug 'majutsushi/tagbar',               { 'on':'TagbarToggle'}
+Plug 'liuchengxu/vista.vim'
 Plug 'tpope/vim-endwise',               {'for':['c','cpp','cc']}                            " endif补全
 Plug 'tpope/vim-surround',              {'for':['go','c','cpp','cc','py']}                  " 成双成对编辑
 Plug 'scrooloose/nerdcommenter',        {'for':['go','c','cpp','cc','py']}                  " 注释插件
@@ -700,4 +701,15 @@ map <leader>v <Plug>(Vman)
 autocmd User Startified setlocal buflisted
 autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
 
-
+let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
+let g:vista_default_executive = 'coc'
+let g:vista_fzf_preview = ['right:50%']
+let g:vista#renderer#enable_icon = 1
+let g:vista_executive_for = {
+  \ 'cpp': 'coc',
+  \ 'go': 'coc',
+  \ }
+let g:vista#renderer#icons = {
+\   "function": "\uf794",
+\   "variable": "\uf71b",
+\  }
