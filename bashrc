@@ -57,3 +57,10 @@ alias zb='z -b'      # 快速回到父目录
 alias on='nvim $(fzf --height 40% --reverse)'
 alias ok='nvim'
 alias tmux='tmux -2'
+
+
+export GOROOT=/usr/local/go
+export GOPATH=$HOME/go
+export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+export GO111MODULE=on
+export GOPROXY=https://goproxy.io
