@@ -88,21 +88,33 @@ nnoremap <leader><leader>c :PlugClean<cr>
 " 插件安装LINX
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
+" git
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
+" icon
 Plug 'ryanoasis/vim-devicons'
+" line
 Plug 'itchyny/lightline.vim'
 Plug 'mengelbrecht/lightline-bufferline'
+" fzf
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'neoclide/coc.nvim',               {'tag': '*', 'do': { -> coc#util#install()}}
+" lsp clinet
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'liuchengxu/space-vim-dark'
 Plug 'sainnhe/vim-color-atlantis'
+" terminal
 Plug 'voldikss/vim-floaterm'
+" code 
 Plug 'chxuan/prepare-code'
-
+" man page
 Plug 'vim-utils/vim-man'
-Plug 'MattesGroeger/vim-bookmarks' " 书签
+" bookmark
+Plug 'MattesGroeger/vim-bookmarks' " 
+" snippets
+Plug 'honza/vim-snippets'
+" translate
+Plug 'voldikss/vim-translate-me'
 Plug 'mg979/vim-visual-multi',          {'branch': 'test'} "多行编辑
 Plug 'mbbill/undotree'                  " 后悔药
 Plug 'mhinz/vim-startify'               " 启动页
@@ -116,10 +128,8 @@ Plug 'tpope/vim-endwise',               {'for':['c','cpp','cc']}                
 Plug 'tpope/vim-surround',              {'for':['go','c','cpp','cc','py']}                  " 成双成对编辑
 Plug 'scrooloose/nerdcommenter',        {'for':['go','c','cpp','cc','py']}                  " 注释插件
 Plug 'lfv89/vim-interestingwords',      {'for':['go','c','cpp','cc','py']}                  " 单词标记
-Plug 'honza/vim-snippets'
 Plug 'ntpeters/vim-better-whitespace',  {'for':['go','c','cpp','cc','py']} " 去除空格
-Plug 'tpope/vim-abolish'            ,  {'for':['go','c','cpp','cc','py']}  " 命名风格转换
-Plug 'voldikss/vim-translate-me'
+Plug 'tpope/vim-abolish'             ,  {'for':['go','c','cpp','cc','py']}  " 命名风格转换
 call plug#end()
 
 nnoremap <localleader>ft :Autoformat<CR>
@@ -170,21 +180,18 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
-imap <expr><TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>":
-      \ coc#refresh()
+imap <expr><TAB>  pumvisible() ? "\<C-n>" :  <SID>check_back_space() ? "\<TAB>":  coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 
 
 nnoremap <silent> <localleader>k :call <SID>show_documentation()<CR>
 inoremap <silent><expr> <c-space> coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
 set updatetime=300
 au CursorHold * sil call CocActionAsync('highlight')
 au CursorHoldI * sil call CocActionAsync('showSignatureHelp')
-filetype plugin indent on     " required!
+filetype plugin indent on    
 
 
 function! s:show_documentation()
