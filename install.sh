@@ -55,7 +55,9 @@ function clone_install_repository()
     git clone --depth=1 https://github.com/ggyyll/dotfiles.git 
     cd dotfiles
     bash nvim_install.sh && bash shell_tools.sh
+    bash install_go.sh && bash install_ccls.sh
     cd -
+
 }
 
 
