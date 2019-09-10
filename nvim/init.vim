@@ -115,6 +115,9 @@ Plug 'MattesGroeger/vim-bookmarks' "
 Plug 'honza/vim-snippets'
 " translate
 Plug 'voldikss/vim-translate-me'
+" leaderf
+Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
+
 Plug 'mg979/vim-visual-multi',          {'branch': 'test'} "多行编辑
 Plug 'mbbill/undotree'                  " 后悔药
 Plug 'mhinz/vim-startify'               " 启动页
@@ -686,3 +689,19 @@ let g:vista#renderer#icons = {
 \   "function": "\uf794",
 \   "variable": "\uf71b",
 \  }
+
+noremap <leader>f :LeaderfFunction!<cr>
+
+let g:Lf_ShowRelativePath = 0
+let g:Lf_HideHelp = 1
+let g:Lf_PreviewResult = {'Function':0, 'Colorscheme':1}
+let g:Lf_WindowPosition ='right'                      
+
+let g:Lf_NormalMap = {
+	\ "File":   [["<ESC>", ':exec g:Lf_py "fileExplManager.quit()"<CR>']],
+	\ "Buffer": [["<ESC>", ':exec g:Lf_py "bufExplManager.quit()"<CR>']],
+	\ "Mru":    [["<ESC>", ':exec g:Lf_py "mruExplManager.quit()"<CR>']],
+	\ "Tag":    [["<ESC>", ':exec g:Lf_py "tagExplManager.quit()"<CR>']],
+	\ "Function":    [["<ESC>", ':exec g:Lf_py "functionExplManager.quit()"<CR>']],
+	\ "Colorscheme":    [["<ESC>", ':exec g:Lf_py "colorschemeExplManager.quit()"<CR>']],
+	\ }
