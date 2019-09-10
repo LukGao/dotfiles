@@ -110,7 +110,7 @@ Plug 'luochen1990/rainbow'              " 多彩括号
 Plug 'jiangmiao/auto-pairs'             " 括号补全
 Plug 'Chiel92/vim-autoformat' ,         {'for':['c','cpp','cc']}
 Plug 'scrooloose/nerdtree',             { 'on':'NERDTreeToggle'}
-"Plug 'majutsushi/tagbar',               { 'on':'TagbarToggle'}
+Plug 'majutsushi/tagbar',               { 'on':'TagbarToggle'}
 Plug 'liuchengxu/vista.vim'
 Plug 'tpope/vim-endwise',               {'for':['c','cpp','cc']}                            " endif补全
 Plug 'tpope/vim-surround',              {'for':['go','c','cpp','cc','py']}                  " 成双成对编辑
@@ -127,8 +127,8 @@ nnoremap <localleader>ft :Autoformat<CR>
 
 
 let g:python3_host_prog  = '/usr/bin/python3'
+"let g:space_vim_plugin_hi_groups = 1
 
-let g:space_vim_plugin_hi_groups = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " nerdtree
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -163,51 +163,20 @@ let g:coc_snippet_next = '<TAB>'
 let g:coc_snippet_prev = '<S-TAB>'
 let g:coc_status_error_sign = '•'
 let g:coc_status_warning_sign = '•'
-
-nmap [g <Plug>(coc-git-prevchunk)
-nmap ]g <Plug>(coc-git-nextchunk)
-" show chunk diff at current position
-nmap gs <Plug>(coc-git-chunkinfo)
-" show commit contains current position
-nmap gm <Plug>(coc-git-commit)
-nnoremap <silent> <leader>cg  :<C-u>CocList --normal gstatus<CR>
-nmap <leader>rn <Plug>(coc-rename)
 let g:coc_global_extensions =['coc-snippets','coc-python','coc-prettier','coc-eslint','coc-emmet','coc-tsserver','coc-pairs','coc-json','coc-imselect','coc-highlight','coc-git','coc-emoji','coc-lists','coc-post','coc-stylelint','coc-yaml','coc-template','coc-tabnine']
 
-"let g:coc#monitor='true'
-nnoremap <silent> <localleader>ca  :<C-u>CocList diagnostics<cr>
-nnoremap <silent> <localleader>ce  :<C-u>CocList extensions<cr>
-nnoremap <silent> <localleader>cc  :<C-u>CocList commands<cr>
-nnoremap <silent> <localleader>co  :<C-u>CocList outline<cr>
-nnoremap <silent> <localleader>cs  :<C-u>CocList -I symbols<cr>
-nnoremap <silent> <localleader>cj  :<C-u>CocNext<CR>
-nnoremap <silent> <localleader>ck  :<C-u>CocPrev<CR>
-nnoremap <silent> <localleader>cr  :<C-u>CocListResume<CR>
-nmap <silent> ]c <Plug>(coc-diagnostic-prev)
-nmap <silent> [c <Plug>(coc-diagnostic-next)
-vmap <localleader>cf  <Plug>(coc-format-selected)
-nmap <localleader>cf  <Plug>(coc-format-selected)
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-nnoremap <silent> <m-k> :call <SID>show_documentation()<CR>
-function! s:show_documentation()
-  if &filetype == 'vim'
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
 
 imap <expr><TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>":
       \ coc#refresh()
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
+
+
+nnoremap <silent> <localleader>k :call <SID>show_documentation()<CR>
 inoremap <silent><expr> <c-space> coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
@@ -217,10 +186,19 @@ au CursorHold * sil call CocActionAsync('highlight')
 au CursorHoldI * sil call CocActionAsync('showSignatureHelp')
 filetype plugin indent on     " required!
 
-" todolist
-nnoremap <localleader>tc :CocCommand todolist.clearRemind<CR>
-nnoremap <localleader>td :CocCommand todolist.create<CR>
-nnoremap <localleader>lt ::CocList todolist<CR>
+
+function! s:show_documentation()
+  if &filetype == 'vim'
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " tagbar
@@ -382,15 +360,10 @@ let g:lightline = {
       \   'homemode': 'LightlineMode',
       \   'fugitive': 'LightLineFugitive',
       \   'gitgutter': 'LightLineGitGutter',
-      \   'readonly': 'LightLineReadonly',
-      \   'modified': 'LightLineModified',
       \   'filename': 'LightLineFname',
-      \   'filetype': 'LightLineFiletype',
       \   'fileformat': 'LightLineFileformat',
       \ },
-      \ 'component_type': {'buffers': 'tabsel'},
-      \ 'separator': { 'left': "", 'right': ""},
-      \ 'subseparator': { 'left': "", 'right': ""}
+      \ 'component_type': {'buffers': 'tabsel'}
       \ }
 
 function! LightlineMode()
@@ -509,10 +482,6 @@ function! LightLineFilename()
         \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
 endfunction
 
-function! LightLineFiletype()
-  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
-endfunction
-
 function! LightLineFileformat()
   return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
 endfunction
@@ -540,18 +509,15 @@ nmap <Leader>0 <Plug>lightline#bufferline#go(10)
 
 
 " Theme
-
-" Enable 256 color terminal
 set t_Co=256
 
-" Enable true color
 if has('termguicolors')
   set termguicolors
 endif
 
 set background=dark
-"colorscheme gruvbox9_hard
 colorscheme space-vim-dark
+"colorscheme gruvbox9_hard
 "colorscheme primary
 "colorscheme forest-night
 "colorscheme vanilla-cake 
@@ -696,7 +662,7 @@ function! Fzf_dev()
 
 endfunction
 
-map <leader>v <Plug>(Vman)
+map <localleader>v <Plug>(Vman)
 
 autocmd User Startified setlocal buflisted
 autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
