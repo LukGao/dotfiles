@@ -587,9 +587,8 @@ let g:ale_completion_delay = 500
 let g:ale_sign_error = '>>'
 let g:ale_sign_warning = '--'
 let g:ale_lint_on_text_changed = 'normal'
-let g:ale_c_gcc_options = '-Wall -O2 -std=c99'
 let g:ale_echo_msg_format = '[%linter%] %code: %%s'
-
+let g:ale_c_parse_compile_commands  = 1
 
 let g:ale_cpp_ccls_executable = 'ccls'
 let g:ale_cpp_ccls_init_options = {}
@@ -601,18 +600,15 @@ let g:ale_cpp_clangtidy_executable = 'clang-tidy'
 let g:ale_cpp_clangtidy_extra_options = ''
 let g:ale_cpp_clangtidy_options = '-Wall -std=c++14 -x c++'
 let g:ale_cpp_cppcheck_executable = 'cppcheck'
-let g:ale_cpp_cppcheck_options = '--enable=all'
+let g:ale_cpp_cppcheck_options = '--std=c++14 --enable=all'
 let g:ale_cpp_cpplint_executable = 'cpplint'
-let g:ale_cpp_cpplint_options = ''
+let g:ale_cpp_cpplint_options = '--filter=-whitespace/braces -build/include_subdir'
 let g:ale_cpp_flawfinder_executable = 'flawfinder'
 let g:ale_cpp_flawfinder_minlevel = 1
 let g:ale_cpp_flawfinder_options = ''
-let g:ale_cpp_gcc_executable = 'gcc'
-let g:ale_cpp_gcc_options = '-std=c++14 -Wall'
-
-let g:ale_linters_explicit = 1
 let g:airline#extensions#ale#enabled = 1
-let g:ale_linters = {'c': ['clang'], 'cpp': ['cpplint','cppcheck','clang++', 'g++']}
+let g:ale_linters = {'cpp': ['cpplint','cppcheck']}
+let g:ale_linters_explicit = 1
 
 
 
