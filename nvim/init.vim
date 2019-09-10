@@ -115,18 +115,14 @@ Plug 'MattesGroeger/vim-bookmarks' "
 Plug 'honza/vim-snippets'
 " translate
 Plug 'voldikss/vim-translate-me'
-" leaderf
-Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 
 Plug 'mg979/vim-visual-multi',          {'branch': 'test'} "多行编辑
 Plug 'mbbill/undotree'                  " 后悔药
 Plug 'mhinz/vim-startify'               " 启动页
 Plug 'luochen1990/rainbow'              " 多彩括号
-Plug 'jiangmiao/auto-pairs'             " 括号补全
 Plug 'Chiel92/vim-autoformat' ,         {'for':['c','cpp','cc']}
 Plug 'scrooloose/nerdtree',             { 'on':'NERDTreeToggle'}
 Plug 'majutsushi/tagbar',               { 'on':'TagbarToggle'}
-Plug 'liuchengxu/vista.vim'
 Plug 'tpope/vim-endwise',               {'for':['c','cpp','cc']}                            " endif补全
 Plug 'tpope/vim-surround',              {'for':['go','c','cpp','cc','py']}                  " 成双成对编辑
 Plug 'scrooloose/nerdcommenter',        {'for':['go','c','cpp','cc','py']}                  " 注释插件
@@ -135,17 +131,15 @@ Plug 'ntpeters/vim-better-whitespace',  {'for':['go','c','cpp','cc','py']} " 去
 Plug 'tpope/vim-abolish'             ,  {'for':['go','c','cpp','cc','py']}  " 命名风格转换
 call plug#end()
 
-nnoremap <localleader>ft :Autoformat<CR>
 
-
-
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" nvim python3
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:python3_host_prog  = '/usr/bin/python3'
-"let g:space_vim_plugin_hi_groups = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " nerdtree
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <localleader>n :NERDTreeToggle <CR>
 let nerdtreequitonopen = 0
 let NERDTreeShowHidden=0
 let nerdchristmastree=1
@@ -170,30 +164,16 @@ let g:nerdtreeindicatormapcustom = {
 " coc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-imap <C-l> <Plug>(coc-snippets-expand)
-vmap <C-j> <Plug>(coc-snippets-select)
 let g:coc_snippet_next = '<TAB>'
 let g:coc_snippet_prev = '<S-TAB>'
 let g:coc_status_error_sign = '•'
 let g:coc_status_warning_sign = '•'
 let g:coc_global_extensions =['coc-snippets','coc-python','coc-prettier','coc-eslint','coc-emmet','coc-tsserver','coc-pairs','coc-json','coc-imselect','coc-highlight','coc-git','coc-emoji','coc-lists','coc-post','coc-stylelint','coc-yaml','coc-template','coc-tabnine']
 
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-imap <expr><TAB>  pumvisible() ? "\<C-n>" :  <SID>check_back_space() ? "\<TAB>":  coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
-
-
-nnoremap <silent> <localleader>k :call <SID>show_documentation()<CR>
-inoremap <silent><expr> <c-space> coc#refresh()
-autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
-
 set updatetime=300
-au CursorHold * sil call CocActionAsync('highlight')
-au CursorHoldI * sil call CocActionAsync('showSignatureHelp')
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+autocmd CursorHold * sil call CocActionAsync('highlight')
+autocmd CursorHoldI * sil call CocActionAsync('showSignatureHelp')
 filetype plugin indent on    
 
 
@@ -213,7 +193,6 @@ endfunction
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " tagbar
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <localleader>g :TagbarToggle<CR>
 let g:tagbar_width=25
 let g:tagbar_type_go = {
       \ 'ctagstype' : 'go',
@@ -246,7 +225,6 @@ let g:tagbar_type_go = {
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " UNDO
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <localleader>u :UndotreeToggle<cr>
 if has("persistent_undo")
   set undodir=~/.undodir/
   set undofile
@@ -258,7 +236,16 @@ endif
 vnoremap // y/<c-r>"<CR>   "
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g'\"" | endif " 打开文件自动定位到最后编辑的位置
 nnoremap zpr :setlocal foldexpr=(getline(v:lnum)=~@/)?0:(getline(v:lnum-1)=~@/)\\|\\|(getline(v:lnum+1)=~@/)?1:2 foldmethod=expr foldlevel=0 foldcolumn=2<CR>:set foldmethod=manual<CR><CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" rainbow
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:rainbow_active = 1
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" prepare-code
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:prepare_code_plugin_path = expand($HOME . "/.vim/plugged/prepare-code")
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -275,16 +262,7 @@ highlight GitGutterAdd ctermfg=22 guifg=#006000 ctermbg=NONE guibg=NONE
 highlight GitGutterChange ctermfg=58 guifg=#5F6000 ctermbg=NONE guibg=NONE
 highlight GitGutterDelete ctermfg=52 guifg=#600000 ctermbg=NONE guibg=NONE
 highlight GitGutterChangeDelete ctermfg=52 guifg=#600000 ctermbg=NONE guibg=NONE
-au TextChangedI * GitGutter
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" json 格式化
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-command! Jsonf :execute '%!python -m json.tool'
-      \ | :execute '%!python -c "import re,sys;sys.stdout.write(re.sub(r\"\\\u[0-9a-f]{4}\", lambda m:m.group().decode(\"unicode_escape\").encode(\"utf-8\"), sys.stdin.read()))"'
-
-
+autocmd TextChangedI * GitGutter
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " startify
@@ -312,35 +290,14 @@ endfunction
 
 let g:startify_custom_header = s:filter_header(startify#fortune#cowsay())
 let g:startify_custom_footer = s:filter_footer(g:startify_custom_foote)
-set viminfo='100,n$HOME/.vim/files/info/viminfo
 let g:startify_padding_left = 30
 let g:better_whitespace_enabled=1
 let g:strip_whitespace_confirm=0
+set viminfo='100,n$HOME/.vim/files/info/viminfo
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" space
+" lightline
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <silent> <localleader>pa :StripWhitespace<CR>
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" translate
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" <Leader>t 翻译光标下的文本，在命令行回显翻译内容
-nmap <silent> <leader>t <Plug>Translate
-vmap <silent> <leader>t <Plug>TranslateV
-" leader>w 翻译光标下的文本，在窗口中显示翻译内容
-nmap <silent> <leader>w <Plug>TranslateW
-vmap <silent> <leader>w <Plug>TranslateWV
-
-
-
-
-
-
-
-
 let g:lightline = {
       \ 'colorscheme': 'atlantis',
       \ 'active': {
@@ -505,18 +462,6 @@ let g:lightline#bufferline#number_map = {
       \ 0: '⓿ ', 1: '❶ ', 2: '❷ ', 3: '❸ ', 4: '❹ ',
       \ 5: '❺ ', 6: '❻ ', 7: '❼ ', 8: '❽ ', 9: '❾ '}
 
-nmap <Leader>1 <Plug>lightline#bufferline#go(1)
-nmap <Leader>2 <Plug>lightline#bufferline#go(2)
-nmap <Leader>3 <Plug>lightline#bufferline#go(3)
-nmap <Leader>4 <Plug>lightline#bufferline#go(4)
-nmap <Leader>5 <Plug>lightline#bufferline#go(5)
-nmap <Leader>6 <Plug>lightline#bufferline#go(6)
-nmap <Leader>7 <Plug>lightline#bufferline#go(7)
-nmap <Leader>8 <Plug>lightline#bufferline#go(8)
-nmap <Leader>9 <Plug>lightline#bufferline#go(9)
-nmap <Leader>0 <Plug>lightline#bufferline#go(10)
-
-
 
 " Theme
 set t_Co=256
@@ -527,62 +472,14 @@ endif
 
 set background=dark
 colorscheme space-vim-dark
-"colorscheme gruvbox9_hard
-"colorscheme primary
-"colorscheme forest-night
-"colorscheme vanilla-cake 
-"colorscheme atlantis
-let g:gruvbox_filetype_hi_groups = 1
-let g:gruvbox_plugin_hi_groups = 1
-let g:gruvbox_transp_bg = 1
-
 
 hi Whitespace ctermfg=96 guifg=#725972 guibg=NONE ctermbg=NONE
 hi default CocHighlightText  guibg=#725972 ctermbg=96
 " ---------------------------------------------------------
-hi PMenuSel ctermfg=252 ctermbg=106 guifg=#d0d0d0 guibg=#859900 guisp=#859900 cterm=NONE gui=NONE
 
-highlight Defx_filename_3_Modified  ctermfg=1  guifg=#D370A3
-highlight Defx_filename_3_Staged    ctermfg=10 guifg=#A3D572
-highlight Defx_filename_3_Ignored   ctermfg=8  guifg=#404660
-highlight def link Defx_filename_3_Untracked Comment
-highlight def link Defx_filename_3_Unknown Comment
-highlight def link Defx_filename_3_Renamed Title
-highlight def link Defx_filename_3_Unmerged Label
-
-
-nnoremap <silent> <F9> :PreviousColorScheme<cr>
-inoremap <silent> <F9> <esc> :PreviousColorScheme<cr>
-nnoremap <silent> <F10> :NextColorScheme<cr>
-inoremap <silent> <F10> <esc> :NextColorScheme<cr>
-nnoremap <silent> <F11> :RandomColorScheme<cr>
-inoremap <silent> <F11> <esc> :RandomColorScheme<cr>
-nnoremap <silent> <F12> :ShowColorScheme<cr>
-inoremap <silent> <F12> <esc> :ShowColorScheme<cr>
-let g:cpp_class_scope_highlight = 1
-let g:cpp_member_variable_highlight = 1
-let g:cpp_class_decl_highlight = 1
-let g:cpp_experimental_simple_template_highlight = 1
-let g:cpp_experimental_template_highlight = 1
-let g:cpp_concepts_highlight = 1
-highlight BookmarkSign ctermbg=NONE ctermfg=160
-highlight BookmarkLine ctermbg=194 ctermfg=NONE
 let g:bookmark_sign = '⚑'
 let g:bookmark_highlight_lines = 1
 let g:interestingWordsGUIColors = ['#EE7AE9','#8B7B8B','#9B30FF','#8B8B7A','#aeee00', '#ff0000','#40E0D0', '#b88823', '#ffa724', '#ff2c4b']
-
-
-
-
-nnoremap <silent> <leader>fc :Colors<CR>
-nnoremap <silent> <leader>fb :Buffers<CR>
-nnoremap <silent> <leader>ff :call Fzf_dev()<CR>
-nnoremap <silent> <leader>fr :Rg<CR>
-nnoremap <silent> <leader>fw :Rg <C-R><C-W><CR>
-nnoremap <silent> <localleader>m :History<CR>
-"autocmd! FileType fzf
-"autocmd  FileType fzf set laststatus=0 noshowmode noruler
-  "\| autocmd BufLeave <buffer> set laststatus=0 showmode ruler
 
 " Customize fzf colors to match your color scheme
 let g:fzf_colors =
@@ -672,36 +569,60 @@ function! Fzf_dev()
 
 endfunction
 
-map <localleader>v <Plug>(Vman)
 
 autocmd User Startified setlocal buflisted
 autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
 
-let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
-let g:vista_default_executive = 'coc'
-let g:vista_fzf_preview = ['right:50%']
-let g:vista#renderer#enable_icon = 1
-let g:vista_executive_for = {
-  \ 'cpp': 'coc',
-  \ 'go': 'coc',
-  \ }
-let g:vista#renderer#icons = {
-\   "function": "\uf794",
-\   "variable": "\uf71b",
-\  }
 
-noremap <leader>f :LeaderfFunction!<cr>
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" space
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <silent> <localleader>pa :StripWhitespace<CR>
 
-let g:Lf_ShowRelativePath = 0
-let g:Lf_HideHelp = 1
-let g:Lf_PreviewResult = {'Function':0, 'Colorscheme':1}
-let g:Lf_WindowPosition ='right'                      
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" translate
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nmap <silent> <leader>t <Plug>Translate
+vmap <silent> <leader>t <Plug>TranslateV
+nmap <silent> <leader>w <Plug>TranslateW
+vmap <silent> <leader>w <Plug>TranslateWV
 
-let g:Lf_NormalMap = {
-	\ "File":   [["<ESC>", ':exec g:Lf_py "fileExplManager.quit()"<CR>']],
-	\ "Buffer": [["<ESC>", ':exec g:Lf_py "bufExplManager.quit()"<CR>']],
-	\ "Mru":    [["<ESC>", ':exec g:Lf_py "mruExplManager.quit()"<CR>']],
-	\ "Tag":    [["<ESC>", ':exec g:Lf_py "tagExplManager.quit()"<CR>']],
-	\ "Function":    [["<ESC>", ':exec g:Lf_py "functionExplManager.quit()"<CR>']],
-	\ "Colorscheme":    [["<ESC>", ':exec g:Lf_py "colorschemeExplManager.quit()"<CR>']],
-	\ }
+
+
+imap <C-l> <Plug>(coc-snippets-expand)
+vmap <C-j> <Plug>(coc-snippets-select)
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+imap <expr><TAB>  pumvisible() ? "\<C-n>" :  <SID>check_back_space() ? "\<TAB>":  coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+nnoremap <silent> <localleader>k :call <SID>show_documentation()<CR>
+inoremap <silent><expr> <c-space> coc#refresh()
+
+nnoremap <localleader>u :UndotreeToggle<cr>
+nnoremap <localleader>g :TagbarToggle<CR>
+nnoremap <localleader>ft :Autoformat<CR>
+nnoremap <localleader>n :NERDTreeToggle <CR>
+
+
+nmap <Leader>1 <Plug>lightline#bufferline#go(1)
+nmap <Leader>2 <Plug>lightline#bufferline#go(2)
+nmap <Leader>3 <Plug>lightline#bufferline#go(3)
+nmap <Leader>4 <Plug>lightline#bufferline#go(4)
+nmap <Leader>5 <Plug>lightline#bufferline#go(5)
+nmap <Leader>6 <Plug>lightline#bufferline#go(6)
+nmap <Leader>7 <Plug>lightline#bufferline#go(7)
+nmap <Leader>8 <Plug>lightline#bufferline#go(8)
+nmap <Leader>9 <Plug>lightline#bufferline#go(9)
+nmap <Leader>0 <Plug>lightline#bufferline#go(10)
+
+
+nnoremap <silent> <localleader>c :Colors<CR>
+nnoremap <silent> <localleader>b :Buffers<CR>
+nnoremap <silent> <localleader>f :call Fzf_dev()<CR>
+nnoremap <silent> <localleader>r :Rg<CR>
+nnoremap <silent> <localleader>w :Rg <C-R><C-W><CR>
+nnoremap <silent> <localleader>m :History<CR>
+
+map <localleader>v <Plug>(Vman)
