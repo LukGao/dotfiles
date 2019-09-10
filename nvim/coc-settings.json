@@ -58,4 +58,5 @@
     "suggest.triggerAfterInsertEnter": true,
     "suggest.triggerCompletionWait": 50,
     "snippets.ultisnips.directories": ["gosnippets/UltiSnips"],
+    "diagnostic.displayByAle": true
 }

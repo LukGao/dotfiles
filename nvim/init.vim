@@ -115,6 +115,8 @@ Plug 'MattesGroeger/vim-bookmarks' "
 Plug 'honza/vim-snippets'
 " translate
 Plug 'voldikss/vim-translate-me'
+" ale
+Plug 'dense-analysis/ale'
 
 Plug 'mg979/vim-visual-multi',          {'branch': 'test'} "多行编辑
 Plug 'mbbill/undotree'                  " 后悔药
@@ -572,6 +574,45 @@ endfunction
 
 autocmd User Startified setlocal buflisted
 autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
+
+
+
+let g:ale_linters_explicit = 1
+let g:ale_sign_column_always = 1
+let g:ale_lint_on_insert_leave = 1
+let g:airline#extensions#ale#enabled = 1
+let g:ale_echo_delay = 20
+let g:ale_lint_delay = 500
+let g:ale_completion_delay = 500
+let g:ale_sign_error = '>>'
+let g:ale_sign_warning = '--'
+let g:ale_lint_on_text_changed = 'normal'
+let g:ale_c_gcc_options = '-Wall -O2 -std=c99'
+let g:ale_echo_msg_format = '[%linter%] %code: %%s'
+
+
+let g:ale_cpp_ccls_executable = 'ccls'
+let g:ale_cpp_ccls_init_options = {}
+let g:ale_cpp_clangcheck_executable = 'clang-check'
+let g:ale_cpp_clangcheck_options = ''
+let g:ale_cpp_clangtidy_checks = []
+let g:ale_cpp_clangtidy_executable = 'clang-tidy'
+let g:ale_cpp_clangtidy_extra_options = ''
+let g:ale_cpp_clangtidy_options = ''
+let g:ale_cpp_cppcheck_executable = 'cppcheck'
+let g:ale_cpp_cppcheck_options = '--enable=style'
+let g:ale_cpp_cpplint_executable = 'cpplint'
+let g:ale_cpp_cpplint_options = ''
+let g:ale_cpp_flawfinder_executable = 'flawfinder'
+let g:ale_cpp_flawfinder_minlevel = 1
+let g:ale_cpp_flawfinder_options = ''
+let g:ale_cpp_gcc_executable = 'gcc'
+let g:ale_cpp_gcc_options = '-std=c++14 -Wall'
+
+let g:ale_linters_explicit = 1
+let g:airline#extensions#ale#enabled = 1
+let g:ale_linters = {'c': ['clang'], 'cpp': ['cpplint','cppcheck','clang', 'g++','clang++']}
+
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
