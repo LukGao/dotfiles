@@ -593,14 +593,15 @@ let g:ale_echo_msg_format = '[%linter%] %code: %%s'
 
 let g:ale_cpp_ccls_executable = 'ccls'
 let g:ale_cpp_ccls_init_options = {}
+let g:ale_cpp_clang_executable = 'clang++'
+let g:ale_cpp_clang_options = '-std=c++14 -Wall'
 let g:ale_cpp_clangcheck_executable = 'clang-check'
-let g:ale_cpp_clangcheck_options = ''
-let g:ale_cpp_clangtidy_checks = []
+let g:ale_cpp_clangcheck_options = '-- -Wall -std=c++14 -x c++'
 let g:ale_cpp_clangtidy_executable = 'clang-tidy'
 let g:ale_cpp_clangtidy_extra_options = ''
-let g:ale_cpp_clangtidy_options = ''
+let g:ale_cpp_clangtidy_options = '-Wall -std=c++14 -x c++'
 let g:ale_cpp_cppcheck_executable = 'cppcheck'
-let g:ale_cpp_cppcheck_options = '--enable=style'
+let g:ale_cpp_cppcheck_options = '--enable=all'
 let g:ale_cpp_cpplint_executable = 'cpplint'
 let g:ale_cpp_cpplint_options = ''
 let g:ale_cpp_flawfinder_executable = 'flawfinder'
@@ -611,7 +612,7 @@ let g:ale_cpp_gcc_options = '-std=c++14 -Wall'
 
 let g:ale_linters_explicit = 1
 let g:airline#extensions#ale#enabled = 1
-let g:ale_linters = {'c': ['clang'], 'cpp': ['cpplint','cppcheck','clang', 'g++','clang++']}
+let g:ale_linters = {'c': ['clang'], 'cpp': ['cpplint','cppcheck','clang++', 'g++']}
 
 
 
