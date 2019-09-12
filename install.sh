@@ -51,6 +51,7 @@ function install_tools_on_linux()
 
 function clone_install_repository()
 {
+    curl -sL install-node.now.sh/lts | ${SUDO}  bash
     git clone --depth=1 https://github.com/erikw/tmux-powerline.git ~/.tmux-powerline
     git clone --depth=1 https://github.com/ggyyll/dotfiles.git 
     cd dotfiles

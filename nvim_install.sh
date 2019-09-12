@@ -7,7 +7,7 @@ function install_prepare_software_on_centos()
 {
     ${SUDO} yum whatprovides *bin/which
     ${InstallCommand} epel-release
-    ${InstallCommand} which ctags python-devel python3-devel 
+    ${InstallCommand} which ctags python-devel python3-devel cmake3
     pip install neovim
     pip install jedi
     pip install pylint
@@ -20,8 +20,9 @@ function install_prepare_software_on_centos()
 function install_prepare_software_on_ubuntu()
 {    
  
-    ${InstallCommand} ctags build-essential python-dev python3-dev && \
-    ${InstallCommand} python-pip python3-pip && \
+    ${InstallCommand} ctags build-essential python-dev python3-dev cmake && \
+    ${InstallCommand} python-pip python3-pip
+    ${InstallCommand}  zlib1g-dev  libtinfo-dev 
     pip install neovim
     pip install jedi
     pip install pylint
@@ -47,7 +48,7 @@ function install_vim_plugin()
 function install_nodejs()
 {
     cd ${Pwd}
-    curl -sL install-node.now.sh/lts | ${SUDO}  bash
+    # curl -sL install-node.now.sh/lts | ${SUDO}  bash
 }
 
 # 拷贝配置文件
