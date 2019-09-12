@@ -49,6 +49,7 @@ function centos_ccls()
 
     ln -sf `pwd`/ccls $HOME/bin/ccls
     cd ${CURR_DIR}
+    exit
 }
 
 
