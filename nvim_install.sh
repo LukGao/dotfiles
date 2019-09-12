@@ -8,7 +8,7 @@ function install_prepare_software_on_centos()
     ${SUDO} yum whatprovides *bin/which
     ${InstallCommand} epel-release
     ${InstallCommand} centos-release-scl
-    ${InstallCommand} devtoolset-7
+    ${InstallCommand} devtoolset-8
     ${InstallCommand} which ctags python-devel  python36-setuptools cmake3
     ${SUDO} easy_install-3.6 pip
     pip install neovim
