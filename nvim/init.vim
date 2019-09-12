@@ -65,11 +65,7 @@ set fileencodings=utf8,ucs-bom,gbk,cp936,gb2312,gb18030
 " 快捷键设置
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 inoremap jk <esc>
-nnoremap <leader>v :sp<CR>
-nnoremap <leader>h :vs<CR>
 nnoremap <space><space> %
-nnoremap <leader>bg m1^~`1
-inoremap <leader>bg <ESC>gUiwgi
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 nnoremap <C-j> <C-w>j
@@ -117,6 +113,8 @@ Plug 'honza/vim-snippets'
 Plug 'voldikss/vim-translate-me'
 " ale
 Plug 'dense-analysis/ale'
+" cppman
+Plug 'gauteh/vim-cppman'
 
 Plug 'mg979/vim-visual-multi',          {'branch': 'test'} "多行编辑
 Plug 'mbbill/undotree'                  " 后悔药
@@ -663,4 +661,14 @@ nnoremap <silent> <localleader>r :Rg<CR>
 nnoremap <silent> <localleader>w :Rg <C-R><C-W><CR>
 nnoremap <silent> <localleader>m :History<CR>
 
+function! s:cpp_man()
+    execute 'Cppman '.expand('<cword>')
+endfunction
+
+
 map <localleader>v <Plug>(Vman)
+noremap <silent> <localleader>cm :call <SID>cpp_man()<CR>
+vnoremap <silent> <localleader>cm :call <SID>cpp_man()<CR>
+"    execute 'h '.expand('<cword>')
+"
+"nnoremap <silent> <localleader>k :call <SID>show_documentation()<CR><CR>
