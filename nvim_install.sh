@@ -7,7 +7,10 @@ function install_prepare_software_on_centos()
 {
     ${SUDO} yum whatprovides *bin/which
     ${InstallCommand} epel-release
-    ${InstallCommand} which ctags python-devel python3-devel cmake3
+    ${InstallCommand} centos-release-scl
+    ${InstallCommand} devtoolset-7
+    ${InstallCommand} which ctags python-devel  python36-setuptools cmake3
+    ${SUDO} easy_install-3.6 pip
     pip install neovim
     pip install jedi
     pip install pylint
