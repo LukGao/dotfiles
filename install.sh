@@ -46,12 +46,13 @@ function install_tools_on_linux()
 {
     check_user
     get_linux_platform_type
-    ${InstallCommand}  git wget curl  cmake  zlib1g-dev  libtinfo-dev ruby 
+    ${InstallCommand} curl
+    curl -sL install-node.now.sh/lts | ${SUDO}  bash
+    ${InstallCommand}  git wget  cmake  zlib1g-dev  libtinfo-dev ruby 
 }
 
 function clone_install_repository()
 {
-    curl -sL install-node.now.sh/lts | ${SUDO}  bash
     git clone --depth=1 https://github.com/erikw/tmux-powerline.git ~/.tmux-powerline
     git clone --depth=1 https://github.com/ggyyll/dotfiles.git 
     cd dotfiles
