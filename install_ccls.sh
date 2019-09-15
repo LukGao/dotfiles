@@ -19,7 +19,7 @@ function ubuntu_ccls()
 
 function centos_ccls()
 {
-    scl enable devtoolset-8 -- bash
+    source /opt/rh/devtoolset-8/enable
     CURR_DIR=`pwd`
     LLVM_INSTALL_DIR="/usr/local/llvm"
 
