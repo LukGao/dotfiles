@@ -101,12 +101,12 @@ Plug 'liuchengxu/space-vim-dark'
 Plug 'sainnhe/vim-color-atlantis'
 " terminal
 Plug 'voldikss/vim-floaterm'
-" code 
+" code
 Plug 'chxuan/prepare-code'
 " man page
-Plug 'vim-utils/vim-man'
+Plug 'vim-utils/vim-man',               {'for':['c','cpp','cc']} 
 " bookmark
-Plug 'MattesGroeger/vim-bookmarks' " 
+Plug 'MattesGroeger/vim-bookmarks' "
 " snippets
 Plug 'honza/vim-snippets'
 " translate
@@ -114,7 +114,7 @@ Plug 'voldikss/vim-translate-me'
 " ale
 Plug 'dense-analysis/ale'
 " cppman
-Plug 'gauteh/vim-cppman'
+Plug 'gauteh/vim-cppman',                {'for':['c','cpp','cc']}
 
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'mzlogin/vim-markdown-toc'
@@ -174,13 +174,13 @@ let g:coc_snippet_next = '<TAB>'
 let g:coc_snippet_prev = '<S-TAB>'
 let g:coc_status_error_sign = '•'
 let g:coc_status_warning_sign = '•'
-let g:coc_global_extensions =['coc-snippets','coc-python','coc-prettier','coc-eslint','coc-emmet','coc-tsserver','coc-pairs','coc-json','coc-imselect','coc-highlight','coc-git','coc-emoji','coc-lists','coc-post','coc-stylelint','coc-yaml','coc-template','coc-tabnine']
+let g:coc_global_extensions =['coc-snippets','coc-python','coc-pairs','coc-json','coc-imselect','coc-highlight','coc-git','coc-emoji','coc-lists','coc-yaml','coc-template','coc-tabnine']
 
 set updatetime=300
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 autocmd CursorHold * sil call CocActionAsync('highlight')
 autocmd CursorHoldI * sil call CocActionAsync('showSignatureHelp')
-filetype plugin indent on    
+filetype plugin indent on
 
 
 function! s:show_documentation()
@@ -696,4 +696,35 @@ inoreabbrev <expr> <bar><bar>
 inoreabbrev <expr> __
           \ <SID>isAtStartOfLine('__') ?
           \ '<c-o>:silent! TableModeDisable<cr>' : '__'
+
+
+" bases
+nn <silent> xb :call CocLocations('ccls','$ccls/inheritance')<cr>
+" bases of up to 3 levels
+nn <silent> xb :call CocLocations('ccls','$ccls/inheritance',{'levels':3})<cr>
+" derived
+nn <silent> xd :call CocLocations('ccls','$ccls/inheritance',{'derived':v:true})<cr>
+" derived of up to 3 levels
+nn <silent> xD :call CocLocations('ccls','$ccls/inheritance',{'derived':v:true,'levels':3})<cr>
+
+" caller
+nn <silent> xc :call CocLocations('ccls','$ccls/call')<cr>
+" callee
+nn <silent> xC :call CocLocations('ccls','$ccls/call',{'callee':v:true})<cr>
+
+" $ccls/member
+" member variables / variables in a namespace
+nn <silent> xm :call CocLocations('ccls','$ccls/member')<cr>
+" member functions / functions in a namespace
+nn <silent> xf :call CocLocations('ccls','$ccls/member',{'kind':3})<cr>
+" nested classes / types in a namespace
+nn <silent> xs :call CocLocations('ccls','$ccls/member',{'kind':2})<cr>
+
+nmap <silent> xt <Plug>(coc-type-definition)<cr>
+nn <silent> xv :call CocLocations('ccls','$ccls/vars')<cr>
+nn <silent> xV :call CocLocations('ccls','$ccls/vars',{'kind':1})<cr>
+
+nn xx x
+
+au CursorHoldI * sil call CocActionAsync('showSignatureHelp')
 

@@ -7,26 +7,9 @@
         },
        "ccls": {
             "command": "ccls",
-            "filetypes": [
-                "c",
-                "cpp",
-                "hpp",
-                "objc",
-                "objcpp"
-            ],
-            "initializationOptions": {
-                "cache": {
-                  "directory": "/tmp/.ccls-cache",
-                }
-            },
-            "rootPatterns": [
-                ".ccls",
-                "compile_commands.json",
-                ".vim/",
-                ".git/",
-                ".hg/",
-                ".svn/",
-            ]
+            "filetypes": [ "c", "cpp", "hpp", "objc", "objcpp" ],
+            "initializationOptions": { "cache": { "directory": "/tmp/.ccls-cache", } },
+            "rootPatterns": [ ".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/", ".svn/" ]
         },
     },
     "git.enableGutters": true,
