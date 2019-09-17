@@ -23,8 +23,9 @@ function install_prepare_software_on_centos()
 function install_prepare_software_on_ubuntu()
 {    
  
-    ${InstallCommand} ctags build-essential python-dev python3-dev cmake && \
+    ${InstallCommand} ctags build-essential python-dev python3-dev cmake 
     ${InstallCommand} python-pip python3-pip
+    ${InstallCommand} python-setuptools python3-setuptools
     ${InstallCommand}  zlib1g-dev  libtinfo-dev 
     pip install neovim
     pip install jedi
