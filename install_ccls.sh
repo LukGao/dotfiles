@@ -12,7 +12,7 @@ function ubuntu_ccls()
 
     cd Release
 
-    make -j`cat /proc/cpuinfo |grep "processor"|wc -l` 
+    make -j`nproc` 
 
     ln -sf `pwd`/ccls $HOME/bin/ccls
 }
@@ -35,7 +35,7 @@ function centos_ccls()
      
     cd Release
 
-    make -j`cat /proc/cpuinfo |grep "processor"|wc -l` clangFormat clangFrontendTool clangIndex clangTooling clang
+    make -j`nproc` 
 
     cd ${CURR_DIR}
 
