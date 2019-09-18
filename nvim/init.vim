@@ -114,7 +114,7 @@ Plug 'voldikss/vim-translate-me'
 " ale
 Plug 'dense-analysis/ale'
 " cppman
-Plug 'gauteh/vim-cppman',                {'for':['c','cpp','cc']}
+"Plug 'gauteh/vim-cppman',                {'for':['c','cpp','cc']}
 
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'mzlogin/vim-markdown-toc'
