@@ -4,6 +4,35 @@ CMAKE="cmake"
 SUDO="sudo"
 InstallCommand=""
 OsName=""
+Pwd=`pwd`
+
+function check_user()
+{
+    if [[ `id -u` -eq 0 ]];then
+        echo "root用户!"
+        export SUDO=""
+    else
+        export SUDO="sudo"
+        echo "非root用户!"
+    fi
+}
+
+# 获取linux平台类型，ubuntu还是centos
+function get_linux_platform_type()
+{
+    export OS_NAME=$( cat /etc/os-release | grep ^NAME | cut -d'=' -f2 | sed 's/\"//gI' )    
+    case "$OS_NAME" in    
+      "CentOS Linux")    
+        export InstallCommand=" ${SUDO} yum install -y "
+        export OsName="centos"
+      ;;    
+      "Ubuntu")    
+        export OsName="ubuntu"
+        export InstallCommand=" ${SUDO} apt install -y "
+      ;;    
+      *)    
+    esac    
+}
 
 function ubuntu_ccls()
 {
@@ -22,6 +51,7 @@ function ubuntu_ccls()
 
 function centos_ccls()
 {
+    echo "InstallCommand : ${InstallCommand}"
     ${SUDO} yum whatprovides *bin/which
     ${InstallCommand} epel-release
     ${InstallCommand} centos-release-scl
@@ -60,48 +90,20 @@ function centos_ccls()
     exit
 }
 
-function check_user()
-{
-    if [[ `id -u` -eq 0 ]];then
-        echo "root用户!"
-        export SUDO=""
-    else
-        export SUDO="sudo"
-        echo "非root用户!"
-    fi
-}
-
-
-function get_linux_platform_type()
-{
-    export OS_NAME=$( cat /etc/os-release | grep ^NAME | cut -d'=' -f2 | sed 's/\"//gI' )    
-    case "$OS_NAME" in    
-      "CentOS Linux")    
-        export InstallCommand=" ${SUDO} yum install -y "
-        export OsName="centos"
-        echo "centos" # centos redhat系列
-      ;;    
-      "Ubuntu")    
-        export OsName="ubuntu"
-        export InstallCommand=" ${SUDO} apt install -y "
-        echo "ubuntu" # debian ubuntu系列
-      ;;    
-      *)    
-    esac    
-}
-
 
 function main()
 {
-    type=`get_linux_platform_type`
-    echo ${type}
-    if [ ${type} == "centos" ]; then
+    check_user
+    get_linux_platform_type
+    echo ${OsName}
+    if [ ${OsName} == "centos" ]; then
         CMAKE="cmake3"
+        echo "InstallCommand : ${InstallCommand}"
         centos_ccls
-    elif [ ${type} == "ubuntu" ];then
+    elif [ ${OsName} == "ubuntu" ];then
         ubuntu_ccls
     else
-        echo "not support platform type: "${type}
+        echo "not support platform OsName: "${OsName}
     fi
 }
 
