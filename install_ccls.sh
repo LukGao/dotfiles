@@ -53,7 +53,7 @@ function centos_ccls()
 {
     echo "InstallCommand : ${InstallCommand}"
     ${SUDO} yum whatprovides *bin/which
-    ${InstallCommand} epel-release
+    ${InstallCommand} epel-release cmake3
     ${InstallCommand} centos-release-scl
     ${InstallCommand} devtoolset-8
  
@@ -108,3 +108,4 @@ function main()
 }
 
 main
+
