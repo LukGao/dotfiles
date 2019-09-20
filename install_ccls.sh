@@ -1,6 +1,9 @@
 #!/bin/bash
 
 CMAKE="cmake"
+SUDO="sudo"
+InstallCommand=""
+OsName=""
 
 function ubuntu_ccls()
 {
@@ -19,6 +22,11 @@ function ubuntu_ccls()
 
 function centos_ccls()
 {
+    ${SUDO} yum whatprovides *bin/which
+    ${InstallCommand} epel-release
+    ${InstallCommand} centos-release-scl
+    ${InstallCommand} devtoolset-8
+ 
     source /opt/rh/devtoolset-8/enable
     CURR_DIR=`pwd`
     LLVM_INSTALL_DIR="/usr/local/llvm"
@@ -52,22 +60,35 @@ function centos_ccls()
     exit
 }
 
+function check_user()
+{
+    if [[ `id -u` -eq 0 ]];then
+        echo "root用户!"
+        export SUDO=""
+    else
+        export SUDO="sudo"
+        echo "非root用户!"
+    fi
+}
 
-# 获取linux平台类型，ubuntu还是centos
+
 function get_linux_platform_type()
 {
     export OS_NAME=$( cat /etc/os-release | grep ^NAME | cut -d'=' -f2 | sed 's/\"//gI' )    
     case "$OS_NAME" in    
       "CentOS Linux")    
+        export InstallCommand=" ${SUDO} yum install -y "
+        export OsName="centos"
         echo "centos" # centos redhat系列
       ;;    
       "Ubuntu")    
+        export OsName="ubuntu"
+        export InstallCommand=" ${SUDO} apt install -y "
         echo "ubuntu" # debian ubuntu系列
       ;;    
       *)    
     esac    
 }
-
 
 
 function main()
