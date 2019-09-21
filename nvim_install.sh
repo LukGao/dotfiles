@@ -61,8 +61,6 @@ function copy_config()
     cd ${Pwd}
     echo "source ${Pwd}/dotfiles/bashrc" >> $HOME/.bashrc
     cat ${Pwd}/dotfiles/.inputrc > $HOME/.inputrc
-    cat ${Pwd}/dotfiles/.tmux.conf > $HOME/.tmux.conf
-    cat ${Pwd}/dotfiles/.tmux.conf.local > $HOME/.tmux.conf.local 
     cat ${Pwd}/dotfiles/.clang-format > $HOME/.clang-format
 }
 
