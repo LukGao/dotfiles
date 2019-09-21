@@ -15,7 +15,7 @@ function ubuntu_ccls()
     ${CMAKE} -H. -BRelease -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=${CURR_DIR}/clang+llvm-8.0.0-x86_64-linux-gnu-ubuntu-18.04
     cd Release
     make -j`nproc` 
-    ln -sf ${CURR_DIR}/ccls $HOME/bin/ccls
+    ln -sf `pwd`/ccls $HOME/bin/ccls
 }
 
 function centos_ccls()
@@ -54,7 +54,7 @@ function centos_ccls()
 
     make -j`cat /proc/cpuinfo |grep "processor"|wc -l` 
 
-    ln -sf ${CURR_DIR}/ccls $HOME/bin/ccls
+    ln -sf `pwd`/ccls $HOME/bin/ccls
     cd ${CURR_DIR}
     exit
 }
