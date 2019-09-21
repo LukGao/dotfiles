@@ -7,15 +7,52 @@ export Pwd=`pwd`
 export UNAME=""
 
 
-# 确认安装命令
+function check_user()
+{
+    if [[ `id -u` -eq 0 ]];then
+        export SUDO=""
+    else
+        export SUDO="sudo"
+    fi
+}
+
+# mac or linux
+function get_platform_type()
+{
+    echo $(uname)
+}
+
+# linux ubuntu or cenots
+function get_linux_platform_type()
+{
+    export OS_NAME=$( cat /etc/os-release | grep ^NAME | cut -d'=' -f2 | sed 's/\"//gI' )    
+    case "$OS_NAME" in    
+      "CentOS Linux")    
+        export InstallCommand=" ${SUDO} yum install -y "
+        export OsName="centos"
+      ;;    
+      "Ubuntu")    
+        export OsName="ubuntu"
+        export InstallCommand=" ${SUDO} apt install -y "
+      ;;    
+      *)    
+    esac    
+}
+
+# install command
 function install_tools_on_linux()
 {
+    check_user
+    get_linux_platform_type
     curl -sL install-node.now.sh/lts | ${SUDO}  bash
+    echo "InstallCommand : ${InstallCommand}"
     ${InstallCommand}  git wget  cmake  zlib1g-dev  libtinfo-dev ruby 
 }
 
+# clone  respository
 function clone_install_repository()
 {
+    git clone --depth=1 https://github.com/erikw/tmux-powerline.git ~/.tmux-powerline
     git clone --depth=1 https://github.com/ggyyll/dotfiles.git 
     cd dotfiles
     bash nvim_install.sh && bash shell_tools.sh
@@ -26,10 +63,11 @@ function clone_install_repository()
 }
 
 
-# main函数
 function main()
 {
-    type=${UNAME}
+    type=`get_platform_type`
+    echo "platform type: "${type}
+
     if [ ${type} == "Linux" ]; then
         install_tools_on_linux 
         clone_install_repository
@@ -38,6 +76,6 @@ function main()
     fi
 }
 
-# 调用main函数
-. help.sh
+#  call main
 main
+
