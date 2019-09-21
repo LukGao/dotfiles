@@ -10,7 +10,7 @@ function ubuntu_install_tmux()
 
 function centos_install_tmux()
 {
-    https://centos7.iuscommunity.org/ius-release.rpm
+    ${InstallCommand} https://centos7.iuscommunity.org/ius-release.rpm
     ${InstallCommand} tmux2u
 }
 
