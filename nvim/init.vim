@@ -96,7 +96,8 @@ Plug 'mengelbrecht/lightline-bufferline'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 " lsp clinet
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+
 Plug 'liuchengxu/space-vim-dark'
 Plug 'sainnhe/vim-color-atlantis'
 " terminal
