@@ -16,9 +16,8 @@ function centos_install_tmux()
 
 function tmux_conf()
 {
-              
     git clone https://github.com/ggyyll/tmux-themepack.git ~/.tmux-themepack
-    wget -c https://github.com/ggyyll/dotfiles/blob/master/.tmux.conf -O ~/.tmux.conf 
+    wget -c https://raw.githubusercontent.com/ggyyll/dotfiles/master/.tmux.conf -O ~/.tmux.conf
 }
 
 function main()
