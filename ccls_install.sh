@@ -21,7 +21,7 @@ function ubuntu_ccls()
 function centos_ccls()
 {
     ${SUDO} yum whatprovides *bin/which
-    ${InstallCommand} epel-release cmake3
+    ${InstallCommand} epel-release 
     ${InstallCommand} centos-release-scl
     ${InstallCommand} devtoolset-8
  
@@ -29,6 +29,7 @@ function centos_ccls()
     PWD=`pwd`
     LLVM_INSTALL_DIR="/usr/local/llvm"
 
+    ${InstallCommand} cmake3
     GCC_DIR=`which gcc`
     G_DIR=`which g++`
 
