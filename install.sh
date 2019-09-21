@@ -52,12 +52,13 @@ function install_tools_on_linux()
 # clone  respository
 function clone_install_repository()
 {
-    git clone --depth=1 https://github.com/erikw/tmux-powerline.git ~/.tmux-powerline
     git clone --depth=1 https://github.com/ggyyll/dotfiles.git 
     cd dotfiles
-    bash nvim_install.sh && bash shell_tools.sh
-    bash install_go.sh 
-    # bash install_ccls.sh
+    bash nvim_install.sh
+    bash shell_tools.sh
+    bash go_install.sh
+    bash tmux_install.sh
+    bash ccls_install.sh
     cd -
 
 }
