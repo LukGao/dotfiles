@@ -153,7 +153,7 @@ let nerdchristmastree=1
 let g:nerdtreewinsize = 15
 let g:NERDTreeDirArrowExpandable = '▷'
 let g:NERDTreeDirArrowCollapsible = '▼'
-let NERDTreeAutoCenter=bn1
+let NERDTreeAutoCenter=1
 let g:nerdtreeindicatormapcustom = {
       \ "modified"  : "✹",
       \ "staged"    : "✚",
