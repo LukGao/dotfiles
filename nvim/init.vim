@@ -112,7 +112,7 @@ Plug 'honza/vim-snippets'
 " translate
 Plug 'voldikss/vim-translate-me'
 " ale
-Plug 'dense-analysis/ale'
+"Plug 'dense-analysis/ale'
 " cppman
 "Plug 'gauteh/vim-cppman',                {'for':['c','cpp','cc']}
 
