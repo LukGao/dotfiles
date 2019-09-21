@@ -16,8 +16,9 @@ function centos_install_tmux()
 
 function tmux_conf()
 {
-    git clone --depth=1 https://github.com/erikw/tmux-powerline.git ~/.tmux-powerline
-    wget -c https://github.com/ggyyll/dotfiles/blob/master/.tmux.conf ~/.tmux.conf 
+              
+    git clone https://github.com/ggyyll/tmux-themepack.git ~/.tmux-themepack
+    wget -c https://github.com/ggyyll/dotfiles/blob/master/.tmux.conf -O ~/.tmux.conf 
 }
 
 function main()
