@@ -7,15 +7,15 @@ export OsName=""
 
 function ubuntu_ccls()
 {
-    PWD=`pwd`
+    CURR_DIR=`pwd`
     git clone --depth=1 --recursive https://github.com/MaskRay/ccls
     cd ccls 
     wget -c http://releases.llvm.org/8.0.0/clang+llvm-8.0.0-x86_64-linux-gnu-ubuntu-18.04.tar.xz
     tar xf clang+llvm-8.0.0-x86_64-linux-gnu-ubuntu-18.04.tar.xz
-    ${CMAKE} -H. -BRelease -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=${PWD}/clang+llvm-8.0.0-x86_64-linux-gnu-ubuntu-18.04
+    ${CMAKE} -H. -BRelease -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=${CURR_DIR}/clang+llvm-8.0.0-x86_64-linux-gnu-ubuntu-18.04
     cd Release
     make -j`nproc` 
-    ln -sf ${PWD}/ccls $HOME/bin/ccls
+    ln -sf ${CURR_DIR}/ccls $HOME/bin/ccls
 }
 
 function centos_ccls()
@@ -26,17 +26,17 @@ function centos_ccls()
     ${InstallCommand} devtoolset-8
  
     source /opt/rh/devtoolset-8/enable
-    PWD=`pwd`
+    CURR_DIR=`pwd`
     LLVM_INSTALL_DIR="/usr/local/llvm"
 
     ${InstallCommand} cmake3
     GCC_DIR=`which gcc`
     G_DIR=`which g++`
 
-    git clone  --depth=1 https://git.llvm.org/git/llvm.git ${PWD}/llvm
-    git clone  --depth=1 https://git.llvm.org/git/clang.git ${PWD}/llvm/tools/clang
+    git clone  --depth=1 https://git.llvm.org/git/llvm.git ${CURR_DIR}/llvm
+    git clone  --depth=1 https://git.llvm.org/git/clang.git ${CURR_DIR}/llvm/tools/clang
 
-    cd ${PWD}/llvm
+    cd ${CURR_DIR}/llvm
      
     ${CMAKE} -H. -BRelease -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON -DLLVM_TARGETS_TO_BUILD=X86 -DCMAKE_CXX_COMPILER=${G_DIR} -DCMAKE_C_COMPILER=${GCC_DIR} -DCMAKE_INSTALL_PREFIX=${LLVM_INSTALL_DIR} -DLLVM_ENABLE_RTTI=ON
      
@@ -44,18 +44,18 @@ function centos_ccls()
 
     make -j`nproc` 
 
-    cd ${PWD}
+    cd ${CURR_DIR}
 
-    git clone --depth=1 --recursive https://github.com/MaskRay/ccls ${PWD}/ccls
+    git clone --depth=1 --recursive https://github.com/MaskRay/ccls ${CURR_DIR}/ccls
     cd ccls
-    ${CMAKE} -H. -BRelease -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_RTTI=ON -DCMAKE_CXX_COMPILER=${G_DIR} -DSYSTEM_CLANG=ON -DCMAKE_PREFIX_PATH="${PWD}/llvm/Release;${PWD}/llvm/Release/tools/clang;${PWD}/llvm;${PWD}/llvm/tools/clang"
+    ${CMAKE} -H. -BRelease -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_RTTI=ON -DCMAKE_CXX_COMPILER=${G_DIR} -DSYSTEM_CLANG=ON -DCMAKE_PREFIX_PATH="${CURR_DIR}/llvm/Release;${CURR_DIR}/llvm/Release/tools/clang;${CURR_DIR}/llvm;${CURR_DIR}/llvm/tools/clang"
 
     cd Release
 
     make -j`cat /proc/cpuinfo |grep "processor"|wc -l` 
 
-    ln -sf ${PWD}/ccls $HOME/bin/ccls
-    cd ${PWD}
+    ln -sf ${CURR_DIR}/ccls $HOME/bin/ccls
+    cd ${CURR_DIR}
     exit
 }
 
