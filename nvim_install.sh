@@ -51,8 +51,8 @@ function install_vim_plugin()
 # 安装nodejs
 function install_nodejs()
 {
-    cd ${Pwd}
-     curl -sL install-node.now.sh/lts | ${SUDO}  bash
+#    cd ${Pwd}
+#     curl -sL install-node.now.sh/lts | ${SUDO}  bash
 }
 
 # 拷贝配置文件
