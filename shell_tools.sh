@@ -1,5 +1,7 @@
 #!/bin/bash
 
+export SUDO="sudo"
+
 function check_tools_dir()
 {
     if [ ! -d "$HOME/bin"  ]; then
@@ -57,8 +59,6 @@ function install_tools_on_linux()
 {
     check_tools_dir
     type=${OsName}
-    echo "linux platform type: "${type}
-
     if [ ${type} == "ubuntu" ]; then
         ubuntu_install_tools
     elif [ ${type} == "centos" ]; then
@@ -73,4 +73,5 @@ function main()
     install_tools_on_linux
 }
 
+. help.sh
 main

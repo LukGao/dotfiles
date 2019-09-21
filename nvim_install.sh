@@ -52,7 +52,7 @@ function install_vim_plugin()
 function install_nodejs()
 {
     cd ${Pwd}
-    # curl -sL install-node.now.sh/lts | ${SUDO}  bash
+     curl -sL install-node.now.sh/lts | ${SUDO}  bash
 }
 
 # 拷贝配置文件
@@ -154,7 +154,6 @@ function install_vimplus_on_centos()
 function install_vimplus_on_linux()
 {
     type=${OsName}
-    echo "linux platform type: "${type}
     if [ ${type} == "ubuntu" ]; then
         install_vimplus_on_ubuntu
     elif [ ${type} == "centos" ]; then
@@ -167,10 +166,6 @@ function install_vimplus_on_linux()
 # main函数
 function main()
 {
-    echo "OsName : ${OsName}"
-    echo "SUDO : ${SUDO}"
-    echo "InstallCommand : ${InstallCommand}"
-    echo "Pwd : ${Pwd}"
     install_vimplus_on_linux
 }
 

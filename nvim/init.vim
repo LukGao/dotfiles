@@ -112,7 +112,7 @@ Plug 'honza/vim-snippets'
 " translate
 Plug 'voldikss/vim-translate-me'
 " ale
-"Plug 'dense-analysis/ale'
+Plug 'dense-analysis/ale'
 " cppman
 "Plug 'gauteh/vim-cppman',                {'for':['c','cpp','cc']}
 
@@ -152,7 +152,7 @@ let nerdchristmastree=1
 let g:nerdtreewinsize = 15
 let g:NERDTreeDirArrowExpandable = '▷'
 let g:NERDTreeDirArrowCollapsible = '▼'
-let NERDTreeAutoCenter=1
+let NERDTreeAutoCenter=bn1
 let g:nerdtreeindicatormapcustom = {
       \ "modified"  : "✹",
       \ "staged"    : "✚",
