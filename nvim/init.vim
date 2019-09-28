@@ -409,8 +409,8 @@ set t_Co=256
 if has('termguicolors')
   set termguicolors
 endif
-let g:equinusocio_material_style='darker'
-let g:equinusocio_material_vertsplit='visible'
+"let g:equinusocio_material_style='darker'
+"let g:equinusocio_material_vertsplit='visible'
 colorscheme equinusocio_material
 
 
@@ -576,9 +576,6 @@ endfunction
 map <localleader>v <Plug>(Vman)
 noremap <silent> <localleader>cm :call <SID>cpp_man()<CR>
 vnoremap <silent> <localleader>cm :call <SID>cpp_man()<CR>
-"    execute 'h '.expand('<cword>')
-"
-"nnoremap <silent> <localleader>k :call <SID>show_documentation()<CR><CR>
 "
 let g:table_mode_corner = '|'
 let g:table_mode_border=0
