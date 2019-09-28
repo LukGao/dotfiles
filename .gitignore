@@ -107,3 +107,5 @@ perf.*
 # mac os
 .DS_Store
 tools/
+ccls/
+llvm/
