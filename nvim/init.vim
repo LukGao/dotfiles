@@ -97,23 +97,17 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 " lsp clinet
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neomake/neomake'
 
-"Plug 'liuchengxu/space-vim-dark'
-"Plug 'sainnhe/vim-color-atlantis'
 Plug 'ggyyll/vim_equinusocio_material'
 
 " terminal
 Plug 'voldikss/vim-floaterm'
 " code
-Plug 'chxuan/prepare-code'
+"Plug 'chxuan/prepare-code'
 " man page
 Plug 'vim-utils/vim-man',               {'for':['c','cpp','cc']} 
 " bookmark
-Plug 'MattesGroeger/vim-bookmarks' "
-" snippets
-Plug 'honza/vim-snippets'
-" translate
+Plug 'MattesGroeger/vim-bookmarks' 
 Plug 'voldikss/vim-translate-me'
 " cppman
 "Plug 'gauteh/vim-cppman',                {'for':['c','cpp','cc']}
@@ -128,6 +122,8 @@ Plug 'mg979/vim-visual-multi',          {'branch': 'test'} "多行编辑
 Plug 'mbbill/undotree'                  " 后悔药
 Plug 'mhinz/vim-startify'               " 启动页
 Plug 'luochen1990/rainbow'              " 多彩括号
+Plug 'neomake/neomake'             
+Plug 'honza/vim-snippets',              {'for':['go','c','cpp','cc','py']}                  " 代码片段
 Plug 'Chiel92/vim-autoformat' ,         {'for':['c','cpp','cc']}
 Plug 'scrooloose/nerdtree',             { 'on':'NERDTreeToggle'}
 Plug 'majutsushi/tagbar',               { 'on':'TagbarToggle'}
@@ -135,8 +131,8 @@ Plug 'tpope/vim-endwise',               {'for':['c','cpp','cc']}                
 Plug 'tpope/vim-surround',              {'for':['go','c','cpp','cc','py']}                  " 成双成对编辑
 Plug 'scrooloose/nerdcommenter',        {'for':['go','c','cpp','cc','py']}                  " 注释插件
 Plug 'lfv89/vim-interestingwords',      {'for':['go','c','cpp','cc','py']}                  " 单词标记
-Plug 'ntpeters/vim-better-whitespace',  {'for':['go','c','cpp','cc','py']} " 去除空格
-Plug 'tpope/vim-abolish'             ,  {'for':['go','c','cpp','cc','py']}  " 命名风格转换
+Plug 'ntpeters/vim-better-whitespace',  {'for':['go','c','cpp','cc','py']}                  " 去除空格
+Plug 'tpope/vim-abolish'             ,  {'for':['go','c','cpp','cc','py']}                  " 命名风格转换
 call plug#end()
 
 
@@ -172,11 +168,25 @@ let g:nerdtreeindicatormapcustom = {
 " coc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let g:coc_snippet_next = '<TAB>'
-let g:coc_snippet_prev = '<S-TAB>'
-let g:coc_status_error_sign = '•'
-let g:coc_status_warning_sign = '•'
-let g:coc_global_extensions =['coc-snippets','coc-python','coc-pairs','coc-json','coc-imselect','coc-highlight','coc-git','coc-emoji','coc-lists','coc-yaml','coc-template','coc-tabnine']
+imap <C-l> <Plug>(coc-snippets-expand)
+vmap <C-j> <Plug>(coc-snippets-select)
+let g:coc_snippet_prev = '<c-k>'
+let g:coc_snippet_next = '<tab>'
+imap <C-j> <Plug>(coc-snippets-expand-jump)
+
+inoremap <silent><expr> <TAB>    
+   \ pumvisible() ? coc#_select_confirm() :    
+   \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :    
+   \ <SID>check_back_space() ? "\<TAB>" :    
+   \ coc#refresh()    
+ 
+function! s:check_back_space() abort    
+let col = col('.') - 1    
+return !col || getline('.')[col - 1]  =~# '\s'    
+endfunction    
+ 
+
+let g:coc_global_extensions =['coc-snippets','coc-ultisnips','coc-gocode','coc-neosnippet','coc-python','coc-pairs','coc-json','coc-imselect','coc-highlight','coc-git','coc-emoji','coc-lists','coc-yaml','coc-template','coc-tabnine']
 
 set updatetime=300
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
@@ -191,11 +201,6 @@ function! s:show_documentation()
   else
     call CocAction('doHover')
   endif
-endfunction
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -628,4 +633,5 @@ nn xx x
 au CursorHoldI * sil call CocActionAsync('showSignatureHelp')
 
 call neomake#configure#automake('w')
+
 
