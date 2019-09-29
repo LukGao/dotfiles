@@ -90,27 +90,22 @@ Plug 'tpope/vim-fugitive'
 " icon
 Plug 'ryanoasis/vim-devicons'
 " line
-Plug 'itchyny/lightline.vim'
-Plug 'mengelbrecht/lightline-bufferline'
+Plug 'bagrat/vim-buffet'
 " fzf
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 " lsp clinet
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
-
+Plug 'ggyyll/spaceline.vim'
 Plug 'ggyyll/vim_equinusocio_material'
 
 " terminal
 Plug 'voldikss/vim-floaterm'
-" code
-"Plug 'chxuan/prepare-code'
 " man page
-Plug 'vim-utils/vim-man',               {'for':['c','cpp','cc']} 
+Plug 'vim-utils/vim-man',               {'for':['c','cpp','cc']}
 " bookmark
-Plug 'MattesGroeger/vim-bookmarks' 
+Plug 'MattesGroeger/vim-bookmarks'
 Plug 'voldikss/vim-translate-me'
-" cppman
-"Plug 'gauteh/vim-cppman',                {'for':['c','cpp','cc']}
 
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'mzlogin/vim-markdown-toc'
@@ -122,7 +117,7 @@ Plug 'mg979/vim-visual-multi',          {'branch': 'test'} "多行编辑
 Plug 'mbbill/undotree'                  " 后悔药
 Plug 'mhinz/vim-startify'               " 启动页
 Plug 'luochen1990/rainbow'              " 多彩括号
-Plug 'neomake/neomake'             
+Plug 'neomake/neomake'
 Plug 'honza/vim-snippets',              {'for':['go','c','cpp','cc','py']}                  " 代码片段
 Plug 'Chiel92/vim-autoformat' ,         {'for':['c','cpp','cc']}
 Plug 'scrooloose/nerdtree',             { 'on':'NERDTreeToggle'}
@@ -168,23 +163,26 @@ let g:nerdtreeindicatormapcustom = {
 " coc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
 imap <C-l> <Plug>(coc-snippets-expand)
 vmap <C-j> <Plug>(coc-snippets-select)
 let g:coc_snippet_prev = '<c-k>'
 let g:coc_snippet_next = '<tab>'
 imap <C-j> <Plug>(coc-snippets-expand-jump)
 
-inoremap <silent><expr> <TAB>    
-   \ pumvisible() ? coc#_select_confirm() :    
-   \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :    
-   \ <SID>check_back_space() ? "\<TAB>" :    
-   \ coc#refresh()    
- 
-function! s:check_back_space() abort    
-let col = col('.') - 1    
-return !col || getline('.')[col - 1]  =~# '\s'    
-endfunction    
- 
+inoremap <silent><expr> <TAB>
+   \ pumvisible() ? coc#_select_confirm() :
+   \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+   \ <SID>check_back_space() ? "\<TAB>" :
+   \ coc#refresh()
+
+function! s:check_back_space() abort
+let col = col('.') - 1
+return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
 
 let g:coc_global_extensions =['coc-snippets','coc-ultisnips','coc-gocode','coc-neosnippet','coc-python','coc-pairs','coc-json','coc-imselect','coc-highlight','coc-git','coc-emoji','coc-lists','coc-yaml','coc-template','coc-tabnine']
 
@@ -308,107 +306,6 @@ let g:better_whitespace_enabled=1
 let g:strip_whitespace_confirm=0
 set viminfo='100,n$HOME/.vim/files/info/viminfo
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" lightline
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" lightline
-let g:lightline = {
-      \ 'colorscheme': 'equinusocio_material',
-      \ 'active': {
-      \   'left': [ ['homemode'],
-      \           ['filename']],
-      \   'right':[ ['lineinfo'],
-      \             ['percent'], ['fileformat'],['fileencoding'] ],
-      \ },
-      \ 'component': {
-      \   'lineinfo': "\ue265 %3l:%-2v",
-      \ },
-      \ 'component_function': {
-      \   'homemode': 'LightlineMode',
-      \   'filename': 'LightLineFname',
-      \   'fileformat': 'LightLineFileformat',
-      \ },
-    \ }
-let g:lightline.tabline = {
-    \ 'left': [ [ 'buffers' ] ],
-    \ 'right': [ [ 'close' ] ],
-    \ }
-let g:lightline.component_expand = { 'buffers': 'lightline#bufferline#buffers' }
-let g:lightline.component_type   = { 'buffers': 'tabsel' }
-let g:lightline#bufferline#show_number = 2
-let g:lightline#bufferline#shorten_path = 0
-let g:lightline#bufferline#unnamed = '[No Name]'
-let g:lightline#bufferline#number_map = {
-      \ 0: '⓿ ', 1: '❶ ', 2: '❷ ', 3: '❸ ', 4: '❹ ',
-      \ 5: '❺ ', 6: '❻ ', 7: '❼ ', 8: '❽ ', 9: '❾ '}
-
-function! LightLineFileformat()
-  return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
-endfunction
-
-function! LightLineFname()
-  let icon = (strlen(&filetype) ? ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft')
-  let filename = LightLineFilename()
-  let ret = [filename,icon]
-  if filename == ''
-    return ''
-  endif
-  return join([filename, icon],'')
-endfunction
-
-function! LightLineFilename()
-  return ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
-        \ ('' != expand('%:t') ? expand('%:t') : '') .
-        \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
-endfunction
-
-function! LightLineReadonly()
-  if &filetype == "help"
-    return ""
-  elseif &readonly
-    return ""
-  else
-    return ""
-  endif
-endfunction
-
-function! LightLineModified()
-  if &filetype == "help"
-    return ""
-  elseif &modified
-    return "+"
-  elseif &modifiable
-    return ""
-  else
-    return ""
-  endif
-endfunction
-
-
-function! LightlineMode()
-  let nr = s:get_buffer_number()
-  let nmap = [ '⓿ ',  '❶ ',  '❷ ',  '❸ ', '❹ ','❺ ',  '❻ ',  '❼ ',  '❽ ',  '❾ ','➓ ','⓫ ','⓬ ','⓭ ','⓮ ','⓯ ','⓰ ','⓱ ','⓲ ','⓳ ','⓴ ']
-  if nr == 0
-    return ''
-  endif
-  let l:number = nr
-  let l:result = ''
-  for i in range(1, strlen(l:number))
-    let l:result = get(nmap, l:number % 10, l:number % 10) . l:result
-    let l:number = l:number / 10
-  endfor
-  return join(['',l:result])
-endfunction
-function! s:get_buffer_number()
-  let i = 0
-  for nr in filter(range(1, bufnr('$')), 'bufexists(v:val) && buflisted(v:val)')
-    let i += 1
-    if nr == bufnr('')
-      return i
-    endif
-  endfor
-  return ''
-endfunction
 
 " Theme
 set t_Co=256
@@ -426,7 +323,6 @@ hi default CocHighlightText  guibg=#725972 ctermbg=96
 
 let g:bookmark_sign = '⚑'
 let g:bookmark_highlight_lines = 1
-let g:interestingWordsGUIColors = ['#EE7AE9','#8B7B8B','#9B30FF','#8B8B7A','#aeee00', '#ff0000','#40E0D0', '#b88823', '#ffa724', '#ff2c4b']
 
 " Customize fzf colors to match your color scheme
 let g:fzf_colors =
@@ -555,18 +451,6 @@ nnoremap <localleader>ft :Autoformat<CR>
 nnoremap <localleader>n :NERDTreeToggle <CR>
 
 
-nmap <Leader>1 <Plug>lightline#bufferline#go(1)
-nmap <Leader>2 <Plug>lightline#bufferline#go(2)
-nmap <Leader>3 <Plug>lightline#bufferline#go(3)
-nmap <Leader>4 <Plug>lightline#bufferline#go(4)
-nmap <Leader>5 <Plug>lightline#bufferline#go(5)
-nmap <Leader>6 <Plug>lightline#bufferline#go(6)
-nmap <Leader>7 <Plug>lightline#bufferline#go(7)
-nmap <Leader>8 <Plug>lightline#bufferline#go(8)
-nmap <Leader>9 <Plug>lightline#bufferline#go(9)
-nmap <Leader>0 <Plug>lightline#bufferline#go(10)
-
-
 nnoremap <silent> <localleader>c :Colors<CR>
 nnoremap <silent> <localleader>b :Buffers<CR>
 nnoremap <silent> <localleader>f :call Fzf_dev()<CR>
@@ -574,14 +458,8 @@ nnoremap <silent> <localleader>r :Rg<CR>
 nnoremap <silent> <localleader>w :Rg <C-R><C-W><CR>
 nnoremap <silent> <localleader>m :History<CR>
 
-function! s:cpp_man()
-    execute 'Cppman '.expand('<cword>')
-endfunction
-
 
 map <localleader>v <Plug>(Vman)
-noremap <silent> <localleader>cm :call <SID>cpp_man()<CR>
-vnoremap <silent> <localleader>cm :call <SID>cpp_man()<CR>
 "
 let g:table_mode_corner = '|'
 let g:table_mode_border=0
@@ -635,3 +513,40 @@ au CursorHoldI * sil call CocActionAsync('showSignatureHelp')
 call neomake#configure#automake('w')
 
 
+
+" linx
+
+let g:spaceline_seperate_style= 'none'
+let g:spaceline_seperate_mode = 0
+let g:spaceline_homemode_right = ''
+let g:spaceline_filename_left  = ''
+let g:spaceline_filesize_right = ''
+let g:spaceline_gitinfo_left   = ''
+let g:spaceline_gitinfo_right  = ''
+let g:spaceline_cocexts_right  = ''
+let g:spaceline_lineformat_right = ''
+let g:spaceline_seperate_endseperate = ''
+let g:spaceline_seperate_emptyseperate = ''
+
+nmap <leader>1 <Plug>BuffetSwitch(1)
+nmap <leader>2 <Plug>BuffetSwitch(2)
+nmap <leader>3 <Plug>BuffetSwitch(3)
+nmap <leader>4 <Plug>BuffetSwitch(4)
+nmap <leader>5 <Plug>BuffetSwitch(5)
+nmap <leader>6 <Plug>BuffetSwitch(6)
+nmap <leader>7 <Plug>BuffetSwitch(7)
+nmap <leader>8 <Plug>BuffetSwitch(8)
+nmap <leader>9 <Plug>BuffetSwitch(9)
+nmap <leader>0 <Plug>BuffetSwitch(10)
+
+let g:buffet_tab_icon = "\uf00a"
+function! g:BuffetSetCustomColors()
+    hi! BuffetCurrentBuffer cterm=NONE ctermbg=106 ctermfg=8 guibg=#b8bb26 guifg=#000000
+    hi! BuffetTrunc cterm=bold ctermbg=66 ctermfg=8 guibg=#458588 guifg=#000000
+    hi! BuffetBuffer cterm=NONE ctermbg=239 ctermfg=8 guibg=#504945 guifg=#000000
+    hi! BuffetTab cterm=NONE ctermbg=66 ctermfg=8 guibg=#458588 guifg=#000000
+    hi! BuffetActiveBuffer cterm=NONE ctermbg=10 ctermfg=239 guibg=#999999 guifg=#504945
+endfunction
+let g:buffet_show_index = 1
+let g:buffet_left_trunc_icon = "<"
+let g:buffet_right_trunc_icon = ">"
