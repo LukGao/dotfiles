@@ -283,25 +283,18 @@ let g:startify_custom_foote = [
       \ '|  1.01 ^ 365 =  37.78         |',
       \ '+----------------+-------------+',
       \]
-function! s:filter_header(lines) abort
+function! s:center(lines) abort
   let longest_line   = max(map(copy(a:lines), 'strwidth(v:val)'))
-  let longest_line   = 30
   let centered_lines = map(copy(a:lines),
         \ 'repeat(" ", (&columns / 2) - (longest_line / 2)) . v:val')
   return centered_lines
 endfunction
 
-function! s:filter_footer(lines) abort
-  let longest_line   = min(map(copy(a:lines), 'strwidth(v:val)'))
-  let longest_line   = 25
-  let centered_lines = map(copy(a:lines),
-        \ 'repeat(" ", (&columns / 2) - (longest_line / 2)) . v:val')
-  return centered_lines
-endfunction
-
-let g:startify_custom_header = s:filter_header(startify#fortune#cowsay())
-let g:startify_custom_footer = s:filter_footer(g:startify_custom_foote)
+let g:startify_custom_header = s:center(startify#fortune#cowsay())
+let g:startify_custom_footer = s:center(g:startify_custom_foote)
 let g:startify_padding_left = 30
+
+
 let g:better_whitespace_enabled=1
 let g:strip_whitespace_confirm=0
 set viminfo='100,n$HOME/.vim/files/info/viminfo
