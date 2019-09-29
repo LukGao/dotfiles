@@ -97,10 +97,11 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 " lsp clinet
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neomake/neomake'
 
 "Plug 'liuchengxu/space-vim-dark'
 "Plug 'sainnhe/vim-color-atlantis'
-Plug 'chuling/vim_equinusocio_material'
+Plug 'ggyyll/vim_equinusocio_material'
 
 " terminal
 Plug 'voldikss/vim-floaterm'
@@ -625,4 +626,6 @@ nn <silent> xV :call CocLocations('ccls','$ccls/vars',{'kind':1})<cr>
 nn xx x
 
 au CursorHoldI * sil call CocActionAsync('showSignatureHelp')
+
+call neomake#configure#automake('w')
 

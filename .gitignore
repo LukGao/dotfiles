@@ -109,3 +109,5 @@ perf.*
 tools/
 ccls/
 llvm/
+nvim-linux64.*
+nvim-linux64/
