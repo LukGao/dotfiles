@@ -305,8 +305,8 @@ set t_Co=256
 if has('termguicolors')
   set termguicolors
 endif
-"let g:equinusocio_material_style='darker'
-"let g:equinusocio_material_vertsplit='visible'
+let g:equinusocio_material_style='darker'
+let g:equinusocio_material_vertsplit='visible'
 colorscheme equinusocio_material
 
 
@@ -508,18 +508,6 @@ call neomake#configure#automake('w')
 
 
 " linx
-
-let g:spaceline_seperate_style= 'none'
-let g:spaceline_seperate_mode = 0
-let g:spaceline_homemode_right = ''
-let g:spaceline_filename_left  = ''
-let g:spaceline_filesize_right = ''
-let g:spaceline_gitinfo_left   = ''
-let g:spaceline_gitinfo_right  = ''
-let g:spaceline_cocexts_right  = ''
-let g:spaceline_lineformat_right = ''
-let g:spaceline_seperate_endseperate = ''
-let g:spaceline_seperate_emptyseperate = ''
 
 nmap <leader>1 <Plug>BuffetSwitch(1)
 nmap <leader>2 <Plug>BuffetSwitch(2)
