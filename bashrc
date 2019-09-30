@@ -58,6 +58,8 @@ alias on='nvim $(fzf --height 40% --reverse)'
 alias ok='nvim'
 alias tmux='tmux -2'
 
+alias proxy='export all_proxy=socks5://127.0.0.1:1080'
+alias unproxy='unset all_proxy'
 
 export GOROOT=/usr/local/go
 export GOPATH=$HOME/go
