@@ -78,7 +78,7 @@ function install_nvim()
     
     cd ${Pwd}/dotfiles/tools
     echo "export PATH=$HOME/bin:$PATH" >> $HOME/.bashrc
-    wget -c https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz
+    wget -c https://github.com/neovim/neovim/releases/download/v0.4.2/nvim-linux64.tar.gz
     tar zxf nvim-linux64.tar.gz && ln -sf `pwd`/nvim-linux64/bin/nvim $HOME/bin/nvim
 }
 

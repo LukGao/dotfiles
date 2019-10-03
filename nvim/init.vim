@@ -95,7 +95,7 @@ Plug 'bagrat/vim-buffet'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 " lsp clinet
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'ggyyll/spaceline.vim'
 Plug 'ggyyll/vim_equinusocio_material'
 
