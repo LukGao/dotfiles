@@ -7,8 +7,8 @@ export OsName=""
 
 function ubuntu_ccls()
 {
-    git clone --depth=1 --recursive https://github.com/MaskRay/ccls
-    cd ccls 
+    git clone  --recursive https://github.com/MaskRay/ccls
+    cd ccls && git checkout 2b552f6
     CURR_DIR=`pwd`
     wget -c http://releases.llvm.org/8.0.0/clang+llvm-8.0.0-x86_64-linux-gnu-ubuntu-18.04.tar.xz
     tar xf clang+llvm-8.0.0-x86_64-linux-gnu-ubuntu-18.04.tar.xz
