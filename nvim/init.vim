@@ -184,7 +184,7 @@ return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
 
-let g:coc_global_extensions =['coc-snippets','coc-neosnippet','coc-python','coc-pairs','coc-json','coc-imselect','coc-highlight','coc-git','coc-emoji','coc-lists','coc-yaml','coc-template','coc-tabnine']
+let g:coc_global_extensions =['coc-snippets','coc-neosnippet','coc-python','coc-pairs','coc-json','coc-imselect','coc-highlight','coc-git','coc-emoji','coc-lists','coc-yaml','coc-template']
 
 set updatetime=300
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
@@ -501,7 +501,6 @@ nn <silent> xV :call CocLocations('ccls','$ccls/vars',{'kind':1})<cr>
 
 nn xx x
 
-au CursorHoldI * sil call CocActionAsync('showSignatureHelp')
 
 call neomake#configure#automake('w')
 
