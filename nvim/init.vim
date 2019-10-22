@@ -96,9 +96,9 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 " lsp clinet
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" thems
 Plug 'ggyyll/spaceline.vim'
 Plug 'ggyyll/vim_equinusocio_material'
-Plug 'sainnhe/gruvbox-material', { 'branch': 'neosyn' }
 Plug 'sheerun/vim-polyglot'
 
 
@@ -308,13 +308,9 @@ set viminfo='100,n$HOME/.vim/files/info/viminfo
 " Theme
 set t_Co=256
 set termguicolors
-set background=dark
-let g:gruvbox_material_background = '𝒔𝒐𝒇𝒕'
-colorscheme gruvbox-material
-
 let g:equinusocio_material_style='darker'
 let g:equinusocio_material_vertsplit='visible'
-"colorscheme equinusocio_material
+colorscheme equinusocio_material
 
 
 hi Whitespace ctermfg=96 guifg=#725972 guibg=NONE ctermbg=NONE
@@ -579,4 +575,6 @@ inoremap <silent><M-j> <c-\><c-o>:call Tools_PreviousCursor(0)<cr>
 inoremap <silent><M-k> <c-\><c-o>:call Tools_PreviousCursor(1)<cr>
 inoremap <silent><M-p> <c-\><c-o>:call Tools_PreviousCursor(2)<cr>
 inoremap <silent><M-n> <c-\><c-o>:call Tools_PreviousCursor(3)<cr>
+
+hi Comment guifg=#928374 guibg=NONE guisp=NONE gui=italic cterm=italic
 
