@@ -41,7 +41,7 @@
     },
     "git.enableGutters": true,
     "git.branchCharacter":"\uf408",
-    "git.addGlameToBufferVar": true,
+    "git.addGBlameToBufferVar": true,
     "git.virtualTextPrefix": " ❯❯❯ ",
     "git.addedSign.text":"▎",
     "git.changedSign.text":"▎",
