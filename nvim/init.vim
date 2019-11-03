@@ -95,7 +95,8 @@ Plug 'bagrat/vim-buffet'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 " lsp clinet
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+
 " thems
 Plug 'ggyyll/spaceline.vim'
 Plug 'ggyyll/vim_equinusocio_material'
@@ -118,7 +119,7 @@ Plug 'mzlogin/vim-kramdown-tab'
 Plug 'iamcco/markdown-preview.nvim'
 
 
-Plug 'mg979/vim-visual-multi',          {'branch': 'test'} "多行编辑
+Plug 'mg979/vim-visual-multi'           "多行编辑
 Plug 'mbbill/undotree'                  " 后悔药
 Plug 'mhinz/vim-startify'               " 启动页
 Plug 'luochen1990/rainbow'              " 多彩括号
