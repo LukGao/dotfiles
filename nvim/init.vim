@@ -12,7 +12,7 @@ set showcmd                   " select模式下显示选中的行数
 "set cursorline                " 高亮显示当前行
 set ttimeoutlen=0             " 设置<ESC>键响应时间
 set virtualedit=block,onemore " 允许光标出现在最后一个字符的后面
-set laststatus=2              " 总是显示状态栏
+set laststatus=0              " 总是显示状态栏
 set showtabline=2
 set noshowmode
 "set autochdir
@@ -87,6 +87,8 @@ call plug#begin('~/.vim/plugged')
 " git
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
+Plug 'mhinz/vim-signify'
+
 " icon
 Plug 'ryanoasis/vim-devicons'
 " line
@@ -94,9 +96,11 @@ Plug 'bagrat/vim-buffet'
 " fzf
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
+
 " lsp clinet
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
-
+Plug 'zgpio/tree.nvim'
 " thems
 Plug 'ggyyll/spaceline.vim'
 Plug 'ggyyll/vim_equinusocio_material'
@@ -190,7 +194,7 @@ return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
 
-let g:coc_global_extensions =['coc-snippets','coc-neosnippet','coc-python','coc-pairs','coc-json','coc-imselect','coc-highlight','coc-git','coc-emoji','coc-lists','coc-yaml','coc-template']
+let g:coc_global_extensions =['coc-snippets','coc-neosnippet','coc-git','coc-python','coc-pairs','coc-json','coc-imselect','coc-highlight','coc-emoji','coc-lists','coc-yaml','coc-template']
 
 set updatetime=300
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
@@ -578,4 +582,31 @@ inoremap <silent><M-p> <c-\><c-o>:call Tools_PreviousCursor(2)<cr>
 inoremap <silent><M-n> <c-\><c-o>:call Tools_PreviousCursor(3)<cr>
 
 hi Comment guifg=#928374 guibg=NONE guisp=NONE gui=italic cterm=italic
+
+
+
+
+let s:hidden_all = 0
+function! ToggleHiddenAll()
+    if s:hidden_all  == 0
+        let s:hidden_all = 1
+        set noshowmode
+        set noruler
+        set laststatus=0
+        set noshowcmd
+    else
+        let s:hidden_all = 0
+        set showmode
+        set ruler
+        set laststatus=2
+        set showcmd
+    endif
+endfunction
+
+nnoremap <S-h> :call ToggleHiddenAll()<CR>
+set updatetime=100
+
+
+let g:Lf_PreviewInPopup = 1
+let g:Lf_PreviewResult = { 'File': 1 }
 

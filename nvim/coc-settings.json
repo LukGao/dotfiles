@@ -9,6 +9,7 @@
             "command": "ccls",
             "filetypes": [ "c", "cpp", "hpp", "objc", "objcpp" ],
             "initializationOptions": { "cache": { "directory": "/tmp/.ccls-cache", } },
+            "trace.server": "verbose",
             "rootPatterns": [ ".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/", ".svn/" ]
         },
     },
@@ -39,15 +40,6 @@
         "typeParameter": "\uf728", 
         "default": "\uf29c"
     },
-    "git.enableGutters": true,
-    "git.branchCharacter":"\uf408",
-    "git.addGBlameToBufferVar": true,
-    "git.virtualTextPrefix": " ❯❯❯ ",
-    "git.addedSign.text":"▎",
-    "git.changedSign.text":"▎",
-    "git.removedSign.text":"▏",
-    "git.topRemovedSign.text": "▔",
-    "git.changeRemovedSign.text": "▋",
 	"coc.preferences.snippetStatusText": "Ⓢ ",
     "todolist.autoUpload": true,
     "todolist.monitor": true,
