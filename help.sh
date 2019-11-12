@@ -41,6 +41,16 @@ function get_linux_platform_type()
     esac    
 }
 
+function install_tools_on_linux()
+{
+    check_user
+    get_linux_platform_type
+    curl -sL install-node.now.sh/lts | ${SUDO}  bash
+    echo "InstallCommand : ${InstallCommand}"
+    ${InstallCommand}  git wget  cmake  zlib1g-dev  libtinfo-dev ruby 
+}
+
+
 function echo_env()
 {
     echo "SUDO : ${SUDO}"
@@ -54,3 +64,4 @@ check_user
 get_platform_type
 get_linux_platform_type
 echo_env
+install_tools_on_linux

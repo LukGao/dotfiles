@@ -498,15 +498,18 @@ nn <silent> xC :call CocLocations('ccls','$ccls/call',{'callee':v:true})<cr>
 " $ccls/member
 " member variables / variables in a namespace
 nn <silent> xm :call CocLocations('ccls','$ccls/member')<cr>
-" member functions / functions in a namespace
 nn <silent> xf :call CocLocations('ccls','$ccls/member',{'kind':3})<cr>
-" nested classes / types in a namespace
 nn <silent> xs :call CocLocations('ccls','$ccls/member',{'kind':2})<cr>
 
-nmap <silent> xt <Plug>(coc-type-definition)<cr>
 nn <silent> xv :call CocLocations('ccls','$ccls/vars')<cr>
 nn <silent> xV :call CocLocations('ccls','$ccls/vars',{'kind':1})<cr>
 
+nn <silent> xj :call CocLocations('ccls','$ccls/navigate',{'direction':'D'})<cr>
+nn <silent> xh :call CocLocations('ccls','$ccls/navigate',{'direction':'L'})<cr>
+nn <silent> xl :call CocLocations('ccls','$ccls/navigate',{'direction':'R'})<cr>
+nn <silent> xk :call CocLocations('ccls','$ccls/navigate',{'direction':'U'})<cr>
+
+nmap <silent> xt <Plug>(coc-type-definition)<cr>
 nn xx x
 
 
@@ -571,13 +574,13 @@ function! Tools_PreviousCursor(mode)
 endfunc
 
 
-noremap <silent><M-j> :call Tools_PreviousCursor(0)<cr>
-noremap <silent><M-k> :call Tools_PreviousCursor(1)<cr>
+noremap <silent><M-k> :call Tools_PreviousCursor(0)<cr>
+noremap <silent><M-j> :call Tools_PreviousCursor(1)<cr>
 noremap <silent><M-p> :call Tools_PreviousCursor(2)<cr>
 noremap <silent><M-n> :call Tools_PreviousCursor(3)<cr>
 
-inoremap <silent><M-j> <c-\><c-o>:call Tools_PreviousCursor(0)<cr>
-inoremap <silent><M-k> <c-\><c-o>:call Tools_PreviousCursor(1)<cr>
+inoremap <silent><M-k> <c-\><c-o>:call Tools_PreviousCursor(0)<cr>
+inoremap <silent><M-j> <c-\><c-o>:call Tools_PreviousCursor(1)<cr>
 inoremap <silent><M-p> <c-\><c-o>:call Tools_PreviousCursor(2)<cr>
 inoremap <silent><M-n> <c-\><c-o>:call Tools_PreviousCursor(3)<cr>
 
@@ -609,4 +612,7 @@ set updatetime=100
 
 let g:Lf_PreviewInPopup = 1
 let g:Lf_PreviewResult = { 'File': 1 }
+highlight Normal guibg=NONE ctermbg=None
 
+
+let g:gitgutter_max_signs=1000

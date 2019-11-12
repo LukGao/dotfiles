@@ -10,9 +10,9 @@ function ubuntu_ccls()
     git clone  --recursive https://github.com/MaskRay/ccls
     cd ccls && git checkout 2b552f6
     CURR_DIR=`pwd`
-    wget -c http://releases.llvm.org/8.0.0/clang+llvm-8.0.0-x86_64-linux-gnu-ubuntu-18.04.tar.xz
-    tar xf clang+llvm-8.0.0-x86_64-linux-gnu-ubuntu-18.04.tar.xz
-    ${CMAKE} -H. -BRelease -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=${CURR_DIR}/clang+llvm-8.0.0-x86_64-linux-gnu-ubuntu-18.04
+    wget -c http://releases.llvm.org/9.0.0/clang+llvm-9.0.0-x86_64-linux-gnu-ubuntu-18.04.tar.xz
+    tar xf clang+llvm-9.0.0-x86_64-linux-gnu-ubuntu-18.04.tar.xz
+    ${CMAKE} -H. -BRelease -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_PREFIX_PATH=${CURR_DIR}/clang+llvm-9.0.0-x86_64-linux-gnu-ubuntu-18.04
     cd Release
     make -j`nproc` 
     ln -sf `pwd`/ccls $HOME/bin/ccls

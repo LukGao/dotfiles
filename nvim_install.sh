@@ -167,6 +167,7 @@ function main()
     install_vimplus_on_linux
 }
 
+. help.sh
 # 调用main函数
 main
 
