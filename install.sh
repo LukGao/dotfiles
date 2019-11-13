@@ -44,7 +44,6 @@ function install_tools_on_linux()
 {
     check_user
     get_linux_platform_type
-    curl -sL install-node.now.sh/lts | ${SUDO}  bash
     echo "InstallCommand : ${InstallCommand}"
     ${InstallCommand}  git wget  cmake  zlib1g-dev  libtinfo-dev ruby 
 }
