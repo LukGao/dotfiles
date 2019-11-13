@@ -60,8 +60,8 @@ function copy_config()
 {
     cd ${Pwd}
     echo "source ${Pwd}/dotfiles/bashrc" >> $HOME/.bashrc
-    cat ${Pwd}/dotfiles/.inputrc > $HOME/.inputrc
-    cat ${Pwd}/dotfiles/.clang-format > $HOME/.clang-format
+    cat ${Pwd}/.inputrc > $HOME/.inputrc
+    cat ${Pwd}/.clang-format > $HOME/.clang-format
 }
 
 # 安装nvim
