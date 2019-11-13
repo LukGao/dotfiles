@@ -41,7 +41,7 @@ function get_linux_platform_type()
     esac    
 }
 
-function install_tools_on_linux()
+function install_tools_1()
 {
     check_user
     get_linux_platform_type
@@ -63,4 +63,4 @@ check_user
 get_platform_type
 get_linux_platform_type
 echo_env
-install_tools_on_linux
+install_tools_1
