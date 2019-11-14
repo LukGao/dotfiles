@@ -59,7 +59,7 @@ function install_nodejs()
 function copy_config()
 {
     cd ${Pwd}
-    echo "source ${Pwd}/dotfiles/bashrc" >> $HOME/.bashrc
+    echo "source ${Pwd}/bashrc" >> $HOME/.bashrc
     cat ${Pwd}/.inputrc > $HOME/.inputrc
     cat ${Pwd}/.clang-format > $HOME/.clang-format
 }
