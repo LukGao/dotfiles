@@ -85,7 +85,7 @@ nnoremap <leader><leader>c :PlugClean<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
 " git
-Plug 'airblade/vim-gitgutter'
+"Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'mhinz/vim-signify'
 
@@ -194,7 +194,7 @@ return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
 
-let g:coc_global_extensions =['coc-snippets','coc-neosnippet','coc-git','coc-python','coc-pairs','coc-json','coc-imselect','coc-highlight','coc-emoji','coc-lists','coc-yaml','coc-template']
+let g:coc_global_extensions =['coc-snippets','coc-neosnippet','coc-python','coc-pairs','coc-json','coc-imselect','coc-highlight','coc-emoji','coc-lists','coc-yaml','coc-template']
 
 set updatetime=300
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
@@ -270,39 +270,9 @@ let g:rainbow_active = 1
 let g:prepare_code_plugin_path = expand($HOME . "/.vim/plugged/prepare-code")
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" gitgutter
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-let g:gitgutter_sign_added = '▎'
-let g:gitgutter_sign_modified = '▎'
-let g:gitgutter_sign_removed = '▏'
-let g:gitgutter_sign_removed_first_line = '▔'
-let g:gitgutter_sign_modified_removed = '▋'
-" ---------------------------------------------------------
-highlight GitGutterAdd ctermfg=22 guifg=#006000 ctermbg=NONE guibg=NONE
-highlight GitGutterChange ctermfg=58 guifg=#5F6000 ctermbg=NONE guibg=NONE
-highlight GitGutterDelete ctermfg=52 guifg=#600000 ctermbg=NONE guibg=NONE
-highlight GitGutterChangeDelete ctermfg=52 guifg=#600000 ctermbg=NONE guibg=NONE
-autocmd TextChangedI * GitGutter
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " startify
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:startify_custom_foote = [
-      \ '+------------------------------+',
-      \ '|  1.01 ^ 365 =  37.78         |',
-      \ '+----------------+-------------+',
-      \]
-function! s:center(lines) abort
-  let longest_line   = max(map(copy(a:lines), 'strwidth(v:val)'))
-  let centered_lines = map(copy(a:lines),
-        \ 'repeat(" ", (&columns / 2) - (longest_line / 2)) . v:val')
-  return centered_lines
-endfunction
-
-let g:startify_custom_header = s:center(startify#fortune#cowsay())
-let g:startify_custom_footer = s:center(g:startify_custom_foote)
-let g:startify_padding_left = 30
+ let g:startify_padding_left = 30
 
 
 let g:better_whitespace_enabled=1
@@ -445,6 +415,8 @@ imap <expr><TAB>  pumvisible() ? "\<C-n>" :  <SID>check_back_space() ? "\<TAB>":
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 nnoremap <silent> <localleader>k :call <SID>show_documentation()<CR>
 inoremap <silent><expr> <c-space> coc#refresh()
+""
+nmap <leader>rn <Plug>(coc-rename)
 
 nnoremap <localleader>u :UndotreeToggle<cr>
 nnoremap <localleader>g :TagbarToggle<CR>
