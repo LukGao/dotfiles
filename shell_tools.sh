@@ -30,7 +30,7 @@ function install_tools
     tar zxf fd-v7.3.0-x86_64-unknown-linux-musl.tar.gz
     tar zxf ripgrep-0.10.0-x86_64-unknown-linux-musl.tar.gz
     ln -sf `pwd`/fd-v7.3.0-x86_64-unknown-linux-musl/fd ${BinaryDir}/fd
-    ln -sf `pwd`/ripgrep-0.10.0-x86_64-unknown-linux-musl/rg ${BinaryDir}/bin/rg
+    ln -sf `pwd`/ripgrep-0.10.0-x86_64-unknown-linux-musl/rg ${BinaryDir}/rg
     ${SUDO} gem install coderay rouge
 
     if ls $HOME/.fzf/bin/fzf 1> /dev/null 2>&1; then
