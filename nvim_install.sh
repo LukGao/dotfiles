@@ -11,7 +11,8 @@ function install_prepare_software_on_centos()
 {
     ${SUDO} yum whatprovides *bin/which
     ${SUDO} wget https://dl.yarnpkg.com/rpm/yarn.repo -O /etc/yum.repos.d/yarn.repo
-    ${InstallCommand} epel-release wget  centos-release-scl devtoolset-8 which ctags python-devel  python36-setuptools cmake3 nodejs yarn
+    ${InstallCommand} epel-release wget  centos-release-scl devtoolset-8 which ctags python-devel  python36-setuptools cmake3 
+    ${InstallCommand} nodejs yarn
     ${SUDO} easy_install-3.6 pip
     pip install neovim  jedi  pylint
     pip3 install neovim jedi  pylint
@@ -34,7 +35,7 @@ function install_nvim
     fi
     CURRENT_DIR=${PWD}
     cd ${ToolsDir}
-    
+
     wget -c https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz
     tar zxf nvim-linux64.tar.gz && ln -sf `pwd`/nvim-linux64/bin/nvim ${BinaryDir}/nvim
     export PATH=${BinaryDir}:$PATH
@@ -70,7 +71,7 @@ function run_install_plug
 function install_coc_nvim
 {
     COC_DIR=$HOME/.vim/plugged/coc.nvim
-    git clone --depth=1 https://github.com/neoclide/coc.nvim.git ${COC_DIR}
+    git clone  https://github.com/neoclide/coc.nvim.git ${COC_DIR}
     cd ${COC_DIR} && ./install.sh && cd -
 }
 
