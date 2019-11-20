@@ -7,6 +7,17 @@ function install_prepare_software_on_ubuntu
     ${InstallCommand} python-setuptools python3-setuptools
 }
 
+function install_prepare_software_on_centos()
+{
+    ${SUDO} yum whatprovides *bin/which
+    ${SUDO} wget https://dl.yarnpkg.com/rpm/yarn.repo -O /etc/yum.repos.d/yarn.repo
+    ${InstallCommand} epel-release wget  centos-release-scl devtoolset-8 which ctags python-devel  python36-setuptools cmake3 nodejs yarn
+    ${SUDO} easy_install-3.6 pip
+    pip install neovim  jedi  pylint
+    pip3 install neovim jedi  pylint
+}
+
+
 function download_vim_plug
 {
     curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -52,10 +63,24 @@ function run_install_plug
     fi
 }
 
+function install_prepare_software
+{
+    type=${OsName}
+    if [ ${type} == "ubuntu" ]; then
+        install_prepare_software_on_ubuntu
+    elif [ ${type} == "centos" ]; then
+        install_prepare_software_on_centos
+    else
+        echo "install failed"
+    fi
+}
 
 . help.sh
 
-install_prepare_software_on_ubuntu
+
+
+
+install_prepare_software
 download_vim_plug
 copy_nvim_config
 install_nvim
