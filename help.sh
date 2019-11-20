@@ -1,10 +1,28 @@
 #!/bin/bash
-
 export SUDO="sudo"
-export Pwd=`pwd`
-export InstallCommand=""
-export OsName=""
-export UNAME=""
+export ToolsDir=`$HOME/.config/tools
+export BinaryDir=$HOME/bin
+export InstallCommand="default"
+export NvimConfigDir="default"
+export VimPlugDir="default"
+export OsName="default"
+export UNAME="default"
+export CMAKE="default"
+
+function echo_env
+{
+    echo "SUDO : ${SUDO}"
+    echo "UNAME : ${UNAME}"
+    echo "OS_NAME : ${OsName}"
+    echo "InstallCommand : ${InstallCommand}"
+    echo "NvimConfigDir : ${NvimConfigDir}"
+    echo "VimPlugDir : ${VimPlugDir}"
+    echo "BinaryDir : ${BinaryDir}" 
+    echo "CMAKE : ${CMAKE}"
+    echo "ToolsDir : ${ToolsDir}"
+}
+
+
 
 function check_user()
 {
@@ -15,14 +33,11 @@ function check_user()
     fi
 }
 
-# 获取平台类型，mac还是linux平台
 function get_platform_type()
 {
     export UNAME=`uname`
 }
 
-
-# 获取linux平台类型，ubuntu还是centos
 function get_linux_platform_type()
 {
     export OS_NAME=$( cat /etc/os-release | grep ^NAME | cut -d'=' -f2 | sed 's/\"//gI' )    
@@ -41,26 +56,7 @@ function get_linux_platform_type()
     esac    
 }
 
-function install_tools_1()
-{
-    check_user
-    get_linux_platform_type
-    echo "InstallCommand : ${InstallCommand}"
-    ${InstallCommand}  git wget  cmake  zlib1g-dev  libtinfo-dev ruby 
-}
-
-
-function echo_env()
-{
-    echo "SUDO : ${SUDO}"
-    echo "OS_NAME : ${OsName}"
-    echo "InstallCommand : ${InstallCommand}"
-    echo "CMAKE : ${CMAKE}"
-    echo "PWD : ${Pwd}"
-}
-
 check_user
 get_platform_type
 get_linux_platform_type
 echo_env
-install_tools_1

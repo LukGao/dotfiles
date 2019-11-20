@@ -3,11 +3,9 @@
 export SUDO="sudo"
 export InstallCommand=""
 export OsName=""
-export Pwd=`pwd`
-export UNAME=""
 
 
-function check_user()
+function check_user
 {
     if [[ `id -u` -eq 0 ]];then
         export SUDO=""
@@ -17,13 +15,13 @@ function check_user()
 }
 
 # mac or linux
-function get_platform_type()
+function get_platform_type
 {
     echo $(uname)
 }
 
 # linux ubuntu or cenots
-function get_linux_platform_type()
+function get_linux_platform_type
 {
     export OS_NAME=$( cat /etc/os-release | grep ^NAME | cut -d'=' -f2 | sed 's/\"//gI' )    
     case "$OS_NAME" in    
@@ -40,32 +38,31 @@ function get_linux_platform_type()
 }
 
 # install command
-function install_tools_on_linux()
+function install_tools_on_linux
 {
     check_user
     get_linux_platform_type
     echo "InstallCommand : ${InstallCommand}"
-    ${InstallCommand}  git wget curl cmake  zlib1g-dev  libtinfo-dev ruby 
+    ${InstallCommand}  git wget curl  
 }
 
 # clone  respository
-function clone_install_repository()
+function clone_install_repository
 {
     git clone --depth=1 https://github.com/ggyyll/dotfiles.git 
     cd dotfiles
     bash nvim_install.sh
     bash shell_tools.sh
-    bash go_install.sh
-    bash tmux_install.sh
     bash ccls_install.sh
     cd -
 
 }
 
 
-function main()
+function main
 {
     type=`get_platform_type`
+
     echo "platform type: "${type}
 
     if [ ${type} == "Linux" ]; then
@@ -78,4 +75,5 @@ function main()
 
 #  call main
 main
+
 
