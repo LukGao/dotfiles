@@ -13,6 +13,8 @@ function ubuntu_ccls
     ln -sf `pwd`/Release/ccls ${BinaryDir}/ccls
     ls -alrkh ${BinaryDir}
     cd ${CURR_DIR}
+    . $HOME/.bashrc
+    echo $PATH
 }
 
 . help.sh
