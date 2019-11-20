@@ -11,6 +11,7 @@ function ubuntu_ccls
     ${CMAKE} -H. -BRelease -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_PREFIX_PATH=${PWD}/clang+llvm-9.0.0-x86_64-linux-gnu-ubuntu-18.04
     cmake --build Release
     ln -sf `pwd`/Release/ccls ${BinaryDir}/ccls
+    ls -alrkh ${BinaryDir}
     cd ${CURR_DIR}
 }
 

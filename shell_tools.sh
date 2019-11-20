@@ -40,6 +40,8 @@ function install_tools
         ~/.fzf/install
     fi
 
+    ls -alrkh ${BinaryDir}
+
     git config --global alias.tree "log --graph --all --relative-date --abbrev-commit --format=\"%x09 %h %Cgreen%cd%Creset [%Cblue%cn%Creset] %C(auto)%d%Creset %s\""
     cd ${CURREN_DIR}
 
