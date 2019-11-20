@@ -44,7 +44,6 @@ function install_vim_plugin()
     echo "run PlugInstall"
     export PATH=$HOME/bin:$PATH 
     nvim +'PlugInstall --sync' +'PlugUpdate' +qa!
-    cd $HOME/.vim/plugged/coc.nvim && ./install.sh 
     cd -
 }
 
