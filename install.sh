@@ -45,7 +45,7 @@ function install_tools_on_linux()
     check_user
     get_linux_platform_type
     echo "InstallCommand : ${InstallCommand}"
-    ${InstallCommand}  git wget  cmake  zlib1g-dev  libtinfo-dev ruby 
+    ${InstallCommand}  git wget curl cmake  zlib1g-dev  libtinfo-dev ruby 
 }
 
 # clone  respository
