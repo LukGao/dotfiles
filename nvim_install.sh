@@ -51,6 +51,9 @@ function run_install_plug
 {
     if ls ${BinaryDir}/nvim 1> /dev/null 2>&1; then
 
+        if [ ${type} == "centos" ]; then
+            install_coc_nvim
+        fi
         echo "run PlugInstall"
         export PATH=${BinaryDir}:$PATH
         nvim +'PlugInstall --sync' +'PlugUpdate' +qa!
@@ -61,6 +64,13 @@ function run_install_plug
         echo "nvim do not exist"
 
     fi
+}
+
+function install_coc_nvim
+{
+    COC_DIR=$HOME/.vim/plugged/coc.nvim
+    git clone --depth=1 https://github.com/neoclide/coc.nvim.git ${COC_DIR}
+    cd ${COC_DIR} && ./install.sh && cd -
 }
 
 function install_prepare_software
