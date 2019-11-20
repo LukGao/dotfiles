@@ -1,7 +1,7 @@
 #!/bin/bash
 export SUDO="sudo"
-export ToolsDir=`$HOME/.config/tools
-export BinaryDir=$HOME/bin
+export ToolsDir="$HOME/.config/tools"
+export BinaryDir="$HOME/bin"
 export InstallCommand="default"
 export NvimConfigDir="default"
 export VimPlugDir="default"
@@ -26,16 +26,21 @@ function echo_env
 
 function check_user()
 {
-    if [[ `id -u` -eq 0 ]];then
+
+    if [[ $(id -u) -eq 0 ]];then
         export SUDO=""
     else
         export SUDO="sudo"
     fi
 }
 
+function platform_type
+{
+    echo $(uname)
+}
 function get_platform_type()
 {
-    export UNAME=`uname`
+    export UNAME=$( uname )
 }
 
 function get_linux_platform_type()
