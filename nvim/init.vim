@@ -96,7 +96,6 @@ Plug 'bagrat/vim-buffet'
 " fzf
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 
 " lsp clinet
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
@@ -556,9 +555,6 @@ inoremap <silent><M-j> <c-\><c-o>:call Tools_PreviousCursor(1)<cr>
 inoremap <silent><M-p> <c-\><c-o>:call Tools_PreviousCursor(2)<cr>
 inoremap <silent><M-n> <c-\><c-o>:call Tools_PreviousCursor(3)<cr>
 
-hi Comment guifg=#928374 guibg=NONE guisp=NONE gui=italic cterm=italic
-
-
 
 
 let s:hidden_all = 0
@@ -579,12 +575,5 @@ function! ToggleHiddenAll()
 endfunction
 
 nnoremap <S-h> :call ToggleHiddenAll()<CR>
-set updatetime=100
-
-
-let g:Lf_PreviewInPopup = 1
-let g:Lf_PreviewResult = { 'File': 1 }
+hi Comment guifg=#928374 guibg=NONE guisp=NONE gui=italic cterm=italic
 highlight Normal guibg=NONE ctermbg=None
-
-
-let g:gitgutter_max_signs=1000
