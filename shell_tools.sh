@@ -11,7 +11,7 @@ function create_dir
     fi
 }
 
-function install_tools
+function install_tools1
 {
     CURREN_DIR=${PWD}
 
@@ -60,14 +60,33 @@ function ubuntu_install_tmux
     wget -c https://raw.githubusercontent.com/ggyyll/dotfiles/master/.tmux.conf -O ~/.tmux.conf
 }
 
+
 function ubuntu_install_tools
 {
     ${InstallCommand}  ruby rubygems tig htop tmux lua5.1
 }
 
+function centos_install_tools
+{
+    ${InstallCommand}  ruby rubygems tig htop tmux lua5.1
+}
+
+function install_tools
+{
+    if [ ${OsName} == "ubuntu" ]; then
+        ubuntu_install_tools
+        ubuntu_install_tmux
+    elif [ ${OsName} == "centos" ]; then
+        centos_install_tools
+        centos_install_tmux
+    else
+        echo "install tmux failed : ${OsName}"
+    fi
+
+}
+
 . help.sh
 
 create_dir
-ubuntu_install_tools
 install_tools
-ubuntu_install_tmux
+install_tools1
