@@ -29,7 +29,16 @@ set backspace=2             " 使用回车键正常处理indent,eol,start等
 set sidescroll=10           " 设置向右滚动字符数
 set t_Co=256
 set colorcolumn=100
+set hidden                                                                                                                                      
+set shortmess=aFc                                                                                                                               
+set signcolumn=yes                                                                                                                              
+set completefunc=emoji#complete                                                                                                                 
+set completeopt =longest,menu                                                                                                                   
+set completeopt-=preview                                                                                                                        
+set list                                                                                                                                        
+set listchars=tab:»·,nbsp:+,trail:·,extends:→,precedes:←                                                                                        
 
+                                                                                                                                                  
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 代码补全
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -105,8 +114,6 @@ Plug 'zgpio/tree.nvim'
 Plug 'ggyyll/spaceline.vim'
 Plug 'ggyyll/vim_equinusocio_material'
 Plug 'sheerun/vim-polyglot'
-
-
 
 
 " terminal
