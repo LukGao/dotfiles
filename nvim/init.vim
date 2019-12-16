@@ -585,3 +585,4 @@ endfunction
 nnoremap <S-h> :call ToggleHiddenAll()<CR>
 hi Comment guifg=#928374 guibg=NONE guisp=NONE gui=italic cterm=italic
 highlight Normal guibg=NONE ctermbg=None
+let g:tagbar_silent = 1
