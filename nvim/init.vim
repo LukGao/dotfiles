@@ -282,7 +282,7 @@ let g:prepare_code_plugin_path = expand($HOME . "/.vim/plugged/prepare-code")
  let g:startify_padding_left = 30
 
 
-let g:better_whitespace_enabled=1
+let g:better_whitespace_enabled=0
 let g:strip_whitespace_confirm=0
 set viminfo='100,n$HOME/.vim/files/info/viminfo
 
