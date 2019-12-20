@@ -8,7 +8,7 @@
        "ccls": {
             "command": "ccls",
             "filetypes": [ "c", "cpp", "hpp", "objc", "objcpp" ],
-            "initializationOptions": { "cache": { "directory": "/tmp/.ccls-cache", } },
+            "initializationOptions": { "cache": { "directory": ".ccls-cache", } },
             "trace.server": "verbose",
             "rootPatterns": [ ".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/", ".svn/" ]
         },
