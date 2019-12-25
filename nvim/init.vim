@@ -12,7 +12,7 @@ set showcmd                   " select模式下显示选中的行数
 "set cursorline                " 高亮显示当前行
 set ttimeoutlen=0             " 设置<ESC>键响应时间
 set virtualedit=block,onemore " 允许光标出现在最后一个字符的后面
-set laststatus=0              " 总是显示状态栏
+set laststatus=2              " 总是显示状态栏
 set showtabline=2
 set noshowmode
 "set autochdir
@@ -29,16 +29,16 @@ set backspace=2             " 使用回车键正常处理indent,eol,start等
 set sidescroll=10           " 设置向右滚动字符数
 set t_Co=256
 set colorcolumn=100
-set hidden                                                                                                                                      
-set shortmess=aFc                                                                                                                               
-set signcolumn=yes                                                                                                                              
-set completefunc=emoji#complete                                                                                                                 
-set completeopt =longest,menu                                                                                                                   
-set completeopt-=preview                                                                                                                        
-set list                                                                                                                                        
-set listchars=tab:»·,nbsp:+,trail:·,extends:→,precedes:←                                                                                        
+set hidden
+set shortmess=aFc
+set signcolumn=yes
+set completefunc=emoji#complete
+set completeopt =longest,menu
+set completeopt-=preview
+set list
+set listchars=tab:»·,nbsp:+,trail:·,extends:→,precedes:←
 
-                                                                                                                                                  
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 代码补全
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -94,44 +94,33 @@ nnoremap <leader><leader>c :PlugClean<cr>
 " 插件安装LINX
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
-" git
-Plug 'tpope/vim-fugitive'
-"Plug 'mhinz/vim-signify'
-" icon
-Plug 'ryanoasis/vim-devicons'
-" line
-Plug 'bagrat/vim-buffet'
-" fzf
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
-" lsp clinet
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
-" thems
+Plug 'bagrat/vim-buffet'                " buffer
 Plug 'ggyyll/spaceline.vim'
-Plug 'ggyyll/vim_equinusocio_material'
-Plug 'sheerun/vim-polyglot'
-
-" man page
-Plug 'vim-utils/vim-man',               {'for':['c','cpp','cc']}
-" bookmark
-Plug 'MattesGroeger/vim-bookmarks'
-Plug 'voldikss/vim-translate-me'
-
-Plug 'mg979/vim-visual-multi'           "多行编辑
+Plug 'ggyyll/vim_equinusocio_material'  " thems
+Plug 'sheerun/vim-polyglot'             " ?
+Plug 'ryanoasis/vim-devicons'           " icon
+Plug 'tpope/vim-fugitive'               " git
+Plug 'MattesGroeger/vim-bookmarks'      " 书签
+Plug 'voldikss/vim-translate-me'        " 翻译
 Plug 'mbbill/undotree'                  " 后悔药
 Plug 'mhinz/vim-startify'               " 启动页
+Plug 'mg979/vim-visual-multi'           " 多行编辑
 Plug 'luochen1990/rainbow'              " 多彩括号
+Plug 'lfv89/vim-interestingwords'       " 单词标记
+Plug 'ntpeters/vim-better-whitespace'   " 去除空格
 Plug 'neomake/neomake'
-Plug 'honza/vim-snippets',              {'for':['go','c','cpp','cc','py']}                  " 代码片段
+Plug 'vim-utils/vim-man',               {'for':['c','cpp','cc']}
 Plug 'Chiel92/vim-autoformat' ,         {'for':['c','cpp','cc']}
 Plug 'scrooloose/nerdtree',             { 'on':'NERDTreeToggle'}
 Plug 'majutsushi/tagbar',               { 'on':'TagbarToggle'}
+Plug 'neoclide/coc.nvim',               {'branch': 'release'}                               " lsp clinet
 Plug 'tpope/vim-endwise',               {'for':['c','cpp','cc']}                            " endif补全
+Plug 'honza/vim-snippets',              {'for':['go','c','cpp','cc','py']}                  " 代码片段
 Plug 'tpope/vim-surround',              {'for':['go','c','cpp','cc','py']}                  " 成双成对编辑
 Plug 'scrooloose/nerdcommenter',        {'for':['go','c','cpp','cc','py']}                  " 注释插件
-Plug 'lfv89/vim-interestingwords',      {'for':['go','c','cpp','cc','py']}                  " 单词标记
-Plug 'ntpeters/vim-better-whitespace',  {'for':['go','c','cpp','cc','py']}                  " 去除空格
 Plug 'tpope/vim-abolish'             ,  {'for':['go','c','cpp','cc','py']}                  " 命名风格转换
 call plug#end()
 
@@ -553,7 +542,8 @@ inoremap <silent><M-n> <c-\><c-o>:call Tools_PreviousCursor(3)<cr>
 
 
 
-let s:hidden_all = 0
+
+let s:hidden_all = 1
 function! ToggleHiddenAll()
     if s:hidden_all  == 0
         let s:hidden_all = 1
@@ -575,4 +565,8 @@ hi Comment guifg=#928374 guibg=NONE guisp=NONE gui=italic cterm=italic
 highlight Normal guibg=NONE ctermbg=None
 let g:tagbar_silent = 1
 
- let g:interestingWordsGUIColors = ['#8CCBEA', '#6699FF','#A4E57E','#13E57B', '#995555','#3399FF','#b39488', '#FFDB72', '#FF7272', '#FFB3FF', '#9999FF']
+let g:interestingWordsGUIColors = ['#8CCBEA', '#6699FF','#A4E57E','#13E57B', '#995555','#3399FF','#b39488', '#FFDB72', '#FF7272', '#FFB3FF', '#9999FF']
+let g:spaceline_seperate_style= 'none'
+
+let g:spaceline_colorscheme = 'solarized_dark'
+
