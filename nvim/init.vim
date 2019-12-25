@@ -95,10 +95,8 @@ nnoremap <leader><leader>c :PlugClean<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
 " git
-"Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
-Plug 'mhinz/vim-signify'
-
+"Plug 'mhinz/vim-signify'
 " icon
 Plug 'ryanoasis/vim-devicons'
 " line
@@ -108,27 +106,17 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
 " lsp clinet
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'zgpio/tree.nvim'
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 " thems
 Plug 'ggyyll/spaceline.vim'
 Plug 'ggyyll/vim_equinusocio_material'
 Plug 'sheerun/vim-polyglot'
 
-
-" terminal
-Plug 'voldikss/vim-floaterm'
 " man page
 Plug 'vim-utils/vim-man',               {'for':['c','cpp','cc']}
 " bookmark
 Plug 'MattesGroeger/vim-bookmarks'
 Plug 'voldikss/vim-translate-me'
-
-Plug 'dhruvasagar/vim-table-mode'
-Plug 'mzlogin/vim-markdown-toc'
-Plug 'mzlogin/vim-kramdown-tab'
-Plug 'iamcco/markdown-preview.nvim'
-
 
 Plug 'mg979/vim-visual-multi'           "多行编辑
 Plug 'mbbill/undotree'                  " 后悔药
@@ -201,7 +189,7 @@ return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
 
-let g:coc_global_extensions =['coc-snippets','coc-neosnippet','coc-python','coc-pairs','coc-json','coc-imselect','coc-highlight','coc-emoji','coc-lists','coc-yaml','coc-template']
+let g:coc_global_extensions =['coc-snippets','coc-python','coc-pairs','coc-json','coc-imselect','coc-highlight','coc-emoji','coc-lists','coc-yaml','coc-template']
 
 set updatetime=300
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
