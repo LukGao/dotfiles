@@ -96,6 +96,7 @@ nnoremap <leader><leader>c :PlugClean<cr>
 call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'skywind3000/vim-terminal-help'
 
 Plug 'bagrat/vim-buffet'                " buffer
 Plug 'ggyyll/spaceline.vim'
