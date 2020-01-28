@@ -123,13 +123,14 @@ Plug 'honza/vim-snippets',              {'for':['go','c','cpp','cc','py']}      
 Plug 'tpope/vim-surround',              {'for':['go','c','cpp','cc','py']}                  " 成双成对编辑
 Plug 'scrooloose/nerdcommenter',        {'for':['go','c','cpp','cc','py']}                  " 注释插件
 Plug 'tpope/vim-abolish'             ,  {'for':['go','c','cpp','cc','py']}                  " 命名风格转换
+Plug 'dracula/vim', { 'as': 'dracula' }
 call plug#end()
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " nvim python3
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:python3_host_prog  = '/usr/bin/python3'
+let g:python3_host_prog  = '/usr/local/bin/python3'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " nerdtree
@@ -271,6 +272,7 @@ set termguicolors
 let g:equinusocio_material_style='darker'
 let g:equinusocio_material_vertsplit='visible'
 colorscheme equinusocio_material
+colorscheme dracula
 
 
 hi Whitespace ctermfg=96 guifg=#725972 guibg=NONE ctermbg=NONE
