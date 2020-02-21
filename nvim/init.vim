@@ -124,6 +124,12 @@ Plug 'tpope/vim-surround',              {'for':['go','c','cpp','cc','py']}      
 Plug 'scrooloose/nerdcommenter',        {'for':['go','c','cpp','cc','py']}                  " 注释插件
 Plug 'tpope/vim-abolish'             ,  {'for':['go','c','cpp','cc','py']}                  " 命名风格转换
 Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'kana/vim-textobj-user'
+Plug 'kana/vim-textobj-indent'
+Plug 'kana/vim-textobj-syntax'
+Plug 'kana/vim-textobj-function', { 'for':['c', 'cpp', 'vim', 'java'] }
+Plug 'sgur/vim-textobj-parameter'
+
 call plug#end()
 
 
@@ -162,11 +168,8 @@ let g:nerdtreeindicatormapcustom = {
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
-imap <C-l> <Plug>(coc-snippets-expand)
-vmap <C-j> <Plug>(coc-snippets-select)
 let g:coc_snippet_prev = '<c-k>'
 let g:coc_snippet_next = '<tab>'
-imap <C-j> <Plug>(coc-snippets-expand-jump)
 
 inoremap <silent><expr> <TAB>
    \ pumvisible() ? coc#_select_confirm() :
@@ -471,6 +474,33 @@ nn <silent> xk :call CocLocations('ccls','$ccls/navigate',{'direction':'U'})<cr>
 nmap <silent> xt <Plug>(coc-type-definition)<cr>
 nn xx x
 
+" Add `:Format` command to format current buffer.
+command! -nargs=0 Format :call CocAction('format')
+
+" Add `:Fold` command to fold current buffer.
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" Add `:OR` command for organize imports of the current buffer.
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+" Mappings using CoCList:
+" Show all diagnostics.
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions.
+nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+" Show commands.
+nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document.
+nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols.
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list.
+nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
 
 call neomake#configure#automake('w')
 
@@ -572,4 +602,5 @@ let g:interestingWordsGUIColors = ['#8CCBEA', '#6699FF','#A4E57E','#13E57B', '#9
 let g:spaceline_seperate_style= 'none'
 
 let g:spaceline_colorscheme = 'solarized_dark'
+
 
