@@ -2,6 +2,7 @@
 export SUDO="sudo"
 export ToolsDir="$HOME/.config/tools"
 export BinaryDir="$HOME/bin"
+export RimeDir="$HOME/.config/ibus/rime"
 export InstallCommand="default"
 export NvimConfigDir="default"
 export VimPlugDir="default"
@@ -18,11 +19,24 @@ function echo_env
     echo "NvimConfigDir : ${NvimConfigDir}"
     echo "VimPlugDir : ${VimPlugDir}"
     echo "BinaryDir : ${BinaryDir}" 
+    echo "RimeDir : ${RimeDir}" 
     echo "CMAKE : ${CMAKE}"
     echo "ToolsDir : ${ToolsDir}"
 }
 
 
+function check_dir()
+{
+    if [ ! -d ${BinaryDir} ]; then
+        mkdir -p ${BinaryDir}
+    fi
+    if [ ! -d ${ToolsDir} ]; then
+        mkdir -p ${ToolsDir}
+    fi
+    if [ ! -d ${RimeDir} ]; then
+        mkdir -p ${RimeDir}
+    fi
+}
 
 function check_user()
 {
@@ -64,4 +78,5 @@ function get_linux_platform_type()
 check_user
 get_platform_type
 get_linux_platform_type
+check_dir
 echo_env
