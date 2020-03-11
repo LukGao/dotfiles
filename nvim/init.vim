@@ -97,7 +97,8 @@ call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'skywind3000/vim-terminal-help'
-
+Plug 'voldikss/vim-floaterm'
+Plug 'skywind3000/vim-quickui'
 Plug 'bagrat/vim-buffet'                " buffer
 Plug 'ggyyll/spaceline.vim'
 Plug 'ggyyll/vim_equinusocio_material'  " thems
@@ -123,12 +124,13 @@ Plug 'honza/vim-snippets',              {'for':['go','c','cpp','cc','py']}      
 Plug 'tpope/vim-surround',              {'for':['go','c','cpp','cc','py']}                  " 成双成对编辑
 Plug 'scrooloose/nerdcommenter',        {'for':['go','c','cpp','cc','py']}                  " 注释插件
 Plug 'tpope/vim-abolish'             ,  {'for':['go','c','cpp','cc','py']}                  " 命名风格转换
-Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'dracula/vim', { 'as': 'dracula' } " 主题
 Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-indent'
 Plug 'kana/vim-textobj-syntax'
 Plug 'kana/vim-textobj-function', { 'for':['c', 'cpp', 'vim', 'java'] }
 Plug 'sgur/vim-textobj-parameter'
+Plug 'puremourning/vimspector'
 
 call plug#end()
 
@@ -183,7 +185,7 @@ return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
 
-let g:coc_global_extensions =['coc-snippets','coc-python','coc-pairs','coc-json','coc-imselect','coc-highlight','coc-emoji','coc-lists','coc-yaml','coc-template']
+let g:coc_global_extensions =['coc-snippets','coc-explorer','coc-cmake','coc-python','coc-pairs','coc-json','coc-imselect','coc-highlight','coc-emoji','coc-lists','coc-yaml','coc-template']
 
 set updatetime=300
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
@@ -603,4 +605,5 @@ let g:spaceline_seperate_style= 'none'
 
 let g:spaceline_colorscheme = 'solarized_dark'
 
+let g:vimspector_enable_mappings = 'VISUAL_STUDIO'
 

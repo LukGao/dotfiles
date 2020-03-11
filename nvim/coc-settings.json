@@ -22,6 +22,11 @@
             "rootPatterns": [ ".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/", ".svn/" ]
         },
     },
+    "cmake.cmakePath": {
+        "type": "string",
+        "default": "cmake",
+        "description": "The path to CMake generator executable"
+    },
     "suggest.completionItemKindLabels": {
         "keyword": "\uf1de",
         "variable": "\ue79b",
