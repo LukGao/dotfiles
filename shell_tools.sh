@@ -17,7 +17,8 @@ function install_tools1
 
     cd ${ToolsDir}
 
-    
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
     wget -c https://raw.githubusercontent.com/ggyyll/dotfiles/master/bashrc -O ${ToolsDir}/.bashrc
     wget -c https://raw.githubusercontent.com/ggyyll/dotfiles/master/.inputrc -O ${ToolsDir}/.inputrc
     echo "source ${ToolsDir}/.bashrc" >> $HOME/.bashrc

@@ -74,5 +74,6 @@
 	"diagnostic.errorSign": "●",
 	"diagnostic.warningSign": "●",
     "diagnostic.refreshOnInsertMode": true,
-    "diagnostic.displayByAle": true
+    "diagnostic.displayByAle": true,
+    "coc.preferences.extensionUpdateCheck": "daily"
 }
