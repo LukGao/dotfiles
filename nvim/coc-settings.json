@@ -1,11 +1,17 @@
 {
     "languageserver": {
-       "golang": {
+        "golang": {
              "command": "gopls",
              "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
              "filetypes": ["go"]
         },
-       "ccls": {
+        "bash": {
+            "command": "bash-language-server",
+            "args": ["start"],
+            "filetypes": ["sh"],
+            "ignoredRootPaths": ["~"]
+        },
+        "ccls": {
             "command": "ccls",
             "filetypes": [ "c", "cpp", "hpp", "objc", "objcpp" ],
             "initializationOptions": {
@@ -54,14 +60,51 @@
         "typeParameter": "\uf728", 
         "default": "\uf29c"
     },
-	"coc.preferences.snippetStatusText": "Ⓢ ",
+    "browser.enable": {
+        "type": "boolean",
+        "default": true,
+        "description": "whether to enable coc-browser"
+    },
+    "browser.shortcut": {
+        "type": "string",
+        "default": "web"
+    },
+    "browser.capacity": {
+        "type": "number",
+        "default": 5,
+        "description": "temp file count to storage the words, 1~10"
+    },
+    "browser.priority": {
+        "type": "number",
+        "default": 5
+    },
+    "browser.minLength": {
+      "type": "number",
+      "default": 4,
+      "description": "Dismiss these words whose length is smaller than this option's value"
+    },
+    "browser.maxLength": {
+      "type": "number",
+      "default": 20,
+      "description": "Dismiss these words whose length is larger than this option's value"
+    },
+    "explorer.icon.enableNerdfont": true,
+    "explorer.file.column.git.showIgnored": true,
+    "explorer.file.column.indent.indentLine": true,
+    "explorer.file.showHiddenFiles": true,
+    "explorer.openAction.changeDirectory": true,
+    "explorer.file.tabCD": false,
+    "explorer.previewAction.onHover": false,
+    "explorer.quitOnOpen": false,
+    "explorer.width": 30,
+    "coc.preferences.snippetStatusText": "Ⓢ ",
     "todolist.autoUpload": true,
     "todolist.monitor": true,
-	"coc.source.file.priority": 10,
-	"coc.source.around.priority": 8,
-	"coc.source.emoji.priority": 3,
-	"coc.source.emoji.filetypes": ["markdown", "gitcommit"],
-	"coc.source.emoji.shortcut": "E",
+    "coc.source.file.priority": 10,
+    "coc.source.around.priority": 8,
+    "coc.source.emoji.priority": 3,
+    "coc.source.emoji.filetypes": ["markdown", "gitcommit"],
+    "coc.source.emoji.shortcut": "E",
     "suggest.detailField": "abbr",
     "suggest.noselect": true,
     "suggest.preferCompleteThanJumpPlaceholder": true,
@@ -71,8 +114,8 @@
     "snippets.ultisnips.directories": ["gosnippets/UltiSnips"],
     "snippets.extends":{"cpp":["c"]},
     "diagnostic.signOffset": 9999999,
-	"diagnostic.errorSign": "●",
-	"diagnostic.warningSign": "●",
+    "diagnostic.errorSign": "●",
+    "diagnostic.warningSign": "●",
     "diagnostic.refreshOnInsertMode": true,
     "diagnostic.displayByAle": true,
     "coc.preferences.extensionUpdateCheck": "daily"

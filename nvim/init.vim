@@ -143,25 +143,6 @@ let g:python3_host_prog  = '/usr/local/bin/python3'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " nerdtree
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let nerdtreequitonopen = 0
-let NERDTreeShowHidden=0
-let nerdchristmastree=1
-let g:nerdtreewinsize = 15
-let g:NERDTreeDirArrowExpandable = '▷'
-let g:NERDTreeDirArrowCollapsible = '▼'
-let NERDTreeAutoCenter=1
-let g:nerdtreeindicatormapcustom = {
-      \ "modified"  : "✹",
-      \ "staged"    : "✚",
-      \ "untracked" : "✭",
-      \ "renamed"   : "➜",
-      \ "unmerged"  : "═",
-      \ "deleted"   : "✖",
-      \ "dirty"     : "✗",
-      \ "clean"     : "✔︎",
-      \ 'ignored'   : '☒',
-      \ "unknown"   : "?"
-      \ }
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " coc
@@ -185,7 +166,7 @@ return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
 
-let g:coc_global_extensions =['coc-snippets','coc-cmake','coc-python','coc-pairs','coc-json','coc-imselect','coc-highlight','coc-emoji','coc-lists','coc-yaml','coc-template']
+let g:coc_global_extensions =['coc-browser','coc-tabnine','coc-snippets','coc-explorer','coc-cmake','coc-python','coc-pairs','coc-json','coc-imselect','coc-highlight','coc-emoji','coc-lists','coc-yaml','coc-template']
 
 set updatetime=300
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
@@ -413,8 +394,7 @@ nmap <leader>rn <Plug>(coc-rename)
 nnoremap <localleader>u :UndotreeToggle<cr>
 nnoremap <localleader>g :TagbarToggle<CR>
 nnoremap <localleader>ft :Autoformat<CR>
-nnoremap <localleader>n :NERDTreeToggle <CR>
-
+nnoremap <localleader>n :CocCommand explorer<CR>
 
 nnoremap <silent> <localleader>c :Colors<CR>
 nnoremap <silent> <localleader>b :Buffers<CR>
