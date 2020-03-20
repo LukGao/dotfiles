@@ -116,7 +116,6 @@ Plug 'ntpeters/vim-better-whitespace'   " 去除空格
 Plug 'neomake/neomake'
 Plug 'vim-utils/vim-man',               {'for':['c','cpp','cc']}
 Plug 'Chiel92/vim-autoformat' ,         {'for':['c','cpp','cc']}
-Plug 'scrooloose/nerdtree',             { 'on':'NERDTreeToggle'}
 Plug 'majutsushi/tagbar',               { 'on':'TagbarToggle'}
 Plug 'neoclide/coc.nvim',               {'branch': 'release'}                               " lsp clinet
 Plug 'tpope/vim-endwise',               {'for':['c','cpp','cc']}                            " endif补全
@@ -139,10 +138,6 @@ call plug#end()
 " nvim python3
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:python3_host_prog  = '/usr/local/bin/python3'
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" nerdtree
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " coc
@@ -183,6 +178,82 @@ function! s:show_documentation()
   endif
 endfunction
 
+imap <C-l> <Plug>(coc-snippets-expand)
+vmap <C-j> <Plug>(coc-snippets-select)
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+imap <expr><TAB>  pumvisible() ? "\<C-n>" :  <SID>check_back_space() ? "\<TAB>":  coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+nnoremap <silent> <localleader>k :call <SID>show_documentation()<CR>
+inoremap <silent><expr> <c-space> coc#refresh()
+""
+nmap <leader>rn <Plug>(coc-rename)
+nnoremap <localleader>n :CocCommand explorer<CR>
+
+
+
+" bases
+nn <silent> xb :call CocLocations('ccls','$ccls/inheritance')<cr>
+" bases of up to 3 levels
+nn <silent> xb :call CocLocations('ccls','$ccls/inheritance',{'levels':3})<cr>
+" derived
+nn <silent> xd :call CocLocations('ccls','$ccls/inheritance',{'derived':v:true})<cr>
+" derived of up to 3 levels
+nn <silent> xD :call CocLocations('ccls','$ccls/inheritance',{'derived':v:true,'levels':3})<cr>
+
+" caller
+nn <silent> xc :call CocLocations('ccls','$ccls/call')<cr>
+" callee
+nn <silent> xC :call CocLocations('ccls','$ccls/call',{'callee':v:true})<cr>
+
+" $ccls/member
+" member variables / variables in a namespace
+nn <silent> xm :call CocLocations('ccls','$ccls/member')<cr>
+nn <silent> xf :call CocLocations('ccls','$ccls/member',{'kind':3})<cr>
+nn <silent> xs :call CocLocations('ccls','$ccls/member',{'kind':2})<cr>
+
+nn <silent> xv :call CocLocations('ccls','$ccls/vars')<cr>
+nn <silent> xV :call CocLocations('ccls','$ccls/vars',{'kind':1})<cr>
+
+nn <silent> xj :call CocLocations('ccls','$ccls/navigate',{'direction':'D'})<cr>
+nn <silent> xh :call CocLocations('ccls','$ccls/navigate',{'direction':'L'})<cr>
+nn <silent> xl :call CocLocations('ccls','$ccls/navigate',{'direction':'R'})<cr>
+nn <silent> xk :call CocLocations('ccls','$ccls/navigate',{'direction':'U'})<cr>
+
+nmap <silent> xt <Plug>(coc-type-definition)<cr>
+nn xx x
+
+" Add `:Format` command to format current buffer.
+command! -nargs=0 Format :call CocAction('format')
+
+" Add `:Fold` command to fold current buffer.
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" Add `:OR` command for organize imports of the current buffer.
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+" Mappings using CoCList:
+" Show all diagnostics.
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions.
+nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+" Show commands.
+nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document.
+nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols.
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list.
+nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " tagbar
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -214,7 +285,7 @@ let g:tagbar_type_go = {
       \ 'ctagsbin' : 'gotags',
       \ 'ctagsargs' : '-sort -silent'
       \ }
-
+nnoremap <localleader>g :TagbarToggle<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " UNDO
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -222,6 +293,7 @@ if has("persistent_undo")
   set undodir=~/.undodir/
   set undofile
 endif
+nnoremap <localleader>u :UndotreeToggle<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 特殊技能
@@ -245,8 +317,6 @@ let g:prepare_code_plugin_path = expand($HOME . "/.vim/plugged/prepare-code")
 " startify
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
  let g:startify_padding_left = 30
-
-
 let g:better_whitespace_enabled=0
 let g:strip_whitespace_confirm=0
 set viminfo='100,n$HOME/.vim/files/info/viminfo
@@ -265,9 +335,15 @@ hi Whitespace ctermfg=96 guifg=#725972 guibg=NONE ctermbg=NONE
 hi default CocHighlightText  guibg=#725972 ctermbg=96
 " ---------------------------------------------------------
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" bookmark
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:bookmark_sign = '⚑'
 let g:bookmark_highlight_lines = 1
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" fzf
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Customize fzf colors to match your color scheme
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
@@ -356,11 +432,20 @@ function! Fzf_dev()
 
 endfunction
 
+nnoremap <silent> <localleader>c :Colors<CR>
+nnoremap <silent> <localleader>b :Buffers<CR>
+nnoremap <silent> <localleader>f :call Fzf_dev()<CR>
+nnoremap <silent> <localleader>r :Rg<CR>
+nnoremap <silent> <localleader>w :Rg <C-R><C-W><CR>
+nnoremap <silent> <localleader>m :History<CR>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" go
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 autocmd User Startified setlocal buflisted
 autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
-
-
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -377,35 +462,20 @@ nmap <silent> <leader>w <Plug>TranslateW
 vmap <silent> <leader>w <Plug>TranslateWV
 
 
-
-imap <C-l> <Plug>(coc-snippets-expand)
-vmap <C-j> <Plug>(coc-snippets-select)
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-imap <expr><TAB>  pumvisible() ? "\<C-n>" :  <SID>check_back_space() ? "\<TAB>":  coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
-nnoremap <silent> <localleader>k :call <SID>show_documentation()<CR>
-inoremap <silent><expr> <c-space> coc#refresh()
-""
-nmap <leader>rn <Plug>(coc-rename)
-
-nnoremap <localleader>u :UndotreeToggle<cr>
-nnoremap <localleader>g :TagbarToggle<CR>
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" code format
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <localleader>ft :Autoformat<CR>
-nnoremap <localleader>n :CocCommand explorer<CR>
-
-nnoremap <silent> <localleader>c :Colors<CR>
-nnoremap <silent> <localleader>b :Buffers<CR>
-nnoremap <silent> <localleader>f :call Fzf_dev()<CR>
-nnoremap <silent> <localleader>r :Rg<CR>
-nnoremap <silent> <localleader>w :Rg <C-R><C-W><CR>
-nnoremap <silent> <localleader>m :History<CR>
 
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" man page
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <localleader>v <Plug>(Vman)
-"
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" markdown table
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:table_mode_corner = '|'
 let g:table_mode_border=0
 let g:table_mode_fillchar=' '
@@ -424,72 +494,14 @@ inoreabbrev <expr> __
           \ <SID>isAtStartOfLine('__') ?
           \ '<c-o>:silent! TableModeDisable<cr>' : '__'
 
-
-" bases
-nn <silent> xb :call CocLocations('ccls','$ccls/inheritance')<cr>
-" bases of up to 3 levels
-nn <silent> xb :call CocLocations('ccls','$ccls/inheritance',{'levels':3})<cr>
-" derived
-nn <silent> xd :call CocLocations('ccls','$ccls/inheritance',{'derived':v:true})<cr>
-" derived of up to 3 levels
-nn <silent> xD :call CocLocations('ccls','$ccls/inheritance',{'derived':v:true,'levels':3})<cr>
-
-" caller
-nn <silent> xc :call CocLocations('ccls','$ccls/call')<cr>
-" callee
-nn <silent> xC :call CocLocations('ccls','$ccls/call',{'callee':v:true})<cr>
-
-" $ccls/member
-" member variables / variables in a namespace
-nn <silent> xm :call CocLocations('ccls','$ccls/member')<cr>
-nn <silent> xf :call CocLocations('ccls','$ccls/member',{'kind':3})<cr>
-nn <silent> xs :call CocLocations('ccls','$ccls/member',{'kind':2})<cr>
-
-nn <silent> xv :call CocLocations('ccls','$ccls/vars')<cr>
-nn <silent> xV :call CocLocations('ccls','$ccls/vars',{'kind':1})<cr>
-
-nn <silent> xj :call CocLocations('ccls','$ccls/navigate',{'direction':'D'})<cr>
-nn <silent> xh :call CocLocations('ccls','$ccls/navigate',{'direction':'L'})<cr>
-nn <silent> xl :call CocLocations('ccls','$ccls/navigate',{'direction':'R'})<cr>
-nn <silent> xk :call CocLocations('ccls','$ccls/navigate',{'direction':'U'})<cr>
-
-nmap <silent> xt <Plug>(coc-type-definition)<cr>
-nn xx x
-
-" Add `:Format` command to format current buffer.
-command! -nargs=0 Format :call CocAction('format')
-
-" Add `:Fold` command to fold current buffer.
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-
-" Add `:OR` command for organize imports of the current buffer.
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
-
-" Mappings using CoCList:
-" Show all diagnostics.
-nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
-" Manage extensions.
-nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
-" Show commands.
-nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
-" Find symbol of current document.
-nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
-" Search workspace symbols.
-nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
-" Do default action for next item.
-nnoremap <silent> <space>j  :<C-u>CocNext<CR>
-" Do default action for previous item.
-nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
-" Resume latest coc list.
-nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
-
-
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" neomake
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call neomake#configure#automake('w')
 
-
-
-" linx
-
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" buffer switch
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nmap <leader>1 <Plug>BuffetSwitch(1)
 nmap <leader>2 <Plug>BuffetSwitch(2)
 nmap <leader>3 <Plug>BuffetSwitch(3)
@@ -514,34 +526,37 @@ let g:buffet_left_trunc_icon = "<"
 let g:buffet_right_trunc_icon = ">"
 
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" previous
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 0:up, 1:down, 2:pgup, 3:pgdown, 4:top, 5:bottom
 function! Tools_PreviousCursor(mode)
-	if winnr('$') <= 1
-		return
-	endif
-	noautocmd silent! wincmd p
-	if a:mode == 0
-		exec "normal! \<c-y>"
-	elseif a:mode == 1
-		exec "normal! \<c-e>"
-	elseif a:mode == 2
-		exec "normal! ".winheight('.')."\<c-y>"
-	elseif a:mode == 3
-		exec "normal! ".winheight('.')."\<c-e>"
-	elseif a:mode == 4
-		normal! gg
-	elseif a:mode == 5
-		normal! G
-	elseif a:mode == 6
-		exec "normal! \<c-u>"
-	elseif a:mode == 7
-		exec "normal! \<c-d>"
-	elseif a:mode == 8
-		exec "normal! k"
-	elseif a:mode == 9
-		exec "normal! j"
-	endif
-	noautocmd silent! wincmd p
+    if winnr('$') <= 1
+        return
+    endif
+    noautocmd silent! wincmd p
+    if a:mode == 0
+        exec "normal! \<c-y>"
+    elseif a:mode == 1
+        exec "normal! \<c-e>"
+    elseif a:mode == 2
+        exec "normal! ".winheight('.')."\<c-y>"
+    elseif a:mode == 3
+        exec "normal! ".winheight('.')."\<c-e>"
+    elseif a:mode == 4
+        normal! gg
+    elseif a:mode == 5
+        normal! G
+    elseif a:mode == 6
+        exec "normal! \<c-u>"
+    elseif a:mode == 7
+        exec "normal! \<c-d>"
+    elseif a:mode == 8
+        exec "normal! k"
+    elseif a:mode == 9
+        exec "normal! j"
+    endif
+    noautocmd silent! wincmd p
 endfunc
 
 
@@ -557,6 +572,9 @@ inoremap <silent><M-n> <c-\><c-o>:call Tools_PreviousCursor(3)<cr>
 
 
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" status
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 let s:hidden_all = 1
 function! ToggleHiddenAll()
@@ -580,10 +598,16 @@ hi Comment guifg=#928374 guibg=NONE guisp=NONE gui=italic cterm=italic
 highlight Normal guibg=NONE ctermbg=None
 let g:tagbar_silent = 1
 
-let g:interestingWordsGUIColors = ['#8CCBEA', '#6699FF','#A4E57E','#13E57B', '#995555','#3399FF','#b39488', '#FFDB72', '#FF7272', '#FFB3FF', '#9999FF']
 let g:spaceline_seperate_style= 'none'
-
 let g:spaceline_colorscheme = 'solarized_dark'
 
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" word color
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:interestingWordsGUIColors = ['#8CCBEA', '#6699FF','#A4E57E','#13E57B', '#995555','#3399FF','#b39488', '#FFDB72', '#FF7272', '#FFB3FF', '#9999FF']
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" gdb
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:vimspector_enable_mappings = 'VISUAL_STUDIO'
 
