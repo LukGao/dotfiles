@@ -45,8 +45,8 @@ function install_nvim
 
 function copy_nvim_config
 {
-    wget -c https://raw.githubusercontent.com/ggyyll/dotfiles/master/nvim/init.vim -O ~/.config/nvim/init.vim
-    wget -c https://raw.githubusercontent.com/ggyyll/dotfiles/master/nvim/coc-settings.json -O ~/.config/nvim/coc-settings.json
+    wget -c https://raw.githubusercontent.com/ooknn/dotfiles/master/nvim/init.vim -O ~/.config/nvim/init.vim
+    wget -c https://raw.githubusercontent.com/ooknn/dotfiles/master/nvim/coc-settings.json -O ~/.config/nvim/coc-settings.json
 }
 
 function run_install_plug

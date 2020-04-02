@@ -49,7 +49,7 @@ function install_tools_on_linux
 # clone  respository
 function clone_install_repository
 {
-    git clone --depth=1 https://github.com/ggyyll/dotfiles.git 
+    git clone --depth=1 https://github.com/ooknn/dotfiles.git 
     cd dotfiles
     bash nvim_install.sh
     bash shell_tools.sh

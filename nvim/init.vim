@@ -100,8 +100,8 @@ Plug 'skywind3000/vim-terminal-help'
 Plug 'voldikss/vim-floaterm'
 Plug 'skywind3000/vim-quickui'
 Plug 'bagrat/vim-buffet'                " buffer
-Plug 'ggyyll/spaceline.vim'
-Plug 'ggyyll/vim_equinusocio_material'  " thems
+Plug 'ooknn/spaceline.vim'
+Plug 'ooknn/vim_equinusocio_material'  " thems
 Plug 'sheerun/vim-polyglot'             " ?
 Plug 'ryanoasis/vim-devicons'           " icon
 Plug 'tpope/vim-fugitive'               " git

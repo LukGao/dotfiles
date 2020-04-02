@@ -69,8 +69,8 @@ alias proxy='export all_proxy=socks5://127.0.0.1:1080'
 alias unproxy='unset all_proxy'
 
 export PATH=$HOME/bin:$PATH
-#export GOROOT=/usr/local/go
-#export GOPATH=$HOME/go
-#export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
-#export GO111MODULE=on
-#export GOPROXY=https://goproxy.io
+export GOROOT=/usr/local/go
+export GOPATH=$HOME/go
+export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+export GO111MODULE=on
+export GOPROXY=https://goproxy.io
