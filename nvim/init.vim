@@ -83,6 +83,7 @@ nnoremap <C-k> <C-w>k
 
 nnoremap <leader>q :q!<CR>
 nnoremap <localleader>e :edit $MYVIMRC<cr>           " 编辑vimrc文件
+nnoremap <localleader>ss :source $MYVIMRC<cr>           " 编辑vimrc文件
 " 安装、更新、删除插件
 nnoremap <leader><leader>i :PlugInstall<cr>
 nnoremap <leader><leader>u :PlugUpdate<cr>
@@ -120,7 +121,8 @@ Plug 'majutsushi/tagbar',               { 'on':'TagbarToggle'}
 Plug 'neoclide/coc.nvim',               {'branch': 'release'}                               " lsp clinet
 Plug 'tpope/vim-endwise',               {'for':['c','cpp','cc']}                            " endif补全
 Plug 'honza/vim-snippets',              {'for':['go','c','cpp','cc','py']}                  " 代码片段
-Plug 'tpope/vim-surround',              {'for':['go','c','cpp','cc','py']}                  " 成双成对编辑
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
 Plug 'scrooloose/nerdcommenter',        {'for':['go','c','cpp','cc','py']}                  " 注释插件
 Plug 'tpope/vim-abolish'             ,  {'for':['go','c','cpp','cc','py']}                  " 命名风格转换
 Plug 'dracula/vim', { 'as': 'dracula' } " 主题
@@ -575,8 +577,8 @@ inoremap <silent><M-n> <c-\><c-o>:call Tools_PreviousCursor(3)<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " status
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let s:hidden_all = 0
 
-let s:hidden_all = 1
 function! ToggleHiddenAll()
     if s:hidden_all  == 0
         let s:hidden_all = 1
@@ -610,4 +612,8 @@ let g:interestingWordsGUIColors = ['#8CCBEA', '#6699FF','#A4E57E','#13E57B', '#9
 " gdb
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:vimspector_enable_mappings = 'VISUAL_STUDIO'
+
+"let g:surround_no_mappings=1
+nmap <localleader>" ysiw"ebysiw}i$<esc>
+nmap <leader>" ysiw"
 
