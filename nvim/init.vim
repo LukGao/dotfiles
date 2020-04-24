@@ -98,6 +98,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'skywind3000/vim-terminal-help'
+Plug 'gauteh/vim-cppman'
 Plug 'voldikss/vim-floaterm'
 Plug 'skywind3000/vim-quickui'
 Plug 'bagrat/vim-buffet'                " buffer
