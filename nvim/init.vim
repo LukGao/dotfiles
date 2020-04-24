@@ -36,7 +36,7 @@ set completefunc=emoji#complete
 set completeopt =longest,menu
 set completeopt-=preview
 set list
-set listchars=tab:»·,nbsp:+,trail:·,extends:→,precedes:←
+"set listchars=tab:»·,nbsp:+,trail:·,extends:→,precedes:←
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -129,11 +129,18 @@ Plug 'dracula/vim', { 'as': 'dracula' } " 主题
 Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-indent'
 Plug 'kana/vim-textobj-syntax'
-Plug 'kana/vim-textobj-function', { 'for':['c', 'cpp', 'vim', 'java'] }
+Plug 'kana/vim-textobj-function', { 'for':['c', 'cpp','cc','go','py'] }
 Plug 'sgur/vim-textobj-parameter'
 Plug 'puremourning/vimspector'
+Plug 'Yggdroot/indentLine', { 'for':['c', 'cpp','cc','go','py'] }
 
 call plug#end()
+
+let g:indentLine_faster = 1
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+let g:indentLine_leadingSpaceEnabled=1
+let g:indentLine_leadingSpaceChar = '\'
+
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
