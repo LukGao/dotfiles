@@ -101,14 +101,16 @@ Plug 'skywind3000/vim-terminal-help'
 "Plug 'gauteh/vim-cppman'
 Plug 'voldikss/vim-floaterm'
 Plug 'skywind3000/vim-quickui'
+Plug 'skywind3000/vim-cppman'
 Plug 'bagrat/vim-buffet'                " buffer
 Plug 'ooknn/spaceline.vim'
-Plug 'ooknn/vim_equinusocio_material'  " thems
+Plug 'ooknn/vim_equinusocio_material'   " thems
 Plug 'sheerun/vim-polyglot'             " ?
 Plug 'ryanoasis/vim-devicons'           " icon
 Plug 'tpope/vim-fugitive'               " git
 Plug 'MattesGroeger/vim-bookmarks'      " 书签
-Plug 'voldikss/vim-translate-me'        " 翻译
+Plug 'voldikss/vim-translator'           " 翻译
+Plug 'preservim/nerdtree'               " 目录树
 Plug 'mbbill/undotree'                  " 后悔药
 Plug 'mhinz/vim-startify'               " 启动页
 Plug 'mg979/vim-visual-multi'           " 多行编辑
@@ -173,7 +175,7 @@ return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
 
-let g:coc_global_extensions =['coc-browser','coc-tabnine','coc-snippets','coc-explorer','coc-cmake','coc-python','coc-pairs','coc-json','coc-imselect','coc-highlight','coc-emoji','coc-lists','coc-yaml','coc-template']
+let g:coc_global_extensions =['coc-tabnine','coc-snippets','coc-cmake','coc-python','coc-pairs','coc-json','coc-imselect','coc-highlight','coc-emoji','coc-lists','coc-yaml','coc-template']
 
 set updatetime=300
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
