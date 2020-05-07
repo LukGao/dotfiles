@@ -5,6 +5,8 @@ function install_prepare_software_on_ubuntu
     ${InstallCommand} git wget curl cmake  zlib1g-dev  libtinfo-dev ruby yarn nodejs ctags build-essential python-dev python3-dev  
     ${InstallCommand} python-pip python3-pip
     ${InstallCommand} python-setuptools python3-setuptools
+    pip install neovim  jedi  pylint
+    pip3 install neovim jedi  pylint
 }
 
 function install_prepare_software_on_centos()
@@ -14,8 +16,6 @@ function install_prepare_software_on_centos()
     ${InstallCommand} epel-release wget  centos-release-scl devtoolset-8 which ctags python-devel  python36-setuptools cmake3 
     ${InstallCommand} nodejs yarn
     ${SUDO} easy_install-3.6 pip
-    pip install neovim  jedi  pylint
-    pip3 install neovim jedi  pylint
 }
 
 
@@ -26,11 +26,11 @@ function download_vim_plug
 
 function install_nvim
 {
-    if [ ! -d ${BinaryDir} ]; then    
+    if [ ! -d ${BinaryDir} ]; then
         mkdir ${BinaryDir}
     fi
 
-    if [ ! -d ${ToolsDir} ]; then    
+    if [ ! -d ${ToolsDir} ]; then
         mkdir ${ToolsDir}
     fi
     CURRENT_DIR=${PWD}
@@ -85,6 +85,7 @@ function install_prepare_software
     else
         echo "install failed"
     fi
+    ls -sf `which python3` /usr/local/bin/python3
 }
 
 . help.sh
