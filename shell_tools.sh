@@ -17,12 +17,9 @@ function install_tools1
 
     cd ${ToolsDir}
 
-    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-
     wget -c https://raw.githubusercontent.com/ooknn/dotfiles/master/bashrc -O ${ToolsDir}/.bashrc
     wget -c https://raw.githubusercontent.com/ooknn/dotfiles/master/.inputrc -O ${ToolsDir}/.inputrc
     echo "source ${ToolsDir}/.bashrc" >> $HOME/.bashrc
-#    ln -sf ${ToolsDir}/.inputrc $HOME/.inputrc
     cat ${ToolsDir}/.inputrc >> $HOME/.inputrc
 
     git clone --depth 1 https://github.com/skywind3000/z.lua.git ~/.z.lua
@@ -57,7 +54,6 @@ function centos_install_tmux()
 function ubuntu_install_tmux
 {
     ${InstallCommand} tmux
-    git clone https://github.com/ooknn/tmux-themepack.git ~/.tmux-themepack
     wget -c https://raw.githubusercontent.com/ooknn/dotfiles/master/.tmux.conf -O ~/.tmux.conf
 }
 
@@ -69,7 +65,7 @@ function ubuntu_install_tools
 
 function centos_install_tools
 {
-    ${InstallCommand}  ruby rubygems tig htop tmux lua5.1
+    ${InstallCommand}  ruby rubygems tig htop lua5.1
 }
 
 function install_tools
