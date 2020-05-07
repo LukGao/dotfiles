@@ -98,7 +98,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'skywind3000/vim-terminal-help'
-Plug 'gauteh/vim-cppman'
+"Plug 'gauteh/vim-cppman'
 Plug 'voldikss/vim-floaterm'
 Plug 'skywind3000/vim-quickui'
 Plug 'bagrat/vim-buffet'                " buffer
@@ -133,14 +133,16 @@ Plug 'kana/vim-textobj-syntax'
 Plug 'kana/vim-textobj-function', { 'for':['c', 'cpp','cc','go','py'] }
 Plug 'sgur/vim-textobj-parameter'
 Plug 'puremourning/vimspector'
-Plug 'Yggdroot/indentLine', { 'for':['c', 'cpp','cc','go','py'] }
+Plug 'haya14busa/niconicomment.vim'
+
+"Plug 'Yggdroot/indentLine', { 'for':['c', 'cpp','cc','go','py'] }
 
 call plug#end()
 
-let g:indentLine_faster = 1
-let g:indentLine_char_list = ['|', '¦', '┆', '┊']
-let g:indentLine_leadingSpaceEnabled=1
-let g:indentLine_leadingSpaceChar = '\'
+"let g:indentLine_faster = 1
+"let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+"let g:indentLine_leadingSpaceEnabled=1
+"let g:indentLine_leadingSpaceChar = '\'
 
 
 
@@ -625,3 +627,6 @@ let g:vimspector_enable_mappings = 'VISUAL_STUDIO'
 nmap <localleader>" ysiw"ebysiw}i$<esc>
 nmap <leader>" ysiw"
 
+let g:neomake_cpp_enable_makers = ['clang']
+let g:neomake_cpp_clang_maker = {'exe' : 'clang' }
+let g:neomake_cpp_clang_args = ['--std=c++14','--analyze']
