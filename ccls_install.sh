@@ -3,7 +3,7 @@
 function ubuntu_ccls
 {
     cd ${ToolsDir}
-    ${InstallCommand} cmake
+    ${InstallCommand} cmake python-dev python3-dev
     CURR_DIR=`pwd`
     LLVM_INSTALL_DIR="/usr/local/llvm"
     GCC_DIR=`which gcc`
