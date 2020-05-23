@@ -204,7 +204,8 @@ nnoremap <silent> <localleader>k :call <SID>show_documentation()<CR>
 inoremap <silent><expr> <c-space> coc#refresh()
 ""
 nmap <leader>rn <Plug>(coc-rename)
-nnoremap <localleader>n :CocCommand explorer<CR>
+
+nnoremap <localleader>n :NERDTreeToggleVCS<CR>
 
 
 
@@ -341,7 +342,7 @@ set t_Co=256
 set termguicolors
 let g:equinusocio_material_style='darker'
 let g:equinusocio_material_vertsplit='visible'
-colorscheme equinusocio_material
+"colorscheme equinusocio_material
 colorscheme dracula
 
 
