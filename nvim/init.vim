@@ -9,7 +9,7 @@ set t_Co=256                  " 开启256色支持
 set nu
 set showcmd                   " select模式下显示选中的行数
 "set cursorcolumn              " 高亮列
-"set cursorline                " 高亮显示当前行
+set cursorline                " 高亮显示当前行
 set ttimeoutlen=0             " 设置<ESC>键响应时间
 set virtualedit=block,onemore " 允许光标出现在最后一个字符的后面
 set laststatus=2              " 总是显示状态栏
@@ -632,4 +632,16 @@ nmap <leader>" ysiw"
 
 let g:neomake_cpp_enable_makers = ['clang']
 let g:neomake_cpp_clang_maker = {'exe' : 'clang' }
-let g:neomake_cpp_clang_args = ['--std=c++14','--analyze']
+let g:neomake_cpp_clang_args = ['--std=c++17','--analyze']
+
+function! ToUTF8()
+    set fileencoding=utf-8
+    set fileformat=unix
+    w
+endfunction
+
+
+nmap <leader>a :call ToUTF8()<CR>
+hi Normal  ctermbg=NONE guibg=NONE
+hi LineNr  ctermbg=NONE guibg=NONE
+hi SignColumn ctermbg=NONE guibg=NONE

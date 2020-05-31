@@ -44,8 +44,8 @@ function centos_ccls
     GCC_DIR=`which gcc`
     G_DIR=`which g++`
 
-    git clone  --depth=1 https://git.llvm.org/git/llvm.git ${CURR_DIR}/llvm
-    git clone  --depth=1 https://git.llvm.org/git/clang.git ${CURR_DIR}/llvm/tools/clang
+    git clone  --depth=1 https://gitee.com/ooknn/llvm.git ${CURR_DIR}/llvm
+    git clone  --depth=1 https://gitee.com/ooknn/clang.git ${CURR_DIR}/llvm/tools/clang
 
     cd ${CURR_DIR}/llvm
      
