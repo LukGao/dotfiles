@@ -121,7 +121,8 @@ Plug 'neomake/neomake'
 Plug 'vim-utils/vim-man',               {'for':['c','cpp','cc']}
 Plug 'Chiel92/vim-autoformat' ,         {'for':['c','cpp','cc']}
 Plug 'majutsushi/tagbar',               { 'on':'TagbarToggle'}
-Plug 'neoclide/coc.nvim',               {'branch': 'release'}                               " lsp clinet
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+
 Plug 'tpope/vim-endwise',               {'for':['c','cpp','cc']}                            " endif补全
 Plug 'honza/vim-snippets',              {'for':['go','c','cpp','cc','py']}                  " 代码片段
 Plug 'tpope/vim-surround'
@@ -206,6 +207,7 @@ inoremap <silent><expr> <c-space> coc#refresh()
 nmap <leader>rn <Plug>(coc-rename)
 
 nnoremap <localleader>n :NERDTreeToggleVCS<CR>
+nnoremap <localleader>n :NERDTreeToggle<CR>
 
 
 
