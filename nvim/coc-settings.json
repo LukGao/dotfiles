@@ -21,6 +21,18 @@
                     "extraArgs": [
                         "-isystem",
                         "/Library/Developer/CommandLineTools/usr/include/c++/v1",]
+                },
+                "completion": {
+                  "detailedLabel": true,
+                  "placeholder": true
+                },
+                "client": {
+                  "snippetSupport": true
+                },
+                "index": {
+                  "onChange": false,
+                  "initialNoLinkage": true,
+                  "threads": 2
                 }
             },
             "trace.server": "verbose",

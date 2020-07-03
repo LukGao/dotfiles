@@ -10,7 +10,7 @@ set termguicolors
 set nu
 set showcmd                   " select模式下显示选中的行数
 "set cursorcolumn              " 高亮列
-"set cursorline                " 高亮显示当前行
+set cursorline                " 高亮显示当前行
 set ttimeoutlen=0             " 设置<ESC>键响应时间
 set virtualedit=block,onemore " 允许光标出现在最后一个字符的后面
 set laststatus=0              " 总是显示状态栏
@@ -215,8 +215,8 @@ nnoremap <silent> <localleader>k :call <SID>show_documentation()<CR>
 inoremap <silent><expr> <c-space> coc#refresh()
 ""
 nmap <leader>rn <Plug>(coc-rename)
-"nnoremap <localleader>n :NERDTreeToggle<CR>
-nnoremap <localleader>n :NERDTreeToggleVCS<CR>
+
+nnoremap <localleader>n :NERDTreeToggle<CR>
 
 
 
@@ -668,6 +668,4 @@ function! <SID>BufCloseOthers()
    endfor
 endfunction
 map <leader>bdo :BcloseOthers<cr>
-
-
 
