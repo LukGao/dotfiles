@@ -6,13 +6,14 @@ let g:maplocalleader = ';'
 set clipboard=unnamed         " 共享系统剪切板
 set nocompatible              " 设置不兼容原始vi模式
 set t_Co=256                  " 开启256色支持
+set termguicolors
 set nu
 set showcmd                   " select模式下显示选中的行数
 "set cursorcolumn              " 高亮列
 "set cursorline                " 高亮显示当前行
 set ttimeoutlen=0             " 设置<ESC>键响应时间
 set virtualedit=block,onemore " 允许光标出现在最后一个字符的后面
-set laststatus=2              " 总是显示状态栏
+set laststatus=0              " 总是显示状态栏
 set showtabline=2
 set noshowmode
 "set autochdir
@@ -27,11 +28,10 @@ set smarttab                " 在行和段开始处使用制表符
 set nowrap                  " 禁止折行
 set backspace=2             " 使用回车键正常处理indent,eol,start等
 set sidescroll=10           " 设置向右滚动字符数
-set t_Co=256
 set colorcolumn=100
 set hidden
 set shortmess=aFc
-set signcolumn=yes
+"set signcolumn=yes
 set completefunc=emoji#complete
 set completeopt =longest,menu
 set completeopt-=preview
@@ -69,7 +69,7 @@ set helplang=cn
 set termencoding=utf-8
 set encoding=utf8
 set fileencodings=utf8,ucs-bom,gbk,cp936,gb2312,gb18030
-
+set fileencoding=utf-8
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 快捷键设置
@@ -83,13 +83,29 @@ nnoremap <C-k> <C-w>k
 
 nnoremap <leader>q :q!<CR>
 nnoremap <localleader>e :edit $MYVIMRC<cr>           " 编辑vimrc文件
-nnoremap <localleader>ss :source $MYVIMRC<cr>           " 编辑vimrc文件
+nnoremap <localleader>ss :source $MYVIMRC<cr>           " 刷新vimrc文件
 " 安装、更新、删除插件
 nnoremap <leader><leader>i :PlugInstall<cr>
 nnoremap <leader><leader>u :PlugUpdate<cr>
 nnoremap <leader><leader>c :PlugClean<cr>
 
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 临时文件设置
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 如果文件夹不存在，则新建文件夹
+if !isdirectory($HOME.'/.vim/files') && exists('*mkdir')
+  call mkdir($HOME.'/.vim/files')
+endif
+
+" 交换文件
+set directory   =$HOME/.vim/files/swap//
+set updatecount =100
+" 撤销文件
+set undofile
+set undodir     =$HOME/.vim/files/undo/
+" viminfo 文件
+set viminfo     ='100,n$HOME/.vim/files/info/viminfo
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 插件安装LINX
@@ -98,6 +114,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'skywind3000/vim-terminal-help'
+Plug 'dstein64/vim-startuptime' ,       {'on':'StartupTime'}
 "Plug 'gauteh/vim-cppman'
 Plug 'voldikss/vim-floaterm'
 Plug 'skywind3000/vim-quickui'
@@ -105,6 +122,7 @@ Plug 'skywind3000/vim-cppman'
 Plug 'bagrat/vim-buffet'                " buffer
 Plug 'ooknn/spaceline.vim'
 Plug 'ooknn/vim_equinusocio_material'   " thems
+Plug 'cocopon/iceberg.vim'
 Plug 'sheerun/vim-polyglot'             " ?
 Plug 'ryanoasis/vim-devicons'           " icon
 Plug 'tpope/vim-fugitive'               " git
@@ -138,15 +156,7 @@ Plug 'sgur/vim-textobj-parameter'
 Plug 'puremourning/vimspector'
 Plug 'haya14busa/niconicomment.vim'
 
-"Plug 'Yggdroot/indentLine', { 'for':['c', 'cpp','cc','go','py'] }
-
 call plug#end()
-
-"let g:indentLine_faster = 1
-"let g:indentLine_char_list = ['|', '¦', '┆', '┊']
-"let g:indentLine_leadingSpaceEnabled=1
-"let g:indentLine_leadingSpaceChar = '\'
-
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -205,7 +215,8 @@ nnoremap <silent> <localleader>k :call <SID>show_documentation()<CR>
 inoremap <silent><expr> <c-space> coc#refresh()
 ""
 nmap <leader>rn <Plug>(coc-rename)
-nnoremap <localleader>n :NERDTreeToggle<CR>
+"nnoremap <localleader>n :NERDTreeToggle<CR>
+nnoremap <localleader>n :NERDTreeToggleVCS<CR>
 
 
 
@@ -331,20 +342,15 @@ let g:prepare_code_plugin_path = expand($HOME . "/.vim/plugged/prepare-code")
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " startify
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
- let g:startify_padding_left = 30
+let g:startify_padding_left = 30
 let g:better_whitespace_enabled=0
 let g:strip_whitespace_confirm=0
 set viminfo='100,n$HOME/.vim/files/info/viminfo
 
 
 " Theme
-set t_Co=256
-set termguicolors
-let g:equinusocio_material_style='darker'
-let g:equinusocio_material_vertsplit='visible'
-colorscheme equinusocio_material
 colorscheme dracula
-
+"colorscheme iceberg
 
 hi Whitespace ctermfg=96 guifg=#725972 guibg=NONE ctermbg=NONE
 hi default CocHighlightText  guibg=#725972 ctermbg=96
@@ -471,10 +477,12 @@ nnoremap <silent> <localleader>pa :StripWhitespace<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " translate
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nmap <silent> <leader>t <Plug>Translate
-vmap <silent> <leader>t <Plug>TranslateV
-nmap <silent> <leader>w <Plug>TranslateW
-vmap <silent> <leader>w <Plug>TranslateWV
+func! LangSelector()
+    let g:translator_target_lang = 'en'
+endfunc
+nmap <silent> <Leader>l :call LangSelector()<CR>
+nmap <silent> <Leader>w <Plug>TranslateW
+vmap <silent> <Leader>w <Plug>TranslateWV
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -632,4 +640,34 @@ nmap <leader>" ysiw"
 
 let g:neomake_cpp_enable_makers = ['clang']
 let g:neomake_cpp_clang_maker = {'exe' : 'clang' }
-let g:neomake_cpp_clang_args = ['--std=c++14','--analyze']
+let g:neomake_cpp_clang_args = ['--std=c++11','--analyze']
+
+function! ToUTF8()
+    set fileencoding=utf-8
+    set fileformat=unix
+    w
+endfunction
+
+
+nmap <leader>a :call ToUTF8()<CR>
+hi Normal  ctermbg=NONE guibg=NONE
+hi LineNr  ctermbg=NONE guibg=NONE
+hi SignColumn ctermbg=NONE guibg=NONE
+
+
+command! BcloseOthers call <SID>BufCloseOthers()
+function! <SID>BufCloseOthers()
+   let l:currentBufNum   = bufnr("%")
+   let l:alternateBufNum = bufnr("#")
+   for i in range(1,bufnr("$"))
+     if buflisted(i)
+       if i!=l:currentBufNum
+         execute("bdelete ".i)
+       endif
+     endif
+   endfor
+endfunction
+map <leader>bdo :BcloseOthers<cr>
+
+
+

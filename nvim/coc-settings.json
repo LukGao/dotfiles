@@ -5,18 +5,17 @@
              "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
              "filetypes": ["go"]
         },
-        "bash": {
-            "command": "bash-language-server",
-            "args": ["start"],
-            "filetypes": ["sh"],
-            "ignoredRootPaths": ["~"]
+        "clangd": {
+          "command": "clangd",
+          "rootPatterns": ["compile_flags.txt", "compile_commands.json"],
+          "filetypes": ["c", "cc", "cpp", "c++", "objc", "objcpp"]
         },
         "ccls": {
             "command": "ccls",
-            "filetypes": [ "c", "cpp", "hpp", "objc", "objcpp" ],
+            "filetypes": [ "c", "cpp", "hpp" ,"cc" ],
             "initializationOptions": {
                 "cache": {
-                    "directory": "/tmp/.ccls-cache",
+                    "directory": ".ccls-cache",
                 },
                 "clang": {
                     "extraArgs": [
@@ -113,5 +112,6 @@
     "diagnostic.warningSign": "●",
     "diagnostic.refreshOnInsertMode": true,
     "diagnostic.displayByAle": true,
+    "rainbow-fart.ffplay":"ffplay",
     "coc.preferences.extensionUpdateCheck": "daily"
 }
