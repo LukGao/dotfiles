@@ -139,7 +139,7 @@ Plug 'neomake/neomake'
 Plug 'vim-utils/vim-man',               {'for':['c','cpp','cc']}
 Plug 'Chiel92/vim-autoformat' ,         {'for':['c','cpp','cc']}
 Plug 'majutsushi/tagbar',               { 'on':'TagbarToggle'}
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug 'tpope/vim-endwise',               {'for':['c','cpp','cc']}                            " endif补全
 Plug 'honza/vim-snippets',              {'for':['go','c','cpp','cc','py']}                  " 代码片段

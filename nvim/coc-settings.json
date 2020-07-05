@@ -1,18 +1,40 @@
 {
     "languageserver": {
         "golang": {
-             "command": "gopls",
-             "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
-             "filetypes": ["go"]
+            "command": "gopls",
+            "rootPatterns": [
+                "go.mod",
+                ".vim/",
+                ".git/",
+                ".hg/"
+            ],
+            "filetypes": [
+                "go"
+            ]
         },
         "clangd": {
-          "command": "clangd",
-          "rootPatterns": ["compile_flags.txt", "compile_commands.json"],
-          "filetypes": ["c", "cc", "cpp", "c++", "objc", "objcpp"]
+            "command": "clangd",
+            "rootPatterns": [
+                "compile_flags.txt",
+                "compile_commands.json"
+            ],
+            "filetypes": [
+                "c",
+                "cc",
+                "cpp",
+                "c++",
+                "objc",
+                "objcpp"
+            ]
         },
         "ccls": {
             "command": "ccls",
-            "filetypes": [ "c", "cpp", "hpp" ,"cc" ],
+            "filetypes": [
+                "c",
+                "cpp",
+                "hpp",
+                "cc"
+            ],
             "initializationOptions": {
                 "cache": {
                     "directory": ".ccls-cache",
@@ -20,23 +42,31 @@
                 "clang": {
                     "extraArgs": [
                         "-isystem",
-                        "/Library/Developer/CommandLineTools/usr/include/c++/v1",]
+                        "/Library/Developer/CommandLineTools/usr/include/c++/v1",
+                    ]
                 },
                 "completion": {
-                  "detailedLabel": true,
-                  "placeholder": true
+                    "detailedLabel": true,
+                    "placeholder": true
                 },
                 "client": {
-                  "snippetSupport": true
+                    "snippetSupport": true
                 },
                 "index": {
-                  "onChange": false,
-                  "initialNoLinkage": true,
-                  "threads": 2
+                    "onChange": false,
+                    "initialNoLinkage": true,
+                    "threads": 2
                 }
             },
             "trace.server": "verbose",
-            "rootPatterns": [ ".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/", ".svn/" ]
+            "rootPatterns": [
+                ".ccls",
+                "compile_commands.json",
+                ".vim/",
+                ".git/",
+                ".hg/",
+                ".svn/"
+            ]
         },
     },
     "suggest.completionItemKindLabels": {
@@ -63,53 +93,19 @@
         "file": "\uf723",
         "folder": "\uf114",
         "snippet": "\ue60b",
-        "typeParameter": "\uf728", 
+        "typeParameter": "\uf728",
         "default": "\uf29c"
     },
-    "browser.enable": {
-        "type": "boolean",
-        "default": true,
-        "description": "whether to enable coc-browser"
-    },
-    "browser.shortcut": {
-        "type": "string",
-        "default": "web"
-    },
-    "browser.capacity": {
-        "type": "number",
-        "default": 5,
-        "description": "temp file count to storage the words, 1~10"
-    },
-    "browser.priority": {
-        "type": "number",
-        "default": 5
-    },
-    "browser.minLength": {
-      "type": "number",
-      "default": 4,
-      "description": "Dismiss these words whose length is smaller than this option's value"
-    },
-    "browser.maxLength": {
-      "type": "number",
-      "default": 20,
-      "description": "Dismiss these words whose length is larger than this option's value"
-    },
-    "explorer.icon.enableNerdfont": true,
-    "explorer.file.column.git.showIgnored": true,
-    "explorer.file.column.indent.indentLine": true,
-    "explorer.file.showHiddenFiles": true,
-    "explorer.openAction.changeDirectory": true,
-    "explorer.file.tabCD": false,
-    "explorer.previewAction.onHover": false,
-    "explorer.quitOnOpen": false,
-    "explorer.width": 30,
     "coc.preferences.snippetStatusText": "Ⓢ ",
     "todolist.autoUpload": true,
     "todolist.monitor": true,
     "coc.source.file.priority": 10,
     "coc.source.around.priority": 8,
     "coc.source.emoji.priority": 3,
-    "coc.source.emoji.filetypes": ["markdown", "gitcommit"],
+    "coc.source.emoji.filetypes": [
+        "markdown",
+        "gitcommit"
+    ],
     "coc.source.emoji.shortcut": "E",
     "suggest.detailField": "abbr",
     "suggest.noselect": true,
@@ -117,13 +113,30 @@
     "suggest.timeout": 500,
     "suggest.triggerAfterInsertEnter": true,
     "suggest.triggerCompletionWait": 50,
-    "snippets.ultisnips.directories": ["gosnippets/UltiSnips"],
-    "snippets.extends":{"cpp":["c"]},
+    "snippets.ultisnips.directories": [
+        "gosnippets/UltiSnips"
+    ],
+    "snippets.extends": {
+        "cpp": [
+            "c"
+        ]
+    },
     "diagnostic.signOffset": 9999999,
     "diagnostic.errorSign": "●",
     "diagnostic.warningSign": "●",
     "diagnostic.refreshOnInsertMode": true,
     "diagnostic.displayByAle": true,
-    "rainbow-fart.ffplay":"ffplay",
+    "rainbow-fart.ffplay": "ffplay",
+    "coc.preferences.formatOnSaveFiletypes": [
+        "markdown",
+        "go",
+        "json"
+    ],
+    "list.source.files.defaultOptions": [
+        "--auto-preview"
+    ],
+    "list.source.outline.defaultOptions": [
+        "--auto-preview"
+    ],
     "coc.preferences.extensionUpdateCheck": "daily"
 }
