@@ -598,17 +598,17 @@ inoremap <silent><M-n> <c-\><c-o>:call Tools_PreviousCursor(3)<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " status
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let s:hidden_all = 0
+let g:hidden_all = 1
 
 function! ToggleHiddenAll()
-    if s:hidden_all  == 0
-        let s:hidden_all = 1
+    if g:hidden_all  == 0
+        let g:hidden_all = 1
         set noshowmode
         set noruler
         set laststatus=0
         set noshowcmd
     else
-        let s:hidden_all = 0
+        let g:hidden_all = 0
         set showmode
         set ruler
         set laststatus=2
