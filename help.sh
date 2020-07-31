@@ -1,8 +1,7 @@
 #!/bin/bash
 export SUDO="sudo"
-export ToolsDir="$HOME/.config/tools"
+export ToolsDir="`pwd`/tools"
 export BinaryDir="$HOME/bin"
-export RimeDir="$HOME/.config/ibus/rime"
 export InstallCommand="default"
 export NvimConfigDir="default"
 export VimPlugDir="default"
@@ -19,7 +18,6 @@ function echo_env
     echo "NvimConfigDir : ${NvimConfigDir}"
     echo "VimPlugDir : ${VimPlugDir}"
     echo "BinaryDir : ${BinaryDir}" 
-    echo "RimeDir : ${RimeDir}" 
     echo "CMAKE : ${CMAKE}"
     echo "ToolsDir : ${ToolsDir}"
 }
@@ -32,9 +30,6 @@ function check_dir()
     fi
     if [ ! -d ${ToolsDir} ]; then
         mkdir -p ${ToolsDir}
-    fi
-    if [ ! -d ${RimeDir} ]; then
-        mkdir -p ${RimeDir}
     fi
 }
 
