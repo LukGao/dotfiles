@@ -223,7 +223,6 @@ nn <silent> xk :call CocLocations('ccls','$ccls/navigate',{'direction':'U'})<cr>
 nmap <silent> xt <Plug>(coc-type-definition)<cr>
 nn xx x
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " tagbar
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

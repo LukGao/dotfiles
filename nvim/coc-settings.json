@@ -129,7 +129,6 @@
     "rainbow-fart.ffplay": "ffplay",
     "coc.preferences.formatOnSaveFiletypes": [
         "markdown",
-        "go",
         "json"
     ],
     "list.source.files.defaultOptions": [
