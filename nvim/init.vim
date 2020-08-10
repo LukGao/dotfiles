@@ -35,7 +35,7 @@ set shortmess=aFc
 set completefunc=emoji#complete
 set completeopt =longest,menu
 set completeopt-=preview
-set list
+"set list
 "set listchars=tab:»·,nbsp:+,trail:·,extends:→,precedes:←
 
 
@@ -111,40 +111,32 @@ set viminfo     ='100,n$HOME/.vim/files/info/viminfo
 " 插件安装LINX
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
-Plug 'skywind3000/vim-terminal-help'
+Plug 'junegunn/fzf',                    { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'yuki-ycino/fzf-preview.vim',      { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
 Plug 'dstein64/vim-startuptime' ,       {'on':'StartupTime'}
 Plug 'liuchengxu/vim-clap'              " preview colors
-
-Plug 'voldikss/vim-floaterm'
-Plug 'skywind3000/vim-cppman'
-Plug 'bagrat/vim-buffet'                " buffer
-Plug 'ooknn/spaceline.vim'
-Plug 'ooknn/vim_equinusocio_material'   " thems
-Plug 'cocopon/iceberg.vim'
-Plug 'sheerun/vim-polyglot'             " ?
+Plug 'voldikss/vim-floaterm',           " 终端
+Plug 'skywind3000/vim-cppman'           " cppreferences 文档
+Plug 'bagrat/vim-buffet'                " buffer切换
+Plug 'sheerun/vim-polyglot'             " 语法插件
+Plug 'hardcoreplayers/spaceline.vim'    " 状态栏
+Plug 'hardcoreplayers/dashboard-nvim'   " 启动页
 Plug 'ryanoasis/vim-devicons'           " icon
 Plug 'tpope/vim-fugitive'               " git
 Plug 'MattesGroeger/vim-bookmarks'      " 书签
 Plug 'voldikss/vim-translator'           " 翻译
 Plug 'preservim/nerdtree'               " 目录树
 Plug 'mbbill/undotree'                  " 后悔药
-Plug 'mhinz/vim-startify'               " 启动页
 Plug 'mg979/vim-visual-multi'           " 多行编辑
 Plug 'luochen1990/rainbow'              " 多彩括号
 Plug 'lfv89/vim-interestingwords'       " 单词标记
-Plug 'ntpeters/vim-better-whitespace'   " 去除空格
-Plug 'neomake/neomake'
-Plug 'vim-utils/vim-man',               {'for':['c','cpp','cc']}
+Plug 'neomake/neomake'                  " 语法检查
 Plug 'Chiel92/vim-autoformat' ,         {'for':['c','cpp','cc']}
 Plug 'majutsushi/tagbar',               { 'on':'TagbarToggle'}
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
+Plug 'neoclide/coc.nvim',               {'branch': 'release'}
 Plug 'tpope/vim-endwise',               {'for':['c','cpp','cc']}                            " endif补全
 Plug 'honza/vim-snippets',              {'for':['go','c','cpp','cc','py']}                  " 代码片段
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
 Plug 'scrooloose/nerdcommenter',        {'for':['go','c','cpp','cc','py']}                  " 注释插件
 Plug 'tpope/vim-abolish'             ,  {'for':['go','c','cpp','cc','py']}                  " 命名风格转换
 Plug 'dracula/vim', { 'as': 'dracula' } " 主题
@@ -154,7 +146,6 @@ Plug 'kana/vim-textobj-syntax'
 Plug 'kana/vim-textobj-function', { 'for':['c', 'cpp','cc','go','py'] }
 Plug 'sgur/vim-textobj-parameter'
 Plug 'puremourning/vimspector'
-Plug 'haya14busa/niconicomment.vim'
 call plug#end()
 
 
@@ -167,11 +158,6 @@ let g:python3_host_prog  = '/usr/local/bin/python3'
 " coc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-let g:coc_snippet_prev = '<c-k>'
-let g:coc_snippet_next = '<tab>'
 
 inoremap <silent><expr> <TAB>
    \ pumvisible() ? coc#_select_confirm() :
@@ -185,7 +171,7 @@ return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
 
-let g:coc_global_extensions =['coc-tabnine','coc-snippets','coc-cmake','coc-python','coc-pairs','coc-json','coc-imselect','coc-highlight','coc-emoji','coc-lists','coc-yaml','coc-template']
+let g:coc_global_extensions =['coc-fzf-preview','coc-tabnine','coc-snippets','coc-cmake','coc-pairs','coc-json','coc-highlight','coc-emoji','coc-lists','coc-yaml']
 
 set updatetime=300
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
@@ -219,64 +205,23 @@ nnoremap <localleader>n :NERDTreeToggle<CR>
 
 
 
-" bases
 nn <silent> xb :call CocLocations('ccls','$ccls/inheritance')<cr>
-" bases of up to 3 levels
 nn <silent> xb :call CocLocations('ccls','$ccls/inheritance',{'levels':3})<cr>
-" derived
 nn <silent> xd :call CocLocations('ccls','$ccls/inheritance',{'derived':v:true})<cr>
-" derived of up to 3 levels
 nn <silent> xD :call CocLocations('ccls','$ccls/inheritance',{'derived':v:true,'levels':3})<cr>
-
-" caller
 nn <silent> xc :call CocLocations('ccls','$ccls/call')<cr>
-" callee
 nn <silent> xC :call CocLocations('ccls','$ccls/call',{'callee':v:true})<cr>
-
-" $ccls/member
-" member variables / variables in a namespace
 nn <silent> xm :call CocLocations('ccls','$ccls/member')<cr>
 nn <silent> xf :call CocLocations('ccls','$ccls/member',{'kind':3})<cr>
 nn <silent> xs :call CocLocations('ccls','$ccls/member',{'kind':2})<cr>
-
 nn <silent> xv :call CocLocations('ccls','$ccls/vars')<cr>
 nn <silent> xV :call CocLocations('ccls','$ccls/vars',{'kind':1})<cr>
-
 nn <silent> xj :call CocLocations('ccls','$ccls/navigate',{'direction':'D'})<cr>
 nn <silent> xh :call CocLocations('ccls','$ccls/navigate',{'direction':'L'})<cr>
 nn <silent> xl :call CocLocations('ccls','$ccls/navigate',{'direction':'R'})<cr>
 nn <silent> xk :call CocLocations('ccls','$ccls/navigate',{'direction':'U'})<cr>
-
 nmap <silent> xt <Plug>(coc-type-definition)<cr>
 nn xx x
-
-" Add `:Format` command to format current buffer.
-command! -nargs=0 Format :call CocAction('format')
-
-" Add `:Fold` command to fold current buffer.
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-
-" Add `:OR` command for organize imports of the current buffer.
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
-
-" Mappings using CoCList:
-" Show all diagnostics.
-nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
-" Manage extensions.
-nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
-" Show commands.
-nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
-" Find symbol of current document.
-nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
-" Search workspace symbols.
-nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
-" Do default action for next item.
-nnoremap <silent> <space>j  :<C-u>CocNext<CR>
-" Do default action for previous item.
-nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
-" Resume latest coc list.
-nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
-
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -315,7 +260,7 @@ nnoremap <localleader>g :TagbarToggle<CR>
 " UNDO
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if has("persistent_undo")
-  set undodir=~/.undodir/
+  set undodir=~/.vim/.undodir/
   set undofile
 endif
 nnoremap <localleader>u :UndotreeToggle<cr>
@@ -338,21 +283,8 @@ let g:rainbow_active = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:prepare_code_plugin_path = expand($HOME . "/.vim/plugged/prepare-code")
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" startify
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:startify_padding_left = 30
-let g:better_whitespace_enabled=0
-let g:strip_whitespace_confirm=0
-set viminfo='100,n$HOME/.vim/files/info/viminfo
-
-
-" Theme
 colorscheme dracula
-"colorscheme iceberg
 
-hi Whitespace ctermfg=96 guifg=#725972 guibg=NONE ctermbg=NONE
-hi default CocHighlightText  guibg=#725972 ctermbg=96
 " ---------------------------------------------------------
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -380,11 +312,6 @@ autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeIm
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" space
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <silent> <localleader>pa :StripWhitespace<CR>
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " translate
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 func! LangSelector()
@@ -400,32 +327,6 @@ vmap <silent> <Leader>w <Plug>TranslateWV
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <localleader>ft :Autoformat<CR>
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" man page
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <localleader>v <Plug>(Vman)
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" markdown table
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:table_mode_corner = '|'
-let g:table_mode_border=0
-let g:table_mode_fillchar=' '
-
-function! s:isAtStartOfLine(mapping)
-  let text_before_cursor = getline('.')[0 : col('.')-1]
-  let mapping_pattern = '\V' . escape(a:mapping, '\')
-  let comment_pattern = '\V' . escape(substitute(&l:commentstring, '%s.*$', '', ''), '\')
-  return (text_before_cursor =~? '^' . ('\v(' . comment_pattern . '\v)?') . '\s*\v' . mapping_pattern . '\v$')
-endfunction
-
-inoreabbrev <expr> <bar><bar>
-          \ <SID>isAtStartOfLine('\|\|') ?
-          \ '<c-o>:TableModeEnable<cr><bar><space><bar><left><left>' : '<bar><bar>'
-inoreabbrev <expr> __
-          \ <SID>isAtStartOfLine('__') ?
-          \ '<c-o>:silent! TableModeDisable<cr>' : '__'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " neomake
@@ -506,36 +407,6 @@ inoremap <silent><M-n> <c-\><c-o>:call Tools_PreviousCursor(3)<cr>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" status
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:hidden_all = 1
-
-function! ToggleHiddenAll()
-    if g:hidden_all  == 0
-        let g:hidden_all = 1
-        set noshowmode
-        set noruler
-        set laststatus=0
-        set noshowcmd
-    else
-        let g:hidden_all = 0
-        set showmode
-        set ruler
-        set laststatus=2
-        set showcmd
-    endif
-endfunction
-
-nnoremap <S-h> :call ToggleHiddenAll()<CR>
-hi Comment guifg=#928374 guibg=NONE guisp=NONE gui=italic cterm=italic
-highlight Normal guibg=NONE ctermbg=None
-let g:tagbar_silent = 1
-
-let g:spaceline_seperate_style= 'none'
-let g:spaceline_colorscheme = 'solarized_dark'
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " word color
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:interestingWordsGUIColors = ['#8CCBEA', '#6699FF','#A4E57E','#13E57B', '#995555','#3399FF','#b39488', '#FFDB72', '#FF7272', '#FFB3FF', '#9999FF']
@@ -543,10 +414,6 @@ let g:interestingWordsGUIColors = ['#8CCBEA', '#6699FF','#A4E57E','#13E57B', '#9
 " gdb
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:vimspector_enable_mappings = 'VISUAL_STUDIO'
-
-"let g:surround_no_mappings=1
-nmap <localleader>" ysiw"ebysiw}i$<esc>
-nmap <leader>" ysiw"
 
 let g:neomake_cpp_enable_makers = ['clang']
 let g:neomake_cpp_clang_maker = {'exe' : 'clang' }
@@ -578,4 +445,37 @@ function! <SID>BufCloseOthers()
    endfor
 endfunction
 map <leader>bdo :BcloseOthers<cr>
+
+let g:spaceline_colorscheme = 'space'
+let g:spaceline_seperate_style= 'curve'
+
+
+let g:spaceline_scroll_chars = [
+  \ '   ', '▏  ', '▎  ', '▍  ', '▌  ',
+  \ '▋  ', '▊  ', '▉  ', '█  ', '█▏ ',
+  \ '█▎ ', '█▍ ', '█▌ ', '█▋ ', '█▊ ',
+  \ '█▉ ', '██ ', '██▏', '██▎', '██▍',
+  \ '██▌', '██▋', '██▊', '██▉', '███'
+  \ ]
+let g:dashboard_default_header='commicgirl5'
+
+let g:dashboard_custom_section={
+  \ 'find_file':    [' Find   '],
+  \ 'file_history': ['ﭯ History'],
+  \ 'ooknn_colors': [' Colors '],
+  \ }
+
+
+function! FIND_FILE()
+    CocCommand fzf-preview.DirectoryFiles
+endfunction 
+
+function! FILE_HISTORY()
+    CocCommand fzf-preview.OldFiles
+endfunction 
+
+function! OOKNN_COLORS()
+    Clap colors
+endfunction 
+
 

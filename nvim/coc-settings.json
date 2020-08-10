@@ -138,5 +138,6 @@
     "list.source.outline.defaultOptions": [
         "--auto-preview"
     ],
+    "coc.preferences.messageLevel": "error",
     "coc.preferences.extensionUpdateCheck": "daily"
 }
