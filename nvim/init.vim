@@ -16,7 +16,7 @@ set virtualedit=block,onemore " 允许光标出现在最后一个字符的后面
 set laststatus=2              " 总是显示状态栏
 set showtabline=2
 set noshowmode
-"set autochdir
+set autochdir
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 代码缩进和排版
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -112,15 +112,17 @@ set viminfo     ='100,n$HOME/.vim/files/info/viminfo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf',                    { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'yuki-ycino/fzf-preview.vim',      { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
 Plug 'dstein64/vim-startuptime' ,       {'on':'StartupTime'}
 Plug 'liuchengxu/vim-clap'              " preview colors
 Plug 'voldikss/vim-floaterm',           " 终端
 Plug 'skywind3000/vim-cppman'           " cppreferences 文档
 Plug 'bagrat/vim-buffet'                " buffer切换
 Plug 'sheerun/vim-polyglot'             " 语法插件
+"Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'hardcoreplayers/spaceline.vim'    " 状态栏
-Plug 'hardcoreplayers/dashboard-nvim'   " 启动页
+Plug 'mhinz/vim-startify'               " 启动页
+
+"Plug 'hardcoreplayers/dashboard-nvim'   " 启动页
 Plug 'ryanoasis/vim-devicons'           " icon
 Plug 'tpope/vim-fugitive'               " git
 Plug 'MattesGroeger/vim-bookmarks'      " 书签
@@ -139,13 +141,14 @@ Plug 'honza/vim-snippets',              {'for':['go','c','cpp','cc','py']}      
 Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdcommenter',        {'for':['go','c','cpp','cc','py']}                  " 注释插件
 Plug 'tpope/vim-abolish'             ,  {'for':['go','c','cpp','cc','py']}                  " 命名风格转换
-Plug 'dracula/vim', { 'as': 'dracula' } " 主题
+Plug 'dracula/vim',                     { 'as': 'dracula' } " 主题
 Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-indent'
 Plug 'kana/vim-textobj-syntax'
-Plug 'kana/vim-textobj-function', { 'for':['c', 'cpp','cc','go','py'] }
+Plug 'kana/vim-textobj-function',       { 'for':['c', 'cpp','cc','go','py'] }
 Plug 'sgur/vim-textobj-parameter'
-Plug 'puremourning/vimspector'
+Plug 'scrooloose/vim-slumlord'          " UML
+
 call plug#end()
 
 
@@ -282,8 +285,6 @@ let g:rainbow_active = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:prepare_code_plugin_path = expand($HOME . "/.vim/plugged/prepare-code")
 
-colorscheme dracula
-
 " ---------------------------------------------------------
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -410,9 +411,8 @@ inoremap <silent><M-n> <c-\><c-o>:call Tools_PreviousCursor(3)<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:interestingWordsGUIColors = ['#8CCBEA', '#6699FF','#A4E57E','#13E57B', '#995555','#3399FF','#b39488', '#FFDB72', '#FF7272', '#FFB3FF', '#9999FF']
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" gdb
+" neomake
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:vimspector_enable_mappings = 'VISUAL_STUDIO'
 
 let g:neomake_cpp_enable_makers = ['clang']
 let g:neomake_cpp_clang_maker = {'exe' : 'clang' }
@@ -466,11 +466,11 @@ let g:dashboard_custom_section={
 
 
 function! FIND_FILE()
-    CocCommand fzf-preview.DirectoryFiles
+    Clap files ++finder=rg --files 
 endfunction 
 
 function! FILE_HISTORY()
-    CocCommand fzf-preview.OldFiles
+    Clap history
 endfunction 
 
 function! OOKNN_COLORS()
@@ -478,3 +478,11 @@ function! OOKNN_COLORS()
 endfunction 
 
 
+colorscheme dracula
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""	
+" startify	
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""	
+let g:startify_padding_left = 30	
+let g:better_whitespace_enabled=0	
+let g:strip_whitespace_confirm=0	
+set viminfo='100,n$HOME/.vim/files/info/viminfo
