@@ -296,6 +296,8 @@ let g:bookmark_highlight_lines = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " fzf
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:fzf_preview_floating_window_rate = 0.8
+
 nnoremap <silent> <localleader>s :Clap colors<CR>
 nnoremap <silent> <localleader>b :CocCommand fzf-preview.AllBuffers<CR>
 nnoremap <silent> <localleader>f :CocCommand fzf-preview.DirectoryFiles<CR>
@@ -456,29 +458,10 @@ let g:spaceline_scroll_chars = [
   \ '█▉ ', '██ ', '██▏', '██▎', '██▍',
   \ '██▌', '██▋', '██▊', '██▉', '███'
   \ ]
-let g:dashboard_default_header='commicgirl5'
-
-let g:dashboard_custom_section={
-  \ 'find_file':    [' Find   '],
-  \ 'file_history': ['ﭯ History'],
-  \ 'ooknn_colors': [' Colors '],
-  \ }
-
-
-function! FIND_FILE()
-    Clap files ++finder=rg --files 
-endfunction 
-
-function! FILE_HISTORY()
-    Clap history
-endfunction 
-
-function! OOKNN_COLORS()
-    Clap colors
-endfunction 
 
 
 colorscheme dracula
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""	
 " startify	
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""	
