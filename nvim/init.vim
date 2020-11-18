@@ -113,17 +113,16 @@ set viminfo     ='100,n$HOME/.vim/files/info/viminfo
 call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf',                    { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'yianwillis/vimcdoc'
 Plug 'dstein64/vim-startuptime' ,       {'on':'StartupTime'}
 Plug 'liuchengxu/vim-clap'              " preview colors
 Plug 'voldikss/vim-floaterm',           " 终端
 Plug 'skywind3000/vim-cppman'           " cppreferences 文档
 Plug 'bagrat/vim-buffet'                " buffer切换
 Plug 'sheerun/vim-polyglot'             " 语法插件
-"Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'hardcoreplayers/spaceline.vim'    " 状态栏
 Plug 'mhinz/vim-startify'               " 启动页
 
-"Plug 'hardcoreplayers/dashboard-nvim'   " 启动页
 Plug 'ryanoasis/vim-devicons'           " icon
 Plug 'tpope/vim-fugitive'               " git
 Plug 'MattesGroeger/vim-bookmarks'      " 书签
@@ -137,6 +136,8 @@ Plug 'neomake/neomake'                  " 语法检查
 Plug 'Chiel92/vim-autoformat' ,         {'for':['c','cpp','cc']}
 Plug 'majutsushi/tagbar',               { 'on':'TagbarToggle'}
 Plug 'neoclide/coc.nvim',               {'branch': 'release'}
+Plug 'jackguo380/vim-lsp-cxx-highlight'
+
 Plug 'tpope/vim-endwise',               {'for':['c','cpp','cc']}                            " endif补全
 Plug 'honza/vim-snippets',              {'for':['go','c','cpp','cc','py']}                  " 代码片段
 Plug 'tpope/vim-surround'
@@ -558,3 +559,11 @@ let g:startify_padding_left = 30
 let g:better_whitespace_enabled=0	
 let g:strip_whitespace_confirm=0	
 set viminfo='100,n$HOME/.vim/files/info/viminfo
+nmap <localleader>a <Plug>(coc-refactor)
+
+function! CocCurrentFunction()
+    let currentFunctionSymbol = get(b:, 'coc_current_function', '')
+    return currentFunctionSymbol !=# '' ? "\uf6a6 " .currentFunctionSymbol : 'no symbol'
+endfunction
+
+
