@@ -140,7 +140,7 @@ install_env_tools()
     cd ${old_dir}
     cp .inputrc ~
     cp .tmux_conf ~
-    echo "PATH=\$PATH:$DotfilesDir/bashrc" >> $HOME/.bashrc
+    echo "export PATH=\$PATH:$DotfilesDir/bashrc" >> $HOME/.bashrc
 }
 
 update_ubuntu_source_list()
