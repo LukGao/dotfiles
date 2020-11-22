@@ -506,9 +506,10 @@ let g:interestingWordsGUIColors = ['#8CCBEA', '#6699FF','#A4E57E','#13E57B', '#9
 " neomake
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+let g:neomake_tempfile_dir = '~/.vim/tmp/neomake'
 let g:neomake_cpp_enable_makers = ['clang']
 let g:neomake_cpp_clang_maker = {'exe' : 'clang' }
-let g:neomake_cpp_clang_args = ['--std=c++11','--analyze']
+let g:neomake_cpp_clang_args = ['--std=c++17','--analyze']
 
 function! ToUTF8()
     set fileencoding=utf-8
