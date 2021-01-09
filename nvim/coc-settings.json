@@ -13,6 +13,7 @@
             ]
         },
         "clangd": {
+            "trace.server": "verbose",
             "command": "clangd",
             "rootPatterns": [
                 "compile_flags.txt",
@@ -35,6 +36,7 @@
                 "hpp",
                 "cc"
             ],
+            "trace.server": "verbose",
             "initializationOptions": {
                 "cache": {
                     "directory": "/tmp/.ccls-cache",

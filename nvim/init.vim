@@ -119,9 +119,10 @@ Plug 'liuchengxu/vim-clap'              " preview colors
 Plug 'voldikss/vim-floaterm',           " 终端
 Plug 'skywind3000/vim-cppman'           " cppreferences 文档
 Plug 'bagrat/vim-buffet'                " buffer切换
-Plug 'sheerun/vim-polyglot'             " 语法插件
+"Plug 'sheerun/vim-polyglot'             " 语法插件
 Plug 'hardcoreplayers/spaceline.vim'    " 状态栏
 Plug 'mhinz/vim-startify'               " 启动页
+Plug 'fatih/vim-go'
 
 Plug 'ryanoasis/vim-devicons'           " icon
 Plug 'tpope/vim-fugitive'               " git
