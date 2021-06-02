@@ -9,3 +9,21 @@ jobs:
     - uses: actions/checkout@v1
     - name: install script
       run: bash install_nvim.sh
+      
+  push:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        image-name: [ubuntu]
+        image-version: [20.04]
+        image-address: [registry.cn-shenzhen.aliyuncs.com]
+        image-registry: [registry.cn-shenzhen.aliyuncs.com/ccls/ubuntu]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build image
+        run: |
+          echo ${{ secrets.aliyun_password }} | sudo docker login --username=${{secrets.aliyun_username}} ${{ matrix.image-address }} --password-stdin 
+          sudo docker build -t ${{ matrix.image-name }}:${{ matrix.image-version }} .
+          sudo docker tag ${{ matrix.image-name }}:${{ matrix.image-version }} ${{ matrix.image-registry }}:${{ matrix.image-version }}
+          sudo docker push ${{ matrix.image-registry }}:${{ matrix.image-version }}
+          sudo docker logout ${{ matrix.image-address }}
