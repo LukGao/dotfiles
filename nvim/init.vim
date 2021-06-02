@@ -424,7 +424,7 @@ nnoremap <localleader>ft :Autoformat<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " neomake
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-call neomake#configure#automake('w')
+silent! call neomake#configure#automake('w')
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " buffer switch
