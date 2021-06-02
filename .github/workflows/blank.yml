@@ -8,4 +8,4 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: install script
-      run: bash install.sh
+      run: bash install_nvim.sh
