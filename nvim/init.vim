@@ -552,7 +552,7 @@ let g:spaceline_scroll_chars = [
   \ ]
 
 
-colorscheme dracula
+silent! colorscheme dracula
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""	
 " startify	
