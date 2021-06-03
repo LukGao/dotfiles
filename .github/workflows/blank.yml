@@ -33,11 +33,10 @@ jobs:
       - name: Build image
         run: |
           echo ${{ secrets.aliyun_password }} | sudo docker login --username=${{secrets.aliyun_username}} ${{ matrix.image-address }} --password-stdin 
-          docker buildx build \
+          sudo docker buildx build \
           --platform=linux/amd64,linux/arm/v7,linux/arm64 \
           --output "type=image,push=false" \
           --file Dockerfile . \
-          --tag ${{ matrix.image-name }}:${{ matrix.image-version }}
-          sudo docker tag ${{ matrix.image-name }}:${{ matrix.image-version }} ${{ matrix.image-registry }}:${{ matrix.image-version }}
+          --tag  ${{ matrix.image-registry }}:${{ matrix.image-version }}
           sudo docker push ${{ matrix.image-registry }}:${{ matrix.image-version }}
           sudo docker logout ${{ matrix.image-address }}
