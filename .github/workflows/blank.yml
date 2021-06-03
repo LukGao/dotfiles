@@ -15,15 +15,29 @@ jobs:
     strategy:
       matrix:
         image-name: [ubuntu]
-        image-version: [20.04]
+        image-tag: [20.04]
         image-address: [registry.cn-shenzhen.aliyuncs.com]
         image-registry: [registry.cn-shenzhen.aliyuncs.com/ccls/ubuntu]
+        
     steps:
-      - uses: actions/checkout@v2
+      -
+        name: Checkout
+        uses: actions/checkout@v2
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
       - name: Build image
         run: |
           echo ${{ secrets.aliyun_password }} | sudo docker login --username=${{secrets.aliyun_username}} ${{ matrix.image-address }} --password-stdin 
-          sudo docker build -t ${{ matrix.image-name }}:${{ matrix.image-version }} .
+          docker buildx build \
+          --platform=linux/amd64,linux/arm/v7,linux/arm64 \
+          --output "type=image,push=false" \
+          --file Dockerfile . \
+          --tag ${{ matrix.image-name }}:${{ matrix.image-version }}
           sudo docker tag ${{ matrix.image-name }}:${{ matrix.image-version }} ${{ matrix.image-registry }}:${{ matrix.image-version }}
           sudo docker push ${{ matrix.image-registry }}:${{ matrix.image-version }}
           sudo docker logout ${{ matrix.image-address }}
