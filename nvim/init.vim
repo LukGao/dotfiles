@@ -94,23 +94,23 @@ nnoremap <leader><leader>c :PlugClean<cr>
 " 临时文件设置
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 如果文件夹不存在，则新建文件夹
-if !isdirectory($HOME.'/.vim/files') && exists('*mkdir')
-  call mkdir($HOME.'/.vim/files')
+if !isdirectory($HOME.'/.nvim/files') && exists('*mkdir')
+  call mkdir($HOME.'/.nvim/files')
 endif
 
 " 交换文件
-set directory   =$HOME/.vim/files/swap//
+set directory   =$HOME/.nvim/files/swap//
 set updatecount =100
 " 撤销文件
 set undofile
-set undodir     =$HOME/.vim/files/undo/
+set undodir     =$HOME/.nvim/files/undo/
 " viminfo 文件
-set viminfo     ='100,n$HOME/.vim/files/info/viminfo
+set viminfo     ='100,n$HOME/.nvim/files/info/viminfo
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 插件安装LINX
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.nvim/plugged')
 Plug 'junegunn/fzf',                    { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'yianwillis/vimcdoc'
@@ -554,7 +554,7 @@ silent! colorscheme dracula
 let g:startify_padding_left = 30	
 let g:better_whitespace_enabled=0	
 let g:strip_whitespace_confirm=0	
-set viminfo='100,n$HOME/.vim/files/info/viminfo
+set viminfo='100,n$HOME/.nvim/files/info/viminfo
 nmap <localleader>a <Plug>(coc-refactor)
 
 function! CocCurrentFunction()
