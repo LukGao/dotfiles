@@ -123,7 +123,8 @@ Plug 'bagrat/vim-buffet'                " buffer切换
 Plug 'hardcoreplayers/spaceline.vim'    " 状态栏
 Plug 'mhinz/vim-startify'               " 启动页
 Plug 'fatih/vim-go'
-
+Plug 'glepnir/zephyr-nvim'
+Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'ryanoasis/vim-devicons'           " icon
 Plug 'tpope/vim-fugitive'               " git
 Plug 'MattesGroeger/vim-bookmarks'      " 书签
@@ -546,7 +547,9 @@ let g:spaceline_scroll_chars = [
   \ ]
 
 
-silent! colorscheme dracula
+"silent! colorscheme dracula
+silent! colorscheme zephyr
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""	
 " startify	
