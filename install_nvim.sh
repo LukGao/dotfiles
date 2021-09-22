@@ -47,7 +47,7 @@ update_install_command()
     esac
 }
 
-curl_proxy="curl "
+
 Pip3Install="pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple"
 
 ubuntu_install_prepare_software()
@@ -67,7 +67,7 @@ ubuntu_install_prepare_software()
 
 install_vim_plug()
 {
-    $curl_proxy -sfLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    curl -sfLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 }
 
 install_nvim()
@@ -75,14 +75,14 @@ install_nvim()
     local nvim_url="https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz"
     local old_dir=$PWD
     cd "$ToolsDir"
-    $curl_proxy -fL "$nvim_url" | tar -xzf -
+    curl -fL "$nvim_url" | tar -xzf -
     ln -sf $PWD/nvim-linux64/bin/nvim ${BinaryDir}/nvim
     cd ${old_dir}
 }
 
 plug_install()
 {
-    $curl_proxy -sL install-node.now.sh/lts | sed '/confirm /d'  | bash
+    curl -sL install-node.now.sh/lts | sed '/confirm /d'  | bash
     export PATH=${BinaryDir}:$PATH
     which nvim
     echo "-----------------------------------------------------------"
@@ -140,8 +140,8 @@ install_fd_rg()
     fd_url=https://github.com/sharkdp/fd/releases/download/v8.2.1/fd-v8.2.1-x86_64-unknown-linux-musl.tar.gz
     rg_url=https://github.com/BurntSushi/ripgrep/releases/download/12.1.1/ripgrep-12.1.1-x86_64-unknown-linux-musl.tar.gz
 
-    $curl_proxy -fL $fd_url | tar -xzf -
-    $curl_proxy -fL $rg_url | tar -xzf -
+    curl -fL $fd_url | tar -xzf -
+    curl -fL $rg_url | tar -xzf -
     mv `pwd`/fd-v8.2.1-x86_64-unknown-linux-musl/fd ${BinaryDir}/fd
     mv `pwd`/ripgrep-12.1.1-x86_64-unknown-linux-musl/rg ${BinaryDir}/rg
 
