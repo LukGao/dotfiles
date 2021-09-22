@@ -5,7 +5,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
     llvm_url=https://github.com/llvm/llvm-project/releases/download/llvmorg-12.0.0/clang+llvm-12.0.0-x86_64-linux-gnu-ubuntu-20.04.tar.xz 
 
 RUN mkdir -p ~/.config/nvim
-RUN apt -qq  update \
+RUN apt -qq  update 
 RUN apt install -y -qq xz-utils  curl wget git nodejs lua5.1 python3-dev >/dev/null 
 RUN apt install -y -qq python3-pip ruby rubygems >/dev/null 
 RUN rm -rf /var/lib/apt/lists/* 
@@ -24,7 +24,7 @@ RUN PATH="$PWD/nvim-linux64/bin:${PATH}"
 RUN echo $PATH
 RUN git clone https://github.com/ooknn/dotfiles.git dotfiles
 RUN mv dotfiles/nvim ~/.config/nvim 
-RUN pip3 -q install neovim jedi  pylint \
+RUN pip3 -q install neovim jedi  pylint 
 RUN nvim --version 
 RUN nvim +'PlugInstall --sync' +'PlugUpdate' +qa! 
 RUN nvim +'PlugInstall --sync' +'PlugUpdate' +qa!
