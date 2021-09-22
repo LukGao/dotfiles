@@ -5,6 +5,13 @@ export InstallCommand="default"
 export ToolsDir="$HOME/.config/dotfiles"
 export BinaryDir="$HOME/bin"
 export DotfilesDir=$PWD
+
+nvim_url='https://github.com/neovim/neovim/releases/download/v0.5.0/nvim-linux64.tar.gz'
+fd_url=https://github.com/sharkdp/fd/releases/download/v8.2.1/fd-v8.2.1-x86_64-unknown-linux-musl.tar.gz
+rg_url=https://github.com/BurntSushi/ripgrep/releases/download/12.1.1/ripgrep-12.1.1-x86_64-unknown-linux-musl.tar.gz
+z_url='https://github.com/skywind3000/z.lua.git'
+fzf_url='https://github.com/junegunn/fzf.git'
+
 BasePath=$(cd `dirname $0`; pwd)
 create_binary_dir()
 {
@@ -48,7 +55,6 @@ update_install_command()
 }
 
 
-Pip3Install="pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple"
 
 ubuntu_install_prepare_software()
 {
@@ -58,21 +64,13 @@ ubuntu_install_prepare_software()
     ${InstallCommand} python3-pip ruby rubygems tig htop tmux lua5.1
     ${InstallCommand} python-setuptools python3-setuptools
     ${InstallCommand} ruby rubygems tig htop tmux lua5.1
-    ${Pip3Install} neovim jedi  pylint 
+    pip3 install neovim jedi  pylint 
     ${SUDO} ln -sf `which python3` /usr/local/bin/python3
     ${SUDO} gem install coderay rouge
 }
 
-
-
-install_vim_plug()
-{
-    curl -sfLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-}
-
 install_nvim()
 {
-    local nvim_url="https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz"
     local old_dir=$PWD
     cd "$ToolsDir"
     curl -fL "$nvim_url" | tar -xzf -
@@ -121,12 +119,12 @@ install_fzf_z()
     local old_dir=$PWD
     cd "$ToolsDir"
 
-    git clone --depth 1 https://github.com/skywind3000/z.lua.git ~/.z.lua
+    git clone --depth 1 ${z_url} ~/.z.lua
 
     if ls $HOME/.fzf/bin/fzf 1> /dev/null 2>&1; then
         echo "fzf exist"
     else
-        git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+        git clone --depth 1 ${fzf_url} ~/.fzf
         yes | ~/.fzf/install
     fi 
     cd ${old_dir}
@@ -136,9 +134,6 @@ install_fd_rg()
 {
     local old_dir=$PWD
     cd "$ToolsDir"
-
-    fd_url=https://github.com/sharkdp/fd/releases/download/v8.2.1/fd-v8.2.1-x86_64-unknown-linux-musl.tar.gz
-    rg_url=https://github.com/BurntSushi/ripgrep/releases/download/12.1.1/ripgrep-12.1.1-x86_64-unknown-linux-musl.tar.gz
 
     curl -fL $fd_url | tar -xzf -
     curl -fL $rg_url | tar -xzf -
@@ -161,10 +156,9 @@ update_bashrc_env()
 
 copy_confif_files()
 {
-    $BasePath/.inputrc $HOME
-    $BasePath/.tmux_conf $HOME
-    ln -sf $BasePath/nvim/init.vim $HOME/.config/nvim/init.vim
-    ln -sf $BasePath/nvim/coc-settings.json  $HOME/.config/nvim/coc-settings.json
+    cp $BasePath/.inputrc $HOME
+    cp $BasePath/.tmux_conf $HOME
+    cp -r $BasePath/nvim $HOME/.config/nvim
 }
 
 main()

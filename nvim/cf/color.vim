@@ -1,0 +1,2 @@
+silent! colorscheme dracula
+
