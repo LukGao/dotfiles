@@ -58,12 +58,10 @@ update_install_command()
 
 ubuntu_install_prepare_software()
 {
-    ${InstallCommand} curl git wget libssl-dev
-    ${InstallCommand} zlib1g-dev libtinfo-dev 
+    ${InstallCommand} curl git wget libssl-dev zlib1g-dev libtinfo-dev 
     ${InstallCommand} build-essential python-dev python3-dev  
     ${InstallCommand} python3-pip ruby rubygems tig htop tmux lua5.1
-    ${InstallCommand} python-setuptools python3-setuptools
-    ${InstallCommand} ruby rubygems tig htop tmux lua5.1
+    ${InstallCommand} python-setuptools python3-setuptools ruby rubygems tig htop tmux lua5.1
     pip3 install neovim jedi  pylint 
     ${SUDO} ln -sf `which python3` /usr/local/bin/python3
     ${SUDO} gem install coderay rouge
@@ -80,7 +78,7 @@ install_nvim()
 
 plug_install()
 {
-    curl -sL install-node.now.sh/lts | sed '/confirm /d'  | bash
+    curl -sL install-node.now.sh/lts | sed '/confirm /d'  | ${SUDO} bash
     export PATH=${BinaryDir}:$PATH
     echo "-----------------------------------------------------------"
     ${BinaryDir}/nvim +'PlugInstall --sync' +'PlugUpdate' +qa!
