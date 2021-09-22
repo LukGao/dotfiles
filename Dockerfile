@@ -1,7 +1,7 @@
 FROM ubuntu:20.04
 ENV DEBIAN_FRONTEND=noninteractive \
     TZ=Asia/Shanghai \
-    nvim_url=https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz \
+    nvim_url=https://github.com/neovim/neovim/releases/download/v0.5.0/nvim-linux64.tar.gz \
     llvm_url=https://github.com/llvm/llvm-project/releases/download/llvmorg-12.0.0/clang+llvm-12.0.0-x86_64-linux-gnu-ubuntu-20.04.tar.xz \
     plug_url=https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim \
     init_url=https://raw.githubusercontent.com/ooknn/dotfiles/master/nvim/init.vim \
