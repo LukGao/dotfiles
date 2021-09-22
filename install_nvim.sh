@@ -47,7 +47,7 @@ update_install_command()
     esac
 }
 
-curl_proxy="curl -x socks5://192.168.2.105:1080"
+curl_proxy="curl "
 Pip3Install="pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple"
 
 ubuntu_install_prepare_software()
@@ -151,7 +151,6 @@ install_fd_rg()
 setting_git_config()
 {
     git config --global alias.tree "log --graph --all --relative-date --abbrev-commit --format=\"%x09 %h %Cgreen%cd%Creset [%Cblue%cn%Creset] %C(auto)%d%Creset %s\""
-    git config --global http.proxy 'socks5://192.168.2.105:1080'
 }
 
 update_bashrc_env()
@@ -168,31 +167,8 @@ copy_confif_files()
     ln -sf $BasePath/nvim/coc-settings.json  $HOME/.config/nvim/coc-settings.json
 }
 
-update_ubuntu_source_list()
-{
-    echo "update source list"
-    mv /etc/apt/sources.list /etc/apt/sourses.list.backup
-
-    tee /etc/apt/sources.list <<-'EOF'
-deb http://mirrors.aliyun.com/ubuntu/ focal main restricted universe multiverse
-deb-src http://mirrors.aliyun.com/ubuntu/ focal main restricted universe multiverse
-
-deb http://mirrors.aliyun.com/ubuntu/ focal-security main restricted universe multiverse
-deb-src http://mirrors.aliyun.com/ubuntu/ focal-security main restricted universe multiverse
-
-deb http://mirrors.aliyun.com/ubuntu/ focal-updates main restricted universe multiverse
-deb-src http://mirrors.aliyun.com/ubuntu/ focal-updates main restricted universe multiverse
-
-deb http://mirrors.aliyun.com/ubuntu/ focal-proposed main restricted universe multiverse
-deb-src http://mirrors.aliyun.com/ubuntu/ focal-proposed main restricted universe multiverse
-
-deb http://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse
-deb-src http://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse
-EOF
-}
 main()
 {
-    [ $# -ne 0 ] && update_ubuntu_source_list
     create_tools_dir
     create_binary_dir
     update_sudo
