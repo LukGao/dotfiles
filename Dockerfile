@@ -30,4 +30,3 @@ RUN ls -al llvm
 RUN ls -al llvm/bin 
 RUN PATH="$PWD/llvm/bin:${PATH}" 
 RUN echo $PATH 
-RUN gem install coderay roug
