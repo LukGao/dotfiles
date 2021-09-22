@@ -27,5 +27,5 @@ jobs:
       -
         name: Build
         run: |
-          docker build . 
+          echo hello # docker build . 
         
