@@ -13,15 +13,15 @@ RUN apt -qq  update \
 && wget -cq "$llvm_url" && ls -al \ 
 && tar -xf clang+llvm-12.0.0-x86_64-linux-gnu-ubuntu-20.04.tar.xz \
 && mv clang+llvm-12.0.0-x86_64-linux-gnu-ubuntu-20.04 llvm \
-&& rm -rf *.xz \
-&& ls -al llvm && ls -al llvm/bin \
+&& rm -rf *.xz 
+RUN ls -al llvm && ls -al llvm/bin \
 && PATH="$PWD/llvm/bin:${PATH}" \
 && echo $PATH \
 && curl -fL "$nvim_url" | tar -xzf - \
 && ls -al $PWD/nvim-linux64/bin \
 && PATH="$PWD/nvim-linux64/bin:${PATH}" \
-&& echo $PATH \
-&& curl -sfLo ~/.config/nvim/autoload/plug.vim --create-dirs "$plug_url" \
+&& echo $PATH 
+RUN curl -sfLo ~/.config/nvim/autoload/plug.vim --create-dirs "$plug_url" \
 && curl -sfLo ~/.config/nvim/init.vim --create-dirs "$init_url" \
 && curl -sfLo ~/.config/nvim/coc-settings.json --create-dirs "$coc_setting_url" \
 && pip3 -q install neovim jedi  pylint \
