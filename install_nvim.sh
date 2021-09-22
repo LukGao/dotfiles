@@ -82,10 +82,9 @@ plug_install()
 {
     curl -sL install-node.now.sh/lts | sed '/confirm /d'  | bash
     export PATH=${BinaryDir}:$PATH
-    which nvim
     echo "-----------------------------------------------------------"
-    nvim +'PlugInstall --sync' +'PlugUpdate' +qa!
-    nvim +'PlugInstall --sync' +'PlugUpdate' +qa!
+    ${BinaryDir}/nvim +'PlugInstall --sync' +'PlugUpdate' +qa!
+    ${BinaryDir}/nvim +'PlugInstall --sync' +'PlugUpdate' +qa!
 }
 
 cmake_install()
@@ -154,7 +153,7 @@ update_bashrc_env()
     echo "export PATH=\$PATH:$BasePath/bashrc" >> $HOME/.bashrc
 }
 
-copy_confif_files()
+copy_config_files()
 {
     cp $BasePath/.inputrc $HOME
     cp $BasePath/.tmux_conf $HOME
@@ -169,9 +168,8 @@ main()
     setting_git_config
     update_install_command
     ubuntu_install_prepare_software
-    install_vim_plug
     install_nvim
-    copy_confif_files
+    copy_config_files
     plug_install
     cmake_install
     ccls_install
