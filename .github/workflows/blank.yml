@@ -16,8 +16,8 @@ jobs:
       matrix:
         image-name: [ubuntu]
         image-tag: [20.04]
-        image-address: [registry.cn-shenzhen.aliyuncs.com]
-        image-registry: [registry.cn-shenzhen.aliyuncs.com/ccls/ubuntu]
+        image-registry: [ubuntu-ccls]
+        image-version: [11]
         
     steps:
       -
@@ -32,11 +32,8 @@ jobs:
 
       - name: Build image
         run: |
-          echo ${{ secrets.aliyun_password }} | sudo docker login --username=${{secrets.aliyun_username}} ${{ matrix.image-address }} --password-stdin 
           sudo docker buildx build \
           --platform=linux/amd64,linux/arm/v7,linux/arm64 \
           --output "type=image,push=false" \
           --file Dockerfile . \
           --tag  ${{ matrix.image-registry }}:${{ matrix.image-version }}
-          sudo docker push ${{ matrix.image-registry }}:${{ matrix.image-version }}
-          sudo docker logout ${{ matrix.image-address }}
