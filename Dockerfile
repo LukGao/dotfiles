@@ -19,14 +19,12 @@ RUN ls -al llvm/bin
 RUN PATH="$PWD/llvm/bin:${PATH}" 
 RUN echo $PATH 
 RUN curl -fL "$nvim_url" | tar -xzf - 
-RUN ls -al $PWD/nvim-linux64/bin 
-RUN PATH="$PWD/nvim-linux64/bin:${PATH}" 
-RUN echo $PATH
+RUN ls -al nvim-linux64/bin 
 RUN git clone https://github.com/ooknn/dotfiles.git dotfiles
 RUN mv dotfiles/nvim ~/.config/nvim 
 RUN pip3 -q install neovim jedi  pylint 
-RUN nvim --version 
-RUN nvim +'PlugInstall --sync' +'PlugUpdate' +qa! 
-RUN nvim +'PlugInstall --sync' +'PlugUpdate' +qa!
+RUN nvim-linux64/bin/nvim --version 
+RUN nvim-linux64/bin/nvim +'PlugInstall --sync' +'PlugUpdate' +qa! 
+RUN nvim-linux64/bin/nvim +'PlugInstall --sync' +'PlugUpdate' +qa!
 RUN git clone --depth 1 https://github.com/skywind3000/z.lua.git ~/.z.lua 
 RUN gem install coderay roug
