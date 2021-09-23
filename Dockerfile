@@ -10,12 +10,12 @@ ENV TZ=Asia/Shanghai
 ENV nvim_url=https://github.com/neovim/neovim/releases/download/v0.5.0/nvim-linux64.tar.gz 
 
 
-RUN apt-get -qq update &> /dev/null
-RUN apt-get install -y -qq locales &> /dev/null
+RUN apt-get -qq update 
+RUN apt-get install -y -qq locales
 RUN locale-gen zh_CN.UTF-8  
-RUN apt-get install -y -qq --no-install-recommends cowsay nyancat xz-utils curl wget git nodejs lua5.1 python3-dev &> /dev/null
-RUN apt-get install -y -qq python3-pip ruby rubygems &> /dev/null
-RUN pip3 -q install neovim
+RUN apt-get install -y -qq --no-install-recommends cowsay nyancat xz-utils curl wget git nodejs lua5.1 python3-dev 
+RUN apt-get install -y -qq python3-pip ruby rubygems 
+RUN pip3 -qq install neovim
 
 RUN rm -rf /var/lib/apt/lists/* 
 
