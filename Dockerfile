@@ -1,14 +1,13 @@
 FROM ubuntu:20.04
-
-ENV LANG zh_CN.UTF-8
-ENV LANGUAGE zh_CN.UTF-8
-ENV LC_ALL zh_CN.UTF-8
-ENV TZ=Asia/Shanghai 
-ENV nvim_url=https://github.com/neovim/neovim/releases/download/v0.5.0/nvim-linux64.tar.gz \
-
 ARG DEBIAN_FRONTEND="noninteractive"
 ARG DEBCONF_NOWARNINGS="yes"
 ARG DEBCONF_TERSE="yes"
+
+ENV LANG=zh_CN.UTF-8
+ENV LANGUAGE=zh_CN.UTF-8
+ENV LC_ALL=zh_CN.UTF-8
+ENV TZ=Asia/Shanghai 
+ENV nvim_url=https://github.com/neovim/neovim/releases/download/v0.5.0/nvim-linux64.tar.gz 
 
 
 RUN apt-get -qq update 
