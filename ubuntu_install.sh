@@ -5,6 +5,7 @@ export InstallCommand="default"
 export ToolsDir="$HOME/.config/dotfiles"
 export BinaryDir="$HOME/bin"
 export DotfilesDir=$PWD
+export DEBIAN_FRONTEND=noninteractive
 
 nvim_url='https://github.com/neovim/neovim/releases/download/v0.5.0/nvim-linux64.tar.gz'
 fd_url=https://github.com/sharkdp/fd/releases/download/v8.2.1/fd-v8.2.1-x86_64-unknown-linux-musl.tar.gz
@@ -13,6 +14,7 @@ z_url='https://github.com/skywind3000/z.lua.git'
 fzf_url='https://github.com/junegunn/fzf.git'
 
 BasePath=$(cd `dirname $0`; pwd)
+
 create_binary_dir()
 {
     if [ ! -d ${BinaryDir} ]; then
@@ -38,31 +40,17 @@ update_sudo()
 
 update_install_command()
 {
-    export OS_NAME=$( cat /etc/os-release | grep ^NAME | cut -d'=' -f2 | sed 's/\"//gI' )    
-    case "$OS_NAME" in    
-      "CentOS Linux")    
-        export OsName="centos"
-        export InstallCommand=" ${SUDO} yum install -y "
-        ${InstallCommand} epel-release
-      ;;    
-      "Ubuntu")    
-        export OsName="ubuntu"
-        export InstallCommand=" ${SUDO} apt-get install -y "
-        ${SUDO} apt-get update
-      ;;    
-      *)    
-    esac
+    export InstallCommand="${SUDO} apt-get install -y "
+    ${SUDO} apt-get update
 }
 
 
 
 ubuntu_install_prepare_software()
 {
-    ${InstallCommand} curl git wget libssl-dev zlib1g-dev libtinfo-dev 
-    ${InstallCommand} build-essential python-dev python3-dev  
-    ${InstallCommand} python3-pip ruby rubygems tig htop tmux lua5.1
-    ${InstallCommand} python-setuptools python3-setuptools ruby rubygems tig htop tmux lua5.1
-    pip3 install neovim jedi  pylint 
+
+    ${InstallCommand} curl git wget libssl-dev zlib1g-dev libtinfo-dev build-essential python-dev python3-dev  python3-pip python-setuptools ruby rubygems tig htop tmux lua5.1
+    pip3 install neovim
     ${SUDO} ln -sf `which python3` /usr/local/bin/python3
     ${SUDO} gem install coderay rouge
 }
@@ -85,21 +73,11 @@ plug_install()
     ${BinaryDir}/nvim +'PlugInstall --sync' +'PlugUpdate' +qa!
 }
 
-cmake_install()
-{
-    if ! command -v cmake &> /dev/null; then
-        local old_dir=$PWD
-        cd "$ToolsDir"
-        git clone https://github.com/Kitware/CMake.git
-        cd CMake && git checkout `git describe --abbrev=0 --tags`
-        ./bootstrap && make -j`nproc` && ${SUDO} make install
-        cd ${old_dir}
-    fi
-}
+
 
 ccls_install()
 {
-    ${InstallCommand} clang-8 clang-tools-8 libclang-8-dev
+    ${InstallCommand} build-essential clang-8 clang-tools-8 libclang-8-dev libz-dev cmake
     ${SUDO} ln -sf /usr/bin/clang-8 /usr/bin/clang
     ${SUDO} ln -sf /usr/bin/clang++-8 /usr/bin/clang++
 
@@ -113,6 +91,7 @@ ccls_install()
     ln -sf `pwd`/Release/ccls ${BinaryDir}/ccls
     cd ${old_dir}
 }
+
 install_fzf_z()
 {
     local old_dir=$PWD
@@ -158,27 +137,54 @@ update_bashrc_env()
 copy_config_files()
 {
     cp $BasePath/.inputrc $HOME
-    cp $BasePath/.tmux_conf $HOME
+    cp $BasePath/.tmux.conf $HOME
+    cp $BasePath/.tmux.conf.local $HOME
     cp -r $BasePath/nvim $HOME/.config/nvim
 }
 
 main()
 {
+    # set_proxy
     create_tools_dir
     create_binary_dir
     update_sudo
-    setting_git_config
     update_install_command
     ubuntu_install_prepare_software
+    setting_git_config
     install_nvim
     copy_config_files
     plug_install
-    cmake_install
-    ccls_install
     install_fzf_z
     install_fd_rg
     update_bashrc_env
+    # cmake_install
+    ccls_install
 }
 
 main "$@"
 
+
+#set_proxy()
+#{
+#    tee ~/.curlrc <<-'EOF'
+#    socks5=127.0.0.1:1080
+#    EOF
+#
+#    tee ~/.gitconfig <<-'EOF'
+#    [http]
+#        proxy = socks5://127.0.0.1:1080
+#    EOF
+#}
+
+
+#cmake_install()
+#{
+#    if ! command -v cmake &> /dev/null; then
+#        local old_dir=$PWD
+#        cd "$ToolsDir"
+#        git clone https://github.com/Kitware/CMake.git
+#        cd CMake && git checkout `git describe --abbrev=0 --tags`
+#        ./bootstrap && make -j`nproc` && ${SUDO} make install
+#        cd ${old_dir}
+#    fi
+#}
