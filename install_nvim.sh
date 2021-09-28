@@ -87,12 +87,14 @@ plug_install()
 
 cmake_install()
 {
-    local old_dir=$PWD
-    cd "$ToolsDir"
-    git clone https://github.com/Kitware/CMake.git
-    cd CMake && git checkout `git describe --abbrev=0 --tags`
-    ./bootstrap && make -j`nproc` && ${SUDO} make install
-    cd ${old_dir}
+    if ! command -v cmake &> /dev/null; then
+        local old_dir=$PWD
+        cd "$ToolsDir"
+        git clone https://github.com/Kitware/CMake.git
+        cd CMake && git checkout `git describe --abbrev=0 --tags`
+        ./bootstrap && make -j`nproc` && ${SUDO} make install
+        cd ${old_dir}
+    fi
 }
 
 ccls_install()
