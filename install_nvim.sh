@@ -144,6 +144,7 @@ setting_git_config()
 {
     git config --global alias.tree "log --graph --all --relative-date --abbrev-commit --format=\"%x09 %h %Cgreen%cd%Creset [%Cblue%cn%Creset] %C(auto)%d%Creset %s\""
     git config --global commit.gpgsign true
+    git config --global core.editor "vim"
 }
 
 update_bashrc_env()
