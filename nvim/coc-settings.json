@@ -1,148 +1,112 @@
 {
-    "languageserver": {
-        "golang": {
-            "command": "gopls",
-            "rootPatterns": [
-                "go.mod",
-                ".vim/",
-                ".git/",
-                ".hg/"
-            ],
-            "filetypes": [
-                "go"
-            ]
-        },
-        "clangd": {
-            "trace.server": "verbose",
-            "command": "clangd",
-            "rootPatterns": [
-                "compile_flags.txt",
-                "compile_commands.json"
-            ],
-            "filetypes": [
-                "c",
-                "cc",
-                "cpp",
-                "c++",
-                "objc",
-                "objcpp"
-            ]
-        },
-        "ccls": {
-            "command": "ccls",
-            "filetypes": [
-                "c",
-                "cpp",
-                "hpp",
-                "cc"
-            ],
-            "trace.server": "verbose",
-            "initializationOptions": {
-                "cache": {
-                    "directory": "/tmp/.ccls-cache",
-                },
-                "clang": {
-                    "extraArgs": [
-                        "-isystem",
-                        "/Library/Developer/CommandLineTools/usr/include/c++/v1",
-                    ]
-                },
-                "highlight": {
-                    "lsRanges": true
-                },
-                "completion": {
-                    "detailedLabel": true,
-                    "placeholder": true
-                },
-                "client": {
-                    "snippetSupport": true
-                },
-                "index": {
-                    "onChange": false,
-                    "initialNoLinkage": true,
-                    "threads": 2
-                }
-            },
-            "trace.server": "verbose",
-            "rootPatterns": [
-                ".ccls",
-                "compile_commands.json",
-                ".vim/",
-                ".git/",
-                ".hg/",
-                ".svn/"
-            ]
-        },
+  "languageserver": {
+    "golang": {
+      "command": "gopls",
+      "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
+      "filetypes": ["go"]
     },
-    "suggest.completionItemKindLabels": {
-        "keyword": "\uf1de",
-        "variable": "\ue79b",
-        "value": "\uf89f",
-        "operator": "\u03a8",
-        "function": "\u2A15",
-        "reference": "\ufa46",
-        "constant": "\uf8fe",
-        "method": "\uf09a",
-        "struct": "\ufb44",
-        "class": "\uf0e8",
-        "interface": "\uf417",
-        "text": "\u2663",
-        "enum": "\uf435",
-        "enumMember": "\uf02b",
-        "module": "\uf530",
-        "color": "\ue22b",
-        "property": "\ue624",
-        "field": "\uf6a6",
-        "unit": "\uf475",
-        "event": "\ufacd",
-        "file": "\uf723",
-        "folder": "\uf114",
-        "snippet": "\ue60b",
-        "typeParameter": "\uf728",
-        "default": "\uf29c"
+    "clangd": {
+      "trace.server": "verbose",
+      "command": "clangd",
+      "rootPatterns": ["compile_flags.txt", "compile_commands.json"],
+      "filetypes": ["c", "cc", "cpp", "c++", "objc", "objcpp"]
     },
-    "coc.preferences.snippetStatusText": "Ⓢ ",
-    "todolist.autoUpload": true,
-    "todolist.monitor": true,
-    "coc.source.file.priority": 10,
-    "coc.source.around.priority": 8,
-    "coc.source.emoji.priority": 3,
-    "coc.source.emoji.filetypes": [
-        "markdown",
-        "gitcommit"
-    ],
-    "coc.source.emoji.shortcut": "E",
-    "suggest.detailField": "abbr",
-    "suggest.noselect": true,
-    "suggest.preferCompleteThanJumpPlaceholder": true,
-    "suggest.timeout": 500,
-    "suggest.triggerAfterInsertEnter": true,
-    "suggest.triggerCompletionWait": 50,
-    "snippets.ultisnips.directories": [
-        "gosnippets/UltiSnips"
-    ],
-    "snippets.extends": {
-        "cpp": [
-            "c"
-        ]
-    },
-    "diagnostic.signOffset": 9999999,
-    "diagnostic.errorSign": "●",
-    "diagnostic.warningSign": "●",
-    "diagnostic.refreshOnInsertMode": true,
-    "diagnostic.displayByAle": true,
-    "rainbow-fart.ffplay": "ffplay",
-    "coc.preferences.formatOnSaveFiletypes": [
-        "markdown",
-        "json"
-    ],
-    "list.source.files.defaultOptions": [
-        "--auto-preview"
-    ],
-    "list.source.outline.defaultOptions": [
-        "--auto-preview"
-    ],
-    "coc.preferences.currentFunctionSymbolAutoUpdate": true,
-    "coc.preferences.messageLevel": "error",
-    "coc.preferences.extensionUpdateCheck": "daily"
+    "ccls": {
+      "command": "ccls",
+      "filetypes": ["c", "cpp", "hpp", "cc"],
+      "trace.server": "verbose",
+      "initializationOptions": {
+        "cache": {
+          "directory": "/tmp/.ccls-cache"
+        },
+        "clang": {
+          "extraArgs": [
+            "-isystem",
+            "/Library/Developer/CommandLineTools/usr/include/c++/v1"
+          ]
+        },
+        "highlight": {
+          "lsRanges": true
+        },
+        "completion": {
+          "detailedLabel": true,
+          "placeholder": true
+        },
+        "client": {
+          "snippetSupport": true
+        },
+        "index": {
+          "onChange": false,
+          "initialNoLinkage": true,
+          "threads": 2
+        }
+      },
+      "trace.server": "verbose",
+      "rootPatterns": [
+        ".ccls",
+        "compile_commands.json",
+        ".vim/",
+        ".git/",
+        ".hg/",
+        ".svn/"
+      ]
+    }
+  },
+  "suggest.completionItemKindLabels": {
+    "keyword": "\uf1de",
+    "variable": "\ue79b",
+    "value": "\uf89f",
+    "operator": "\u03a8",
+    "function": "\u2A15",
+    "reference": "\ufa46",
+    "constant": "\uf8fe",
+    "method": "\uf09a",
+    "struct": "\ufb44",
+    "class": "\uf0e8",
+    "interface": "\uf417",
+    "text": "\u2663",
+    "enum": "\uf435",
+    "enumMember": "\uf02b",
+    "module": "\uf530",
+    "color": "\ue22b",
+    "property": "\ue624",
+    "field": "\uf6a6",
+    "unit": "\uf475",
+    "event": "\ufacd",
+    "file": "\uf723",
+    "folder": "\uf114",
+    "snippet": "\ue60b",
+    "typeParameter": "\uf728",
+    "default": "\uf29c"
+  },
+  "coc.preferences.snippetStatusText": "Ⓢ ",
+  "todolist.autoUpload": true,
+  "todolist.monitor": true,
+  "coc.source.file.priority": 10,
+  "coc.source.around.priority": 8,
+  "coc.source.emoji.priority": 3,
+  "coc.source.emoji.filetypes": ["markdown", "gitcommit"],
+  "coc.source.emoji.shortcut": "E",
+  "suggest.detailField": "abbr",
+  "suggest.noselect": true,
+  "suggest.preferCompleteThanJumpPlaceholder": true,
+  "suggest.timeout": 500,
+  "suggest.triggerAfterInsertEnter": true,
+  "suggest.triggerCompletionWait": 50,
+  "snippets.ultisnips.directories": ["gosnippets/UltiSnips"],
+  "snippets.extends": {
+    "cpp": ["c"]
+  },
+  "diagnostic.signOffset": 9999999,
+  "diagnostic.errorSign": "●",
+  "diagnostic.warningSign": "●",
+  "diagnostic.refreshOnInsertMode": true,
+  "diagnostic.displayByAle": true,
+  "rainbow-fart.ffplay": "ffplay",
+  "coc.preferences.formatOnSaveFiletypes": ["markdown", "json"],
+  "list.source.files.defaultOptions": ["--auto-preview"],
+  "list.source.outline.defaultOptions": ["--auto-preview"],
+  "coc.preferences.currentFunctionSymbolAutoUpdate": true,
+  "coc.preferences.messageLevel": "error",
+  "coc.preferences.extensionUpdateCheck": "daily"
 }

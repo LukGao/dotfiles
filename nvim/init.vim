@@ -2,7 +2,7 @@ source ~/.config/nvim/init/option.vim
 source ~/.config/nvim/init/key.vim
 source ~/.config/nvim/init/dir.vim
 source ~/.config/nvim/init/plug.vim
-source ~/.config/nvim/cf/spaceline.vim
+"source ~/.config/nvim/cf/spaceline.vim
 source ~/.config/nvim/cf/coc.vim
 source ~/.config/nvim/cf/autocmd.vim
 source ~/.config/nvim/cf/autoformat.vim
@@ -20,3 +20,4 @@ source ~/.config/nvim/cf/wordcolor.vim
 source ~/.config/nvim/cf/color.vim
 source ~/.config/nvim/cf/asynctask.vim
 source ~/.config/nvim/cf/treesitter.vim
+source ~/.config/nvim/cf/galaxyline.vim

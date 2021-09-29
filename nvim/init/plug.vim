@@ -4,7 +4,11 @@ Plug 'junegunn/fzf.vim'
 Plug 'yianwillis/vimcdoc'
 Plug 'skywind3000/vim-cppman'           " cppreferences 文档
 Plug 'bagrat/vim-buffet'                " buffer切换
-Plug 'hardcoreplayers/spaceline.vim'    " 状态栏
+"Plug 'hardcoreplayers/spaceline.vim'    " 状态栏
+
+Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
+Plug 'kyazdani42/nvim-web-devicons' 
+
 Plug 'mhinz/vim-startify'               " 启动页
 Plug 'fatih/vim-go'
 Plug 'nvim-treesitter/nvim-treesitter'
