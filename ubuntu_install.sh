@@ -95,8 +95,8 @@ install_fzf_z()
 
 install_fd_rg()
 {
-    curl -sSfL -o rg.deb $rg_url && dpkg -i rg.deb && rm -rf rg.deb
-    curl -sSfL -o fd.deb $fd_url && dpkg -i fd.deb && rm -rf fd.deb
+    curl -sSfL -o rg.deb $rg_url && ${SUDO} dpkg -i rg.deb && rm -rf rg.deb
+    curl -sSfL -o fd.deb $fd_url && ${SUDO} dpkg -i fd.deb && rm -rf fd.deb
 }
 
 setting_git_config()
