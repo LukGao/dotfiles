@@ -53,7 +53,7 @@ install_nvim()
 {
     local old_dir=$PWD
     cd "$ToolsDir"
-    curl -fL "$nvim_url" | tar -xzf -
+    curl -sSfL "$nvim_url" | tar -xzf -
     ln -sf $PWD/nvim-linux64/bin/nvim ${BinaryDir}/nvim
     cd ${old_dir}
 }
