@@ -8,51 +8,45 @@ export DotfilesDir=$PWD
 export DEBIAN_FRONTEND=noninteractive
 
 nvim_url='https://github.com/neovim/neovim/releases/download/v0.5.0/nvim-linux64.tar.gz'
-fd_url=https://github.com/sharkdp/fd/releases/download/v8.2.1/fd-v8.2.1-x86_64-unknown-linux-musl.tar.gz
-rg_url=https://github.com/BurntSushi/ripgrep/releases/download/12.1.1/ripgrep-12.1.1-x86_64-unknown-linux-musl.tar.gz
+fd_url=https://github.com/sharkdp/fd/releases/download/v8.2.1/fd-musl_8.2.1_amd64.deb
+rg_url=https://github.com/BurntSushi/ripgrep/releases/download/13.0.0/ripgrep_13.0.0_amd64.deb
 z_url='https://github.com/skywind3000/z.lua.git'
 fzf_url='https://github.com/junegunn/fzf.git'
 
 BasePath=$(cd `dirname $0`; pwd)
 
-create_binary_dir()
+echo "source $BasePath/bashrc" >> $HOME/.bashrc
+echo "export PATH=${BinaryDir}:\$PATH" >> $HOME/.bashrc
+
+[ ! -d ${BinaryDir} ] && mkdir -p ${BinaryDir}
+
+[ ! -d ${ToolsDir} ] && mkdir -p ${ToolsDir}
+
+cp $BasePath/.inputrc $HOME
+cp $BasePath/.tmux.conf $HOME
+cp $BasePath/.tmux.conf.local $HOME
+cp -r $BasePath/nvim $HOME/.config/nvim
+
+
+if [[ $(id -u) -eq 0 ]];then
+    export SUDO=""
+else
+    export SUDO="sudo"
+fi
+
+export PATH=${BinaryDir}:$PATH
+
+${SUDO} apt-get update -qq
+
+export InstallCommand="${SUDO} apt-get install -y "
+
+
+install_prepare_software()
 {
-    if [ ! -d ${BinaryDir} ]; then
-        mkdir -p ${BinaryDir}
-    fi
-}
-
-create_tools_dir()
-{
-    if [ ! -d ${ToolsDir} ]; then
-        mkdir -p ${ToolsDir}
-    fi
-}
-update_sudo()
-{
-
-    if [[ $(id -u) -eq 0 ]];then
-        export SUDO=""
-    else
-        export SUDO="sudo"
-    fi
-}
-
-update_install_command()
-{
-    export InstallCommand="${SUDO} apt-get install -y "
-    ${SUDO} apt-get update
-}
-
-
-
-ubuntu_install_prepare_software()
-{
-
-    ${InstallCommand} curl git wget libssl-dev zlib1g-dev libtinfo-dev build-essential python-dev python3-dev  python3-pip python-setuptools ruby rubygems tig htop tmux lua5.1
-    pip3 install neovim
+    ${InstallCommand} curl git wget libssl-dev zlib1g-dev libtinfo-dev build-essential python-dev python3-dev  python3-pip python-setuptools ruby rubygems tig htop tmux lua5.1 > /dev/null  2>&1
+    pip3 install -q neovim
     ${SUDO} ln -sf `which python3` /usr/local/bin/python3
-    ${SUDO} gem install coderay rouge
+    ${SUDO} gem install -q coderay rouge
 }
 
 install_nvim()
@@ -66,8 +60,8 @@ install_nvim()
 
 plug_install()
 {
-    curl -sL install-node.now.sh/lts | sed '/confirm /d'  | ${SUDO} bash
-    export PATH=${BinaryDir}:$PATH
+    curl -sSL install-node.now.sh/lts | sed '/confirm /d'  | ${SUDO} bash
+
     echo "-----------------------------------------------------------"
     ${BinaryDir}/nvim +'PlugInstall --sync' +'PlugUpdate' +qa!
     ${BinaryDir}/nvim +'PlugInstall --sync' +'PlugUpdate' +qa!
@@ -77,7 +71,7 @@ plug_install()
 
 ccls_install()
 {
-    ${InstallCommand} build-essential clang-8 clang-tools-8 libclang-8-dev libz-dev cmake
+    ${InstallCommand} build-essential clang-8 clang-tools-8 libclang-8-dev libz-dev cmake > /dev/null  2>&1
     ${SUDO} ln -sf /usr/bin/clang-8 /usr/bin/clang
     ${SUDO} ln -sf /usr/bin/clang++-8 /usr/bin/clang++
 
@@ -94,31 +88,15 @@ ccls_install()
 
 install_fzf_z()
 {
-    local old_dir=$PWD
-    cd "$ToolsDir"
-
     git clone --depth 1 ${z_url} ~/.z.lua
-
-    if ls $HOME/.fzf/bin/fzf 1> /dev/null 2>&1; then
-        echo "fzf exist"
-    else
-        git clone --depth 1 ${fzf_url} ~/.fzf
-        yes | ~/.fzf/install
-    fi 
-    cd ${old_dir}
+    git clone --depth 1 ${fzf_url} ~/.fzf
+    yes | ~/.fzf/install
 }
 
 install_fd_rg()
 {
-    local old_dir=$PWD
-    cd "$ToolsDir"
-
-    curl -fL $fd_url | tar -xzf -
-    curl -fL $rg_url | tar -xzf -
-    mv `pwd`/fd-v8.2.1-x86_64-unknown-linux-musl/fd ${BinaryDir}/fd
-    mv `pwd`/ripgrep-12.1.1-x86_64-unknown-linux-musl/rg ${BinaryDir}/rg
-
-    cd ${old_dir}
+    curl -sSfL -o rg.deb $rg_url && dpkg -i rg.deb && rm -rf rg.deb
+    curl -sSfL -o fd.deb $fd_url && dpkg -i fd.deb && rm -rf fd.deb
 }
 
 setting_git_config()
@@ -128,63 +106,31 @@ setting_git_config()
     git config --global core.editor "vim"
 }
 
-update_bashrc_env()
-{
-
-    echo "export PATH=\$PATH:$BasePath/bashrc" >> $HOME/.bashrc
-}
-
-copy_config_files()
-{
-    cp $BasePath/.inputrc $HOME
-    cp $BasePath/.tmux.conf $HOME
-    cp $BasePath/.tmux.conf.local $HOME
-    cp -r $BasePath/nvim $HOME/.config/nvim
-}
 
 main()
 {
     # set_proxy
-    create_tools_dir
-    create_binary_dir
-    update_sudo
-    update_install_command
-    ubuntu_install_prepare_software
+
+    install_prepare_software
     setting_git_config
     install_nvim
-    copy_config_files
     plug_install
     install_fzf_z
     install_fd_rg
-    update_bashrc_env
-    # cmake_install
     ccls_install
 }
 
 main "$@"
 
 
-#set_proxy()
-#{
-#    tee ~/.curlrc <<-'EOF'
-#    socks5=127.0.0.1:1080
-#    EOF
-#
-#    tee ~/.gitconfig <<-'EOF'
-#    [http]
-#        proxy = socks5://127.0.0.1:1080
-#    EOF
-#}
+# set_proxy()
+# {
+# tee ~/.curlrc <<-'EOF'
+# socks5=127.0.0.1:1080
+# EOF
 
-
-#cmake_install()
-#{
-#    if ! command -v cmake &> /dev/null; then
-#        local old_dir=$PWD
-#        cd "$ToolsDir"
-#        git clone https://github.com/Kitware/CMake.git
-#        cd CMake && git checkout `git describe --abbrev=0 --tags`
-#        ./bootstrap && make -j`nproc` && ${SUDO} make install
-#        cd ${old_dir}
-#    fi
-#}
+# tee ~/.gitconfig <<-'EOF'
+# [http]
+#    proxy = socks5://127.0.0.1:1080
+# EOF
+# }
