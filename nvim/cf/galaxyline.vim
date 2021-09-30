@@ -1,36 +1,47 @@
 lua <<EOF
+
 local gl = require('galaxyline')
 local gls = gl.section
-local extension = require('galaxyline.provider_extensions')
+gl.short_line_list = { "NvimTree" }
 
-gl.short_line_list = {
-    'LuaTree',
-    'vista',
-    'dbui',
-    'startify',
-    'term',
-    'nerdtree',
-    'plug'
-}
-
--- VistaPlugin = extension.vista_nearest
 
 local colors = {
-    bg = '#282c34',
-    line_bg = '#353644',
-    fg = '#8FBCBB',
-    fg_green = '#65a380',
-
-    yellow = '#fabd2f',
-    cyan = '#008080',
-    darkblue = '#081633',
-    green = '#afd700',
-    orange = '#FF8800',
-    purple = '#5d4d7a',
-    magenta = '#c678dd',
-    blue = '#51afef';
-    red = '#ec5f67'
+  bg = '#282c34',
+  yellow = '#fabd2f',
+  cyan = '#008080',
+  darkblue = '#081633',
+  green = '#afd700',
+  orange = '#FF8800',
+  purple = '#5d4d7a',
+  magenta = '#d16d9e',
+  grey = '#c0c0c0',
+  blue = '#0087d7',
+  red = '#ec5f67'
 }
+local icons = {
+  locker = '', -- f023
+  not_modifiable = '', -- f05e
+  unsaved = '', -- f0c7
+  pencil = '', -- f040
+  dos = '', -- e70f
+  unix = '', -- f17c
+  mac = '', -- f179
+  page = '☰', -- 2630
+  connected = '', -- f817
+  disconnected = '', -- f818
+  error = '', -- f658
+  warning = '', -- f06a
+  info = '', -- f05a
+}
+
+
+local buffer_not_empty = function()
+  if vim.fn.empty(vim.fn.expand('%:t')) ~= 1 then
+    return true
+  end
+  return false
+end
+
 
 local function lsp_status(status)
     shorter_stat = ''
@@ -52,6 +63,7 @@ local function get_coc_lsp()
   return lsp_status(status)
 end
 
+
 function get_diagnostic_info()
   if vim.fn.exists('*coc#rpc#start_server') == 1 then
     return get_coc_lsp()
@@ -60,204 +72,165 @@ function get_diagnostic_info()
 end
 
 local function get_current_func()
-  if vim.fn.exists("*coc#rpc#start_server") == 1 then
-    local ret, current_function = pcall(
-      vim.api.nvim_buf_get_var,
-      0,
-      "coc_current_function"
-    )
-    if not ret then
-      return
+    local has_func, func_name = pcall(vim.api.nvim_buf_get_var, 0, 'coc_current_function')
+    if not has_func then return nil end
+    return string.sub(func_name,4) 
+end
+
+local function get_function_info()
+    if vim.fn.exists('*coc#rpc#start_server') == 1 then
+        return get_current_func()
     end
-    if current_function and current_function ~= "" then
-        return string.sub(current_function,4)
-    end
-  end
-  return ""
+    return ''
 end
 
 CocStatus = get_diagnostic_info
-CocFunc = get_current_func
 
-function has_file_type()
-    local f_type = vim.bo.filetype
-    if not f_type or f_type == '' then
-        return false
-    end
-    return true
-end
+CocFunc = get_function_info
 
-local buffer_not_empty = function()
-  if vim.fn.empty(vim.fn.expand('%:t')) ~= 1 then
-    return true
-  end
-  return false
-end
+local i = 1
 
-gls.left[1] = {
+
+gls.left[i] = {
   FirstElement = {
-    provider = function() return ' ' end,
-    highlight = {colors.blue,colors.line_bg}
+    provider = function() return '▋' end,
+    highlight = {colors.blue,colors.yellow}
   },
 }
-gls.left[2] = {
+
+i = i + 1
+
+gls.left[i] = {
   ViMode = {
     provider = function()
-      -- auto change color according the vim mode
-      local alias = {
-          n = 'NORMAL',
-          i = 'INSERT',
-          c= 'COMMAND',
-          V= 'VISUAL',
-          [''] = 'VISUAL',
-          v ='VISUAL',
-          c  = 'COMMAND-LINE',
-          ['r?'] = ':CONFIRM',
-          rm = '--MORE',
-          R  = 'REPLACE',
-          Rv = 'VIRTUAL',
-          s  = 'SELECT',
-          S  = 'SELECT',
-          ['r']  = 'HIT-ENTER',
-          [''] = 'SELECT',
-          t  = 'TERMINAL',
-          ['!']  = 'SHELL',
-      }
-      local mode_color = {
-          n = colors.green,
-          i = colors.blue,v=colors.magenta,[''] = colors.blue,V=colors.blue,
-          c = colors.red,no = colors.magenta,s = colors.orange,S=colors.orange,
-          [''] = colors.orange,ic = colors.yellow,R = colors.purple,Rv = colors.purple,
-          cv = colors.red,ce=colors.red, r = colors.cyan,rm = colors.cyan, ['r?'] = colors.cyan,
-          ['!']  = colors.green,t = colors.green,
-          c  = colors.purple,
-          ['r?'] = colors.red,
-          ['r']  = colors.red,
-          rm = colors.red,
-          R  = colors.yellow,
-          Rv = colors.magenta,
-      }
-      local vim_mode = vim.fn.mode()
-      vim.api.nvim_command('hi GalaxyViMode guifg='..mode_color[vim_mode])
-      return alias[vim_mode] .. '   '
+      local alias = {n = 'NORMAL',i = 'INSERT',c= 'COMMAND',v= 'VISUAL',V= 'VISUAL LINE', [''] = 'VISUAL BLOCK'}
+      return ' ' .. alias[vim.fn.mode()]
     end,
-    highlight = {colors.red,colors.line_bg,'bold'},
+    separator = '',
+    separator_highlight = {colors.darkblue,function()
+      if not buffer_not_empty() then
+        return colors.darkblue
+      end
+        return colors.purple
+    end},
+
+
+    highlight = {colors.darkblue,colors.purple,'bold'},
   },
 }
-gls.left[3] ={
-  FileIcon = {
-    provider = 'FileIcon',
+
+i = i + 1
+gls.left[i] = {
+  Whitespace = {
+    provider = function()return '' end,
+    separator = ' ',
+    separator_highlight = {colors.purple,colors.darkblue},
     condition = buffer_not_empty,
-    highlight = {require('galaxyline.provider_fileinfo').get_file_icon_color,colors.line_bg},
+    highlight = {colors.darkblue,colors.darkblue}
+  }
+}
+
+i = i + 1
+gls.left[i] ={
+  FileIcon = {
+    provider = {'FileIcon'},
+    condition = buffer_not_empty,
+    highlight = {require('galaxyline.provider_fileinfo').get_file_icon_color,colors.darkblue},
   },
 }
-gls.left[4] = {
+i = i + 1
+gls.left[i] = {
   FileName = {
     provider = {'FileName','FileSize'},
     condition = buffer_not_empty,
-    highlight = {colors.fg,colors.line_bg,'bold'}
+    highlight = {colors.magenta,colors.darkblue}
   }
 }
 
-gls.left[5] = {
-  GitIcon = {
-    provider = function() return '  ' end,
-    condition = require('galaxyline.provider_vcs').check_git_workspace,
-    highlight = {colors.orange,colors.line_bg},
-  }
-}
-gls.left[6] = {
-  GitBranch = {
-    provider = 'GitBranch',
-    condition = require('galaxyline.provider_vcs').check_git_workspace,
-    highlight = {'#8FBCBB',colors.line_bg,'bold'},
-  }
-}
 
-gls.left[7] = {
-  LeftEnd = {
-    provider = function() return '' end,
-    separator = '',
-    separator_highlight = {colors.bg,colors.line_bg},
-    highlight = {colors.line_bg,colors.line_bg}
-  }
-}
-
-gls.left[6] = {
-  CocFunc = {
-    provider = CocFunc,
-    icon = '  ',
-    highlight = {colors.yellow,colors.bg},
-  }
-}
-
-gls.left[8] = {
-    CocStatus = {
-     provider = CocStatus,
-     highlight = {colors.green,colors.bg},
-     icon = '  '
+i = 1
+gls.right[i] = {
+    CocFunc = {
+        provider = function()
+            if CocFunc() ~= nil and CocFunc() ~= '' then
+                return ' ⨍' .. CocFunc() .. ' '
+            else
+                return  ''
+            end
+        end,
+        condition = buffer_not_empty,
+        highlight = {colors.magenta,colors.darkblue,'bold'}
     }
 }
 
-gls.right[1]= {
+i = i + 1
+gls.right[i] = {
   FileFormat = {
-    provider = 'FileFormat',
-    separator = ' ',
-    separator_highlight = {colors.bg,colors.line_bg},
-    highlight = {colors.fg,colors.line_bg,'bold'},
-  }
-}
-gls.right[4] = {
-  LineInfo = {
-    provider = 'LineColumn',
-    separator = ' | ',
-    separator_highlight = {colors.blue,colors.line_bg},
-    highlight = {colors.fg,colors.line_bg},
-  },
-}
-gls.right[5] = {
-  PerCent = {
-    provider = 'LinePercent',
-    separator = ' ',
-    separator_highlight = {colors.line_bg,colors.line_bg},
-    highlight = {colors.cyan,colors.darkblue,'bold'},
+    provider = function()
+      if not buffer_not_empty() then return '' end
+      local icon = icons[vim.bo.fileformat] or ''
+      return string.format(' %s %s ', icon, vim.bo.fileencoding)
+    end,
+    separator = '',
+    separator_highlight = {colors.purple,function()
+      if not buffer_not_empty() then
+        return colors.purple
+      end
+        return colors.darkblue
+    end},
+
+    highlight = {colors.grey,colors.purple},
   }
 }
 
--- gls.right[4] = {
---   ScrollBar = {
---     provider = 'ScrollBar',
---     highlight = {colors.blue,colors.purple},
---   }
--- }
---
--- gls.right[3] = {
---   Vista = {
---     provider = VistaPlugin,
---     separator = ' ',
---     separator_highlight = {colors.bg,colors.line_bg},
---     highlight = {colors.fg,colors.line_bg,'bold'},
---   }
--- }
+i = i + 1
+gls.right[i] = {
+  LineInfo = {
+    provider = 'LineColumn',
+    separator = '☰ ',
+    separator_highlight = {colors.darkblue,colors.purple},
+    highlight = {colors.grey,colors.purple},
+  },
+}
+i = i + 1
+gls.right[i] = {
+  PerCent = {
+    provider = 'LinePercent',
+    separator = '',
+    separator_highlight = {colors.darkblue,colors.purple},
+    highlight = {colors.grey,colors.darkblue},
+  }
+}
+i = i + 1
+gls.right[i] = {
+  ScrollBar = {
+    provider = 'ScrollBar',
+    highlight = {colors.yellow,colors.purple},
+  }
+}
 
 gls.short_line_left[1] = {
   BufferType = {
     provider = 'FileTypeName',
     separator = '',
-    condition = has_file_type,
     separator_highlight = {colors.purple,colors.bg},
-    highlight = {colors.fg,colors.purple}
+    highlight = {colors.grey,colors.purple}
   }
 }
 
+gls.short_line_left[2] = {
+  SFileName = {
+    provider =  'SFileName',
+    condition = buffer_not_empty,
+    highlight = {colors.fg,colors.bg,'bold'}
+  }
+}
 
 gls.short_line_right[1] = {
   BufferIcon = {
     provider= 'BufferIcon',
-    separator = '',
-    condition = has_file_type,
     separator_highlight = {colors.purple,colors.bg},
-    highlight = {colors.fg,colors.purple}
+    highlight = {colors.grey,colors.purple}
   }
 }
 
