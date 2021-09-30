@@ -21,3 +21,5 @@ source ~/.config/nvim/cf/color.vim
 source ~/.config/nvim/cf/asynctask.vim
 source ~/.config/nvim/cf/treesitter.vim
 source ~/.config/nvim/cf/galaxyline.vim
+source ~/.config/nvim/cf/nvim-tree.vim
+source ~/.config/nvim/cf/vista.vim

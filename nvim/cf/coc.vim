@@ -40,8 +40,6 @@ inoremap <silent><expr> <c-space> coc#refresh()
 ""
 nmap <leader>rn <Plug>(coc-rename)
 
-nnoremap <localleader>n :NERDTreeToggle<CR>
-
 nn <silent> xb :call CocLocations('ccls','$ccls/inheritance')<cr>
 nn <silent> xb :call CocLocations('ccls','$ccls/inheritance',{'levels':3})<cr>
 nn <silent> xd :call CocLocations('ccls','$ccls/inheritance',{'derived':v:true})<cr>

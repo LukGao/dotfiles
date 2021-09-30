@@ -8,6 +8,7 @@ Plug 'bagrat/vim-buffet'                " buffer切换
 
 Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
 Plug 'kyazdani42/nvim-web-devicons' 
+Plug 'kyazdani42/nvim-tree.lua'
 
 Plug 'mhinz/vim-startify'               " 启动页
 Plug 'fatih/vim-go'
@@ -15,7 +16,7 @@ Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'ryanoasis/vim-devicons'           " icon
 Plug 'MattesGroeger/vim-bookmarks'      " 书签
 Plug 'voldikss/vim-translator'           " 翻译
-Plug 'preservim/nerdtree'               " 目录树
+"Plug 'preservim/nerdtree'               " 目录树
 Plug 'mbbill/undotree'                  " 后悔药
 Plug 'mg979/vim-visual-multi'           " 多行编辑
 Plug 'luochen1990/rainbow'              " 多彩括号
@@ -38,6 +39,6 @@ Plug 'dracula/vim',                     { 'as': 'dracula' } " 主题
 Plug 'skywind3000/vim-quickui'
 Plug 'skywind3000/asynctasks.vim'
 Plug 'skywind3000/asyncrun.vim'
+Plug 'liuchengxu/vista.vim'
 
 call plug#end()
-
