@@ -104,7 +104,11 @@ gls.left[i] = {
   ViMode = {
     provider = function()
       local alias = {n = 'NORMAL',i = 'INSERT',c= 'COMMAND',v= 'VISUAL',V= 'VISUAL LINE', [''] = 'VISUAL BLOCK'}
-      return ' ' .. alias[vim.fn.mode()]
+      if alias[vim.fn.mode()] ~= nil then
+        return ' ' .. alias[vim.fn.mode()]
+      else
+        return ' '  .. vim.fn.mode()
+      end
     end,
     separator = '',
     separator_highlight = {colors.darkblue,function()
