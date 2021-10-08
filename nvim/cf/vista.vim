@@ -18,7 +18,7 @@ let g:vista_cursor_delay = 0
 let g:vista_sidebar_width = 35
 let g:vista_stay_on_open = 0
 let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
-autocmd bufenter * if winnr("$") == 1 && vista#sidebar#IsOpen() | execute "normal! :q!\<CR>" | endif
+"autocmd bufenter * if winnr("$") == 1 && vista#sidebar#IsOpen() | execute "normal! :q!\<CR>" | endif
 
 nnoremap <localleader>g :Vista!!<CR>
 
