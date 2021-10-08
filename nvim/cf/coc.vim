@@ -10,7 +10,7 @@ return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
 
-let g:coc_global_extensions =['coc-tabnine','coc-snippets','coc-cmake','coc-pairs','coc-json','coc-highlight','coc-emoji','coc-lists','coc-yaml','coc-vetur', 'coc-eslint', 'coc-emmet', 'coc-css', 'coc-html','coc-prettier', 'coc-tsserver']
+let g:coc_global_extensions =['coc-tabnine','coc-snippets','coc-cmake','coc-pairs','coc-json','coc-highlight','coc-emoji','coc-lists','coc-yaml','coc-vetur', 'coc-eslint', 'coc-translator' , 'coc-emmet', 'coc-css', 'coc-html','coc-prettier', 'coc-tsserver']
 
 set updatetime=300
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif

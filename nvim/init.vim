@@ -23,3 +23,7 @@ source ~/.config/nvim/cf/treesitter.vim
 source ~/.config/nvim/cf/galaxyline.vim
 source ~/.config/nvim/cf/nvim-tree.vim
 source ~/.config/nvim/cf/vista.vim
+
+autocmd FileType c,cpp setlocal keywordprg=:Cppman
+
+
