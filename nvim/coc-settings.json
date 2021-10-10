@@ -106,6 +106,7 @@
   "coc.preferences.formatOnSaveFiletypes": ["markdown", "json"],
   "list.source.files.defaultOptions": ["--auto-preview"],
   "list.source.outline.defaultOptions": ["--auto-preview"],
+  "translator.engines": ["bing", "youdao", "haici"],
   "coc.preferences.currentFunctionSymbolAutoUpdate": true,
   "coc.preferences.messageLevel": "error",
   "coc.preferences.extensionUpdateCheck": "daily"
