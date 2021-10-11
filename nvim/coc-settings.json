@@ -101,7 +101,6 @@
   "diagnostic.errorSign": "●",
   "diagnostic.warningSign": "●",
   "diagnostic.refreshOnInsertMode": true,
-  "diagnostic.displayByAle": true,
   "rainbow-fart.ffplay": "ffplay",
   "coc.preferences.formatOnSaveFiletypes": ["markdown", "json"],
   "list.source.files.defaultOptions": ["--auto-preview"],

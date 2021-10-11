@@ -18,7 +18,7 @@ Plug 'mbbill/undotree'
 Plug 'mg979/vim-visual-multi'         
 Plug 'luochen1990/rainbow'            
 Plug 'lfv89/vim-interestingwords'     
-Plug 'neomake/neomake',       { 'for':['c', 'cpp','cc','go','py'] }                
+Plug 'neomake/neomake'
 Plug 'Chiel92/vim-autoformat'
 Plug 'majutsushi/tagbar',               { 'on':'TagbarToggle'}
 Plug 'neoclide/coc.nvim',               {'branch': 'release'}
