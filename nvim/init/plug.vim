@@ -26,7 +26,7 @@ Plug 'tpope/vim-endwise',               {'for':['c','cpp','cc']}
 Plug 'honza/vim-snippets',              {'for':['go','c','cpp','cc','py']}  
 Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdcommenter',        {'for':['go','c','cpp','cc','py']}  
-Plug 'tpope/vim-abolish'             ,  {'for':['go','c','cpp','cc','py']}  
+Plug 'tpope/vim-abolish'    
 Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-indent'
 Plug 'kana/vim-textobj-syntax'
@@ -36,6 +36,6 @@ Plug 'dracula/vim',                     { 'as': 'dracula' }
 Plug 'skywind3000/vim-quickui'
 Plug 'skywind3000/asynctasks.vim'
 Plug 'skywind3000/asyncrun.vim'
-Plug 'liuchengxu/vista.vim',       { 'for':['c', 'cpp','cc','go','py'] }
-
+Plug 'liuchengxu/vista.vim'
+Plug 'voldikss/vim-translator'
 call plug#end()
