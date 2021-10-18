@@ -2,7 +2,6 @@ source ~/.config/nvim/init/option.vim
 source ~/.config/nvim/init/key.vim
 source ~/.config/nvim/init/dir.vim
 source ~/.config/nvim/init/plug.vim
-"source ~/.config/nvim/cf/spaceline.vim
 source ~/.config/nvim/cf/coc.vim
 source ~/.config/nvim/cf/autocmd.vim
 source ~/.config/nvim/cf/autoformat.vim
@@ -22,7 +21,7 @@ source ~/.config/nvim/cf/asynctask.vim
 source ~/.config/nvim/cf/treesitter.vim
 source ~/.config/nvim/cf/galaxyline.vim
 source ~/.config/nvim/cf/nvim-tree.vim
-source ~/.config/nvim/cf/vista.vim
+source ~/.config/nvim/cf/leaderf.vim
 
 autocmd FileType c,cpp setlocal keywordprg=:Cppman
 

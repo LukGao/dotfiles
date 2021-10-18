@@ -89,7 +89,5 @@ function! Fzf_dev()
 endfunction
 
 nnoremap <silent> <localleader>b :Buffers<CR>
-nnoremap <silent> <localleader>f :call Fzf_dev()<CR>
-nnoremap <silent> <localleader>r :Rg<CR>
-nnoremap <silent> <localleader>w :Rg <C-R><C-W><CR>
-nnoremap <silent> <localleader>m :History<CR>
+
+
