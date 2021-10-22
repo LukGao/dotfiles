@@ -61,19 +61,16 @@ nn xx x
 
 nmap <localleader>a <Plug>(coc-refactor)
 
-function! CocCurrentFunction()
-    let currentFunctionSymbol = get(b:, 'coc_current_function', '')
-    return currentFunctionSymbol !=# '' ? "\uf6a6 " .currentFunctionSymbol : 'no symbol'
-endfunction
 
 xmap if <Plug>(coc-funcobj-i)
 xmap af <Plug>(coc-funcobj-a)
 omap if <Plug>(coc-funcobj-i)
 omap af <Plug>(coc-funcobj-a)
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-" Remap for do codeAction of current line
+
+
+
 nmap <leader>ac  <Plug>(coc-codeaction)
-" Fix autofix problem of current line
+
 nmap <leader>qf  <Plug>(coc-fix-current)
 
 

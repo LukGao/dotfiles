@@ -1,4 +1,9 @@
 inoremap jk <esc>
+nnoremap k gk
+nnoremap gk k
+nnoremap j gj
+nnoremap gj j
+
 nnoremap <space><space> %
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
