@@ -45,6 +45,5 @@ Plug 'skywind3000/asyncrun.vim'
 Plug 'skywind3000/asynctasks.vim'
 
 Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
-
-
+Plug 'github/copilot.vim'
 call plug#end()
