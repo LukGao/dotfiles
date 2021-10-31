@@ -17,7 +17,7 @@
       "trace.server": "verbose",
       "initializationOptions": {
         "cache": {
-          "directory": "/tmp/.ccls-cache"
+          "directory": ".ccls-cache"
         },
         "clang": {
           "extraArgs": [
