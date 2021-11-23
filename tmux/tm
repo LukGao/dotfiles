@@ -1,0 +1,2 @@
+tmux list-windows -a | grep -v "$(tmux display-message -p '#S:#I: #{window_name}')" |~/.tmux/plugins/fzf/fzf --preview="sed 's/: .*$//' | xargs -I{} tmux capture-pane -ep -t {}" --preview-window=":follow:hidden" | sed 's/: .*//' |  xargs tmux select-window -t
+

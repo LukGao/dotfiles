@@ -24,7 +24,6 @@ echo "export PATH=${BinaryDir}:\$PATH" >> $HOME/.bashrc
 
 cp $BasePath/.inputrc $HOME
 cp $BasePath/.tmux.conf $HOME
-cp $BasePath/.tmux.conf.local $HOME
 cp -r $BasePath/nvim $HOME/.config/nvim
 
 
@@ -106,6 +105,13 @@ setting_git_config()
     git config --global core.editor "vim"
 }
 
+config_tmux()
+{
+    mkdir -p $HOME/.tmux/plugins/fzf
+    cp $BasePath/tmux/fzf $HOME/.tmux/plugins/fzf/
+    cp $BasePath/tmux/tm $HOME/.tmux/
+}
+
 
 main()
 {
@@ -117,6 +123,7 @@ main()
     plug_install
     install_fzf_z
     install_fd_rg
+    config_tmux
     ccls_install
 }
 
