@@ -20,11 +20,11 @@ set autochdir
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 代码缩进和排版
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set expandtab               " 将制表符扩展为空格
 set tabstop=4               " 设置编辑时制表符占用空格数
 set shiftwidth=4            " 设置格式化时制表符占用空格数
 set softtabstop=4           " 设置4个空格为制表符
 set smarttab                " 在行和段开始处使用制表符
+set expandtab               " 将制表符扩展为空格
 set nowrap                  " 禁止折行
 set backspace=2             " 使用回车键正常处理indent,eol,start等
 set sidescroll=10           " 设置向右滚动字符数

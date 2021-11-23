@@ -10,46 +10,6 @@
       "command": "clangd",
       "rootPatterns": ["compile_flags.txt", "compile_commands.json"],
       "filetypes": ["c", "cc", "cpp", "c++", "objc", "objcpp"]
-    },
-    "ccls": {
-      "command": "ccls",
-      "filetypes": ["c", "cpp", "hpp", "cc"],
-      "trace.server": "verbose",
-      "initializationOptions": {
-        "cache": {
-          "directory": ".ccls-cache"
-        },
-        "clang": {
-          "extraArgs": [
-            "-isystem",
-            "/Library/Developer/CommandLineTools/usr/include/c++/v1"
-          ]
-        },
-        "highlight": {
-          "lsRanges": true
-        },
-        "completion": {
-          "detailedLabel": true,
-          "placeholder": true
-        },
-        "client": {
-          "snippetSupport": true
-        },
-        "index": {
-          "onChange": false,
-          "initialNoLinkage": true,
-          "threads": 2
-        }
-      },
-      "trace.server": "verbose",
-      "rootPatterns": [
-        ".ccls",
-        "compile_commands.json",
-        ".vim/",
-        ".git/",
-        ".hg/",
-        ".svn/"
-      ]
     }
   },
   "suggest.completionItemKindLabels": {
@@ -80,8 +40,6 @@
     "default": "\uf29c"
   },
   "coc.preferences.snippetStatusText": "Ⓢ ",
-  "todolist.autoUpload": true,
-  "todolist.monitor": true,
   "coc.source.file.priority": 10,
   "coc.source.around.priority": 8,
   "coc.source.emoji.priority": 3,
@@ -97,16 +55,15 @@
   "snippets.extends": {
     "cpp": ["c"]
   },
-  "diagnostic.signOffset": 9999999,
   "diagnostic.errorSign": "●",
   "diagnostic.warningSign": "●",
   "diagnostic.refreshOnInsertMode": true,
-  "rainbow-fart.ffplay": "ffplay",
   "coc.preferences.formatOnSaveFiletypes": ["markdown", "json"],
   "list.source.files.defaultOptions": ["--auto-preview"],
   "list.source.outline.defaultOptions": ["--auto-preview"],
   "translator.engines": ["bing", "youdao", "haici"],
   "coc.preferences.currentFunctionSymbolAutoUpdate": true,
   "coc.preferences.messageLevel": "error",
-  "coc.preferences.extensionUpdateCheck": "daily"
+  "coc.preferences.extensionUpdateCheck": "daily",
+  "clangd.arguments": ["--background-index=true"]
 }
