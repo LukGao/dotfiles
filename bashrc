@@ -43,10 +43,10 @@ reset=$(tput sgr0);
 if [ -n "$BASH_VERSION" ]; then
     if [ "$UID" -eq 0 ]; then
         #export PS1='\[\e[38;5;135m\]\u\[\e[0m\]@\[\e[38;5;166m\]\h\[\e[0m\] \[\e[31m\]$(_fish_collapsed_pwd)\[\e[0m\] \[\e[31m\]➜\[\e[0m\] '
-        export PS1='\[\e[38;5;135m\]•\[\e[0m\]•\[\e[38;5;166m\]•\[\e[0m\] \[\e[32m\]$(_fish_collapsed_pwd)\[\e[0m\] \[\e[31m\]➜\[\e[0m\] '
+        export PS1='\[\e[38;5;135m\]•\[\e[0m\] •\[\e[38;5;166m\] •\[\e[0m\] \[\e[32m\]$(_fish_collapsed_pwd)\[\e[0m\] \[\e[31m\]➜\[\e[0m\] '
     else
         #export PS1="\[${bold}\] \[${orange}\]>\[${yellow}\]>\[${reset}\] $(_fish_collapsed_pwd) ➜ "
-        export PS1='\[\e[38;5;135m\]•\[\e[0m\]•\[\e[38;5;166m\]•\[\e[0m\] \[\e[32m\]$(_fish_collapsed_pwd)\[\e[0m\] \[\e[32m\]➜\[\e[0m\] '
+        export PS1='\[\e[38;5;135m\]•\[\e[0m\] •\[\e[38;5;166m\] •\[\e[0m\] \[\e[32m\]$(_fish_collapsed_pwd)\[\e[0m\] \[\e[32m\]➜\[\e[0m\] '
     fi
 fi
 
@@ -64,6 +64,8 @@ alias zb='z -b'      # 快速回到父目录
 alias on='nvim $(fzf --height 40% --reverse)'
 alias ok='nvim'
 alias tmux='tmux -2'
+
+alias vi='nvim -u NONE -N'
 
 alias proxy='export all_proxy=socks5://127.0.0.1:1080'
 alias unproxy='unset all_proxy'

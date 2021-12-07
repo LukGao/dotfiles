@@ -1,3 +1,5 @@
+vim.cmd[[
+
 let g:tagbar_width=25
 let g:tagbar_type_go = {
       \ 'ctagstype' : 'go',
@@ -27,3 +29,4 @@ let g:tagbar_type_go = {
       \ 'ctagsargs' : '-sort -silent'
       \ }
 nnoremap <localleader>g :TagbarToggle<CR>
+]]

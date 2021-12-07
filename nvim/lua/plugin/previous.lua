@@ -1,3 +1,6 @@
+
+vim.cmd[[
+
 " 0:up, 1:down, 2:pgup, 3:pgdown, 4:top, 5:bottom
 function! Tools_PreviousCursor(mode)
     if winnr('$') <= 1
@@ -39,4 +42,4 @@ inoremap <silent><M-j> <c-\><c-o>:call Tools_PreviousCursor(1)<cr>
 inoremap <silent><M-p> <c-\><c-o>:call Tools_PreviousCursor(2)<cr>
 inoremap <silent><M-n> <c-\><c-o>:call Tools_PreviousCursor(3)<cr>
 
-
+]]

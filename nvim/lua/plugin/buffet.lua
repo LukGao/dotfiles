@@ -1,3 +1,4 @@
+vim.cmd[[
 nmap <leader>1 <Plug>BuffetSwitch(1)
 nmap <leader>2 <Plug>BuffetSwitch(2)
 nmap <leader>3 <Plug>BuffetSwitch(3)
@@ -15,7 +16,8 @@ let g:buffet_show_index = 1
 let g:buffet_powerline_separators = 1
 let g:buffet_left_trunc_icon = "\uf0a8"
 let g:buffet_right_trunc_icon = "\uf0a9"
-
+]]
+vim.cmd[[
 function! g:BuffetSetCustomColors()
     hi! BuffetCurrentBuffer cterm=NONE ctermbg=106 ctermfg=8 guibg=#b8bb26 guifg=#000000
     hi! BuffetTrunc cterm=bold ctermbg=66 ctermfg=8 guibg=#458588 guifg=#000000
@@ -24,17 +26,7 @@ function! g:BuffetSetCustomColors()
     hi! BuffetActiveBuffer cterm=NONE ctermbg=10 ctermfg=239 guibg=#999999 guifg=#504945
 endfunction
 
-command! BcloseOthers call <SID>BufCloseOthers()
-function! <SID>BufCloseOthers()
-   let l:currentBufNum   = bufnr("%")
-   let l:alternateBufNum = bufnr("#")
-   for i in range(1,bufnr("$"))
-     if buflisted(i)
-       if i!=l:currentBufNum
-         execute("bdelete ".i)
-       endif
-     endif
-   endfor
-endfunction
-map <leader>bdo :BcloseOthers<cr>
+
+]]
+
 

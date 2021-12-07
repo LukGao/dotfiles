@@ -1,8 +1,5 @@
-lua <<EOF
-
 local gl = require('galaxyline')
 local gls = gl.section
-gl.short_line_list = { "NvimTree" }
 
 
 local colors = {
@@ -237,5 +234,3 @@ gls.short_line_right[1] = {
     highlight = {colors.grey,colors.purple}
   }
 }
-
-EOF

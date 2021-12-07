@@ -7,7 +7,7 @@ export BinaryDir="$HOME/bin"
 export DotfilesDir=$PWD
 export DEBIAN_FRONTEND=noninteractive
 
-nvim_url='https://github.com/neovim/neovim/releases/download/v0.5.0/nvim-linux64.tar.gz'
+nvim_url='https://github.com/neovim/neovim/releases/download/v0.6.0/nvim-linux64.tar.gz'
 fd_url=https://github.com/sharkdp/fd/releases/download/v8.2.1/fd-musl_8.2.1_amd64.deb
 rg_url=https://github.com/BurntSushi/ripgrep/releases/download/13.0.0/ripgrep_13.0.0_amd64.deb
 z_url='https://github.com/skywind3000/z.lua.git'
@@ -62,8 +62,8 @@ plug_install()
     curl -sSL install-node.now.sh/lts | sed '/confirm /d'  | ${SUDO} bash
 
     echo "-----------------------------------------------------------"
-    ${BinaryDir}/nvim +'PlugInstall --sync' +'PlugUpdate' +qa!
-    ${BinaryDir}/nvim +'PlugInstall --sync' +'PlugUpdate' +qa!
+    ${BinaryDir}/nvim nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync' +qa!
+    ${BinaryDir}/nvim nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync' +qa!
 }
 
 

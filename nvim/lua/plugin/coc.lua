@@ -1,0 +1,1 @@
+vim.g.coc_global_extensions ={'coc-clangd','coc-rust-analyzer','coc-tabnine','coc-snippets','coc-cmake','coc-pairs','coc-json','coc-highlight','coc-emoji','coc-lists','coc-yaml', 'coc-translator' ,'coc-explorer'}
