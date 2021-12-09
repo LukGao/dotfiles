@@ -1,7 +1,12 @@
 
+
+function prequire(...)
+    pcall(require, ...)
+end
+
 require('plugin.plugin')
-require('plugin.treesitter')
-require('plugin.galaxyline')
+prequire('plugin.treesitter')
+prequire('plugin.galaxyline')
 require('plugin.color')
 require('plugin.coc')
 require('plugin.translate')

@@ -14,7 +14,6 @@ local plug_func = function()
 	use{"dracula/vim",						as 		= "dracula"}
 	use{"Yggdroot/LeaderF", 				run 	= ":LeaderfInstallCExtension"}
 	use{"neoclide/coc.nvim", 				branch 	= "release"}
-	use{"wbthomason/packer.nvim", 			opt 	= true}
 	use{"glepnir/galaxyline.nvim", 			branch 	= "main" }
 	use{"nvim-treesitter/nvim-treesitter", 	run 	= ":TSUpdate"}
 
