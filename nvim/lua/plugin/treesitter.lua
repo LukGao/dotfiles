@@ -1,12 +1,8 @@
-
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = {'c', 'cpp', 'toml', 'json', 'lua', 'bash', 'rust'},
+require("nvim-treesitter.configs").setup({
+  ensure_installed = {"python", "cpp", "lua", "vim"},
+  ignore_install = {}, -- List of parsers to ignore installing
   highlight = {
-    enable = true,
-  }
-}
--- integrate with rainbow
-require "nvim-treesitter.highlight"
-local hlmap = vim.treesitter.highlighter.hl_map
-hlmap.error = nil
-hlmap["punctuation.delimiter"] = "Delimiter"
+    enable = true, -- false will disable the whole extension
+    disable = {}, -- list of language that will be disabled
+  },
+})

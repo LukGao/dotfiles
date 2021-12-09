@@ -1,9 +1,10 @@
 
 require('plugin.plugin')
-require('plugin.coc')
 require('plugin.treesitter')
-require('plugin.translate')
 require('plugin.galaxyline')
+require('plugin.color')
+require('plugin.coc')
+require('plugin.translate')
 require('plugin.startify')
 require('plugin.leaderf')
 require('plugin.neomake')
