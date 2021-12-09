@@ -7,14 +7,14 @@ ENV LANG=zh_CN.UTF-8
 ENV LANGUAGE=zh_CN.UTF-8
 ENV LC_ALL=zh_CN.UTF-8
 ENV TZ=Asia/Shanghai 
-ENV nvim_url=https://github.com/neovim/neovim/releases/download/v0.5.0/nvim-linux64.tar.gz 
+ENV nvim_url=https://github.com/neovim/neovim/releases/download/v0.6.0/nvim-linux64.tar.gz 
 
 
 RUN apt-get -qq update 
 RUN apt-get install -y -qq locales
 RUN locale-gen zh_CN.UTF-8  
-RUN apt-get install -y -qq --no-install-recommends cowsay nyancat xz-utils curl wget git nodejs lua5.1 python3-dev 
-RUN apt-get install -y -qq python3-pip ruby rubygems 
+RUN apt-get install -y -qq --no-install-recommends cowsay nyancat xz-utils curl wget git nodejs lua5.1 python3-dev python3-pip ruby rubygems 
+
 RUN pip3 -qq install neovim
 
 RUN rm -rf /var/lib/apt/lists/* 
