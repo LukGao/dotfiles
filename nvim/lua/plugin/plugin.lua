@@ -15,7 +15,7 @@ local plug_func = function()
 	use{"Yggdroot/LeaderF", 				run 	= ":LeaderfInstallCExtension"}
 	use{"neoclide/coc.nvim", 				branch 	= "release"}
 	use{"glepnir/galaxyline.nvim", 			branch 	= "main" }
-	use{"nvim-treesitter/nvim-treesitter", 	run 	= ":TSUpdate"}
+	use{"nvim-treesitter/nvim-treesitter", 	run 	= ":TSInstall"}
 
 	use{"preservim/tagbar"}
 	use{"rcarriga/nvim-notify"}
