@@ -3,7 +3,7 @@ vim.g.maplocalleader=';'
 vim.opt.termguicolors=true
 vim.opt.number=true
 vim.opt.showcmd=true
-vim.opt.cursorline=true
+-- vim.opt.cursorline=true
 vim.opt.ttimeoutlen=0
 vim.opt.laststatus=2
 vim.opt.showtabline=2
@@ -17,7 +17,8 @@ vim.opt.expandtab=true
 vim.opt.wrap=false
 vim.opt.sidescroll=10
 vim.opt.colorcolumn='100'
-vim.opt.listchars = {eol = '↲', tab = '▸ ', trail = '·'}
+vim.opt.listchars = {tab = '▸ ', trail = '·'}
+vim.opt.list=true
 vim.opt.hidden=true
 vim.opt.shortmess='aFc'
 vim.opt.hlsearch=true
