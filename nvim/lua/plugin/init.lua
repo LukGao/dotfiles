@@ -1,5 +1,3 @@
-
-
 function prequire(...)
     pcall(require, ...)
 end
@@ -21,9 +19,4 @@ require('plugin.tagbar')
 require('plugin.previous')
 require('plugin.interestingwords')
 require('plugin.explorer')
-
-
-
-
-
-
+require('plugin.utf8')
