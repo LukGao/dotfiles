@@ -5,12 +5,6 @@
       "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
       "filetypes": ["go"]
     },
-    "clangd": {
-      "trace.server": "verbose",
-      "command": "clangd",
-      "rootPatterns": ["compile_flags.txt", "compile_commands.json"],
-      "filetypes": ["c", "cc", "cpp", "c++", "objc", "objcpp"]
-    }
   },
   "explorer.width": 30,
   "explorer.git.enable": false,
@@ -64,5 +58,5 @@
   "coc.preferences.currentFunctionSymbolAutoUpdate": true,
   "coc.preferences.messageLevel": "error",
   "coc.preferences.extensionUpdateCheck": "daily",
-  "clangd.arguments": ["--background-index=true"]
+  "clangd.arguments": ["--background-index=true","--suggest-missing-includes","--clang-tidy"],
 }
