@@ -154,11 +154,11 @@ ins_left {
     return '%='
   end,
 }
-ins_left {
-  function()
-    return '%='
-  end,
-}
+-- ins_left {
+--   function()
+--     return '%='
+--   end,
+-- }
 -- echo CocAction('services')
 ins_left {
   function ()
