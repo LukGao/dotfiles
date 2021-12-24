@@ -14,13 +14,14 @@ local plug_func = function()
 	use{"dracula/vim",						as 		= "dracula"}
 	use{"Yggdroot/LeaderF", 				run 	= ":LeaderfInstallCExtension"}
 	use{"neoclide/coc.nvim", 				branch 	= "release"}
-	use{"glepnir/galaxyline.nvim", 			branch 	= "main" }
 	use{"nvim-treesitter/nvim-treesitter", 	run 	= ":TSInstall"}
-
+	use {
+	  'nvim-lualine/lualine.nvim',
+	   requires = {'kyazdani42/nvim-web-devicons', opt = true}
+	}
 	use{"preservim/tagbar"}
 	use{"rcarriga/nvim-notify"}
 	use{"ryanoasis/vim-devicons"}
-	use{"kyazdani42/nvim-web-devicons"}
 	use{"mhinz/vim-startify"}
 	use{"kana/vim-textobj-user"}
 	use{"kana/vim-textobj-indent"}
