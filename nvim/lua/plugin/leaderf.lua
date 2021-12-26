@@ -18,6 +18,5 @@ vim.g.Lf_WildIgnore = {
 local util = require('config.util')
 
 util.nmap('<c-f>', ':LeaderfFunction<CR>')
-util.nmap('<c-m>', ':LeaderfMru<CR>')
 
 

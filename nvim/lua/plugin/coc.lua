@@ -1,2 +1,0 @@
-vim.g.coc_global_extensions ={'coc-clangd','coc-rust-analyzer','coc-snippets','coc-cmake','coc-pairs','coc-json','coc-highlight','coc-emoji','coc-lists','coc-yaml', 'coc-translator' ,'coc-explorer'}
-vim.cmd[[ nmap <leader>rn <Plug>(coc-rename) ]]
