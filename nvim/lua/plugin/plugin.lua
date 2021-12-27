@@ -46,7 +46,15 @@ local plug_func = function()
     use {'andymass/vim-matchup'}
     use {'phaazon/hop.nvim', as = 'hop', config = function() require('hop').setup() end}
     use {'folke/trouble.nvim', config = function() require('trouble').setup() end}
-    use {'kevinhwang91/nvim-bqf', ft = 'qf',config = function() require('bqf').setup() end}
+    use {'xiyaowong/nvim-bqf', ft = 'qf',config = function() require('bqf').setup({
+    	vim.cmd[[
+    	augroup BQF
+			  au!
+			  au FileType qf nnoremap <silent> <esc> :cclose<CR>
+			augroup END
+    	]]
+
+    }) end}
     use {'junegunn/fzf', run = function()vim.fn['fzf#install']()end}
 use {
   "folke/twilight.nvim",

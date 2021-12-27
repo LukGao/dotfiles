@@ -11,22 +11,9 @@ local function create_capabilities( ... )
 end
 
 function M.setup()
-  local nvim_lsp = require("lspconfig")
-
-  nvim_lsp.clangd.setup {
-    filetypes = { "cpp" ,"c"},
-    cmd = {
-      "clangd",
-      "--background-index",
-      "--completion-style=detailed",
-      "--suggest-missing-includes",
-      "--clang-tidy",
-    }
-  }
   local lsp_installer = require("nvim-lsp-installer")
-    lsp_installer.on_server_ready(function(server)
-    
-    server:setup({
+
+  local cfg = {
       capabilities = create_capabilities(),
       on_attach = function ( client, bufnr )
 
@@ -52,7 +39,26 @@ function M.setup()
           ]], false)
         end
       end
-    })
+    }
+
+    lsp_installer.on_server_ready(function(server)
+    
+    if server == "clangd" then 
+      cfg["settings"] = {
+        ["clangd"] = {
+          filetypes = { "cpp" ,"c"},
+          cmd = {
+            "clangd",
+            "--background-index",
+            "--completion-style=detailed",
+            "--suggest-missing-includes",
+            "--clang-tidy",
+          }
+        }
+      }
+    end
+    
+    server:setup(cfg)
     
     vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
       underline = false,
