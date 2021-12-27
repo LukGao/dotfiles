@@ -26,7 +26,6 @@ local plug_func = function()
     use{"nvim-treesitter/nvim-treesitter", config = require("plugin.treesitter")}
     use{"kyazdani42/nvim-web-devicons"}
     use{"nvim-lualine/lualine.nvim", config = require("plugin.lualine")}
-    use{"mfussenegger/nvim-lint"}
     use{"preservim/tagbar"}
     use{"rcarriga/nvim-notify"}
     use{"ryanoasis/vim-devicons"}
@@ -43,8 +42,14 @@ local plug_func = function()
     use{"scrooloose/nerdcommenter"}
     use{"nvim-lua/popup.nvim"}
     use{"nvim-treesitter/nvim-treesitter-refactor"}
-    use{"andymass/vim-matchup"}
-    use{"phaazon/hop.nvim", as = "hop", config = function() require("hop").setup() end}
+    use{"phaazon/hop.nvim", as = "hop", config = function() require("hop").setup({
+        vim.api.nvim_set_keymap('n', 'f', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>", {}),
+        vim.api.nvim_set_keymap('n', 'F', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>", {}),
+        vim.api.nvim_set_keymap('o', 'f', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, inclusive_jump = true })<cr>", {}),
+        vim.api.nvim_set_keymap('o', 'F', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, inclusive_jump = true })<cr>", {}),
+        vim.api.nvim_set_keymap('', 't', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>", {}),
+        vim.api.nvim_set_keymap('', 'T', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>", {}),
+    }) end}
     use{"folke/trouble.nvim", config = function() require("trouble").setup() end}
     use{"xiyaowong/nvim-bqf", ft = "qf",config = function() require("bqf").setup({
         vim.cmd[[
