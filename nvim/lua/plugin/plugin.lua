@@ -23,7 +23,7 @@ local plug_func = function()
     use{"wbthomason/packer.nvim"}
     use{"dracula/vim",                      as      = "dracula",config = function() vim.cmd[[silent! colorscheme dracula]] end}
     use{"Yggdroot/LeaderF",                 run     = ":LeaderfInstallCExtension"}
-    use{"nvim-treesitter/nvim-treesitter", run = ":TSUpdate", config = require("plugin.treesitter")}
+    use{"nvim-treesitter/nvim-treesitter", config = require("plugin.treesitter")}
     use{"kyazdani42/nvim-web-devicons"}
     use{"nvim-lualine/lualine.nvim", config = require("plugin.lualine")}
     use{"mfussenegger/nvim-lint"}
