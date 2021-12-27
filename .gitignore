@@ -111,3 +111,4 @@ ccls/
 llvm/
 nvim-linux64.*
 nvim-linux64/
+packer_compiled.lua

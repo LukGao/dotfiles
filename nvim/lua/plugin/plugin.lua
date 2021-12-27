@@ -4,23 +4,24 @@
 local plug_url_format = "https://github.com/%s"
 local packer_url = "https://github.com/wbthomason/packer.nvim"
 
-local install_path = vim.fn.stdpath("data").."/site/pack/packer/start/packer.nvim"
+local install_path = vim.fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-  vim.fn.system({"git", "clone", packer_url, install_path})
-  vim.cmd "packadd packer.nvim"
+  packer_bootstrap = vim.fn.system({'git', 'clone', '--depth', '1', packer_url, install_path})
 end
+
+
 
 vim.cmd("packadd! packer.nvim")
 
 local packer_config =  {
     auto_clean = false,
-    git = {default_url_format = plug_url_format}
+    git = { default_url_format = plug_url_format}
 }
 
 local plug_func = function()
     use{"nvim-lua/plenary.nvim"}
     use{"wbthomason/packer.nvim"}
-    use{"dracula/vim",                      as      = "dracula"}
+    use{"dracula/vim",                      as      = "dracula",config = function() vim.cmd[[silent! colorscheme dracula]] end}
     use{"Yggdroot/LeaderF",                 run     = ":LeaderfInstallCExtension"}
     use{"nvim-treesitter/nvim-treesitter", run = ":TSUpdate", config = require("plugin.treesitter")}
     use{"kyazdani42/nvim-web-devicons"}
@@ -41,7 +42,6 @@ local plug_func = function()
     use{"mg979/vim-visual-multi"}
     use{"scrooloose/nerdcommenter"}
     use {'nvim-lua/popup.nvim'}
-    use {'nvim-treesitter/nvim-treesitter-textobjects'}
     use {'nvim-treesitter/nvim-treesitter-refactor'}
     use {'andymass/vim-matchup'}
     use {'phaazon/hop.nvim', as = 'hop', config = function() require('hop').setup() end}
@@ -55,28 +55,9 @@ local plug_func = function()
     	]]
 
     }) end}
-    use {'junegunn/fzf', run = function()vim.fn['fzf#install']()end}
-use {
-  "folke/twilight.nvim",
-  config = function()
-    require("twilight").setup {
-      -- your configuration comes here
-      -- or leave it empty to use the default settings
-      -- refer to the configuration section below
-    }
-  end
-}
--- Lua
-use {
-  "folke/zen-mode.nvim",
-  config = function()
-    require("zen-mode").setup {
-      -- your configuration comes here
-      -- or leave it empty to use the default settings
-      -- refer to the configuration section below
-    }
-  end
-}
+    use {'junegunn/fzf'}
+    use {"folke/twilight.nvim",config = function()require("twilight").setup()end}
+    use {"folke/zen-mode.nvim",config = function()  require("zen-mode").setup()end}
 	  use{"bagrat/vim-buffet"}
     use{"skywind3000/vim-cppman"}
     use{"lfv89/vim-interestingwords"}
@@ -103,6 +84,9 @@ use {
     use{"neovim/nvim-lspconfig"}
     use{"williamboman/nvim-lsp-installer", config = function() require("lsp").setup() end}
     use{"ray-x/lsp_signature.nvim", config = require("plugin.lsp_signature")}
+    if packer_bootstrap then
+        require('packer').sync()
+    end
 end
 
 
