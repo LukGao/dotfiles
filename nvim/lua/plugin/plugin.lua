@@ -53,16 +53,17 @@ local plug_func = function()
         vim.api.nvim_set_keymap('o', 'F', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, inclusive_jump = true })<cr>", {}),
         vim.api.nvim_set_keymap('', 't', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>", {}),
         vim.api.nvim_set_keymap('', 'T', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>", {}),
-    
     }) end}
+
     use{"folke/trouble.nvim", config = function() require("trouble").setup() end}
+
     use{"xiyaowong/nvim-bqf", ft = "qf",config = function() require("bqf").setup({
-        vim.cmd[[
-        augroup BQF
-              au!
-              au FileType qf nnoremap <silent> <esc> :cclose<CR>
-            augroup END
-        ]]
+         vim.cmd[[
+            augroup BQF
+               au!
+               au FileType qf nnoremap <silent> <esc> :cclose<CR>
+             augroup END
+         ]]
 
     }) end}
     use{"junegunn/fzf"}

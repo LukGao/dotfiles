@@ -19,12 +19,15 @@ echo "source $BasePath/bashrc" >> $HOME/.bashrc
 echo "export PATH=${BinaryDir}:\$PATH" >> $HOME/.bashrc
 
 [ ! -d ${BinaryDir} ] && mkdir -p ${BinaryDir}
-
 [ ! -d ${ToolsDir} ] && mkdir -p ${ToolsDir}
+
+mkdir -p $HOME/.tmux/plugins/fzf
 
 cp $BasePath/.inputrc $HOME
 cp $BasePath/.tmux.conf $HOME
-cp -r $BasePath/nvim $HOME/.config/nvim
+ln -sf $BasePath/nvim $HOME/.config/nvim
+cp $BasePath/tmux/fzf $HOME/.tmux/plugins/fzf/
+cp $BasePath/tmux/tm $HOME/.tmux/
 
 
 if [[ $(id -u) -eq 0 ]];then
@@ -39,76 +42,39 @@ ${SUDO} apt-get update -qq
 
 export InstallCommand="${SUDO} apt-get install -y "
 
+${InstallCommand} curl git tmux wget python3 python3-dev python3-pip lua5.1 > /dev/null  2>&1
 
-install_prepare_software()
-{
-    ${InstallCommand} curl git wget libssl-dev zlib1g-dev libtinfo-dev build-essential python3 python3-dev python3-pip ruby rubygems tig htop tmux lua5.1 > /dev/null  2>&1
-    pip3 install -q neovim
-    ${SUDO} gem install -q coderay rouge
-}
+pip3 install -q neovim
 
-install_nvim()
-{
-    local old_dir=$PWD
-    cd "$ToolsDir"
-    curl -sSfL "$nvim_url" | tar -xzf -
-    ln -sf $PWD/nvim-linux64/bin/nvim ${BinaryDir}/nvim
-    cd ${old_dir}
-}
+git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 
-plug_install()
-{
-    curl -sSL install-node.now.sh/lts | sed '/confirm /d'  | ${SUDO} bash
-    echo "-----------------------------------------------------------"
-    git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-    ${BinaryDir}/nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
-}
+cd $ToolsDir
+curl -sSfL "$nvim_url" | tar -xzf -
+ln -sf $PWD/nvim-linux64/bin/nvim ${BinaryDir}/nvim
+cd -
 
 
+git clone --depth 1 ${z_url} ~/.z.lua
 
-install_fzf_z()
-{
-    git clone --depth 1 ${z_url} ~/.z.lua
-    git clone --depth 1 ${fzf_url} ~/.fzf
-    yes | ~/.fzf/install
-}
+git clone --depth 1 ${fzf_url} ~/.fzf && yes | ~/.fzf/install
 
-install_fd_rg()
-{
-    curl -sSfL -o rg.deb $rg_url && ${SUDO} dpkg -i rg.deb && rm -rf rg.deb
-    curl -sSfL -o fd.deb $fd_url && ${SUDO} dpkg -i fd.deb && rm -rf fd.deb
-}
+curl -sSfL -o rg.deb $rg_url && ${SUDO} dpkg -i rg.deb && rm -rf rg.deb
 
-setting_git_config()
-{
-    git config --global alias.tree "log --graph --all --relative-date --abbrev-commit --format=\"%x09 %h %Cgreen%cd%Creset [%Cblue%cn%Creset] %C(auto)%d%Creset %s\""
-    git config --global commit.gpgsign true
-    git config --global core.editor "vim"
-}
+curl -sSfL -o fd.deb $fd_url && ${SUDO} dpkg -i fd.deb && rm -rf fd.deb
 
-config_tmux()
-{
-    mkdir -p $HOME/.tmux/plugins/fzf
-    cp $BasePath/tmux/fzf $HOME/.tmux/plugins/fzf/
-    cp $BasePath/tmux/tm $HOME/.tmux/
-}
+[[ -f .bashrc ]] && source .bashrc
+[[ -f .bash_profile ]] && source .bash_profile
 
+z -h
+fzf --version
+rg --version
+fd --version
+nvim --version
+tmux -V
 
-main()
-{
-    # set_proxy
-
-    install_prepare_software
-    setting_git_config
-    install_nvim
-    plug_install
-    install_fzf_z
-    install_fd_rg
-    config_tmux
-}
-
-main "$@"
-
+git config --global alias.tree "log --graph --all --relative-date --abbrev-commit --format=\"%x09 %h %Cgreen%cd%Creset [%Cblue%cn%Creset] %C(auto)%d%Creset %s\""
+git config --global commit.gpgsign true
+git config --global core.editor "vim"
 
 # set_proxy()
 # {
