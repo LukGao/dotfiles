@@ -75,7 +75,7 @@ local plug_func = function()
     use{"tpope/vim-abolish"}
     use{"skywind3000/asyncrun.vim"}
     use{"skywind3000/asynctasks.vim"}
-    use{"github/copilot.vim",config = function()·
+    use{"github/copilot.vim",config = function()
         vim.cmd[[
             let g:copilot_no_tab_map = v:true
             imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
