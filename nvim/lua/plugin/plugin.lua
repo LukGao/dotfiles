@@ -47,7 +47,7 @@ local plug_func = function()
         keys = 'etovxqpdygfblzhckisuran', 
         jump_on_sole_occurrence = false,
         vim.api.nvim_set_keymap('n', 'f', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>", {}),
-        vim.api.nvim_set_keymap('n', '<localleader>f', ":HopWordCurrentLine<CR>", {}),
+        vim.api.nvim_set_keymap('n', 'e', ":HopWordCurrentLine<CR>", {}),
         vim.api.nvim_set_keymap('n', 'F', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>", {}),
         vim.api.nvim_set_keymap('o', 'f', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, inclusive_jump = true })<cr>", {}),
         vim.api.nvim_set_keymap('o', 'F', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, inclusive_jump = true })<cr>", {}),
@@ -75,7 +75,12 @@ local plug_func = function()
     use{"tpope/vim-abolish"}
     use{"skywind3000/asyncrun.vim"}
     use{"skywind3000/asynctasks.vim"}
-    use{"github/copilot.vim"}
+    use{"github/copilot.vim",config = function()·
+        vim.cmd[[
+            let g:copilot_no_tab_map = v:true
+            imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
+        ]]
+    end}
     use{"voldikss/vim-translator"}
     use{"folke/lsp-colors.nvim"}
     use{"p00f/nvim-ts-rainbow"}
