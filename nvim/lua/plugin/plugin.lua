@@ -28,7 +28,11 @@ local plug_func = function()
     use{"preservim/tagbar"}
     use{"rcarriga/nvim-notify"}
     use{"ryanoasis/vim-devicons"}
-    use{"mhinz/vim-startify"}
+    use{"mhinz/vim-startify", config = function ()
+        vim.g.startify_padding_left = 30    
+        vim.g.better_whitespace_enabled=0   
+        vim.g.strip_whitespace_confirm=0
+    end}
     use{"kana/vim-textobj-user"}
     use{"kana/vim-textobj-indent"}
     use{"kana/vim-textobj-syntax"}
@@ -53,9 +57,9 @@ local plug_func = function()
     }) end}
     
     use{"neoclide/coc.nvim", branch  = "release", config = function ()
-        vim.g.coc_global_extensions ={'coc-clangd','coc-snippets','coc-cmake','coc-pairs','coc-json','coc-highlight','coc-emoji','coc-lists','coc-yaml', 'coc-translator' ,'coc-explorer'}
+        vim.g.coc_global_extensions ={'coc-clangd','coc-snippets','coc-cmake','coc-pairs','coc-json','coc-highlight','coc-emoji','coc-lists','coc-yaml','coc-explorer'}
         vim.api.nvim_command([[
-          nmap <leader>rn <Plug>(coc-rename)
+            nmap <leader>rn <Plug>(coc-rename)
           nmap <space>e <Cmd>CocCommand explorer --position floating<CR>
           autocmd FileType coc-explorer setlocal norelativenumber
           autocmd BufEnter coc-explorer if &ft == 'coc-explorer'| call CocAction('runCommand', 'explorer.doAction', 'closest', ['refresh']) | endif
@@ -73,30 +77,44 @@ local plug_func = function()
         ]]
     end}
 
+    use{"junegunn/fzf"}
+    use{"junegunn/fzf.vim"}
+    use{"antoinemadec/coc-fzf", config = function ()
+        vim.cmd[[
+            let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
+        ]]
+    end}
 
-    use{"xiyaowong/nvim-bqf", ft = "qf",config = function() require("bqf").setup({
-         vim.cmd[[
-            augroup BQF
-               au!
-               au FileType qf nnoremap <silent> <esc> :cclose<CR>
-             augroup END
-         ]]
-
-    }) end}
     use{"bagrat/vim-buffet"}
-    use{"skywind3000/vim-cppman"}
+    use{"skywind3000/vim-cppman", config = function ()
+        vim.cmd[[
+            autocmd FileType c,cpp setlocal keywordprg=:Cppman
+        ]]
+    end}
     use{"lfv89/vim-interestingwords"}
     use{"MattesGroeger/vim-bookmarks"}
     use{"tpope/vim-abolish"}
     use{"skywind3000/asyncrun.vim"}
     use{"skywind3000/asynctasks.vim"}
-    use{"github/copilot.vim",config = function()
+    use{"github/copilot.vim", config = function()
         vim.cmd[[
             let g:copilot_no_tab_map = v:true
             imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
         ]]
     end}
-    use{"voldikss/vim-translator"}
+    use{"Chiel92/vim-autoformat", config = function ()
+        vim.cmd[[
+            nnoremap <localleader>ft :Autoformat<CR>
+        ]]
+
+    end}
+
+    use{"voldikss/vim-translator", config = function ()
+        vim.cmd[[
+            nmap <silent> <Leader>w <Plug>TranslateW
+            vmap <silent> <Leader>w <Plug>TranslateWV
+        ]]
+    end}
     use{"p00f/nvim-ts-rainbow"}
     use{"jiangmiao/auto-pairs"}
     if packer_bootstrap then

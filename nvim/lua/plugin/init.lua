@@ -1,10 +1,7 @@
 
 require('plugin.plugin')
-require('plugin.translate')
-require('plugin.startify')
 require('plugin.leaderf')
 require('plugin.buffet')
 require('plugin.autocmd')
 require('plugin.tagbar')
 require('plugin.previous')
-require('plugin.utf8')
