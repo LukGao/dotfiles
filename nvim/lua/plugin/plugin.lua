@@ -23,7 +23,6 @@ local plug_func = function()
     use{"wbthomason/packer.nvim"}
     use{"dracula/vim", as = "dracula",config = function() vim.cmd[[silent! colorscheme dracula]] end}
     use{"Yggdroot/LeaderF", run = ":LeaderfInstallCExtension"}
-    use{"nvim-treesitter/nvim-treesitter", config = require("plugin.treesitter")}
     use{"kyazdani42/nvim-web-devicons"}
     use{"nvim-lualine/lualine.nvim", config = require("plugin.lualine")}
     use{"preservim/tagbar"}
@@ -40,10 +39,8 @@ local plug_func = function()
     use{"tpope/vim-surround"}
     use{"mg979/vim-visual-multi"}
     use{"scrooloose/nerdcommenter"}
-    use{"nvim-lua/popup.nvim"}
-    use{"nvim-treesitter/nvim-treesitter-refactor"}
+    use{"nvim-treesitter/nvim-treesitter", config = require("plugin.treesitter")}
     use{"phaazon/hop.nvim", as = "hop", config = function() require("hop").setup({
-        
         keys = 'etovxqpdygfblzhckisuran', 
         jump_on_sole_occurrence = false,
         vim.api.nvim_set_keymap('n', 'f', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>", {}),
@@ -54,8 +51,23 @@ local plug_func = function()
         vim.api.nvim_set_keymap('', 't', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>", {}),
         vim.api.nvim_set_keymap('', 'T', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>", {}),
     }) end}
+    
+    use{"neoclide/coc.nvim", branch  = "release", config = function ()
+          vim.g.coc_global_extensions ={'coc-clangd','coc-snippets','coc-cmake','coc-pairs','coc-json','coc-highlight','coc-emoji','coc-lists','coc-yaml', 'coc-translator' ,'coc-explorer'}
+          vim.cmd[[ nmap <leader>rn <Plug>(coc-rename) ]]
+    end}
 
-    use{"folke/trouble.nvim", config = function() require("trouble").setup() end}
+    use{"neomake/neomake", config = function ()
+        vim.g.neomake_tempfile_dir = '~/.nvim/tmp/neomake'
+        vim.g.neomake_cpp_enable_makers = 'clang'
+        vim.g.neomake_cpp_clang_maker = {exe = 'clang' }
+        vim.g.neomake_cpp_clang_args = {'--std=c++20','--analyze -extra-arg -Xanalyzer -extra-arg -analyzer-output=text'}
+
+        vim.cmd[[
+            silent! call neomake#configure#automake('w')
+        ]]
+    end}
+
 
     use{"xiyaowong/nvim-bqf", ft = "qf",config = function() require("bqf").setup({
          vim.cmd[[
@@ -66,8 +78,6 @@ local plug_func = function()
          ]]
 
     }) end}
-    use{"junegunn/fzf"}
-    use{"folke/twilight.nvim",config = function() require("twilight").setup()end}
     use{"bagrat/vim-buffet"}
     use{"skywind3000/vim-cppman"}
     use{"lfv89/vim-interestingwords"}
@@ -82,22 +92,8 @@ local plug_func = function()
         ]]
     end}
     use{"voldikss/vim-translator"}
-    use{"folke/lsp-colors.nvim"}
     use{"p00f/nvim-ts-rainbow"}
     use{"jiangmiao/auto-pairs"}
-    use{"rafamadriz/friendly-snippets"}
-    use{"hrsh7th/vim-vsnip"}
-    use{"hrsh7th/vim-vsnip-integ"}
-    use{"hrsh7th/cmp-vsnip"}
-    use{"hrsh7th/cmp-buffer"}
-    use{"hrsh7th/cmp-nvim-lsp"}
-    use{"hrsh7th/cmp-path"}
-    use{"hrsh7th/cmp-cmdline"}
-    use{"octaltree/cmp-look"}
-    use{"hrsh7th/nvim-cmp", config = require("plugin.cmp")}
-    use{"neovim/nvim-lspconfig"}
-    use{"williamboman/nvim-lsp-installer", config = function() require("lsp").setup() end}
-    use{"ray-x/lsp_signature.nvim", config = require("plugin.lsp_signature")}
     if packer_bootstrap then
         require("packer").sync()
     end
