@@ -44,22 +44,12 @@ local plug_func = function()
     use{"mg979/vim-visual-multi"}
     use{"scrooloose/nerdcommenter"}
     use{"nvim-treesitter/nvim-treesitter", config = require("plugin.treesitter")}
-    use{"phaazon/hop.nvim", as = "hop", config = function() require("hop").setup({
-        keys = 'etovxqpdygfblzhckisuran', 
-        jump_on_sole_occurrence = false,
-        vim.api.nvim_set_keymap('n', 'f', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>", {}),
-        vim.api.nvim_set_keymap('n', 'e', ":HopWordCurrentLine<CR>", {}),
-        vim.api.nvim_set_keymap('n', 'F', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>", {}),
-        vim.api.nvim_set_keymap('o', 'f', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, inclusive_jump = true })<cr>", {}),
-        vim.api.nvim_set_keymap('o', 'F', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, inclusive_jump = true })<cr>", {}),
-        vim.api.nvim_set_keymap('', 't', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>", {}),
-        vim.api.nvim_set_keymap('', 'T', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>", {}),
-    }) end}
+
     
     use{"neoclide/coc.nvim", branch  = "release", config = function ()
         vim.g.coc_global_extensions ={'coc-clangd','coc-snippets','coc-cmake','coc-pairs','coc-json','coc-highlight','coc-emoji','coc-lists','coc-yaml','coc-explorer'}
         vim.api.nvim_command([[
-            nmap <leader>rn <Plug>(coc-rename)
+          nmap <leader>rn <Plug>(coc-rename)
           nmap <space>e <Cmd>CocCommand explorer --position floating<CR>
           autocmd FileType coc-explorer setlocal norelativenumber
           autocmd BufEnter coc-explorer if &ft == 'coc-explorer'| call CocAction('runCommand', 'explorer.doAction', 'closest', ['refresh']) | endif
