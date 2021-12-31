@@ -155,12 +155,12 @@ ins_left {
     return '%='
   end,
 }
--- ins_left {
---   function()
---     return '%='
---   end,
--- }
--- echo CocAction('services')
+ins_left {
+  function()
+    return '%='
+  end,
+}
+
 ins_left {
   function ()
       local has_func, func_name = pcall(vim.api.nvim_buf_get_var, 0, 'coc_current_function')
