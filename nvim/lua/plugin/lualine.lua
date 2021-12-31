@@ -144,7 +144,7 @@ ins_left {
   function()
     local file = vim.fn.expand('%:p')
     if string.len(file) == 0 then return '' end
-    return get_file_icon() .. get_current_file_name() .. format_file_size(file)
+    return get_file_icon()
   end,
   cond = conditions.buffer_not_empty,
   icons_enabled = true, 
