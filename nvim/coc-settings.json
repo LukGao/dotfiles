@@ -1,9 +1,18 @@
 {
   "languageserver": {
-    "golang": {
-      "command": "gopls",
-      "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
-      "filetypes": ["go"]
+      "ccls": {
+      "command": "ccls",
+      "filetypes": ["c", "cpp"],
+      "rootPatterns": [".ccls-root",".git/",".svn", "build/compile_commands.json"],
+      "initializationOptions": {
+        "cache": {
+          "directory": "/tmp/.ccls-cache"
+        },
+        "compilationDatabaseDirectory": "build",
+        "clang": { 
+          "extraArgs": [ "-std=c++20" ] 
+        }
+      }
     },
   },
   "explorer.width": 30,
