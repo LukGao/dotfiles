@@ -70,7 +70,6 @@ local plug_func = function()
         vim.g.ccls_close_on_jump = true
         vim.g.yggdrasil_no_default_maps = 1
     end}
-    use{"jackguo380/vim-lsp-cxx-highlight"}
     use{"junegunn/fzf"}
     use{"junegunn/fzf.vim"}
     use{"antoinemadec/coc-fzf", config = function ()
