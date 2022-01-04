@@ -39,7 +39,7 @@ local plug_func = function()
     use{"kana/vim-textobj-function"}
     use{"sgur/vim-textobj-parameter"}
     use{"tpope/vim-endwise"}
-    use{"honza/vim-snippets"}
+    use{"honza/vim-snippets", event = "VimEnter"}
     use{"tpope/vim-surround"}
     use{"mg979/vim-visual-multi"}
     use{"scrooloose/nerdcommenter"}

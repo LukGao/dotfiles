@@ -35,7 +35,7 @@
       "expand": true
     }
   ],
-"explorer.presets": {
+  "explorer.presets": {
     "floating": {
       "position": "floating",
       "open-action-strategy": "sourceWindow",
@@ -60,6 +60,7 @@
     "n": "addFile",
     "N": "addDirectory"
   },
+  "snippets.extends": {"cpp": ["c"]},
   "suggest.acceptSuggestionOnCommitCharacter": false,
   "diagnostic.displayByAle": true,
   "coc.preferences.formatOnSaveFiletypes": ["markdown", "json"],
