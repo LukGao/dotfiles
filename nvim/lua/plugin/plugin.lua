@@ -44,8 +44,23 @@ local plug_func = function()
     use{"mg979/vim-visual-multi"}
     use{"scrooloose/nerdcommenter"}
     use{"nvim-treesitter/nvim-treesitter", config = require("plugin.treesitter")}
-
-    
+    use {
+      "lukas-reineke/indent-blankline.nvim",
+      config = function()
+         require("indent_blankline").setup {
+            space_char_blankline = " ",
+            show_current_context = true,
+            show_current_context_start = true,
+            use_treesitter = true,
+            context_patterns = {
+                "class", "function", "method", "block", "list_literal", "selector",
+                "^if", "^table", "if_statement", "while", "for",
+            },
+            filetype_exclude = { "help", "terminal", "packer", 'startify', 'fzf', 'tagbar'},
+            buftype_exclude = { "help", "terminal", "packer", 'startify', 'fzf', 'tagbar'},
+         }
+      end
+   }
     use{"neoclide/coc.nvim", branch  = "release", config = function ()
         vim.g.coc_global_extensions ={'coc-clangd','coc-snippets','coc-cmake','coc-pairs','coc-json','coc-highlight','coc-emoji','coc-lists','coc-yaml','coc-explorer'}
         vim.api.nvim_command([[

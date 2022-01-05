@@ -4,6 +4,9 @@ vim.opt.termguicolors=true
 vim.opt.number=true
 vim.opt.showcmd=true
 -- vim.opt.cursorline=true
+vim.opt.list = true
+vim.opt.listchars:append("space:⋅")
+vim.opt.listchars:append("eol:↴")
 vim.opt.ttimeoutlen=0
 vim.opt.laststatus=2
 vim.opt.showtabline=2
@@ -17,8 +20,6 @@ vim.opt.expandtab=true
 vim.opt.wrap=false
 vim.opt.sidescroll=10
 vim.opt.colorcolumn='100'
-vim.opt.listchars = {tab = '▸ ', trail = '·'}
-vim.opt.list=true
 vim.opt.hidden=true
 vim.opt.shortmess='aFc'
 vim.opt.hlsearch=true
