@@ -53,7 +53,7 @@ function! g:MyTaskFinish(...)
 endfunction
 
 
-nnoremap <silent><nowait> <localleader>r  :Leaderf --nowrap task<cr>
+nnoremap <silent><nowait> <localleader>r  :Leaderf --nowrap task --popup<cr>
 
 
 
