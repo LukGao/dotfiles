@@ -56,8 +56,8 @@ local plug_func = function()
                 "class", "function", "method", "block", "list_literal", "selector",
                 "^if", "^table", "if_statement", "while", "for",
             },
-            filetype_exclude = { "help", "terminal", "packer", 'startify', 'fzf', 'tagbar'},
-            buftype_exclude = { "help", "terminal", "packer", 'startify', 'fzf', 'tagbar'},
+            filetype_exclude = { "help", "coc-explorer", "terminal", "packer", 'startify', 'fzf', 'tagbar'},
+            buftype_exclude = { "help", "coc-explorer", "terminal", "packer", 'startify', 'fzf', 'tagbar'},
          }
       end
    }

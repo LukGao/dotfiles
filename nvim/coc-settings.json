@@ -55,6 +55,7 @@
       "file.child.template: [selection | clip | 1] [indent][icon | 1] [filename omitCenter 1]"
       }
   },
+  "explorer.previewAction.onHover": true,
   "explorer.keyMappings.global": {
     "v": "open:vsplit",
     "n": "addFile",
