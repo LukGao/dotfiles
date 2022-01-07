@@ -48,22 +48,15 @@ let g:Lf_Extensions.task = {
 			\ 'help' : 'navigate available tasks from asynctasks.vim',
 		\ }
 
-function! g:MyTaskFinish(...)
-	lua require("notify")("task finish","info",{title = "async task"})
-endfunction
+
+lua << EOF
+function _G.MyTaskFinish(title, project)
+   require("notify")(project .. " task finish","info",{title = title .. " async task"})
+end
+EOF
 
 
 nnoremap <silent><nowait> <localleader>r  :Leaderf --nowrap task --popup<cr>
-
-
-
-
-
-
-
-
-
-
 
 
 

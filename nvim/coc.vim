@@ -31,9 +31,8 @@ let g:coc_snippet_next = '<tab>'
 
 
 
-imap <C-l> <Plug>(coc-snippets-expand)
+imap <C-k> <Plug>(coc-snippets-expand)
 vmap <C-j> <Plug>(coc-snippets-select)
-imap <C-j> <Plug>(coc-snippets-expand-jump)
 
 let g:coc_snippet_next = '<c-j>'
 let g:coc_snippet_prev = '<c-k>'
