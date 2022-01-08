@@ -20,23 +20,9 @@ function! s:check_back_space() abort
 endfunction
 
 
-
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-let g:coc_snippet_next = '<tab>'
-
-
-
-imap <C-k> <Plug>(coc-snippets-expand)
 vmap <C-j> <Plug>(coc-snippets-select)
-
-let g:coc_snippet_next = '<c-j>'
-let g:coc_snippet_prev = '<c-k>'
-
+imap <C-l> <Plug>(coc-snippets-expand)
+imap <C-j> <Plug>(coc-snippets-expand-jump)
 
 
 nmap <silent> gd <Plug>(coc-definition)
