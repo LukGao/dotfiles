@@ -82,12 +82,14 @@ local plug_func = function()
       end
    }
     use{"neoclide/coc.nvim", branch  = "release", config = function ()
-        vim.g.coc_global_extensions ={'coc-clangd','coc-snippets','coc-cmake','coc-pairs','coc-json','coc-highlight','coc-emoji','coc-lists','coc-yaml','coc-explorer'}
+        vim.g.coc_global_extensions ={'coc-clangd','coc-go','coc-snippets','coc-cmake','coc-pairs','coc-json','coc-highlight','coc-emoji','coc-lists','coc-yaml','coc-explorer'}
         vim.api.nvim_command([[
           nmap <leader>rn <Plug>(coc-rename)
+
           nmap <space>e <Cmd>CocCommand explorer --position floating<CR>
           autocmd FileType coc-explorer setlocal norelativenumber
           autocmd BufEnter coc-explorer if &ft == 'coc-explorer'| call CocAction('runCommand', 'explorer.doAction', 'closest', ['refresh']) | endif
+          autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
         ]])
     end}
 
