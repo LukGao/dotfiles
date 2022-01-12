@@ -89,3 +89,14 @@ nn <silent> xv :call CocLocations('ccls','$ccls/vars')<cr>
 nn <silent> xV :call CocLocations('ccls','$ccls/vars',{'kind':1})<cr>
 
 nn xx x
+
+autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
+
+let g:coc_global_extensions = ['coc-clangd','coc-go','coc-snippets','coc-cmake','coc-pairs','coc-json','coc-highlight','coc-emoji','coc-lists','coc-yaml','coc-explorer']
+
+nmap <leader>rn <Plug>(coc-rename)
+
+nmap <space>e <Cmd>CocCommand explorer --position floating<CR>
+autocmd FileType coc-explorer setlocal norelativenumber
+autocmd BufEnter coc-explorer if &ft == 'coc-explorer'| call CocAction('runCommand', 'explorer.doAction', 'closest', ['refresh']) | endif
+
