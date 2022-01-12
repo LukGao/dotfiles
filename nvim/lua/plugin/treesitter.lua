@@ -1,19 +1,25 @@
 return function()
-  require('nvim-treesitter.configs').setup({
+    require('nvim-treesitter.configs').setup({
 
-    indent = {
-      enable = true
-    },
-    ignore_install = {}, -- List of parsers to ignore installing
-    highlight = {
-      enable = true, -- false will disable the whole extension
-      disable = {} -- list of language that will be disabled
-    },
+        indent = {
+            enable = true
+        },
+        ignore_install = {}, -- List of parsers to ignore installing
+        highlight = {
+            enable = true, -- false will disable the whole extension
+            disable = {} -- list of language that will be disabled
+        },
 
-   rainbow = {
-      enable = true,
-      extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
-      max_file_lines = nil, -- Do not enable for files with more than n lines, int
-    },
-  })
+        rainbow = {
+            enable = true,
+            extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
+            max_file_lines = nil, -- Do not enable for files with more than n lines, int
+        },
+    }
+
+    )
+    require("nvim-treesitter.install").command_extra_args = {
+        curl = { "--proxy", "--socks5 localhost:1080" },
+    }
+
 end
