@@ -15,11 +15,6 @@ return function()
             extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
             max_file_lines = nil, -- Do not enable for files with more than n lines, int
         },
-    }
-
-    )
-    require("nvim-treesitter.install").command_extra_args = {
-        curl = { "--proxy", "--socks5 localhost:1080" },
-    }
-
+    })
+    require("nvim-treesitter.install").prefer_git = true
 end
