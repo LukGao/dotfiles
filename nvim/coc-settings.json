@@ -1,74 +1,74 @@
 {
-    "languageserver": {
-        "ccls": {
-            "command": "ccls",
-            "filetypes": ["c", "cpp"],
-            "rootPatterns": [".ccls-root","compile_commands.json"],
-            "initializationOptions": {
-                "cache": {
-                    "directory": "/tmp/.ccls-cache"
-                },
-                "clang": {
-                    "extraArgs": [ "-std=c++20" ]
-                }
-            }
+  "languageserver": {
+    "ccls": {
+      "command": "ccls",
+      "filetypes": ["c", "cpp"],
+      "rootPatterns": [".ccls-root", "compile_commands.json"],
+      "disableDiagnostics": true,
+      "initializationOptions": {
+        "cache": {
+          "directory": "/tmp/.ccls-cache"
         },
-    },
-    "explorer.width": 30,
-    "explorer.git.enable": false,
-    "explorer.quitOnOpen": true,
-    "explorer.buffer.showHiddenBuffers": true,
-    "explorer.file.reveal.auto": false,
-    "explorer.file.reveal.whenOpen": true,
-    "explorer.file.showHiddenFiles": true,
-    "explorer.buffer.tabOnly": true,
-    "explorer.icon.enableNerdfont": true,
-    "explorer.file.root.template": "[icon] [root]",
-    "explorer.previewAction.onHover": true,
-    "explorer.floating.border.enable": true,
+        "clang": {
+          "extraArgs": ["-std=c++20"]
+        }
+      }
+    }
+  },
+  "explorer.width": 30,
+  "explorer.git.enable": false,
+  "explorer.quitOnOpen": true,
+  "explorer.buffer.showHiddenBuffers": true,
+  "explorer.file.reveal.auto": false,
+  "explorer.file.reveal.whenOpen": true,
+  "explorer.file.showHiddenFiles": false,
+  "explorer.buffer.tabOnly": true,
+  "explorer.icon.enableNerdfont": true,
+  "explorer.file.root.template": "[icon] [root]",
+  "explorer.floating.border.enable": true,
 
-    "explorer.git.showIgnored": false,
-    "explorer.icon.source": "nvim-web-devicons",
-    "explorer.sources":[
-        {
-            "name": "file",
-            "expand": true
-        }
-    ],
-    "explorer.presets": {
-        "floating": {
-            "position": "floating",
-            "open-action-strategy": "sourceWindow",
-            "floating-width": 90
-        },
-        "tab": {
-            "position": "tab",
-            "quit-on-open": true
-        },
-        "floatingTop": {
-            "position": "floating",
-            "floating-position": "center-top",
-            "floating-width": 50,
-            "open-action-strategy": "sourceWindow"
-        },
-        "simplify": {
-            "file.child.template: [selection | clip | 1] [indent][icon | 1] [filename omitCenter 1]"
-        }
+  "explorer.git.showIgnored": false,
+  "explorer.icon.source": "nvim-web-devicons",
+  "explorer.sources": [
+    {
+      "name": "file",
+      "expand": true
+    }
+  ],
+  "explorer.presets": {
+    "floating": {
+      "position": "floating",
+      "open-action-strategy": "sourceWindow",
+      "floating-width": 90
     },
-    "explorer.previewAction.onHover": true,
-    "explorer.keyMappings.global": {
-        "v": "open:vsplit",
-        "n": "addFile",
-        "N": "addDirectory"
+    "tab": {
+      "position": "tab",
+      "quit-on-open": true
     },
-    "snippets.extends": {"cpp": ["c"]},
-    "snippets.ultisnips.directories": [
-        "~/.config/nvim/snippets"
-    ],
-    "suggest.acceptSuggestionOnCommitCharacter": false,
-    "coc.preferences.formatOnSaveFiletypes": ["markdown", "json"],
-    "coc.preferences.currentFunctionSymbolAutoUpdate": true,
-    "coc.preferences.messageLevel": "error",
-    "coc.preferences.extensionUpdateCheck": "daily",
-    "clangd.arguments": ["--background-index=true","--suggest-missing-includes","--clang-tidy"],
+    "floatingTop": {
+      "position": "floating",
+      "floating-position": "center-top",
+      "floating-width": 50,
+      "open-action-strategy": "sourceWindow"
+    }
+  },
+
+  "explorer.previewAction.onHover": "labeling",
+  "explorer.keyMappings.global": {
+    "v": "open:vsplit",
+    "n": "addFile",
+    "N": "addDirectory"
+  },
+  "snippets.extends": { "cpp": ["c"] },
+  "snippets.ultisnips.directories": ["~/.config/nvim/snippets"],
+  "suggest.acceptSuggestionOnCommitCharacter": false,
+  "coc.preferences.formatOnSaveFiletypes": ["markdown", "json"],
+  "coc.preferences.currentFunctionSymbolAutoUpdate": true,
+  "coc.preferences.messageLevel": "error",
+  "coc.preferences.extensionUpdateCheck": "daily",
+  "clangd.arguments": [
+    "--background-index=true",
+    "--suggest-missing-includes",
+    "--clang-tidy"
+  ]
 }
