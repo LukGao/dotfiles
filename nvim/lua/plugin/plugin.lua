@@ -64,23 +64,6 @@ local plug_func = function()
     use{"mg979/vim-visual-multi"}
     use{"scrooloose/nerdcommenter"}
     use{"nvim-treesitter/nvim-treesitter", config = require("plugin.treesitter")}
-    use {
-      "lukas-reineke/indent-blankline.nvim",
-      config = function()
-         require("indent_blankline").setup {
-            space_char_blankline = " ",
-            show_current_context = true,
-            show_current_context_start = true,
-            use_treesitter = true,
-            context_patterns = {
-                "class", "function", "method", "block", "list_literal", "selector",
-                "^if", "^table", "if_statement", "while", "for",
-            },
-            filetype_exclude = { "help", "coc-explorer", "terminal", "packer", 'startify', 'fzf', 'tagbar'},
-            buftype_exclude = { "help", "coc-explorer", "terminal", "packer", 'startify', 'fzf', 'tagbar'},
-         }
-      end
-   }
     use{"neoclide/coc.nvim", branch  = "release"}
 
     use{"neomake/neomake", config = function ()
@@ -138,7 +121,6 @@ local plug_func = function()
         ]]
     end}
     use{"p00f/nvim-ts-rainbow"}
-    use{"jiangmiao/auto-pairs"}
     if packer_bootstrap then
         require("packer").sync()
     end

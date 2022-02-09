@@ -4,9 +4,6 @@ vim.opt.termguicolors=true
 vim.opt.number=true
 vim.opt.showcmd=true
 -- vim.opt.cursorline=true
-vim.opt.list = true
-vim.opt.listchars:append("space:⋅")
-vim.opt.listchars:append("eol:↴")
 vim.opt.ttimeoutlen=0
 vim.opt.laststatus=2
 vim.opt.showtabline=2
