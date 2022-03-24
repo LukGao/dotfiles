@@ -7,7 +7,7 @@ ENV LANG=zh_CN.UTF-8
 ENV LANGUAGE=zh_CN.UTF-8
 ENV LC_ALL=zh_CN.UTF-8
 ENV TZ=Asia/Shanghai 
-ENV nvim_url=https://github.com/neovim/neovim/releases/download/v0.6.0/nvim-linux64.tar.gz 
+ENV nvim_url=https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz
 
 
 RUN apt-get -qq update 
@@ -25,5 +25,5 @@ RUN ls -al nvim-linux64/bin
 COPY nvim ~/.config/nvim
 
 RUN nvim-linux64/bin/nvim --version 
-# RUN nvim-linux64/bin/nvim +'PlugInstall --sync' +'PlugUpdate' +qa! 
 
+RUN nvim-linux64/nvim --headless -c 'autocmd User PackerComplete quitall' -c 'silent PackerSync'
