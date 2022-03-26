@@ -120,7 +120,7 @@ local plug_func = function()
             vmap <silent> <Leader>w <Plug>TranslateWV
         ]]
     end}
-    use{"p00f/nvim-ts-rainbow"}
+    use{"luochen1990/rainbow"}
     if packer_bootstrap then
         require("packer").sync()
     end
