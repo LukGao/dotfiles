@@ -49,3 +49,8 @@ vim.cmd[[
 
 vim.opt.fileencodings='utf8,ucs-bom,gbk,cp936,gb2312,gb18030'
 vim.opt.fileencoding='utf-8'
+
+vim.cmd[[
+    let g:python_host_prog = '/user/bin/python'
+    let g:python3_host_prog = '/usr/bin/python3'
+]]
