@@ -6,7 +6,7 @@ local packer_url = "https://github.com/wbthomason/packer.nvim"
 
 local install_path = vim.fn.stdpath("data").."/site/pack/packer/start/packer.nvim"
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-  packer_bootstrap = vim.fn.system({"git", "clone", "--depth", "1", packer_url, install_path})
+    packer_bootstrap = vim.fn.system({"git", "clone", "--depth", "1", packer_url, install_path})
 end
 
 
@@ -35,13 +35,13 @@ local plug_func = function()
         vim.g.Lf_StlSeparator = { left = '', right= '', font='' }
 
         vim.g.Lf_WildIgnore = {
-              dir = {'.git','.clangd', '.svn', '.hg', '.cache', '.build', '.deps', '.ccls-cache', 'build'},
-              file = {'*.exe', '*.o', '*.a', '*.so', '*.py[co]', '*.sw?', '*.bak', '*.d', '*.idx', "*.lint", '*.gcno'}
+            dir = {'.git','.clangd', '.svn', '.hg', '.cache', '.build', '.deps', '.ccls-cache', 'build'},
+            file = {'*.exe', '*.o', '*.a', '*.so', '*.py[co]', '*.sw?', '*.bak', '*.d', '*.idx', "*.lint", '*.gcno'}
         }
 
         vim.cmd[[
-            nnoremap <silent><nowait> <c-f> :LeaderfFunction<cr>
-            nnoremap <silent><nowait> <localleader>m :LeaderfMru<cr>
+        nnoremap <silent><nowait> <c-f> :LeaderfFunction<cr>
+        nnoremap <silent><nowait> <localleader>m :LeaderfMru<cr>
         ]]
     end}
     use{"kyazdani42/nvim-web-devicons"}
@@ -50,8 +50,8 @@ local plug_func = function()
     use{"rcarriga/nvim-notify"}
     use{"ryanoasis/vim-devicons"}
     use{"mhinz/vim-startify", config = function ()
-        vim.g.startify_padding_left = 30    
-        vim.g.better_whitespace_enabled=0   
+        vim.g.startify_padding_left = 30
+        vim.g.better_whitespace_enabled=0
         vim.g.strip_whitespace_confirm=0
     end}
     use{"kana/vim-textobj-user"}
@@ -73,7 +73,7 @@ local plug_func = function()
         vim.g.neomake_cpp_clang_args = {'--std=c++20','--analyze -extra-arg -Xanalyzer -extra-arg -analyzer-output=text'}
 
         vim.cmd[[
-            silent! call neomake#configure#automake('w')
+        silent! call neomake#configure#automake('w')
         ]]
     end}
     use{"m-pilia/vim-ccls", config = function ()
@@ -84,14 +84,14 @@ local plug_func = function()
     use{"junegunn/fzf.vim"}
     use{"antoinemadec/coc-fzf", config = function ()
         vim.cmd[[
-            let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
+        let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
         ]]
     end}
 
     use{"bagrat/vim-buffet"}
     use{"skywind3000/vim-cppman", config = function ()
         vim.cmd[[
-            autocmd FileType c,cpp setlocal keywordprg=:Cppman
+        autocmd FileType c,cpp setlocal keywordprg=:Cppman
         ]]
     end}
     use{"lfv89/vim-interestingwords"}
@@ -103,31 +103,36 @@ local plug_func = function()
     end}
     use{"github/copilot.vim", config = function ()
         vim.cmd[[
-            let g:copilot_no_tab_map = v:true
-            imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
+        let g:copilot_no_tab_map = v:true
+        imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
         ]]
     end}
     use{"Chiel92/vim-autoformat", config = function ()
         vim.cmd[[
-            nnoremap <localleader>ft :Autoformat<CR>
+        nnoremap <localleader>ft :Autoformat<CR>
         ]]
 
     end}
 
     use{"voldikss/vim-translator", config = function ()
         vim.cmd[[
-            nmap <silent> <Leader>w <Plug>TranslateW
-            vmap <silent> <Leader>w <Plug>TranslateWV
+        nmap <silent> <Leader>w <Plug>TranslateW
+        vmap <silent> <Leader>w <Plug>TranslateWV
         ]]
     end}
-    use{"luochen1990/rainbow"}
+
+    use{"luochen1990/rainbow", config = function ()
+        vim.cmd[[
+        let g:rainbow_active = 1
+        ]]
+    end}
     if packer_bootstrap then
         require("packer").sync()
     end
 end
 
 
-return require("packer").startup({ 
+return require("packer").startup({
     plug_func,
     config = packer_config,
 })
