@@ -114,10 +114,13 @@ local plug_func = function()
 
     end}
 
-    use{"voldikss/vim-translator", config = function ()
+    use{"ooknn/translate", config = function ()
         vim.cmd[[
-        nmap <silent> <Leader>w <Plug>TranslateW
-        vmap <silent> <Leader>w <Plug>TranslateWV
+        vmap <silent> <leader>t <Cmd>lua require("translate").translateV()<cr>
+        nmap <silent> <leader>t <Cmd>lua require("translate").translateN()<cr>
+
+        command! Translate  lua require("translate").translateN()
+        command! TranslateV lua require("translate").translateV()
         ]]
     end}
 
