@@ -40,7 +40,7 @@ local plug_func = function()
         }
 
         vim.cmd[[
-        nnoremap <silent><nowait> <c-f> :LeaderfFunction<cr>
+        nnoremap <silent><nowait> <localleader>f :LeaderfFunction<cr>
         nnoremap <silent><nowait> <localleader>m :LeaderfMru<cr>
         ]]
     end}
