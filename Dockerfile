@@ -25,5 +25,3 @@ RUN ls -al nvim-linux64/bin
 COPY nvim ~/.config/nvim
 
 RUN nvim-linux64/bin/nvim --version 
-
-RUN nvim-linux64/bin/nvim --headless -c 'autocmd User PackerComplete quitall' -c 'silent PackerSync'
