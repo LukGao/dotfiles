@@ -40,8 +40,8 @@ local plug_func = function()
         }
 
         vim.cmd[[
-        nnoremap <silent><nowait> <localleader>f :LeaderfFunction<cr>
-        nnoremap <silent><nowait> <localleader>m :LeaderfMru<cr>
+        nnoremap <silent> <localleader>f :LeaderfFunction<cr>
+        nnoremap <silent> <localleader>m :LeaderfMru<cr>
         ]]
     end}
     use{"kyazdani42/nvim-web-devicons"}
@@ -129,6 +129,10 @@ local plug_func = function()
         let g:rainbow_active = 1
         ]]
     end}
+
+    use{"mbbill/undotree"}
+
+
     if packer_bootstrap then
         require("packer").sync()
     end

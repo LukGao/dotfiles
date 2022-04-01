@@ -50,16 +50,29 @@ let g:Lf_Extensions.task = {
 
 
 lua << EOF
-function _G.MyTaskFinish(title, project)
-   require("notify")(project .. " task finish","info",{title = title .. " async task"})
+function BuildTask(project)
+    local log = "info"
+    local status = "success"
+    if vim.g.asyncrun_code ~= 0 then
+        log = "error"
+        status = "fail"
+    end
+    require("notify")(project .. " task finish",err,{title ="async build"})
+    if vim.g.asyncrun_code ~= 0 then
+        vim.api.nvim_command("copen")
+    end
 end
 EOF
 
 
 nnoremap <silent><nowait> <localleader>r  :Leaderf --nowrap task --popup<cr>
 
-
-
-
-
+if has("persistent_undo")
+    let target_path = expand('~/.undodir')
+    if !isdirectory(target_path)
+        call mkdir(target_path, "p", 0700)
+    endif
+    let &undodir=target_path
+    set undofile
+endif
 
