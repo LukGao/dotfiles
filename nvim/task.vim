@@ -59,7 +59,7 @@ function BuildTask(project)
     end
     require("notify")(project .. " task finish",err,{title ="async build"})
     if vim.g.asyncrun_code ~= 0 then
-        vim.api.nvim_command("copen")
+       vim.api.nvim_command("copen")
     end
 end
 EOF
@@ -75,4 +75,10 @@ if has("persistent_undo")
     let &undodir=target_path
     set undofile
 endif
+
+func! s:transparent_background()
+    highlight Normal ctermfg=None guifg=None guibg=None
+endf
+autocmd ColorScheme * call s:transparent_background()
+
 

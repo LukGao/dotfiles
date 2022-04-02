@@ -45,10 +45,14 @@ local plug_func = function()
         ]]
     end}
     use{"kyazdani42/nvim-web-devicons"}
-    use{"nvim-lualine/lualine.nvim", config = require("plugin.lualine")}
+    --use{"nvim-lualine/lualine.nvim", config = require("plugin.lualine")}
     use{"preservim/tagbar"}
     use{"rcarriga/nvim-notify"}
-    use{"ryanoasis/vim-devicons"}
+    use{"ryanoasis/vim-devicons", config = function ()
+        require("notify").setup({
+              background_colour = "#000000",
+        })
+    end}
     use{"mhinz/vim-startify", config = function ()
         vim.g.startify_padding_left = 30
         vim.g.better_whitespace_enabled=0
