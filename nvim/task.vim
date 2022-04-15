@@ -58,10 +58,7 @@ function BuildTask(project)
         status = "fail"
     end
     require("notify")(project .. " task finish",err,{title ="async build"})
-    if vim.g.asyncrun_code ~= 0 then
-       vim.api.nvim_command("copen")
-    end
-end
+ end
 EOF
 
 
@@ -81,4 +78,4 @@ func! s:transparent_background()
 endf
 autocmd ColorScheme * call s:transparent_background()
 
-
+nnoremap <silent><nowait> <localleader>k  :Dox<cr><Esc>

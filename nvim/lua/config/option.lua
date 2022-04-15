@@ -5,7 +5,7 @@ vim.opt.number=true
 vim.opt.showcmd=false
 -- vim.opt.cursorline=true
 vim.opt.ttimeoutlen=0
-vim.opt.laststatus=1
+vim.opt.laststatus=0
 vim.opt.cmdheight=1
 vim.opt.showtabline=0
 vim.opt.showmode=false
@@ -33,6 +33,7 @@ vim.opt.encoding='utf8'
 vim.opt.updatecount=100
 vim.opt.undofile=true
 vim.opt.completeopt = "menu,menuone,noselect"
+vim.opt.scrolloff=15
 
 vim.cmd[[
     set wildignore+=*.o,*.obj,*~,*.exe,*.a,*.pdb,*.lib
