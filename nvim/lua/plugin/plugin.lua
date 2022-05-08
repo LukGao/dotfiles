@@ -40,6 +40,8 @@ local plug_func = function()
         }
 
         vim.cmd[[
+        let g:Lf_WorkingDirectoryMode = 'AF'
+        let g:Lf_RootMarkers = ['.git', '.svn', '.hg', '.project', '.root']
         nnoremap <silent> <localleader>f :LeaderfFunction<cr>
         nnoremap <silent> <localleader>m :LeaderfMru<cr>
         ]]
@@ -50,7 +52,7 @@ local plug_func = function()
     use{"rcarriga/nvim-notify"}
     use{"ryanoasis/vim-devicons", config = function ()
         require("notify").setup({
-              background_colour = "#000000",
+            background_colour = "#000000",
         })
     end}
     use{"mhinz/vim-startify", config = function ()
@@ -93,6 +95,7 @@ local plug_func = function()
     end}
 
     use{"bagrat/vim-buffet"}
+    use{"vim-scripts/DoxygenToolkit.vim"}
     use{"skywind3000/vim-cppman", config = function ()
         vim.cmd[[
         autocmd FileType c,cpp setlocal keywordprg=:Cppman

@@ -33,6 +33,7 @@ vim.opt.encoding='utf8'
 vim.opt.updatecount=100
 vim.opt.undofile=true
 vim.opt.completeopt = "menu,menuone,noselect"
+vim.opt.scrolloff=15
 
 vim.cmd[[
     set wildignore+=*.o,*.obj,*~,*.exe,*.a,*.pdb,*.lib
