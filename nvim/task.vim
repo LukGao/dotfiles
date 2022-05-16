@@ -74,7 +74,8 @@ if has("persistent_undo")
 endif
 
 func! s:transparent_background()
-    highlight Normal ctermfg=None guifg=None guibg=None
+    highlight Normal guibg=None ctermbg=None
+    "highlight NonText guibg=None ctermbg=None
 endf
 autocmd ColorScheme * call s:transparent_background()
 
