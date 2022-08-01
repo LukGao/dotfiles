@@ -52,7 +52,11 @@ vim.cmd[[
 vim.opt.fileencodings='utf8,ucs-bom,gbk,cp936,gb2312,gb18030'
 vim.opt.fileencoding='utf-8'
 
+if vim.loop.os_uname().sysname == 'Darwin' then
 vim.cmd[[
-    let g:python_host_prog = '/user/bin/python'
-    let g:python3_host_prog = '/usr/bin/python3'
+    let g:python_host_prog = '/user/local/bin/python'
+    let g:python3_host_prog = '/usr/local/bin/python3'
 ]]
+end
+
+
