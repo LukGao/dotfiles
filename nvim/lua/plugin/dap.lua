@@ -1,75 +1,49 @@
 return function()
     local dap = require('dap')
-    local dapui = require('dapui')
 
+    local dapui = require("dapui")
     dap.adapters.lldb = {
         type = 'executable',
         attach = {
             pidProperty = 'pid',
             pidSelect = 'ask',
         },
-        command = 'lldb-vscode',
+        command = 'lldb-vscode-14',
+        env = {
+            LLDB_LAUNCH_FLAG_LAUNCH_IN_TTY = 'YES',
+        },
         name = 'lldb',
     }
 
-    dapui.setup({
-        layouts = {
-            {
-                elements = {
-                    'scopes',
-                    'breakpoints',
-                    'stacks',
-                    'watches',
-                },
-                size = 40,
-                position = 'right',
-            },
-            {
-                elements = {
-                    'repl',
-                    'console',
-                },
-                size = 10,
-                position = 'bottom',
-            },
-        },
-    })
 
     vim.fn.sign_define('DapBreakpoint', { text = '', texthl = 'DiagnosticError' })
     vim.fn.sign_define('DapLogPoint', { text = '', texthl = 'DiagnosticInfo' })
     vim.fn.sign_define('DapStopped', { text = '', texthl = 'Constant' })
     vim.fn.sign_define('DapBreakpointRejected', { text = '' })
 
-    vim.keymap.set({ 'n', 'i', 'v' }, '<F10>', dap.step_over, { noremap = true })
-    vim.keymap.set({ 'n', 'i', 'v' }, '<F11>', dap.step_into, { noremap = true })
-    vim.keymap.set({ 'n', 'i', 'v' }, '<S-F11>', dap.step_out, { noremap = true })
-    vim.keymap.set({ 'n', 'i', 'v' }, '<F12>', dap.continue, { noremap = true })
-    vim.keymap.set({ 'n', 'i', 'v' }, '<S-F12>', dap.pause, { noremap = true })
-    vim.keymap.set({ 'n', 'i', 'v' }, '<A-d>', dapui.toggle, { noremap = true })
-    vim.keymap.set({ 'n', 'i', 'v' }, '<A-BS>', function()
+    dap.listeners.after.event_initialized["dapui_config"] = function()
+        dapui.open()
+    end
+    dap.listeners.before.event_terminated["dapui_config"] = function()
         dapui.close()
-        dap.terminate()
-    end, { noremap = true })
-    vim.keymap.set({ 'n', 'i', 'v' }, '<A-l>', dapui.eval, { noremap = true })
-
-    vim.keymap.set('n', '<Leader>b', dap.toggle_breakpoint, { noremap = true })
-    vim.keymap.set('n', '<Leader>B', function()
-        vim.ui.input({ prompt = 'Breakpoint condition: ' }, function(condition) dap.set_breakpoint(condition) end)
-    end, { noremap = true })
-    vim.keymap.set('n', '<Leader>lp', function()
-        vim.ui.input({ prompt = 'Log point message: ' }, function(message) dap.set_breakpoint(message) end)
-    end, { noremap = true })
-
-    vim.api.nvim_create_user_command('Lldb', function(command)
-        local config = {
-            type = 'lldb',
-            name = command.fargs[1],
-            request = 'launch',
-            program = command.fargs[1],
-            args = { vim.list_slice(command.fargs, 2, vim.tbl_count(command.fargs)) },
-        }
-
-        dap.run(config)
-        dap.repl.open()
-    end, { nargs = '+', complete = 'file', desc = 'Start debugging' })
+    end
+    dap.listeners.before.event_exited["dapui_config"] = function()
+        dapui.close()
+    end
+    dapui.setup({ floating = { border = "rounded" } })
+    vim.cmd([[ autocmd FileType dap-repl set nobuflisted]])
+    vim.cmd([[ autocmd FileType dap-repl,dapui_scopes,dapui_breakpoints,dapui_stacks,dapui_watches set nocursorline]])
+    vim.keymap.set('n', '<M-b>', require('dap').toggle_breakpoint)
+    vim.keymap.set('n', '<M-n>', require('dap').step_over)
+    vim.keymap.set('n', '<M-i>', require('dap').step_into)
+    vim.keymap.set('n', '<M-o>', require('dap').step_out)
+    vim.keymap.set('n', '<M-c>', require('dap').continue)
+    vim.keymap.set('n', '<M-x>', function() return require('dapui').float_element('scopes', { enter = true } ) end, { silent = true })
+    vim.keymap.set('n', '<M-w>', function() return require('dapui').float_element('watches', { enter = true } ) end, { silent = true })
+    vim.keymap.set('n', '<M-s>', function() return require('dapui').float_element('stacks', { enter = true } ) end, { silent = true })
+    vim.keymap.set('n', '<M-p>', function() return require('dapui').float_element('breakpoints', { enter = true } ) end, { silent = true })
+    vim.keymap.set('n', '<M-r>', function() return require('dapui').float_element('repl', { enter = true } ) end, { silent = true })
+    vim.api.nvim_set_keymap('n', '<M-e>', [[<cmd>lua require("dapui").eval()<CR>]], {noremap = true, silent = true})
+    vim.api.nvim_set_keymap('n', '<M-a>', [[<cmd>lua require("dapui").eval(vim.fn.input('Enter expression: '))<CR>]], {noremap = true, silent = true})
+    vim.api.nvim_set_keymap('n', '<M-k>', [[:lua require'dapui'.toggle()<CR>]], {noremap = true, silent = true})
 end
