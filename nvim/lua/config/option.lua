@@ -1,5 +1,10 @@
 vim.g.mapleader=','
 vim.g.maplocalleader=';'
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_node_provider = 0
+vim.opt.fileencodings='utf8,ucs-bom,gbk,cp936,gb2312,gb18030'
+vim.opt.fileencoding='utf-8'
 vim.opt.termguicolors=true
 vim.opt.number=true
 vim.opt.showcmd=false
@@ -34,29 +39,46 @@ vim.opt.updatecount=100
 vim.opt.undofile=true
 vim.opt.completeopt = "menu,menuone,noselect"
 vim.opt.scrolloff=15
+vim.o.foldcolumn = '1'
+vim.o.foldlevel = 99
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true
 
-vim.cmd[[
-    set wildignore+=*.o,*.obj,*~,*.exe,*.a,*.pdb,*.lib
-    set wildignore+=*.so,*.dll,*.swp,*.egg,*.jar,*.class,*.pyc,*.pyo,*.bin,*.dex
-    set wildignore+=*.log,*.pyc,*.sqlite,*.sqlite3,*.min.js,*.min.css,*.tags
-    set wildignore+=*.zip,*.7z,*.rar,*.gz,*.tar,*.gzip,*.bz2,*.tgz,*.xz
-    set wildignore+=*.png,*.jpg,*.gif,*.bmp,*.tga,*.pcx,*.ppm,*.img,*.iso
-    set wildignore+=*.pdf,*.dmg,*.app,*.ipa,*.apk,*.mobi,*.epub
-    set wildignore+=*.mp4,*.avi,*.flv,*.mov,*.mkv,*.swf,*.swc
-    set wildignore+=*.ppt,*.pptx,*.doc,*.docx,*.xlt,*.xls,*.xlsx,*.odt,*.wps
-    set wildignore+=*/.git/*,*/.svn/*,*.DS_Store
-    set wildignore+=*/node_modules/*,*/nginx_runtime/*,*/build/*,*/logs/*,*/dist/*,*/tmp/*
-]]
+vim.opt.wildignore:append'*.pyc,*.o,*.obj,*~,*.exe,*.a,*.pdb,*.lib'
+vim.opt.wildignore:append'*_build/*,*.so,*.dll,*.swp,*.egg,*.jar,*.class,*.pyc,*.pyo,*.bin,*.dex'
+vim.opt.wildignore:append'***/coverage/*,*.log,*.pyc,*.sqlite,*.sqlite3,*.min.js,*.min.css,*.tags'
+vim.opt.wildignore:append'***/node_modules/*,*.zip,*.7z,*.rar,*.gz,*.tar,*.gzip,*.bz2,*.tgz,*.xz'
+vim.opt.wildignore:append'***/android/*,*.png,*.jpg,*.gif,*.bmp,*.tga,*.pcx,*.ppm,*.img,*.iso'
+vim.opt.wildignore:append'***/ios/*,*.pdf,*.dmg,*.app,*.ipa,*.apk,*.mobi,*.epub'
+vim.opt.wildignore:append'***/.git/*,*.mp4,*.avi,*.flv,*.mov,*.mkv,*.swf,*.swc'
+vim.opt.wildignore:append'*.ppt,*.pptx,*.doc,*.docx,*.xlt,*.xls,*.xlsx,*.odt,*.wps'
+vim.opt.wildignore:append'*/.git/*,*/.svn/*,*.DS_Store'
+vim.opt.wildignore:append'*/node_modules/*,*/nginx_runtime/*,*/build/*,*/logs/*,*/dist/*,*/tmp/*'
+
+local cache_dir = os.getenv('HOME') .. '/.cache/nvim/'
+vim.opt.directory = cache_dir .. 'swag/'
+vim.opt.undodir = cache_dir .. 'undo/'
+vim.opt.backupdir = cache_dir .. 'backup/'
+vim.opt.viewdir = cache_dir .. 'view/'
+vim.opt.spellfile = cache_dir .. 'spell/en.uft-8.add'
+vim.opt.clipboard = 'unnamedplus'
 
 
-vim.opt.fileencodings='utf8,ucs-bom,gbk,cp936,gb2312,gb18030'
-vim.opt.fileencoding='utf-8'
+local function file_exists(path)
+    return 
+end
+
+vim.g.python_host_prog = '/user/bin/python'
+vim.g.python3_host_prog = '/usr/bin/python3'
+
+if vim.fn.empty(vim.fn.glob('/opt/rh/rh-python38/root/bin/python')) == 0 then
+    vim.g.python3_host_prog = '/opt/rh/rh-python38/root/bin/python'
+    vim.g.python_host_prog = '/opt/rh/rh-python38/root/bin/python'
+end
 
 if vim.loop.os_uname().sysname == 'Darwin' then
-vim.cmd[[
-    let g:python_host_prog = '/user/local/bin/python'
-    let g:python3_host_prog = '/usr/local/bin/python3'
-]]
+    vim.g.python_host_prog = '/user/local/bin/python'
+    vim.g.python3_host_prog = '/usr/local/bin/python3'
 end
 
 
