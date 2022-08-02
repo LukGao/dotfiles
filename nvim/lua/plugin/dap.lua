@@ -15,11 +15,13 @@ return function()
         name = 'lldb',
     }
 
+    dap.defaults.fallback.exception_breakpoints = {'raised'}
 
-    vim.fn.sign_define('DapBreakpoint', { text = '', texthl = 'DiagnosticError' })
-    vim.fn.sign_define('DapLogPoint', { text = '', texthl = 'DiagnosticInfo' })
-    vim.fn.sign_define('DapStopped', { text = '', texthl = 'Constant' })
-    vim.fn.sign_define('DapBreakpointRejected', { text = '' })
+    vim.fn.sign_define('DapBreakpoint', {text='🛑', texthl='', linehl='', numhl=''})
+    vim.fn.sign_define('DapBreakpointRejected', {text='🟦', texthl='', linehl='', numhl=''})
+    vim.fn.sign_define('DapStopped', {text='🟢', texthl='', linehl='', numhl=''})
+    vim.fn.sign_define('DapBreakpointCondition', { text = '🟡', texthl = '', linehl = '', numhl = '' })
+    vim.fn.sign_define('DapLogPoint', { text = '🔵', texthl = '', linehl = '', numhl = '' })
 
     dap.listeners.after.event_initialized["dapui_config"] = function()
         dapui.open()
@@ -33,6 +35,11 @@ return function()
     dapui.setup({ floating = { border = "rounded" } })
     vim.cmd([[ autocmd FileType dap-repl set nobuflisted]])
     vim.cmd([[ autocmd FileType dap-repl,dapui_scopes,dapui_breakpoints,dapui_stacks,dapui_watches set nocursorline]])
+    vim.api.nvim_set_keymap('n', '<localleader>dt', '<Cmd>lua require("dapui").close();require("dap").clear_breakpoints(); require("dap").terminate()<CR><Cmd>DapVirtualTextForceRefresh<CR>', { noremap = true })
+    vim.keymap.set('n', '<localleader>dc', require('dap').run_to_cursor)
+    vim.keymap.set('n', '<localleader>ds', require('dap').step_back)
+    vim.keymap.set('n', '<localleader>du', require('dap').up)
+    vim.keymap.set('n', '<localleader>dd', require('dap').down)
     vim.keymap.set('n', '<M-b>', require('dap').toggle_breakpoint)
     vim.keymap.set('n', '<M-n>', require('dap').step_over)
     vim.keymap.set('n', '<M-i>', require('dap').step_into)
