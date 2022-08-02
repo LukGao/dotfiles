@@ -156,6 +156,9 @@ local plug_func = function()
 
     use{"mbbill/undotree"}
 
+    use{"rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
+    use{"mfussenegger/nvim-dap",config = require ("plugin.dap")}
+    use{"Shatur/neovim-cmake",config = require ("plugin.cmake")}
 
     if packer_bootstrap then
         require("packer").sync()
