@@ -54,7 +54,6 @@ omap ac <Plug>(coc-classobj-a)
 
 nnoremap <silent><nowait> <space>d  :<C-u>CocList diagnostics<cr>
 nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
-nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
 nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
 nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
@@ -186,26 +185,33 @@ endfunction
 
 function! s:InitCoc() abort
   execute "lua vim.notify('Initialized coc.nvim for LSP support', 'info', { title = 'LSP Status' })"
+  hi! CocSemProperty guifg=#ef9062
+  hi CocSemParameter ctermfg=29 guifg=#dbba75 cterm=none gui=none
 endfunction
 
 " notifications
 autocmd User CocNvimInit call s:InitCoc()
 autocmd User CocDiagnosticChange call s:DiagnosticNotify()
-autocmd User CocStatusChange call s:StatusNotify()
-
 
 let g:coc_default_semantic_highlight_groups=1
 
-hi! CocSemProperty ctermfg=88 guifg=#c65156 cterm=none gui=none
+autocmd BufEnter * call CheckOutline()
+function! CheckOutline() abort
+if &filetype ==# 'coctree' && winnr('$') == 1
+  if tabpagenr('$') != 1
+    close
+  else
+    bdelete
+  endif
+endif
+endfunction
 
-
-
-
-
-
-
-
-
-
-
-
+nnoremap <silent><nowait> <space>o  :call ToggleOutline()<CR>
+  function! ToggleOutline() abort
+    let winid = coc#window#find('cocViewId', 'OUTLINE')
+    if winid == -1
+      call CocActionAsync('showOutline', 1)
+    else
+      call coc#window#close(winid)
+    endif
+endfunction
