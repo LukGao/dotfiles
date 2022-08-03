@@ -6,6 +6,7 @@
                 "c",
                 "cpp"
             ],
+            "disableDiagnostics": true,
             "rootPatterns": [
                 "compile_commands.json"
             ],
@@ -13,9 +14,7 @@
                 "cache": {
                     "directory": "/tmp/.ccls-cache"
                 },
-                "client": {
-                    "snippetSupport": false
-                }
+                "snippetSupport": false
             }
         }
     },
@@ -93,6 +92,9 @@
     "coc.preferences.extensionUpdateCheck": "daily",
     "clangd.arguments": [
         "--background-index=true",
-        "--clang-tidy"
+        "--clang-tidy",
+        "--all-scopes-completion",
+        "--completion-style=detailed",
+        "--pch-storage=disk"
     ]
 }
