@@ -1,4 +1,24 @@
 {
+    "languageserver": {
+        "ccls": {
+            "command": "ccls",
+            "filetypes": [
+                "c",
+                "cpp"
+            ],
+            "rootPatterns": [
+                "compile_commands.json"
+            ],
+            "initializationOptions": {
+                "cache": {
+                    "directory": "/tmp/.ccls-cache"
+                },
+                "client": {
+                    "snippetSupport": false
+                }
+            }
+        }
+    },
     "explorer.width": 30,
     "explorer.git.enable": false,
     "explorer.quitOnOpen": true,
@@ -35,7 +55,9 @@
             "open-action-strategy": "sourceWindow"
         }
     },
-    "codeLens.enable": true,
+    "codeLens.enable": false,
+    "codeLens.subseparator": "|",
+    "codeLens.position": "eol",
     "explorer.previewAction.onHover": false,
     "explorer.file.child.template": "[selection | clip | 1] [indent][icon | 1] [diagnosticError & 1][filename omitCenter 1][modified][readonly] [linkIcon & 1][link growRight 1 omitCenter 5][size]",
     "explorer.keyMappings.global": {
@@ -59,9 +81,12 @@
     "semanticTokens.filetypes": [
         "*"
     ],
+    "notification.disabledProgressSources": [
+        "*"
+    ],
     "suggest.noselect": true,
     "clangd.enabled": true,
-    "clangd.inlayHints.enable": true,
+    "clangd.inlayHints.enable": false,
     "clangd.inlayHints.sep": " ",
     "coc.preferences.currentFunctionSymbolAutoUpdate": true,
     "coc.preferences.messageLevel": "error",
