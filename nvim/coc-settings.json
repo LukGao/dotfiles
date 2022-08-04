@@ -54,9 +54,6 @@
             "open-action-strategy": "sourceWindow"
         }
     },
-    "codeLens.enable": false,
-    "codeLens.subseparator": "|",
-    "codeLens.position": "eol",
     "explorer.previewAction.onHover": false,
     "explorer.file.child.template": "[selection | clip | 1] [indent][icon | 1] [diagnosticError & 1][filename omitCenter 1][modified][readonly] [linkIcon & 1][link growRight 1 omitCenter 5][size]",
     "explorer.keyMappings.global": {
@@ -85,8 +82,8 @@
     ],
     "suggest.noselect": true,
     "clangd.enabled": true,
-    "clangd.inlayHints.enable": false,
-    "clangd.inlayHints.sep": " ",
+    "clangd.disableProgressNotifications": true,
+    "clangd.inlayHints.enable": true,
     "coc.preferences.currentFunctionSymbolAutoUpdate": true,
     "coc.preferences.messageLevel": "error",
     "coc.preferences.extensionUpdateCheck": "daily",

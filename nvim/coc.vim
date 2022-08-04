@@ -215,3 +215,5 @@ nnoremap <silent><nowait> <space>o  :call ToggleOutline()<CR>
       call coc#window#close(winid)
     endif
 endfunction
+
+nmap <leader>qf  <Plug>(coc-fix-current)
