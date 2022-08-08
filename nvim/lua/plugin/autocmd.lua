@@ -15,7 +15,7 @@ function! ToUTF8()
 endfunction
 
 
-autocmd BufWritePre *.cpp,*.lua,*.c,*.h,*.hpp :silent! call ToUTF8()
-autocmd BufWritePre *.cpp,*.lua,*.c,*.h,*.hpp :%retab
+"autocmd BufWritePre *.cpp,*.lua,*.c,*.h,*.hpp :silent! call ToUTF8()
+"autocmd BufWritePre *.cpp,*.lua,*.c,*.h,*.hpp :%retab
 
 ]]
