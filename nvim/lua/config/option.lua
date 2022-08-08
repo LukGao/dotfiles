@@ -39,11 +39,13 @@ vim.opt.updatecount=100
 vim.opt.undofile=true
 vim.opt.completeopt = "menu,menuone,noselect"
 vim.opt.scrolloff=15
-vim.o.foldcolumn = '1'
-vim.o.foldlevel = 99
-vim.o.foldlevelstart = 99
-vim.o.foldenable = true
-
+vim.opt.foldcolumn = '1'
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99
+vim.opt.foldenable = true
+vim.cmd[[
+autocmd FileType * setlocal formatoptions-=o
+]]
 vim.opt.wildignore:append'*.pyc,*.o,*.obj,*~,*.exe,*.a,*.pdb,*.lib'
 vim.opt.wildignore:append'*_build/*,*.so,*.dll,*.swp,*.egg,*.jar,*.class,*.pyc,*.pyo,*.bin,*.dex'
 vim.opt.wildignore:append'***/coverage/*,*.log,*.pyc,*.sqlite,*.sqlite3,*.min.js,*.min.css,*.tags'
