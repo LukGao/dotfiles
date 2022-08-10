@@ -8,6 +8,7 @@ vim.opt.fileencoding='utf-8'
 vim.opt.termguicolors=true
 vim.opt.number=true
 vim.opt.showcmd=false
+vim.opt.mouse=''
 -- vim.opt.cursorline=true
 vim.opt.ttimeoutlen=0
 vim.opt.laststatus=0
