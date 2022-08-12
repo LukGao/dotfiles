@@ -137,8 +137,6 @@ local plug_func = function()
         ]]
     end}
 
-    use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async',config =  require("plugin.ufo") }
-
     use {'karb94/neoscroll.nvim',config = function()
         require('neoscroll').setup({
             mappings = {'<C-u>', '<C-d>', '<C-b>', '<C-f>',
