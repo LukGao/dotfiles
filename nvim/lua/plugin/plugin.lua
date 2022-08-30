@@ -107,6 +107,7 @@ local plug_func = function()
     use{"skywind3000/asyncrun.vim"}
     use{"skywind3000/asynctasks.vim", config = function ()
         vim.g.asyncrun_open = 15
+        vim.g.asyncrun_rootmarks = {'.git', '.svn', '.root', '.project', '.hg'}
     end}
     use{"Chiel92/vim-autoformat", config = function ()
         vim.cmd[[
