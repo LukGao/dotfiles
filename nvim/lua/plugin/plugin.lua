@@ -108,12 +108,6 @@ local plug_func = function()
     use{"skywind3000/asynctasks.vim", config = function ()
         vim.g.asyncrun_open = 15
     end}
-    use{"github/copilot.vim", config = function ()
-        vim.cmd[[
-        let g:copilot_no_tab_map = v:true
-        imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
-        ]]
-    end}
     use{"Chiel92/vim-autoformat", config = function ()
         vim.cmd[[
         nnoremap <localleader>ft :Autoformat<CR>
