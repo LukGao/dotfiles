@@ -80,3 +80,6 @@ endf
 autocmd ColorScheme * call s:transparent_background()
 
 nnoremap <silent><nowait> <localleader>k  :Dox<cr><Esc>
+
+noremap <silent><f1> :AsyncTask build<cr>
+noremap <silent><f2> :AsyncTask run<cr>
