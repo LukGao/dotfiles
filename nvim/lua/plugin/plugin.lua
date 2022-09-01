@@ -172,6 +172,7 @@ local plug_func = function()
             -- e.g. 80 to position at column 80, see `:h nvim_buf_set_extmark()`
         }
     end}
+    use {"skywind3000/vim-terminal-help"}
     if packer_bootstrap then
         require("packer").sync()
     end
