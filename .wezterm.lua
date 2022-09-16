@@ -17,7 +17,7 @@ function(tab, tabs, panes, config, hover, max_width)
 end
 )
 wezterm.on("update-right-status", function(window, pane)
-    local datetime = "   " .. wezterm.strftime("%B %e, %H:%M  ")
+    local datetime = "   " .. wezterm.strftime("%F %H:%M  ")
     local bat = ''
     for _, b in ipairs(wezterm.battery_info()) do
         bat = '🔋 ' .. string.format('%.0f%%', b.state_of_charge * 100)
