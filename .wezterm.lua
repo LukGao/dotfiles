@@ -35,6 +35,7 @@ return {
     enable_tab_bar = true,
     leader = {key='o', mods='CTRL', timeout_milliseconds=1000},
     keys = {
+        { key = 'o', mods = 'LEADER|CTRL', action = wezterm.action.SendString '\x0f', },
         { key = 'p', mods = 'ALT', action = wezterm.action.ToggleFullScreen, },
         { key = 'v', mods = 'ALT',          action = act.PasteFrom 'Clipboard' },
         { key = 'l', mods = 'ALT', action = wezterm.action.ShowLauncher },
