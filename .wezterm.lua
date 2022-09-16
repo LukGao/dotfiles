@@ -9,7 +9,8 @@ local format_tab_title = function(tab, tabs, panes, config, hover, max_width)
     end
 
     local title = tab.active_pane.title
-
+    --local title = "\x1b]0;wezterm\x1b\\"
+    --return { { Text = title } }
     return { { Text = symbolic .. title .. " " } }
 end
 
@@ -19,14 +20,16 @@ local update_right_status = function(window, pane)
 
     local hostname = " "..wezterm.hostname().." "
 
-    local datetime = "   " .. wezterm.strftime("%F %H:%M  ")
+    local datetime = "   " .. wezterm.strftime("%F %H:%M")
+
+    local weekday = wezterm.strftime("%A")
 
     local bat = ''
     for _, b in ipairs(wezterm.battery_info()) do
         bat = '🔋 ' .. string.format('%.0f%%', b.state_of_charge * 100)
     end
 
-    window:set_right_status(wezterm.format { { Text = bat .. '    ' .. datetime .. ' | ' .. hostname ..' '}, })
+    window:set_right_status(wezterm.format { { Text = bat .. '    ' .. datetime .. '   |   ' .. weekday ..'  '}, })
 end
 
 local format_windos_title = function(tab, pane, tabs, panes, config)
@@ -58,7 +61,7 @@ return {
         { key = 'p', mods = 'ALT', action = wezterm.action.ToggleFullScreen, },
         { key = 'v', mods = 'ALT',          action = wezterm.action.PasteFrom 'Clipboard' },
         { key = 'l', mods = 'ALT', action = wezterm.action.ShowLauncher },
-        { key = "c", mods = "ALT",       action=wezterm.action{SpawnTab="CurrentPaneDomain"}},
+        { key = "c", mods = "LEADER",       action=wezterm.action{SpawnTab="CurrentPaneDomain"}},
         { key = "1", mods = "ALT",       action=wezterm.action{ActivateTab=0}},
         { key = "2", mods = "ALT",       action=wezterm.action{ActivateTab=1}},
         { key = "3", mods = "ALT",       action=wezterm.action{ActivateTab=2}},
