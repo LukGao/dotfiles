@@ -28,8 +28,7 @@ wezterm.on("update-right-status", function(window, pane)
     })
 end)
 return {
-    check_for_updates = true,
-    check_for_updates_interval_seconds = 2592000,
+    check_for_updates = false,
     color_scheme = "Dracula",
     font = wezterm.font("JetBrainsMono Nerd Font"),
     font_size = 16,
