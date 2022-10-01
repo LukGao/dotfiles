@@ -86,6 +86,9 @@
     "clangd.enabled": true,
     "clangd.disableProgressNotifications": true,
     "clangd.inlayHints.enable": true,
+    "inlayHint.enable": true,
+    "inlayHint.enableParameter": true,
+    "inlayHint.refreshOnInsertMode": true,
     "clangd.arguments": [
         "--background-index=true",
         "--clang-tidy",
