@@ -73,3 +73,4 @@ alias unproxy='unset all_proxy'
 export PATH="$HOME/go/bin:$PATH"
 export GO111MODULE=on
 export GOPROXY=https://goproxy.cn,direct
+export HOMEBREW_NO_AUTO_UPDATE=1
