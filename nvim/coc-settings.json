@@ -76,7 +76,6 @@
     ],
     "suggest.languageSourcePriority": 99,
     "suggest.triggerCompletionWait": 50,
-    "suggest.acceptSuggestionOnCommitCharacter": true,
     "suggest.noselect": true,
     "coc.preferences.currentFunctionSymbolAutoUpdate": true,
     "coc.preferences.messageLevel": "error",
@@ -154,10 +153,6 @@
     },
     "dialog.floatHighlight": "Normal",
     "dialog.floatBorderHighlight": "Normal",
-    "snippets.enableStatusItem": false,
-    "snippets.ultisnips.enable": false,
-    "snippets.snipmate.enable": false,
-    "snippets.loadFromExtensions": false,
     "snippets.shortcut": "SP",
     "snippets.extends": {
         "cpp": [
