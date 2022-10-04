@@ -48,6 +48,7 @@ local plug_func = function()
     end}
     use{"kyazdani42/nvim-web-devicons"}
     use{"preservim/tagbar"}
+    use{"nvim-lualine/lualine.nvim", config = require ("plugin.lualine")}
     use{"rcarriga/nvim-notify"}
     use{"ryanoasis/vim-devicons", config = function ()
         require("notify").setup({
