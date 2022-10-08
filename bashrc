@@ -53,7 +53,8 @@ fi
 [ -f ~/.fzf.bash  ] && source ~/.fzf.bash
 eval "$(lua ~/.z.lua/z.lua --init bash once enhanced echo fzf)"
 
-export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --preview '( coderay {} || rougify {} || highlight -O ansi {} || cat {}) 2> /dev/null | head -500'"
+export BAT_THEME="Dracula"
+export FZF_DEFAULT_OPTS="--ansi --preview-window 'right:60%' --layout reverse --margin=1,4 --preview 'bat --color=always --style=header,grid --line-range :300 {}'"
 export FZF_DEFAULT_COMMAND="fd --exclude={.git,.idea,.vscode,.sass-cache,node_modules,build} --type f"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="rg --sort-files --files --null 2> /dev/null | xargs -0 dirname | uniq"
