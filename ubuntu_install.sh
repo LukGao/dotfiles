@@ -13,49 +13,67 @@ if [[ $(id -u) -eq 0 ]];then
     export SUDO=""
 fi
 
-export InstallCommand="${SUDO} apt-get install -y "
+install_dep()
+{
+    export InstallCommand="${SUDO} apt-get install -y "
 
-echo "source $BasePath/bashrc" >> ~/.bashrc
+    echo "source $BasePath/bashrc" >> ~/.bashrc
 
-rm -rf ~/.inputrc && cp .inputrc ~
-rm -rf ~/.tmux.conf && cp .tmux.conf ~
-rm -rf ~/.z.lua && mkdir ~/.z.lua && cp z.lua ~/.z.lua/z.lua
-rm -rf ~/.tmux/plugins/fzf && mkdir -p ~/.tmux/plugins/fzf && cp tmux/fzf ~/.tmux/plugins/fzf/ && cp tmux/tm ~/.tmux/
-rm -rf  ~/.local/share/nvim/site/pack/packer/start/
-mkdir -p ~/.local/share/nvim/site/pack/packer/start/
-cp -r packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+    ${SUDO} apt-get update -qq
 
-ln -snf ${BasePath}/nvim ~/.config/nvim
+    ${InstallCommand} build-essential curl git tmux wget python3 python3-dev python3-pip lua5.1 > /dev/null  2>&1
+}
 
-${SUDO} apt-get update -qq
+copy_dotfile()
+{
 
-${InstallCommand} curl git tmux wget python3 python3-dev python3-pip lua5.1 > /dev/null  2>&1
+    rm -rf ~/.inputrc && cp .inputrc ~
+    rm -rf ~/.tmux.conf && cp .tmux.conf ~
+    rm -rf ~/.z.lua && mkdir ~/.z.lua && cp z.lua ~/.z.lua/z.lua
+    rm -rf ~/.tmux/plugins/fzf && mkdir -p ~/.tmux/plugins/fzf && cp tmux/fzf ~/.tmux/plugins/fzf/ && cp tmux/tm ~/.tmux/
+    rm -rf  ~/.local/share/nvim/site/pack/packer/start/
+    mkdir -p ~/.local/share/nvim/site/pack/packer/start/
+    cp -r packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+    ln -snf ${BasePath}/nvim ~/.config/nvim
+}
 
-pip3 install -q neovim
+
 
 install_homebrew()
 {
-export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.ustc.edu.cn/brew.git"
-export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.ustc.edu.cn/homebrew-core.git"
-export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles"
+    export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.ustc.edu.cn/brew.git"
+    export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.ustc.edu.cn/linuxbrew-core.git"
+    /bin/bash -c "$(curl -fsSL https://gitee.com/ineo6/homebrew-install/raw/master/install.sh)"
+    echo 'export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/linuxbrew-bottles/bottles' >> ~/.bashrc
+    source ~/.bashrc
 
-install_homebrew.sh
+    brew update
+    
+    command -v fzf > /dev/null || ($BREW install fzf && $($BREW --prefix)/opt/fzf/install)
+    command -v fd > /dev/null || $BREW install fd
+    command -v rg > /dev/null || $BREW install rg
+    command -v node > /dev/null || $BREW install node
+    command -v tmux > /dev/null || $BREW install tmux
 
-brew update
-# echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.bashrc
-unset HOMEBREW_BOTTLE_DOMAIN
-unset HOMEBREW_CORE_GIT_REMOTE
-unset HOMEBREW_BREW_GIT_REMOTE
+
+    # echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.bashrc
+    unset HOMEBREW_CORE_GIT_REMOTE
+    unset HOMEBREW_BREW_GIT_REMOTE
 }
-command -v fzf > /dev/null || ($BREW install fzf && $($BREW --prefix)/opt/fzf/install)
-command -v fd > /dev/null || $BREW install fd
-command -v rg > /dev/null || $BREW install rg
-command -v node > /dev/null || $BREW install node
-command -v tmux > /dev/null || $BREW install tmux
+git_config()
+{
+    git config --global alias.tree "log --graph --all --relative-date --abbrev-commit --format=\"%x09 %h %Cgreen%cd%Creset [%Cblue%cn%Creset] %C(auto)%d%Creset %s\""
+    git config --global commit.gpgsign true
+    git config --global core.editor "nvim"
+}
 
-git config --global alias.tree "log --graph --all --relative-date --abbrev-commit --format=\"%x09 %h %Cgreen%cd%Creset [%Cblue%cn%Creset] %C(auto)%d%Creset %s\""
-git config --global commit.gpgsign true
-git config --global core.editor "nvim"
+copy_dotfile
+
+install_dep
+
+install_homebrew
+
+git_config
 
 # tee ~/.curlrc <<-'EOF'
 # socks5=127.0.0.1:1080
