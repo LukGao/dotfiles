@@ -21,9 +21,11 @@ rm -rf ~/.inputrc && cp .inputrc ~
 rm -rf ~/.tmux.conf && cp .tmux.conf ~
 rm -rf ~/.z.lua && mkdir ~/.z.lua && cp z.lua ~/.z.lua/z.lua
 rm -rf ~/.tmux/plugins/fzf && mkdir -p ~/.tmux/plugins/fzf && cp tmux/fzf ~/.tmux/plugins/fzf/ && cp tmux/tm ~/.tmux/
-rm -rf  ~/.local/share/nvim/site/pack/packer/start/packer.nvim && cp -r packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+rm -rf  ~/.local/share/nvim/site/pack/packer/start/
+mkdir -p ~/.local/share/nvim/site/pack/packer/start/
+cp -r packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 
-ln -snf nvim ~/.config/nvim
+ln -snf ${BasePath}/nvim ~/.config/nvim
 
 ${SUDO} apt-get update -qq
 
