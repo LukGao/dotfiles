@@ -1,6 +1,7 @@
 #!/bin/bash
 set -x
 export SUDO="sudo"
+export NONINTERACTIVE=1
 export InstallCommand="default"
 export DEBIAN_FRONTEND=noninteractive
 export BREW=/home/linuxbrew/.linuxbrew/bin/brew
@@ -43,7 +44,7 @@ install_homebrew()
 {
     export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.ustc.edu.cn/brew.git"
     export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.ustc.edu.cn/linuxbrew-core.git"
-    /bin/bash -c "$(curl -fsSL https://gitee.com/ineo6/homebrew-install/raw/master/install.sh)"
+    NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://gitee.com/ineo6/homebrew-install/raw/master/install.sh)"
     echo 'export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/linuxbrew-bottles/bottles' >> ~/.bashrc
     source ~/.bashrc
 
