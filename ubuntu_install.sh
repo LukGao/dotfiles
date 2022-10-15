@@ -58,7 +58,7 @@ install_homebrew()
 
     $BREW update
 
-    command -v fzf > /dev/null || ($BREW install fzf && $($BREW --prefix)/opt/fzf/install)
+    command -v fzf > /dev/null || ($BREW install fzf && $($BREW --prefix)/opt/fzf/install --all)
     command -v fd > /dev/null || $BREW install fd
     command -v rg > /dev/null || $BREW install rg
     command -v node > /dev/null || $BREW install node
