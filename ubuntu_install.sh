@@ -44,12 +44,17 @@ install_homebrew()
 {
     export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.ustc.edu.cn/brew.git"
     export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.ustc.edu.cn/linuxbrew-core.git"
-    NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://gitee.com/ineo6/homebrew-install/raw/master/install.sh)"
-    echo 'export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/linuxbrew-bottles/bottles' >> ~/.bashrc
-    source ~/.bashrc
 
-    brew update
-    
+    NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://gitee.com/ineo6/homebrew-install/raw/master/install.sh)"
+
+    git -C "$($BREW --repo)" remote set-url origin https://mirrors.ustc.edu.cn/brew.git
+    git -C "$($BREW --repo homebrew/core)" remote set-url origin https://mirrors.ustc.edu.cn/linuxbrew-core.git
+    git -C "$($BREW --repo homebrew/cask)" remote set-url origin https://mirrors.ustc.edu.cn/homebrew-cask.git
+
+    echo 'export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/linuxbrew-bottles/bottles' >> ~/.bashrc
+
+    $BREW update
+
     command -v fzf > /dev/null || ($BREW install fzf && $($BREW --prefix)/opt/fzf/install)
     command -v fd > /dev/null || $BREW install fd
     command -v rg > /dev/null || $BREW install rg
