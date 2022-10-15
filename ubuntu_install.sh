@@ -35,6 +35,7 @@ copy_dotfile()
     rm -rf  ~/.local/share/nvim/site/pack/packer/start/
     mkdir -p ~/.local/share/nvim/site/pack/packer/start/
     cp -r packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+    mkdir ~/.config
     ln -snf ${BasePath}/nvim ~/.config/nvim
 }
 
