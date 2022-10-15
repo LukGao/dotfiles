@@ -61,13 +61,15 @@ install_homebrew()
     command -v fzf > /dev/null || ($BREW install fzf && $($BREW --prefix)/opt/fzf/install --all)
     command -v fd > /dev/null || $BREW install fd
     command -v rg > /dev/null || $BREW install rg
+    command -v bat > /dev/null || $BREW install bat
     command -v node > /dev/null || $BREW install node
     command -v tmux > /dev/null || $BREW install tmux
+    command -v nvim > /dev/null || $BREW install neovim
 
-
-    # echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.bashrc
     unset HOMEBREW_CORE_GIT_REMOTE
     unset HOMEBREW_BREW_GIT_REMOTE
+
+    echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.bashrc
 }
 git_config()
 {
