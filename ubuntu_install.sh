@@ -45,7 +45,9 @@ install_homebrew()
     export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.ustc.edu.cn/brew.git"
     export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.ustc.edu.cn/linuxbrew-core.git"
 
+    set +x
     NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://gitee.com/ineo6/homebrew-install/raw/master/install.sh)"
+    set -x
 
     git -C "$($BREW --repo)" remote set-url origin https://mirrors.ustc.edu.cn/brew.git
     git -C "$($BREW --repo homebrew/core)" remote set-url origin https://mirrors.ustc.edu.cn/linuxbrew-core.git
