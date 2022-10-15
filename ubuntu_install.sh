@@ -67,7 +67,7 @@ install_homebrew()
     unset HOMEBREW_CORE_GIT_REMOTE
     unset HOMEBREW_BREW_GIT_REMOTE
 
-    echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.bashrc
+    echo "eval \"\$($($BREW --prefix)/bin/brew shellenv)\"" >> ~/.bashrc
 }
 git_config()
 {
