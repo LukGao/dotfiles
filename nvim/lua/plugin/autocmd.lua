@@ -9,6 +9,7 @@ nnoremap zpr :setlocal foldexpr=(getline(v:lnum)=~@/)?0:(getline(v:lnum-1)=~@/)\
 vnoremap // y/<c-r>"<CR>   "
 
 function! ToUTF8()
+    e ++ff=dos
     set fileencoding=utf-8
     set fileformat=unix
     w
