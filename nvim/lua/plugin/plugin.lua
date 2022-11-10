@@ -23,6 +23,8 @@ local plug_func = function()
     use{"wbthomason/packer.nvim"}
     use{"dracula/vim", as = "dracula",config = function() vim.cmd[[silent! colorscheme dracula]] end}
     use{"Yggdroot/LeaderF", run = ":LeaderfInstallCExtension", config = function ()
+        vim.g.Lf_GtagsAutoGenerate = 1
+        vim.g.Lf_Gtagslabel = 'native-pygments'
         vim.g.Lf_UseCache = 0
         vim.g.Lf_HideHelp = 1
         vim.g.Lf_MruMaxFiles = 2048
@@ -42,7 +44,7 @@ local plug_func = function()
         vim.cmd[[
         let g:Lf_WorkingDirectoryMode = 'AF'
         let g:Lf_RootMarkers = ['.git', '.svn', '.hg', '.project', '.root']
-        nnoremap <silent> <localleader>f :LeaderfFunction<cr>
+        nnoremap <silent> <space>f :LeaderfFunction<cr>
         nnoremap <silent> <localleader>m :LeaderfMru<cr>
         ]]
     end}
