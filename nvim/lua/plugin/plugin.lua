@@ -71,7 +71,6 @@ local plug_func = function()
     use{"tpope/vim-surround"}
     use{"mg979/vim-visual-multi"}
     use{"scrooloose/nerdcommenter"}
-    use{"nvim-treesitter/nvim-treesitter", config = require("plugin.treesitter")}
     use{"neoclide/coc.nvim", branch  = "release"}
 
     use{"neomake/neomake", config = function ()
