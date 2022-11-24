@@ -52,8 +52,6 @@ install_homebrew()
     git -C "$($BREW --repo homebrew/core)" remote set-url origin https://mirrors.ustc.edu.cn/linuxbrew-core.git
     git -C "$($BREW --repo homebrew/cask)" remote set-url origin https://mirrors.ustc.edu.cn/homebrew-cask.git
 
-    echo 'export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/linuxbrew-bottles' >> ~/.bashrc
-
     $BREW update
 
     command -v fzf > /dev/null || ($BREW install fzf && $($BREW --prefix)/opt/fzf/install --all)
