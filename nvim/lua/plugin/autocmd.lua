@@ -1,3 +1,24 @@
+local keymap = vim.keymap
+local uv = vim.loop
+
+keymap.set("n", "<localleader>bb", function()
+  local cnt = 0
+  local blink_times = 7
+  local timer = uv.new_timer()
+
+  timer:start(0, 100, vim.schedule_wrap(function()
+    vim.cmd[[
+      set cursorcolumn!
+      set cursorline!
+    ]]
+
+    if cnt == blink_times then
+      timer:close()
+    end
+
+    cnt = cnt + 1
+  end))
+end)
 
 vim.cmd[[
 
