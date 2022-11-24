@@ -62,11 +62,6 @@ local plug_func = function()
         vim.g.better_whitespace_enabled=0
         vim.g.strip_whitespace_confirm=0
     end}
-    use{"kana/vim-textobj-user"}
-    use{"kana/vim-textobj-indent"}
-    use{"kana/vim-textobj-syntax"}
-    use{"kana/vim-textobj-function"}
-    use{"sgur/vim-textobj-parameter"}
     use{"tpope/vim-endwise"}
     use{"tpope/vim-surround"}
     use{"mg979/vim-visual-multi"}
