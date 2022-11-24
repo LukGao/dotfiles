@@ -61,7 +61,7 @@ install_homebrew()
     command -v node > /dev/null || $BREW install node
     command -v tmux > /dev/null || $BREW install tmux
     command -v nvim > /dev/null || $BREW install neovim
-
+    $BREW  install --HEAD universal-ctags/universal-ctags/universal-ctags
     unset HOMEBREW_CORE_GIT_REMOTE
     unset HOMEBREW_BREW_GIT_REMOTE
 
