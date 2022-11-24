@@ -77,6 +77,7 @@
     "suggest.languageSourcePriority": 99,
     "suggest.triggerCompletionWait": 50,
     "suggest.noselect": true,
+    "suggest.invalidInsertCharacters": [ " ", "(", "<", "{", "[", "\r", "\n" ],
     "coc.preferences.currentFunctionSymbolAutoUpdate": true,
     "coc.preferences.messageLevel": "error",
     "coc.preferences.extensionUpdateCheck": "daily",
