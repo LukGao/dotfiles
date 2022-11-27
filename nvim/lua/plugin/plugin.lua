@@ -48,6 +48,16 @@ local plug_func = function()
         nnoremap <silent> <localleader>m :LeaderfMru<cr>
         ]]
     end}
+    use{"ggandor/flit.nvim", config = function()
+        require('flit').setup ({
+            keys = { f = 'f', F = 'F', t = 't', T = 'T' },
+            labeled_modes = "v",
+            multiline = true,
+        })
+    end}
+    use{"ggandor/leap.nvim", config = function()
+        require('leap').add_default_mappings()
+    end}
     use{"kyazdani42/nvim-web-devicons"}
     use{"preservim/tagbar"}
     use{"nvim-lualine/lualine.nvim", config = require ("plugin.lualine")}
