@@ -75,3 +75,16 @@ export PATH="$HOME/go/bin:$PATH"
 export GO111MODULE=on
 export GOPROXY=https://goproxy.cn,direct
 export HOMEBREW_NO_AUTO_UPDATE=1
+[ -z $SSH_TTY ] || PS1='\[\e[0;30m\]\[\e[47m\]SSH\[\e[0m\] '$PS1
+
+# Non-default history file, to avoid accidental truncation.
+[ -f "$HOME/.bash_history_x" ] || { [ -f "$HOME/.bash_history" ] && cp "$HOME/.bash_history" "$HOME/.bash_history_x" ; }
+HISTFILE="$HOME/.bash_history_x"
+HISTCONTROL=erasedups:ignoreboth
+HISTSIZE=99999
+HISTFILESIZE=99999
+HISTIGNORE='exit:cd:ls:bg:fg:history:f:fd'
+HISTTIMEFORMAT='%F %T '
+# append to the history file, don't overwrite it
+shopt -s histappend
+PROMPT_COMMAND='history -a' # append history file after each command
