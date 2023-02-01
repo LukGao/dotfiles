@@ -170,5 +170,6 @@
     "lightbulb.text": {
         "default": "",
         "quickfix": ""
-    }
+    },
+    "snippets.ultisnips.pythonPrompt": false
 }
