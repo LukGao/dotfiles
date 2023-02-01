@@ -49,19 +49,6 @@ let g:Lf_Extensions.task = {
 		\ }
 
 
-lua << EOF
-function BuildTask(project)
-    local log = "info"
-    local status = "success"
-    if vim.g.asyncrun_code ~= 0 then
-        log = "error"
-        status = "fail"
-    end
-    require("notify")(project .. " task finish",err,{title ="async build"})
- end
-EOF
-
-
 nnoremap <silent><nowait> <localleader>r  :Leaderf --nowrap task --popup<cr>
 
 if has("persistent_undo")
@@ -81,5 +68,3 @@ autocmd ColorScheme * call s:transparent_background()
 
 nnoremap <silent><nowait> <localleader>k  :Dox<cr><Esc>
 
-noremap <silent><f1> :AsyncTask build<cr>
-noremap <silent><f2> :AsyncTask run<cr>

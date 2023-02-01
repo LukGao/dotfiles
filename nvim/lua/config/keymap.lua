@@ -1,4 +1,3 @@
-
 vim.cmd[[
     nnoremap <space><space> %
     nnoremap <C-h> <C-w>h
@@ -7,3 +6,4 @@ vim.cmd[[
     nnoremap <C-k> <C-w>k
     nnoremap <leader>q :q!<CR>
 ]]
+

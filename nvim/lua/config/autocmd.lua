@@ -41,3 +41,12 @@ endfunction
 "autocmd BufWritePre *.cpp,*.lua,*.c,*.h,*.hpp :%retab
 
 ]]
+
+vim.cmd([[
+augroup CursorLineOnlyInActiveWindow
+        autocmd!
+        autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+        autocmd WinLeave * setlocal nocursorline
+augroup END
+]])
+

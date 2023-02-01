@@ -1,7 +1,7 @@
 [http]
-   proxy = socks5h://127.0.0.1:1080
+    proxy = socks5h://127.0.0.1:1080
 [alias]
-	tree = log --graph --all --relative-date --abbrev-commit --format=\"%x09 %h %Cgreen%cd%Creset [%Cblue%cn%Creset] %C(auto)%d%Creset %s\"
+    tree = log --graph --all --relative-date --abbrev-commit --format=\"%x09 %h %Cgreen%cd%Creset [%Cblue%cn%Creset] %C(auto)%d%Creset %s\"
     l  = log --graph --oneline --decorate
     ld = log --graph --pretty=format:'%C(yellow)%h%C(bold black white)%d%Creset %s %C(bold green)%cr %Creset%C(white)%an' --abbrev-commit --date=relative
     ll = log --stat --decorate --source -p

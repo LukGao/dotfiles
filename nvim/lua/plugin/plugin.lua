@@ -1,202 +1,206 @@
--- local plug_url_format = "https://hub.fastgit.org/%s"
--- local packer_url = "https://hub.fastgit.org/wbthomason/packer.nvim"
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+    vim.fn.system({
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        "--branch=stable", -- latest stable release
+        lazypath,
+    })
+end
+vim.opt.rtp:prepend(lazypath)
 
-local plug_url_format = "https://github.com/%s"
-local packer_url = "https://github.com/wbthomason/packer.nvim"
+local cppman_cfg = function() vim.cmd [[ autocmd FileType c,cpp setlocal keywordprg=:Cppman ]] end
 
-local install_path = vim.fn.stdpath("data").."/site/pack/packer/start/packer.nvim"
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-    packer_bootstrap = vim.fn.system({"git", "clone", "--depth", "1", packer_url, install_path})
+local leaderf_cfg = function()
+    vim.g.Lf_GtagsAutoGenerate = 1
+    vim.g.Lf_Gtagslabel = 'native-pygments'
+    vim.g.Lf_UseCache = 0
+    vim.g.Lf_HideHelp = 1
+    vim.g.Lf_MruMaxFiles = 2048
+    vim.g.Lf_WindowHeight = 0.30
+    vim.g.Lf_UseMemoryCache = 0
+    vim.g.Lf_ShowRelativePath = 0
+    vim.g.Lf_UseVersionControlTool = 0
+    vim.g.Lf_IgnoreCurrentBufferName = 1
+    vim.g.Lf_PreviewResult = { Function = 0, BufTag = 0 }
+    vim.g.Lf_StlSeparator = { left = '', right = '', font = '' }
+    vim.g.Lf_WildIgnore = {
+        dir = { '.git', '.clangd', '.svn', '.hg', '.cache', '.build', '.deps', '.ccls-cache', 'build' },
+        file = { '*.exe', '*.o', '*.a', '*.so', '*.py[co]', '*.sw?', '*.bak', '*.d', '*.idx', "*.lint", '*.gcno' }
+    }
+    vim.g.Lf_WorkingDirectoryMode = 'AF'
+    vim.g.Lf_RootMarkers = { '.git', '.svn', '.hg', '.project', '.root' }
+    vim.g.Lf_NormalMap = {
+        File = { { "<ESC>", ':exec g:Lf_py "fileExplManager.quit()"<CR>' } },
+        Buffer = { { "<ESC>", ':exec g:Lf_py "bufExplManager.quit()"<CR>' } },
+        Mru = { { "<ESC>", ':exec g:Lf_py "mruExplManager.quit()"<CR>' } },
+        Tag = { { "<ESC>", ':exec g:Lf_py "tagExplManager.quit()"<CR>' } },
+        Function = { { "<ESC>", ':exec g:Lf_py "functionExplManager.quit()"<CR>' } },
+        Colorscheme = { { "<ESC>", ':exec g:Lf_py "colorschemeExplManager.quit()"<CR>' } },
+    }
+    vim.cmd [[
+    nnoremap <silent> <space>f :LeaderfFunction<cr>
+    nnoremap <silent> <localleader>m :LeaderfMru<cr>
+    ]]
+end
+local interestingwords_cfg = function()
+    vim.g.interestingWordsGUIColors = {
+        '#72b5e4', '#f0c53f', '#ff8784', '#c5c7f1',
+        '#c2d735', '#78d3cc', '#ea8336', '#e43542',
+        '#ebab35', '#ebe735', '#aadd32', '#219286',
+        '#2f569c', '#ffb577', '#5282a4', '#edfccf',
+        '#67064c', '#f5bca7', '#95c474', '#dece83',
+        '#de9783', '#f2e700', '#e9e9e9', '#69636d',
+        '#626b98', '#f5f5a7', '#dcca6b', '#b72a83',
+        '#6f2b9d', '#5f569c',
+    }
 end
 
+local buffet_cfg = function()
+    vim.cmd [[
+    nmap <leader>1 <Plug>BuffetSwitch(1)
+    nmap <leader>2 <Plug>BuffetSwitch(2)
+    nmap <leader>3 <Plug>BuffetSwitch(3)
+    nmap <leader>4 <Plug>BuffetSwitch(4)
+    nmap <leader>5 <Plug>BuffetSwitch(5)
+    nmap <leader>6 <Plug>BuffetSwitch(6)
+    nmap <leader>7 <Plug>BuffetSwitch(7)
+    nmap <leader>8 <Plug>BuffetSwitch(8)
+    nmap <leader>9 <Plug>BuffetSwitch(9)
+    nmap <leader>0 <Plug>BuffetSwitch(10)
 
+    let g:buffet_tab_icon = "\uf00a"
+    let g:buffet_tab_icon = "\uf00a"
+    let g:buffet_show_index = 1
+    let g:buffet_powerline_separators = 1
+    let g:buffet_left_trunc_icon = "\uf0a8"
+    let g:buffet_right_trunc_icon = "\uf0a9"
 
-vim.cmd("packadd! packer.nvim")
+    function! g:BuffetSetCustomColors()
+        hi! BuffetCurrentBuffer cterm=NONE ctermbg=106 ctermfg=8 guibg=#b8bb26 guifg=#000000
+        hi! BuffetTrunc cterm=bold ctermbg=66 ctermfg=8 guibg=#458588 guifg=#000000
+        hi! BuffetBuffer cterm=NONE ctermbg=239 ctermfg=8 guibg=#504945 guifg=#000000
+        hi! BuffetTab cterm=NONE ctermbg=66 ctermfg=8 guibg=#458588 guifg=#000000
+        hi! BuffetActiveBuffer cterm=NONE ctermbg=10 ctermfg=239 guibg=#999999 guifg=#504945
+    endfunction
+    ]]
 
-local packer_config =  {
-    auto_clean = false,
-    git = { default_url_format = plug_url_format}
+end
+
+local tagbar_cfg = function()
+    vim.cmd [[
+    let g:tagbar_width=25
+    nnoremap <localleader>g :TagbarToggle<CR>
+    ]]
+end
+
+local asynctasks_cfg = function()
+    vim.g.asyncrun_open = 15
+    vim.g.asyncrun_rootmarks = { '.git', '.svn', '.root', '.project', '.hg' }
+end
+
+local fzf_cfg = function()
+    vim.cmd [[
+    let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
+    ]]
+end
+
+vim.api.nvim_create_autocmd('User', {
+    pattern = 'LazyDone',
+    once = true,
+    callback = function()
+        vim.cmd [[
+            silent! colorscheme dracula
+        ]]
+    end,
+})
+
+local line_cfg = function()
+    local dracula = require 'lualine.themes.dracula'
+    require('lualine').setup {
+        options = {
+            theme                = dracula,
+            section_separators   = { left = ' ', right = ' ' },
+            component_separators = { right = ' ', left = ' ' },
+        },
+        sections = {
+            lualine_c = { 'g:coc_status' },
+            lualine_x = {
+                {
+                    require("lazy.status").updates,
+                    cond = require("lazy.status").has_updates,
+                    color = { fg = "#ff9e64" },
+                },
+            },
+        },
+    }
+end
+
+local rainbow_cfg = function() vim.g.rainbow_active = 1 end
+
+local shade_cfg = function()
+    require 'shade'.setup({
+        overlay_opacity = 50,
+        opacity_step = 1,
+        keys = {
+            brightness_up   = '<C-Up>',
+            brightness_down = '<C-Down>',
+            toggle          = '<Leader>s',
+        }
+    })
+end
+local startify_cfg = function()
+    vim.g.startify_padding_left = 30
+    vim.g.better_whitespace_enabled = 0
+    vim.g.strip_whitespace_confirm = 0
+end
+local translate_cfg = function()
+    --vim.g.translator_proxy_url = 'socks5://172.20.50.241:1080'
+    vim.g.translator_default_engines = { 'youdao', 'bing' }
+    vim.cmd [[
+        nmap <silent> <leader>t <Plug>TranslateW
+        vmap <silent> <leader>t <Plug>TranslateWV
+    ]]
+end
+local opts = {
+    defaults = {
+        lazy = true
+    }
 }
+require("lazy").setup({
+    spec = {
 
-local plug_func = function()
-    use{"nvim-lua/plenary.nvim"}
-    use{"wbthomason/packer.nvim"}
-    use{"dracula/vim", as = "dracula",config = function() vim.cmd[[silent! colorscheme dracula]] end}
-    use{"Yggdroot/LeaderF", run = ":LeaderfInstallCExtension", config = function ()
-        vim.g.Lf_GtagsAutoGenerate = 1
-        vim.g.Lf_Gtagslabel = 'native-pygments'
-        vim.g.Lf_UseCache = 0
-        vim.g.Lf_HideHelp = 1
-        vim.g.Lf_MruMaxFiles = 2048
-        vim.g.Lf_WindowHeight = 0.30
-        vim.g.Lf_UseMemoryCache = 0
-        vim.g.Lf_ShowRelativePath = 0
-        vim.g.Lf_UseVersionControlTool = 0
-        vim.g.Lf_IgnoreCurrentBufferName = 1
-        vim.g.Lf_PreviewResult = {Function = 0, BufTag= 0 }
-        vim.g.Lf_StlSeparator = { left = '', right= '', font='' }
-
-        vim.g.Lf_WildIgnore = {
-            dir = {'.git','.clangd', '.svn', '.hg', '.cache', '.build', '.deps', '.ccls-cache', 'build'},
-            file = {'*.exe', '*.o', '*.a', '*.so', '*.py[co]', '*.sw?', '*.bak', '*.d', '*.idx', "*.lint", '*.gcno'}
-        }
-
-        vim.cmd[[
-        let g:Lf_WorkingDirectoryMode = 'AF'
-        let g:Lf_RootMarkers = ['.git', '.svn', '.hg', '.project', '.root']
-        nnoremap <silent> <space>f :LeaderfFunction<cr>
-        nnoremap <silent> <localleader>m :LeaderfMru<cr>
-        ]]
-    end}
-    use{"ggandor/flit.nvim", config = function()
-        require('flit').setup ({
-            keys = { f = 'f', F = 'F', t = 't', T = 'T' },
-            labeled_modes = "v",
-            multiline = true,
-        })
-    end}
-    use{"ggandor/leap.nvim", config = function()
-        require('leap').add_default_mappings()
-    end}
-    use{"kyazdani42/nvim-web-devicons"}
-    use{"preservim/tagbar"}
-    use{"nvim-lualine/lualine.nvim", config = require ("plugin.lualine")}
-    use{"rcarriga/nvim-notify"}
-    use{"ryanoasis/vim-devicons", config = function ()
-        require("notify").setup({
-            background_colour = "#000000",
-        })
-    end}
-    use{"mhinz/vim-startify", config = function ()
-        vim.g.startify_padding_left = 30
-        vim.g.better_whitespace_enabled=0
-        vim.g.strip_whitespace_confirm=0
-    end}
-    use{"tpope/vim-endwise"}
-    use{"tpope/vim-surround"}
-    use{"mg979/vim-visual-multi"}
-    use{"scrooloose/nerdcommenter"}
-    use{"neoclide/coc.nvim", branch  = "release"}
-
-    use{"neomake/neomake", config = function ()
-        vim.g.neomake_tempfile_dir = '~/.nvim/tmp/neomake'
-        vim.g.neomake_cpp_enable_makers = 'clang'
-        vim.g.neomake_cpp_clang_maker = {exe = 'clang' }
-        vim.g.neomake_cpp_clang_args = {'--std=c++20','--analyze -extra-arg -Xanalyzer -extra-arg -analyzer-output=text'}
-
-        vim.cmd[[
-        silent! call neomake#configure#automake('w')
-        ]]
-    end}
-    use{"m-pilia/vim-ccls", config = function ()
-        vim.g.ccls_close_on_jump = true
-        vim.g.yggdrasil_no_default_maps = 1
-    end}
-    use{"junegunn/fzf"}
-    use{"junegunn/fzf.vim"}
-    use{"antoinemadec/coc-fzf", config = function ()
-        vim.cmd[[
-        let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
-        ]]
-    end}
-
-    use{"bagrat/vim-buffet"}
-    use{"vim-scripts/DoxygenToolkit.vim"}
-    use{"skywind3000/vim-cppman", config = function ()
-        vim.cmd[[
-        autocmd FileType c,cpp setlocal keywordprg=:Cppman
-        ]]
-    end}
-    use{"lfv89/vim-interestingwords",config = function()
-        vim.g.interestingWordsGUIColors = {
-            '#72b5e4', '#f0c53f', '#ff8784', '#c5c7f1',
-            '#c2d735', '#78d3cc', '#ea8336', '#e43542',
-            '#ebab35', '#ebe735', '#aadd32',
-            '#219286', '#2f569c', '#ffb577', '#5282a4',
-            '#edfccf', '#67064c', '#f5bca7', '#95c474',
-            '#dece83', '#de9783', '#f2e700', '#e9e9e9',
-            '#69636d', '#626b98', '#f5f5a7', '#dcca6b',
-            '#b72a83', '#6f2b9d',  '#5f569c',
-        }
-    end}
-    use{"MattesGroeger/vim-bookmarks"}
-    use{"tpope/vim-abolish"}
-    use{"skywind3000/asyncrun.vim"}
-    use{"skywind3000/asynctasks.vim", config = function ()
-        vim.g.asyncrun_open = 15
-        vim.g.asyncrun_rootmarks = {'.git', '.svn', '.root', '.project', '.hg'}
-    end}
-    use{"Chiel92/vim-autoformat", config = function ()
-        vim.cmd[[
-        nnoremap <localleader>ft :Autoformat<CR>
-        ]]
-
-    end}
-
-    use{"ooknn/translate", config = function ()
-        vim.cmd[[
-        vmap <silent> <leader>t <Cmd>lua require("translate").translateV()<cr>
-        nmap <silent> <leader>t <Cmd>lua require("translate").translateN()<cr>
-
-        command! Translate  lua require("translate").translateN()
-        command! TranslateV lua require("translate").translateV()
-        ]]
-    end}
-
-    use{"luochen1990/rainbow", config = function ()
-        vim.cmd[[
-        let g:rainbow_active = 1
-        ]]
-    end}
-
-    use {'karb94/neoscroll.nvim',config = function()
-        require('neoscroll').setup({
-            mappings = {'<C-u>', '<C-d>', '<C-b>', '<C-f>',
-            '<C-y>', '<C-e>', 'zt', 'zz', 'zb'},
-            hide_cursor = true,          -- Hide cursor while scrolling
-            stop_eof = true,             -- Stop at <EOF> when scrolling downwards
-            respect_scrolloff = false,   -- Stop scrolling when the cursor reaches the scrolloff margin of the file
-            cursor_scrolls_alone = true, -- The cursor will keep on scrolling even if the window cannot scroll further
-            easing_function = nil,       -- Default easing function
-            pre_hook = nil,              -- Function to run before the scrolling animation starts
-            post_hook = nil,             -- Function to run after the scrolling animation ends
-            performance_mode = false,    -- Disable "Performance Mode" on all buffers.
-        })
-    end}
-
-    use{"mbbill/undotree"}
-
-    use{"mfussenegger/nvim-dap",config = require ("plugin.dap")}
-    use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
-    use{"Shatur/neovim-cmake",config = require ("plugin.cmake")}
-
-    use{"theHamsta/nvim-dap-virtual-text",config = function()
-        require("nvim-dap-virtual-text").setup {
-            enabled = true,                        -- enable this plugin (the default)
-            enabled_commands = true,               -- create commands DapVirtualTextEnable, DapVirtualTextDisable, DapVirtualTextToggle, (DapVirtualTextForceRefresh for refreshing when debug adapter did not notify its termination)
-            highlight_changed_variables = true,    -- highlight changed values with NvimDapVirtualTextChanged, else always NvimDapVirtualText
-            highlight_new_as_changed = false,      -- highlight new variables in the same way as changed variables (if highlight_changed_variables)
-            show_stop_reason = true,               -- show stop reason when stopped for exceptions
-            commented = false,                     -- prefix virtual text with comment string
-            only_first_definition = true,          -- only show virtual text at first definition (if there are multiple)
-            all_references = false,                -- show virtual text on all all references of the variable (not only definitions)
-            filter_references_pattern = '<module', -- filter references (not definitions) pattern when all_references is activated (Lua gmatch pattern, default filters out Python modules)
-            -- experimental features:
-            virt_text_pos = 'eol',                 -- position of virtual text, see `:h nvim_buf_set_extmark()`
-            all_frames = false,                    -- show virtual text for all stack frames not only current. Only works for debugpy on my machine.
-            virt_lines = false,                    -- show virtual lines instead of virtual text (will flicker!)
-            virt_text_win_col = nil                -- position the virtual text at a fixed window column (starting from the first text column) ,
-            -- e.g. 80 to position at column 80, see `:h nvim_buf_set_extmark()`
-        }
-    end}
-    use {"skywind3000/vim-terminal-help"}
-    if packer_bootstrap then
-        require("packer").sync()
-    end
-end
-
-
-return require("packer").startup({
-    plug_func,
-    config = packer_config,
+        { "kyazdani42/nvim-web-devicons", event = 'VeryLazy', },
+        { "tpope/vim-endwise", event = 'VeryLazy', },
+        { "scrooloose/nerdcommenter", event = 'VeryLazy', },
+        { "vim-scripts/DoxygenToolkit.vim", event = 'VeryLazy', },
+        { "MattesGroeger/vim-bookmarks", event = 'VeryLazy', },
+        { "tpope/vim-abolish", event = 'VeryLazy', },
+        { "skywind3000/asyncrun.vim", event = 'VeryLazy', },
+        { "mbbill/undotree", event = 'VeryLazy', },
+        { "rcarriga/nvim-notify", event = 'VeryLazy', },
+        { "junegunn/fzf.vim", event = 'VeryLazy', },
+        { "m-pilia/vim-ccls", event = 'VeryLazy', },
+        { "skywind3000/vim-terminal-help", event = 'VeryLazy', },
+        { "mg979/vim-visual-multi", event = 'VeryLazy', },
+        { "voldikss/vim-translator", config = translate_cfg, event = 'VeryLazy', },
+        { "antoinemadec/coc-fzf", config = fzf_cfg, event = 'VeryLazy', },
+        { "mhinz/vim-startify", config = startify_cfg },
+        { "nvim-lualine/lualine.nvim", config = line_cfg, event = 'VeryLazy', },
+        { "sunjon/shade.nvim", config = shade_cfg, event = 'VeryLazy', },
+        { 'yuki-yano/fzf-preview.vim', branch = 'release/rpc', event = 'VeryLazy', },
+        { "junegunn/fzf", dir = "~/.fzf", build = "./install --all", event = 'VeryLazy', },
+        { "neoclide/coc.nvim", branch = "release", event = 'VeryLazy', },
+        { "preservim/tagbar", config = tagbar_cfg, event = 'VeryLazy', },
+        { "bagrat/vim-buffet", config = buffet_cfg, },
+        { "luochen1990/rainbow", config = rainbow_cfg, event = 'VeryLazy', },
+        { "skywind3000/asynctasks.vim", config = asynctasks_cfg, event = 'VeryLazy', },
+        { "lfv89/vim-interestingwords", config = interestingwords_cfg, event = 'VeryLazy', },
+        { "skywind3000/vim-cppman", config = cppman_cfg, event = 'VeryLazy', },
+        { "dracula/vim", name = "dracula", },
+        { "Yggdroot/LeaderF", build = ":LeaderfInstallCExtension", config = leaderf_cfg, event = 'VeryLazy', },
+    },
+    opts
 })
