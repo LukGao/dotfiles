@@ -167,7 +167,22 @@ end
 local opts = {
     defaults = {
         lazy = true
-    }
+    },
+    performance = {
+        rtp = {
+            disabled_plugins = {
+                'rplugin',
+                'gzip',
+                'matchit',
+                'matchparen',
+                'shada',
+                'tarPlugin',
+                'tohtml',
+                'tutor',
+                'zipPlugin',
+            },
+        },
+    },
 }
 require("lazy").setup({
     spec = {
@@ -194,7 +209,7 @@ require("lazy").setup({
         { "junegunn/fzf", dir = "~/.fzf", build = "./install --all", event = 'VeryLazy', },
         { "neoclide/coc.nvim", branch = "release", event = 'VeryLazy', },
         { "preservim/tagbar", config = tagbar_cfg, event = 'VeryLazy', },
-        { "bagrat/vim-buffet", config = buffet_cfg, },
+        { "bagrat/vim-buffet", config = buffet_cfg, event = "VeryLazy", },
         { "luochen1990/rainbow", config = rainbow_cfg, event = 'VeryLazy', },
         { "skywind3000/asynctasks.vim", config = asynctasks_cfg, event = 'VeryLazy', },
         { "lfv89/vim-interestingwords", config = interestingwords_cfg, event = 'VeryLazy', },
