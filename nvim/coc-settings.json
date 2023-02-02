@@ -77,7 +77,15 @@
     "suggest.languageSourcePriority": 99,
     "suggest.triggerCompletionWait": 50,
     "suggest.noselect": true,
-    "suggest.invalidInsertCharacters": [ " ", "(", "<", "{", "[", "\r", "\n" ],
+    "suggest.invalidInsertCharacters": [
+        " ",
+        "(",
+        "<",
+        "{",
+        "[",
+        "\r",
+        "\n"
+    ],
     "coc.preferences.currentFunctionSymbolAutoUpdate": true,
     "coc.preferences.messageLevel": "error",
     "coc.preferences.extensionUpdateCheck": "daily",
@@ -86,7 +94,7 @@
     "clangd.enabled": true,
     "clangd.disableProgressNotifications": true,
     "clangd.inlayHints.enable": true,
-    "inlayHint.enable": true,
+    "inlayHint.enable": false,
     "inlayHint.enableParameter": true,
     "inlayHint.refreshOnInsertMode": true,
     "clangd.arguments": [
@@ -96,10 +104,15 @@
         "--completion-style=detailed",
         "--pch-storage=disk"
     ],
+    "diagnostic.virtualText": true,
+    "diagnostic.autoRefresh": true,
     "diagnostic.errorSign": "",
     "diagnostic.warningSign": "",
     "diagnostic.infoSign": "",
     "diagnostic.hintSign": "",
+    "diagnostic.signPriority": 20,
+    "diagnostic.enableHighlightLineNumber": false,
+    "diagnostic.locationlistUpdate": false,
     "diagnostic.floatConfig": {
         "border": true,
         "borderhighlight": "FloatBorder",
@@ -107,9 +120,6 @@
         "maxWidth": 120,
         "focusable": false
     },
-    "diagnostic.signPriority": 20,
-    "diagnostic.enableHighlightLineNumber": false,
-    "diagnostic.locationlistUpdate": false,
     "suggest.completionItemKindLabels": {
         "default": "",
         "text": "",

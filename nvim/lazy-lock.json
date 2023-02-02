@@ -6,12 +6,13 @@
   "coc-fzf": { "branch": "master", "commit": "5fae5a15497750483e21fc207aa6005f340f02f2" },
   "coc.nvim": { "branch": "release", "commit": "bbaa1d5d1ff3cbd9d26bb37cfda1a990494c4043" },
   "dracula": { "branch": "master", "commit": "eb577d47b0cfc9191bf04c414b4042d5f1a980f8" },
-  "fzf-preview.vim": { "branch": "release/rpc", "commit": "c3c4d7c988cfa0b5eb863ad66df885a069dfe84f" },
   "fzf.vim": { "branch": "master", "commit": "dc71692255b62d1f67dc55c8e51ab1aa467b1d46" },
   "lazy.nvim": { "branch": "main", "commit": "3d2dcb2d5ef99106c5ff412da88c6f59a9f8a693" },
   "lualine.nvim": { "branch": "master", "commit": "0050b308552e45f7128f399886c86afefc3eb988" },
   "nerdcommenter": { "branch": "master", "commit": "06f6166e5dfcf78eb0d055c21274cafc3927d461" },
+  "nvim-gps": { "branch": "master", "commit": "f4734dff6fc2f33b5fd13412e56c4fce06650a74" },
   "nvim-notify": { "branch": "master", "commit": "bdd647f61a05c9b8a57c83b78341a0690e9c29d7" },
+  "nvim-treesitter": { "branch": "master", "commit": "69867ffe7e05559fdb055f6b5a2589fc6bee1070" },
   "nvim-web-devicons": { "branch": "master", "commit": "a421d183ef37dfa13f51a5805bed2381aebf9080" },
   "rainbow": { "branch": "master", "commit": "61f719aebe0dc5c3048330c50db72cfee1afdd34" },
   "shade.nvim": { "branch": "master", "commit": "4286b5abc47d62d0c9ffb22a4f388b7bf2ac2461" },
@@ -26,6 +27,6 @@
   "vim-interestingwords": { "branch": "master", "commit": "e59f97aca15c6180e6f3aceaf4f7b50ca04326ed" },
   "vim-startify": { "branch": "master", "commit": "81e36c352a8deea54df5ec1e2f4348685569bed2" },
   "vim-terminal-help": { "branch": "master", "commit": "4ae1772f55877e041b9c11a4ce4645890aa0fed0" },
-  "vim-translator": { "branch": "master", "commit": "63ac44f87563fea49cfb5f07379b5959ef19cdaa" },
+  "vim-translator": { "branch": "master", "commit": "681c6b2f650b699572e6bb55162a3d6e62ee5d43" },
   "vim-visual-multi": { "branch": "master", "commit": "724bd53adfbaf32e129b001658b45d4c5c29ca1a" }
 }

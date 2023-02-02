@@ -119,6 +119,7 @@ vim.api.nvim_create_autocmd('User', {
 
 local line_cfg = function()
     local dracula = require 'lualine.themes.dracula'
+    local gps = require("nvim-gps")
     require('lualine').setup {
         options = {
             theme                = dracula,
@@ -126,14 +127,12 @@ local line_cfg = function()
             component_separators = { right = ' ', left = ' ' },
         },
         sections = {
-            lualine_c = { 'g:coc_status' },
+            lualine_c = { 'filetype' },
             lualine_x = {
-                {
-                    require("lazy.status").updates,
-                    cond = require("lazy.status").has_updates,
-                    color = { fg = "#ff9e64" },
-                },
+                { gps.get_location, cond = gps.is_available },
             },
+
+            lualine_y = { 'encoding', 'fileformat', 'progress' },
         },
     }
 end
@@ -164,6 +163,31 @@ local translate_cfg = function()
         vmap <silent> <leader>t <Plug>TranslateWV
     ]]
 end
+local ts_cfg = function()
+    require 'nvim-treesitter.configs'.setup {
+        ensure_installed = { "c", "cpp", "go", "lua", "help" },
+        sync_install = false,
+        auto_install = true,
+        highlight = {
+            enable = false,
+        },
+
+    }
+    require("nvim-treesitter.install").command_extra_args = {
+        curl = { "--proxy", "127.0.0.1:8889" },
+    }
+end
+local gps_cfg = function()
+    require("nvim-gps").setup({
+        icons = {
+            ["class-name"] = ' ', -- Classes and class-like objects
+            ["function-name"] = '', -- Functions
+            ["method-name"] = ' ', -- Methods (functions inside class-like objects)
+            ["container-name"] = ' ', -- Containers (example: lua tables)
+            ["tag-name"] = '炙' -- Tags (example: html tags)
+        },
+    })
+end
 local opts = {
     defaults = {
         lazy = true
@@ -184,38 +208,40 @@ local opts = {
         },
     },
 }
-require("lazy").setup({
-    spec = {
+local plugins = {
+    { "dracula/vim", name = "dracula", },
+    { "mhinz/vim-startify", config = startify_cfg },
 
-        { "kyazdani42/nvim-web-devicons", event = 'VeryLazy', },
-        { "tpope/vim-endwise", event = 'VeryLazy', },
-        { "scrooloose/nerdcommenter", event = 'VeryLazy', },
-        { "vim-scripts/DoxygenToolkit.vim", event = 'VeryLazy', },
-        { "MattesGroeger/vim-bookmarks", event = 'VeryLazy', },
-        { "tpope/vim-abolish", event = 'VeryLazy', },
-        { "skywind3000/asyncrun.vim", event = 'VeryLazy', },
-        { "mbbill/undotree", event = 'VeryLazy', },
-        { "rcarriga/nvim-notify", event = 'VeryLazy', },
-        { "junegunn/fzf.vim", event = 'VeryLazy', },
-        { "m-pilia/vim-ccls", event = 'VeryLazy', },
-        { "skywind3000/vim-terminal-help", event = 'VeryLazy', },
-        { "mg979/vim-visual-multi", event = 'VeryLazy', },
-        { "voldikss/vim-translator", config = translate_cfg, event = 'VeryLazy', },
-        { "antoinemadec/coc-fzf", config = fzf_cfg, event = 'VeryLazy', },
-        { "mhinz/vim-startify", config = startify_cfg },
-        { "nvim-lualine/lualine.nvim", config = line_cfg, event = 'VeryLazy', },
-        { "sunjon/shade.nvim", config = shade_cfg, event = 'VeryLazy', },
-        { 'yuki-yano/fzf-preview.vim', branch = 'release/rpc', event = 'VeryLazy', },
-        { "junegunn/fzf", dir = "~/.fzf", build = "./install --all", event = 'VeryLazy', },
-        { "neoclide/coc.nvim", branch = "release", event = 'VeryLazy', },
-        { "preservim/tagbar", config = tagbar_cfg, event = 'VeryLazy', },
-        { "bagrat/vim-buffet", config = buffet_cfg, event = "VeryLazy", },
-        { "luochen1990/rainbow", config = rainbow_cfg, event = 'VeryLazy', },
-        { "skywind3000/asynctasks.vim", config = asynctasks_cfg, event = 'VeryLazy', },
-        { "lfv89/vim-interestingwords", config = interestingwords_cfg, event = 'VeryLazy', },
-        { "skywind3000/vim-cppman", config = cppman_cfg, event = 'VeryLazy', },
-        { "dracula/vim", name = "dracula", },
-        { "Yggdroot/LeaderF", build = ":LeaderfInstallCExtension", config = leaderf_cfg, event = 'VeryLazy', },
-    },
-    opts
-})
+    { "SmiteshP/nvim-gps", config = gps_cfg, event = 'VeryLazy', },
+    { "kyazdani42/nvim-web-devicons", event = 'VeryLazy', },
+    { "tpope/vim-endwise", event = 'VeryLazy', },
+    { "scrooloose/nerdcommenter", event = 'VeryLazy', },
+    { "vim-scripts/DoxygenToolkit.vim", event = 'VeryLazy', },
+    { "MattesGroeger/vim-bookmarks", event = 'VeryLazy', },
+    { "tpope/vim-abolish", event = 'VeryLazy', },
+    { "skywind3000/asyncrun.vim", event = 'VeryLazy', },
+    { "mbbill/undotree", event = 'VeryLazy', },
+    { "rcarriga/nvim-notify", event = 'VeryLazy', },
+
+    { "junegunn/fzf.vim", event = 'VeryLazy', },
+    { "junegunn/fzf", dir = "~/.fzf", build = "./install --all", event = 'VeryLazy', },
+    { "antoinemadec/coc-fzf", config = fzf_cfg, event = 'VeryLazy', },
+
+    { "m-pilia/vim-ccls", event = 'VeryLazy', },
+    { "skywind3000/vim-terminal-help", event = 'VeryLazy', },
+    { "mg979/vim-visual-multi", event = 'VeryLazy', },
+    { "voldikss/vim-translator", config = translate_cfg, event = 'VeryLazy', },
+    { "nvim-lualine/lualine.nvim", config = line_cfg, event = 'VeryLazy', },
+    { "sunjon/shade.nvim", config = shade_cfg, event = 'VeryLazy', },
+    { "neoclide/coc.nvim", branch = "release", event = 'VeryLazy', },
+    { "preservim/tagbar", config = tagbar_cfg, event = 'VeryLazy', },
+    { "bagrat/vim-buffet", config = buffet_cfg, event = 'VeryLazy', },
+    { "luochen1990/rainbow", config = rainbow_cfg, event = 'VeryLazy', },
+    { "skywind3000/asynctasks.vim", config = asynctasks_cfg, event = 'VeryLazy', },
+    { "lfv89/vim-interestingwords", config = interestingwords_cfg, event = 'VeryLazy', },
+    { "skywind3000/vim-cppman", config = cppman_cfg, event = 'VeryLazy', },
+    { "Yggdroot/LeaderF", build = ":LeaderfInstallCExtension", config = leaderf_cfg, event = 'VeryLazy', },
+    { 'nvim-treesitter/nvim-treesitter', config = ts_cfg, event = 'VeryLazy', build = ':TSUpdate', },
+}
+
+require("lazy").setup({ spec = plugins, opts })
