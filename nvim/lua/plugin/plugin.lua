@@ -255,9 +255,12 @@ local line_cfg = function()
     local gps = require("nvim-gps")
     require('lualine').setup {
         options = {
-            theme                = dracula,
+            theme                = 'auto',
             section_separators   = { left = ' ', right = ' ' },
             component_separators = { right = ' ', left = ' ' },
+            disabled_filetypes   = { 'coc-explorer', 'tagbar', },
+            always_divide_middle = true,
+            globalstatus         = false,
         },
         sections = {
             lualine_c = { 'filetype' },
@@ -321,6 +324,45 @@ local gps_cfg = function()
         },
     })
 end
+local bufferline_init = function()
+    for i = 1, 9 do
+        vim.keymap.set("n", "<leader>" .. i, function()
+            require("bufferline").go_to_buffer(i, true)
+        end)
+    end
+
+    vim.keymap.set("n", "<leader>" .. 0, function()
+        require("bufferline").go_to_buffer(-1, true)
+    end)
+
+    vim.keymap.set("n", "<Tab>", function()
+        require("bufferline").cycle(1)
+    end)
+    vim.keymap.set("n", "<S-Tab>", function()
+        require("bufferline").cycle(-1)
+    end)
+end
+
+local bufferline_cfg = function()
+    require("bufferline").setup({
+        options = {
+            mode = "buffers",
+            numbers = "ordinal",
+            indicator = { icon = "" },
+            max_name_length = 20,
+            max_prefix_length = 2,
+            modified_icon = "●",
+            persist_buffer_sort = false,
+            show_buffer_close_icons = false,
+            show_buffer_icons = false,
+            show_close_icon = false,
+            name_formatter = function(opts)
+                return string.format("%s", opts.name)
+            end,
+        },
+    })
+end
+
 local opts = {
     defaults = {
         lazy = true
@@ -354,65 +396,20 @@ local plugins = {
     { "tpope/vim-abolish", event = 'VeryLazy', },
     { "skywind3000/asyncrun.vim", event = 'VeryLazy', },
     { "mbbill/undotree", event = 'VeryLazy', },
-    { "rcarriga/nvim-notify", event = 'VeryLazy', },
 
-    { "junegunn/fzf.vim", event = 'VeryLazy', },
-    { "junegunn/fzf", dir = "~/.fzf", build = "./install --all", event = 'VeryLazy', },
-    { "antoinemadec/coc-fzf", config = fzf_cfg, event = 'VeryLazy', },
+    { "junegunn/fzf.vim" },
+    { "junegunn/fzf", dir = "~/.fzf", build = "./install --all" },
+    { "antoinemadec/coc-fzf", config = fzf_cfg },
+    { "neoclide/coc.nvim", branch = "release" },
 
     { "m-pilia/vim-ccls", event = 'VeryLazy', },
     { "skywind3000/vim-terminal-help", event = 'VeryLazy', },
-    { "mg979/vim-visual-multi", event = 'VeryLazy', },
+    { "mg979/vim-visual-multi", event = 'VeryLazy', config = function() vim.g.terminal_list = 0 end },
     { "voldikss/vim-translator", config = translate_cfg, event = 'VeryLazy', },
     { "nvim-lualine/lualine.nvim", config = line_cfg, event = 'VeryLazy', },
     { "sunjon/shade.nvim", config = shade_cfg, event = 'VeryLazy', },
-    { "neoclide/coc.nvim", branch = "release", event = 'VeryLazy', },
     { "preservim/tagbar", config = tagbar_cfg, event = 'VeryLazy', },
-    {
-        "akinsho/nvim-bufferline.lua",
-        event = "VeryLazy",
-        dependencies = { { "nvim-tree/nvim-web-devicons" }, { "catppuccin/nvim" } },
-
-        init = function()
-            for i = 1, 9 do
-                vim.keymap.set("n", "<leader>" .. i, function()
-                    require("bufferline").go_to_buffer(i, true)
-                end)
-            end
-
-            vim.keymap.set("n", "<leader>" .. 0, function()
-                require("bufferline").go_to_buffer(-1, true)
-            end)
-
-            vim.keymap.set("n", "<Tab>", function()
-                require("bufferline").cycle(1)
-            end)
-            vim.keymap.set("n", "<S-Tab>", function()
-                require("bufferline").cycle(-1)
-            end)
-        end,
-
-        config = function()
-            require("bufferline").setup({
-                options = {
-                    mode = "buffers",
-                    numbers = "ordinal",
-                    highlights = require("catppuccin.groups.integrations.bufferline").get(),
-                    indicator = { icon = "" },
-                    max_name_length = 10,
-                    max_prefix_length = 2,
-                    modified_icon = "●",
-                    persist_buffer_sort = false,
-                    show_buffer_close_icons = false,
-                    show_buffer_icons = false,
-                    show_close_icon = false,
-                    name_formatter = function(opts)
-                        return string.format("%s", opts.name)
-                    end,
-                },
-            })
-        end,
-    },
+    { "akinsho/nvim-bufferline.lua", event = "VeryLazy", init = bufferline_init, config = bufferline_cfg },
     { "luochen1990/rainbow", config = rainbow_cfg, event = 'VeryLazy', },
     { "skywind3000/asynctasks.vim", config = asynctasks_cfg, event = 'VeryLazy', },
     { "lfv89/vim-interestingwords", config = interestingwords_cfg, event = 'VeryLazy', },
