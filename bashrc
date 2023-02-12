@@ -77,15 +77,8 @@ export GOPROXY=https://goproxy.cn,direct
 export HOMEBREW_NO_AUTO_UPDATE=1
 [ -z $SSH_TTY ] || PS1='\[\e[0;30m\]\[\e[47m\]SSH\[\e[0m\] '$PS1
 
-# Non-default history file, to avoid accidental truncation.
-[ -f "$HOME/.bash_history_x" ] || { [ -f "$HOME/.bash_history" ] && cp "$HOME/.bash_history" "$HOME/.bash_history_x" ; }
-HISTFILE="$HOME/.bash_history_x"
-HISTCONTROL=erasedups:ignoreboth
 HISTSIZE=99999
 HISTFILESIZE=99999
-HISTIGNORE='exit:cd:ls:bg:fg:history:f:fd'
-HISTTIMEFORMAT='%F %T '
-# append to the history file, don't overwrite it
 shopt -s histappend
 PROMPT_COMMAND='history -a' # append history file after each command
 alias git-ls="\\ls -A --group-directories-first -1 | while IFS= read -r line; do git log --color --format=\"\$(\\ls -d -F --color \"\$line\") =} %C(bold black)▏%Creset%Cred%h %Cgreen(%cr)%Creset =} %C(bold black)▏%Creset%s %C(bold blue)<%an>%Creset\" --abbrev-commit --max-count 1 HEAD -- \"\$line\"; done | awk -F'=}' '{ nf[NR]=NF; for (i = 1; i <= NF; i++) { cell[NR,i] = \$i; gsub(/\\033\\[([[:digit:]]+(;[[:digit:]]+)*)?[mK]/, \"\", \$i); len[NR,i] = l = length(\$i); if (l > max[i]) max[i] = l; } } END { for (row = 1; row <= NR; row++) { for (col = 1; col < nf[row]; col++) printf \"%s%*s%s\", cell[row,col], max[col]-len[row,col], \"\", OFS; print cell[row,nf[row]]; } }'"
