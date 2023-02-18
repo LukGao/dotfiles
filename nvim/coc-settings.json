@@ -65,15 +65,34 @@
         "markdown",
         "json"
     ],
-    "semanticTokens.filetypes": [
-        "c",
-        "cpp",
-        "go",
-        "sh"
-    ],
     "notification.disabledProgressSources": [
         "*"
     ],
+    "go.goplsPath": "~/go/bin/gopls",
+    "go.goplsOptions": {
+        "gofumpt": true,
+        "semanticTokens": true,
+        "staticcheck": true,
+        "completeUnimported": true,
+        "usePlaceholders": true,
+        "hints": {
+            "assignVariableTypes": true,
+            "compositeLiteralFields": true,
+            "compositeLiteralTypes": true,
+            "constantValues": true,
+            "functionTypeParameters": true,
+            "parameterNames": true,
+            "rangeVariableTypes": true
+        },
+        "codelenses": {
+            "gc_details": true,
+            "generate": true,
+            "vendor": true,
+            "regenerate_cgo": true,
+            "tidy": true,
+            "upgrade_dependency": true
+        }
+    },
     "suggest.languageSourcePriority": 99,
     "suggest.triggerCompletionWait": 50,
     "suggest.noselect": true,
@@ -94,6 +113,7 @@
     "clangd.enabled": true,
     "clangd.disableProgressNotifications": true,
     "clangd.inlayHints.enable": true,
+    "semanticTokens.enable": true,
     "inlayHint.enable": false,
     "inlayHint.enableParameter": true,
     "inlayHint.refreshOnInsertMode": true,
