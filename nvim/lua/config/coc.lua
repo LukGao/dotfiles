@@ -39,7 +39,6 @@ keyset("n", "gy", "<Plug>(coc-type-definition)", {silent = true})
 keyset("n", "gi", "<Plug>(coc-implementation)", {silent = true})
 keyset("n", "gr", "<Plug>(coc-references)", {silent = true})
 
-
 -- Use K to show documentation in preview window
 function _G.show_docs()
     local cw = vim.fn.expand('<cword>')
@@ -82,6 +81,8 @@ vim.api.nvim_create_autocmd("User", {
 -- Apply codeAction to the selected region
 -- Example: `<leader>aap` for current paragraph
 local opts = {silent = true, nowait = true}
+
+keyset("n", "<space>o", ":CocOutline<CR>", opts)
 keyset("n", "<leader>rn", "<Plug>(coc-rename)", opts)
 keyset("n", "<localleader>ft", "<Plug>(coc-format)", opts)
 
@@ -137,5 +138,28 @@ keyset("n", "<space>j", ":<C-u>CocNext<cr>", opts)
 -- Do default action for previous item
 keyset("n", "<space>k", ":<C-u>CocPrev<cr>", opts)
 
-vim.g.coc_global_extensions = {'coc-clangd','coc-rust-analyzer','coc-markdownlint','coc-ecdict','coc-go','coc-snippets','coc-cmake','coc-pairs','coc-json','coc-highlight','coc-emoji','coc-lists','coc-yaml','coc-explorer'}
+vim.g.coc_global_extensions = {'coc-clangd','coc-rust-analyzer','coc-markdownlint','coc-ecdict','coc-snippets','coc-cmake','coc-pairs','coc-json','coc-highlight','coc-emoji','coc-lists','coc-yaml','coc-explorer'}
 vim.g.coc_default_semantic_highlight_groups = 1
+
+vim.cmd[[
+autocmd BufEnter * call CheckOutline()
+function! CheckOutline() abort
+if &filetype ==# 'coctree' && winnr('$') == 1
+  if tabpagenr('$') != 1
+    close
+  else
+    bdelete
+  endif
+endif
+endfunction
+
+nnoremap <silent><nowait> <space>o  :call ToggleOutline()<CR>
+  function! ToggleOutline() abort
+    let winid = coc#window#find('cocViewId', 'OUTLINE')
+    if winid == -1
+      call CocActionAsync('showOutline', 1)
+    else
+      call coc#window#close(winid)
+    endif
+endfunction
+]]
