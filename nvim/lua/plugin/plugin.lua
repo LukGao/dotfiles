@@ -63,7 +63,7 @@ local buffet_cfg = function()
     local colors = {
         white = "#abb2bf",
         darker_black = "#1b1f27",
-        black = "#1e222a", --  nvim bg
+        black = "#1e222a",  --  nvim bg
         black2 = "#252931",
         one_bg = "#282c34", -- real bg of onedark
         one_bg2 = "#353b45",
@@ -142,7 +142,6 @@ local buffet_cfg = function()
                 fg = colors.grey_fg,
                 bg = colors.black2,
             },
-
             -- buffers
             buffer_selected = {
                 fg = colors.white,
@@ -154,7 +153,6 @@ local buffet_cfg = function()
                 fg = colors.light_grey,
                 bg = colors.black2,
             },
-
             -- close buttons
             close_button = {
                 fg = colors.light_grey,
@@ -176,7 +174,6 @@ local buffet_cfg = function()
                 fg = colors.blue,
                 bg = colors.black,
             },
-
             -- modified
             modified = {
                 fg = colors.red,
@@ -190,7 +187,6 @@ local buffet_cfg = function()
                 fg = colors.green,
                 bg = colors.black,
             },
-
             -- separators
             separator = {
                 fg = colors.black2,
@@ -266,7 +262,6 @@ local line_cfg = function()
             lualine_x = {
                 { gps.get_location, cond = gps.is_available },
             },
-
             lualine_y = { 'encoding', 'fileformat', 'progress' },
         },
     }
@@ -310,17 +305,17 @@ local ts_cfg = function()
 
     }
     require("nvim-treesitter.install").command_extra_args = {
-        curl = { "--proxy", "172.20.50.180:8889" },
+        curl = { "--proxy", "127.0.0.1:8889" },
     }
 end
 local gps_cfg = function()
     require("nvim-gps").setup({
         icons = {
-            ["class-name"] = ' ', -- Classes and class-like objects
-            ["function-name"] = '', -- Functions
+            ["class-name"] = ' ',  -- Classes and class-like objects
+            ["function-name"] = '',   -- Functions
             ["method-name"] = ' ', -- Methods (functions inside class-like objects)
             ["container-name"] = ' ', -- Containers (example: lua tables)
-            ["tag-name"] = '炙' -- Tags (example: html tags)
+            ["tag-name"] = '炙'      -- Tags (example: html tags)
         },
     })
 end
@@ -332,14 +327,14 @@ local bufferline_init = function()
     end
 
     vim.keymap.set("n", "<leader>" .. 0, function()
-        require("bufferline").go_to_buffer( -1, true)
+        require("bufferline").go_to_buffer(-1, true)
     end)
 
     vim.keymap.set("n", "<Tab>", function()
         require("bufferline").cycle(1)
     end)
     vim.keymap.set("n", "<S-Tab>", function()
-        require("bufferline").cycle( -1)
+        require("bufferline").cycle(-1)
     end)
 end
 
@@ -373,22 +368,23 @@ local telescope_cfg = function()
         },
     })
     require('telescope').load_extension('coc')
+    require("telescope").load_extension("lazygit")
 end
 local cpp_tools_cfg = function()
     require('nvim-treesitter.configs').setup({
         nt_cpp_tools = {
             enable = true,
             preview = {
-                quit = 'q', -- optional keymapping for quit preview
-                accept = '<tab>' -- optional keymapping for accept preview
+                quit = 'q',           -- optional keymapping for quit preview
+                accept = '<tab>'      -- optional keymapping for accept preview
             },
-            header_extension = 'h', -- optional
+            header_extension = 'h',   -- optional
             source_extension = 'cxx', -- optional
-            custom_define_class_function_commands = { -- optional
+            custom_define_class_function_commands = {
+                -- optional
                 TSCppImplWrite = {
                     output_handle = require 'nvim-treesitter.nt-cpp-tools.output_handlers'.get_add_to_cpp()
                 }
-
             }
         }
     })
@@ -416,39 +412,64 @@ local opts = {
     },
 }
 local plugins = {
-    { "dracula/vim",                     name = "dracula", },
-    { "mhinz/vim-startify",              config = startify_cfg },
-    { "SmiteshP/nvim-gps",               config = gps_cfg,                    event = 'VeryLazy', },
-    { "nvim-tree/nvim-web-devicons",     event = 'VeryLazy', },
-    { "tpope/vim-endwise",               event = 'VeryLazy', },
-    { "scrooloose/nerdcommenter",        event = 'VeryLazy', },
-    { "vim-scripts/DoxygenToolkit.vim",  event = 'VeryLazy', },
-    { "MattesGroeger/vim-bookmarks",     event = 'VeryLazy', },
-    { "tpope/vim-abolish",               event = 'VeryLazy', },
-    { "skywind3000/asyncrun.vim",        event = 'VeryLazy', },
-    { "mbbill/undotree",                 event = 'VeryLazy', },
+    { "dracula/vim",                    name = "dracula", },
+    { "mhinz/vim-startify",             config = startify_cfg },
+    { "SmiteshP/nvim-gps",              config = gps_cfg,     event = 'VeryLazy', },
+    { "nvim-tree/nvim-web-devicons",    event = 'VeryLazy', },
+    { "tpope/vim-endwise",              event = 'VeryLazy', },
+    { "scrooloose/nerdcommenter",       event = 'VeryLazy', },
+    { "vim-scripts/DoxygenToolkit.vim", event = 'VeryLazy', },
+    { "MattesGroeger/vim-bookmarks",    event = 'VeryLazy', },
+    { "tpope/vim-abolish",              event = 'VeryLazy', },
+    { "skywind3000/asyncrun.vim",       event = 'VeryLazy', },
+    { "mbbill/undotree",                event = 'VeryLazy', },
     { "nvim-lua/plenary.nvim" },
     { "junegunn/fzf.vim" },
-    { "junegunn/fzf",                    dir = "~/.fzf",                      build = "./install --all" },
-    { "antoinemadec/coc-fzf",            config = fzf_cfg },
-    { "neoclide/coc.nvim",               branch = "release" },
-    { "nvim-telescope/telescope.nvim",   config = telescope_cfg,              dependencies = { 'nvim-lua/plenary.nvim' } },
+    { "junegunn/fzf",                   dir = "~/.fzf",       build = "./install --all" },
+    { "antoinemadec/coc-fzf",           config = fzf_cfg },
+    { "neoclide/coc.nvim",              branch = "release" },
+    {
+        "nvim-telescope/telescope.nvim",
+        config = telescope_cfg,
+        dependencies =
+        { 'nvim-lua/plenary.nvim' },
+        { "kdheepak/lazygit.nvim" }
+    },
     { "fannheyward/telescope-coc.nvim" },
-    { "m-pilia/vim-ccls",                event = 'VeryLazy', },
-    { "skywind3000/vim-terminal-help",   event = 'VeryLazy', },
-    { "mg979/vim-visual-multi",          event = 'VeryLazy',                  config = function() vim.g.terminal_list = 0 end },
-    { "gyl30/translate",                 config = translate_cfg },
-    { "nvim-lualine/lualine.nvim",       config = line_cfg,                   event = 'VeryLazy', },
-    { "sunjon/shade.nvim",               config = shade_cfg,                  event = 'VeryLazy', },
-    { "preservim/tagbar",                config = tagbar_cfg,                 event = 'VeryLazy', },
-    { "akinsho/nvim-bufferline.lua",     event = "VeryLazy",                  init = bufferline_init,                         config = bufferline_cfg },
-    { "luochen1990/rainbow",             config = rainbow_cfg,                event = 'VeryLazy', },
-    { "skywind3000/asynctasks.vim",      config = asynctasks_cfg,             event = 'VeryLazy', },
-    { "lfv89/vim-interestingwords",      config = interestingwords_cfg,       event = 'VeryLazy', },
-    { "skywind3000/vim-cppman",          config = cppman_cfg,                 event = 'VeryLazy', },
-    { "Yggdroot/LeaderF",                build = ":LeaderfInstallCExtension", config = leaderf_cfg,                           event = 'VeryLazy', },
-    { 'nvim-treesitter/nvim-treesitter', config = ts_cfg,                     event = 'VeryLazy',                             build = ':TSUpdate', },
+    { "m-pilia/vim-ccls",              event = 'VeryLazy', },
+    { "skywind3000/vim-terminal-help", event = 'VeryLazy', },
+    { "mg979/vim-visual-multi",        event = 'VeryLazy',    config = function() vim.g.terminal_list = 0 end },
+    { "gyl30/translate",               config = translate_cfg },
+    { "nvim-lualine/lualine.nvim",     config = line_cfg,     event = 'VeryLazy', },
+    { "sunjon/shade.nvim",             config = shade_cfg,    event = 'VeryLazy', },
+    { "preservim/tagbar",              config = tagbar_cfg,   event = 'VeryLazy', },
+    {
+        "akinsho/nvim-bufferline.lua",
+        event = "VeryLazy",
+        init = bufferline_init,
+        config =
+            bufferline_cfg
+    },
+    { "luochen1990/rainbow",        config = rainbow_cfg,          event = 'VeryLazy', },
+    { "skywind3000/asynctasks.vim", config = asynctasks_cfg,       event = 'VeryLazy', },
+    { "lfv89/vim-interestingwords", config = interestingwords_cfg, event = 'VeryLazy', },
+    { "skywind3000/vim-cppman",     config = cppman_cfg,           event = 'VeryLazy', },
+    {
+        "Yggdroot/LeaderF",
+        build = ":LeaderfInstallCExtension",
+        config = leaderf_cfg,
+        event =
+        'VeryLazy',
+    },
+    {
+        'nvim-treesitter/nvim-treesitter',
+        config = ts_cfg,
+        event = 'VeryLazy',
+        build =
+        ':TSUpdate',
+    },
     { "Badhi/nvim-treesitter-cpp-tools", config = cpp_tools_cfg },
+    { "rcarriga/nvim-notify" },
 }
 
 require("lazy").setup({ spec = plugins, opts })
