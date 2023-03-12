@@ -51,7 +51,6 @@ if [ -n "$BASH_VERSION" ]; then
 fi
 
 [ -f ~/.fzf.bash  ] && source ~/.fzf.bash
-eval "$(lua ~/.z.lua/z.lua --init bash once enhanced echo fzf)"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export BAT_THEME="Dracula"
 export FZF_DEFAULT_OPTS="--ansi --preview-window 'right:60%' --layout reverse --margin=1,4 --preview '(bat --color=always --style=numbers,grid --line-range :300 {}) 2>/dev/null'"
@@ -82,3 +81,4 @@ HISTFILESIZE=99999
 shopt -s histappend
 PROMPT_COMMAND='history -a' # append history file after each command
 alias git-ls="\\ls -A --group-directories-first -1 | while IFS= read -r line; do git log --color --format=\"\$(\\ls -d -F --color \"\$line\") =} %C(bold black)▏%Creset%Cred%h %Cgreen(%cr)%Creset =} %C(bold black)▏%Creset%s %C(bold blue)<%an>%Creset\" --abbrev-commit --max-count 1 HEAD -- \"\$line\"; done | awk -F'=}' '{ nf[NR]=NF; for (i = 1; i <= NF; i++) { cell[NR,i] = \$i; gsub(/\\033\\[([[:digit:]]+(;[[:digit:]]+)*)?[mK]/, \"\", \$i); len[NR,i] = l = length(\$i); if (l > max[i]) max[i] = l; } } END { for (row = 1; row <= NR; row++) { for (col = 1; col < nf[row]; col++) printf \"%s%*s%s\", cell[row,col], max[col]-len[row,col], \"\", OFS; print cell[row,nf[row]]; } }'"
+eval "$(lua ~/.z.lua/z.lua --init bash once enhanced echo fzf)"
