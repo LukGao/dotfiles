@@ -101,6 +101,9 @@ local disabled_plugins = {
 for _, plugin in pairs(disabled_plugins) do
 	vim.g['loaded_' .. plugin] = 1
 end
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_node_provider = 0
 
 vim.g.python_host_prog = '/user/bin/python'
 vim.g.python3_host_prog = '/usr/bin/python3'
