@@ -390,6 +390,7 @@ local cpp_tools_cfg = function()
     })
 end
 
+local lazygit_cfg = function() vim.cmd [[ nnoremap <silent> <localleader>n :LazyGit<CR> ]] end
 
 local opts = {
     defaults = {
@@ -433,8 +434,8 @@ local plugins = {
         config = telescope_cfg,
         dependencies =
         { 'nvim-lua/plenary.nvim' },
-        { "kdheepak/lazygit.nvim" }
     },
+    { "kdheepak/lazygit.nvim",         config = lazygit_cfg },
     { "fannheyward/telescope-coc.nvim" },
     { "m-pilia/vim-ccls",              event = 'VeryLazy', },
     { "skywind3000/vim-terminal-help", event = 'VeryLazy', },
