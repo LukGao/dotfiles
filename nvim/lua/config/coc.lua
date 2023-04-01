@@ -138,8 +138,15 @@ keyset("n", "<space>j", ":<C-u>CocNext<cr>", opts)
 -- Do default action for previous item
 keyset("n", "<space>k", ":<C-u>CocPrev<cr>", opts)
 
-vim.g.coc_global_extensions = {'coc-clangd','coc-rust-analyzer','coc-markdownlint','coc-ecdict','coc-snippets','coc-cmake','coc-pairs','coc-json','coc-highlight','coc-emoji','coc-lists','coc-yaml','coc-explorer'}
+vim.g.coc_global_extensions = {'coc-clangd','coc-go','coc-rust-analyzer','coc-markdownlint','coc-ecdict','coc-snippets','coc-cmake','coc-pairs','coc-json','coc-highlight','coc-emoji','coc-lists','coc-yaml','coc-explorer'}
+
 vim.g.coc_default_semantic_highlight_groups = 1
+
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+	pattern = "*.go",
+	command = ":silent call CocAction('runCommand', 'editor.action.organizeImport')"
+})
 
 vim.cmd[[
 autocmd BufEnter * call CheckOutline()

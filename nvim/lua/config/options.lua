@@ -114,6 +114,6 @@ if vim.fn.empty(vim.fn.glob('/opt/rh/rh-python38/root/bin/python')) == 0 then
 end
 
 if vim.loop.os_uname().sysname == 'Darwin' then
-    vim.g.python_host_prog = '/user/local/bin/python'
     vim.g.python3_host_prog = '/usr/local/bin/python3'
 end
+
