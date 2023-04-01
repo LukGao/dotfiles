@@ -247,7 +247,6 @@ vim.api.nvim_create_autocmd('User', {
 
 local line_cfg = function()
     local dracula = require 'lualine.themes.dracula'
-    local gps = require("nvim-gps")
     require('lualine').setup {
         options = {
             theme                = 'auto',
@@ -260,7 +259,6 @@ local line_cfg = function()
         sections = {
             lualine_c = { 'filetype' },
             lualine_x = {
-                { gps.get_location, cond = gps.is_available },
             },
             lualine_y = { 'encoding', 'fileformat', 'progress' },
         },
@@ -294,31 +292,7 @@ local translate_cfg = function()
         command! TranslateV lua require("translate").translateV()
     ]]
 end
-local ts_cfg = function()
-    require 'nvim-treesitter.configs'.setup {
-        ensure_installed = { "c", "cpp", "go", "lua", "help" },
-        sync_install = false,
-        auto_install = true,
-        highlight = {
-            enable = false,
-        },
 
-    }
-    require("nvim-treesitter.install").command_extra_args = {
-        curl = { "--proxy", "127.0.0.1:8889" },
-    }
-end
-local gps_cfg = function()
-    require("nvim-gps").setup({
-        icons = {
-            ["class-name"] = ' ',  -- Classes and class-like objects
-            ["function-name"] = '',   -- Functions
-            ["method-name"] = ' ', -- Methods (functions inside class-like objects)
-            ["container-name"] = ' ', -- Containers (example: lua tables)
-            ["tag-name"] = '炙'      -- Tags (example: html tags)
-        },
-    })
-end
 local bufferline_init = function()
     for i = 1, 9 do
         vim.keymap.set("n", "<leader>" .. i, function()
@@ -370,25 +344,6 @@ local telescope_cfg = function()
     require('telescope').load_extension('coc')
     require("telescope").load_extension("lazygit")
 end
-local cpp_tools_cfg = function()
-    require('nvim-treesitter.configs').setup({
-        nt_cpp_tools = {
-            enable = true,
-            preview = {
-                quit = 'q',           -- optional keymapping for quit preview
-                accept = '<tab>'      -- optional keymapping for accept preview
-            },
-            header_extension = 'h',   -- optional
-            source_extension = 'cxx', -- optional
-            custom_define_class_function_commands = {
-                -- optional
-                TSCppImplWrite = {
-                    output_handle = require 'nvim-treesitter.nt-cpp-tools.output_handlers'.get_add_to_cpp()
-                }
-            }
-        }
-    })
-end
 
 local lazygit_cfg = function() vim.cmd [[ nnoremap <silent> <localleader>n :LazyGit<CR> ]] end
 
@@ -415,7 +370,6 @@ local opts = {
 local plugins = {
     { "dracula/vim",                    name = "dracula", },
     { "mhinz/vim-startify",             config = startify_cfg },
-    { "SmiteshP/nvim-gps",              config = gps_cfg,     event = 'VeryLazy', },
     { "nvim-tree/nvim-web-devicons",    event = 'VeryLazy', },
     { "tpope/vim-endwise",              event = 'VeryLazy', },
     { "scrooloose/nerdcommenter",       event = 'VeryLazy', },
@@ -462,14 +416,6 @@ local plugins = {
         event =
         'VeryLazy',
     },
-    {
-        'nvim-treesitter/nvim-treesitter',
-        config = ts_cfg,
-        event = 'VeryLazy',
-        build =
-        ':TSUpdate',
-    },
-    { "Badhi/nvim-treesitter-cpp-tools", config = cpp_tools_cfg },
     { "rcarriga/nvim-notify" },
 }
 
