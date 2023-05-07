@@ -193,6 +193,9 @@
     "snippets.ultisnips.directories": [
         "~/.config/nvim/snippets"
     ],
+    "Lua.diagnostics.globals": [
+        "vim"
+    ],
     "outline.keepWindow": true,
     "outline.sortBy": "position",
     "outline.splitCommand": "botright 40vs",
