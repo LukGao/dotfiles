@@ -244,6 +244,12 @@ vim.api.nvim_create_autocmd('User', {
         ]]
     end,
 })
+function _G.symbol_line()
+  local curwin = vim.g.statusline_winid or 0
+  local curbuf = vim.api.nvim_win_get_buf(curwin)
+  local ok, line = pcall(vim.api.nvim_buf_get_var, curbuf, 'coc_symbol_line')
+  return ok and line or ''
+end
 
 local line_cfg = function()
     local dracula = require 'lualine.themes.dracula'
@@ -259,6 +265,7 @@ local line_cfg = function()
         sections = {
             lualine_c = { 'filetype' },
             lualine_x = {
+                'symbol_line()'
             },
             lualine_y = { 'encoding', 'fileformat', 'progress' },
         },
