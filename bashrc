@@ -53,7 +53,7 @@ fi
 [ -f ~/.fzf.bash  ] && source ~/.fzf.bash
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export BAT_THEME="Dracula"
-export FZF_DEFAULT_OPTS="--ansi --preview-window 'right:60%' --layout reverse --margin=1,4 --preview '(bat --color=always --style=numbers,grid --line-range :300 {}) 2>/dev/null'"
+export FZF_DEFAULT_OPTS="--ansi  --layout reverse"
 export FZF_DEFAULT_COMMAND="fd --exclude={.git,.idea,.vscode,.sass-cache,node_modules,build} --type f"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="rg --sort-files --files --null 2> /dev/null | xargs -0 dirname | uniq"
