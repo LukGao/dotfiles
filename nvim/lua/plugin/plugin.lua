@@ -12,27 +12,41 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local cppman_cfg = function() vim.cmd [[ autocmd FileType c,cpp setlocal keywordprg=:Cppman ]] end
-
 local leaderf_cfg = function()
-    vim.g.Lf_GtagsAutoGenerate = 1
-    vim.g.Lf_Gtagslabel = 'native-pygments'
-    vim.g.Lf_UseCache = 0
-    vim.g.Lf_HideHelp = 1
-    vim.g.Lf_MruMaxFiles = 2048
-    vim.g.Lf_WindowHeight = 0.30
-    vim.g.Lf_UseMemoryCache = 0
-    vim.g.Lf_ShowRelativePath = 0
-    vim.g.Lf_UseVersionControlTool = 0
+    vim.g.Lf_GtagsAutoGenerate       = 1
+    vim.g.Lf_Gtagslabel              = "native-pygments"
+    vim.g.Lf_UseCache                = 0
+    vim.g.Lf_HideHelp                = 1
+    vim.g.Lf_MruMaxFiles             = 2048
+    vim.g.Lf_WindowHeight            = 0.30
+    vim.g.Lf_UseMemoryCache          = 0
+    vim.g.Lf_ShowRelativePath        = 0
+    vim.g.Lf_UseVersionControlTool   = 0
     vim.g.Lf_IgnoreCurrentBufferName = 1
-    vim.g.Lf_PreviewResult = { Function = 0, BufTag = 0 }
-    vim.g.Lf_StlSeparator = { left = '', right = '', font = '' }
-    vim.g.Lf_WildIgnore = {
-        dir = { '.git', '.clangd', '.svn', '.hg', '.cache', '.build', '.deps', '.ccls-cache', 'build' },
-        file = { '*.exe', '*.o', '*.a', '*.so', '*.py[co]', '*.sw?', '*.bak', '*.d', '*.idx', "*.lint", '*.gcno' }
+    vim.g.Lf_WindowPosition          = 'bottom'
+    vim.g.Lf_PopupShowStatusline     = 0
+    vim.g.Lf_PopupShowBorder         = 0
+    vim.g.Lf_PopupWidth              = 0.8
+    vim.g.Lf_PopupPosition           = { 0, 0 }
+    vim.g.Lf_StlSeparator            = { left = "", right = "" }
+    vim.g.Lf_PopupPreviewPosition    = 'top'
+    vim.g.Lf_PreviewResult           = {
+        File = 0,
+        Mru = 0,
+        Tag = 0,
+        Function = 0,
+        BufTag = 0,
+        Colorscheme = 0,
+        Line = 0,
+        Rg = 0
     }
-    vim.g.Lf_WorkingDirectoryMode = 'AF'
-    vim.g.Lf_RootMarkers = { '.git', '.svn', '.hg', '.project', '.root' }
-    vim.g.Lf_NormalMap = {
+    vim.g.Lf_WildIgnore              = {
+        dir = { ".git", ".clangd", ".svn", ".hg", ".cache", ".build", ".deps", ".ccls-cache", "build" },
+        file = { "*.exe", "*.o", "*.a", "*.so", "*.py[co]", "*.sw?", "*.bak", "*.d", "*.idx", "*.lint", "*.gcno" },
+    }
+    vim.g.Lf_WorkingDirectoryMode    = "AF"
+    vim.g.Lf_RootMarkers             = { ".git", ".svn", ".hg", ".project", ".root" }
+    vim.g.Lf_NormalMap               = {
         File = { { "<ESC>", ':exec g:Lf_py "fileExplManager.quit()"<CR>' } },
         Buffer = { { "<ESC>", ':exec g:Lf_py "bufExplManager.quit()"<CR>' } },
         Mru = { { "<ESC>", ':exec g:Lf_py "mruExplManager.quit()"<CR>' } },
@@ -41,8 +55,11 @@ local leaderf_cfg = function()
         Colorscheme = { { "<ESC>", ':exec g:Lf_py "colorschemeExplManager.quit()"<CR>' } },
     }
     vim.cmd [[
-    nnoremap <silent> <space>f :LeaderfFunction<cr>
-    nnoremap <silent> <localleader>m :LeaderfMru<cr>
+        nnoremap <silent><nowait> <localleader>f :LeaderfFunction<cr>
+        nnoremap <silent><nowait> <localleader>m :LeaderfMru<cr>
+        nnoremap <silent><nowait> <C-p> :LeaderfFile<cr>
+        nnoremap <silent><nowait> <leader>fh :LeaderfHelp<cr>
+        nnoremap <silent><nowait> <leader>fl :LeaderfLine<cr>
     ]]
 end
 local interestingwords_cfg = function()
@@ -118,12 +135,8 @@ local buffet_cfg = function()
             close_icon = '',
             left_trunc_marker = '',
             right_trunc_marker = '',
-            -- display buffer group by tabpage
-            -- custom_filter = function(buf_id)
-            --   return vim.tbl_contains(vim.fn.tabpagebuflist(), buf_id)
-            -- end,
             max_name_length = 20,
-            max_prefix_length = 15, -- prefix used when a buffer is de-duplicated
+            max_prefix_length = 15,
             tab_size = 15,
             diagnostics = false,
             offsets = { { filetype = 'NvimTree', text = 'File Explorer', highlight = 'Directory' } },
@@ -245,10 +258,10 @@ vim.api.nvim_create_autocmd('User', {
     end,
 })
 function _G.symbol_line()
-  local curwin = vim.g.statusline_winid or 0
-  local curbuf = vim.api.nvim_win_get_buf(curwin)
-  local ok, line = pcall(vim.api.nvim_buf_get_var, curbuf, 'coc_symbol_line')
-  return ok and line or ''
+    local curwin = vim.g.statusline_winid or 0
+    local curbuf = vim.api.nvim_win_get_buf(curwin)
+    local ok, line = pcall(vim.api.nvim_buf_get_var, curbuf, 'coc_symbol_line')
+    return ok and line or ''
 end
 
 local line_cfg = function()
@@ -386,9 +399,6 @@ local plugins = {
     { "skywind3000/asyncrun.vim",       event = 'VeryLazy', },
     { "mbbill/undotree",                event = 'VeryLazy', },
     { "nvim-lua/plenary.nvim" },
-    { "junegunn/fzf.vim" },
-    { "junegunn/fzf",                   dir = "~/.fzf",       build = "./install --all" },
-    { "antoinemadec/coc-fzf",           config = fzf_cfg },
     { "neoclide/coc.nvim",              branch = "release" },
     {
         "nvim-telescope/telescope.nvim",
@@ -420,8 +430,11 @@ local plugins = {
         "Yggdroot/LeaderF",
         build = ":LeaderfInstallCExtension",
         config = leaderf_cfg,
-        event =
-        'VeryLazy',
+        init = function()
+            vim.g.Lf_ShortcutF = ""
+            vim.g.Lf_ShortcutB = ""
+        end,
+        event = 'VeryLazy',
     },
     { "rcarriga/nvim-notify" },
 }
