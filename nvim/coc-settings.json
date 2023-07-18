@@ -61,10 +61,9 @@
         "n": "addFile",
         "N": "addDirectory"
     },
-    "coc.preferences.formatOnSaveFiletypes": [
-        "markdown",
-        "json"
-    ],
+    "coc.preferences.formatOnSave": true,
+    "coc.preferences.formatOnType": true,
+    "coc.preferences.bracketEnterImprove": true,
     "notification.disabledProgressSources": [
         "*"
     ],
