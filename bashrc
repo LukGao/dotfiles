@@ -49,14 +49,13 @@ if [ -n "$BASH_VERSION" ]; then
         export PS1='\[\e[38;5;135m\]•\[\e[0m\] •\[\e[38;5;166m\] •\[\e[0m\] \[\e[32m\]$(_fish_collapsed_pwd)\[\e[0m\] \[\e[32m\]➜\[\e[0m\] '
     fi
 fi
-
+export RUNEWIDTH_EASTASIAN=0
 [ -f ~/.fzf.bash  ] && source ~/.fzf.bash
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export BAT_THEME="Dracula"
-export FZF_DEFAULT_OPTS="--ansi  --layout reverse"
-export FZF_DEFAULT_COMMAND="fd --exclude={.git,.idea,.vscode,.sass-cache,node_modules,build} --type f"
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_ALT_C_COMMAND="rg --sort-files --files --null 2> /dev/null | xargs -0 dirname | uniq"
+export FZF_DEFAULT_COMMAND='fd -type f --color=always --follow --hidden --exclude .git'
+export FZF_DEFAULT_OPTS="--no-info --no-scrollbar --height 60% --layout=reverse --ansi --border=none"
+export FZF_CTRL_T_OPTS="--no-info --no-scrollbar --height 60% --layout=reverse --ansi --border=none --preview 'bat -n --color=always --line-range=:500 {}'"
 
 alias zc='z -c'      # 严格匹配当前路径的子路径
 alias zf='z -I'      # 使用 fzf 对多个结果进行选择
