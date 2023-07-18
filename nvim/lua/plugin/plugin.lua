@@ -403,8 +403,7 @@ local plugins = {
     {
         "nvim-telescope/telescope.nvim",
         config = telescope_cfg,
-        dependencies =
-        { 'nvim-lua/plenary.nvim' },
+        dependencies = { 'nvim-lua/plenary.nvim' },
     },
     { "kdheepak/lazygit.nvim",         config = lazygit_cfg },
     { "fannheyward/telescope-coc.nvim" },
@@ -435,6 +434,11 @@ local plugins = {
             vim.g.Lf_ShortcutB = ""
         end,
         event = 'VeryLazy',
+    },
+    {
+        "antoinemadec/coc-fzf",
+        config = fzf_cfg,
+        dependencies = { "junegunn/fzf", "junegunn/fzf.vim" },
     },
     { "rcarriga/nvim-notify" },
 }
