@@ -315,12 +315,12 @@ end
 
 local bufferline_init = function()
     for i = 1, 9 do
-        vim.keymap.set("n", "<leader>" .. i, function()
+        vim.keymap.set("n", "," .. i, function()
             require("bufferline").go_to_buffer(i, true)
         end)
     end
 
-    vim.keymap.set("n", "<leader>" .. 0, function()
+    vim.keymap.set("n", "," .. 0, function()
         require("bufferline").go_to_buffer(-1, true)
     end)
 
