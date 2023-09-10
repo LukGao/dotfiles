@@ -50,10 +50,9 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 export RUNEWIDTH_EASTASIAN=0
-[ -f ~/.fzf.bash  ] && source ~/.fzf.bash
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export BAT_THEME="Dracula"
-export FZF_DEFAULT_COMMAND='fd -type f --color=always --follow --hidden --exclude .git'
+export FZF_DEFAULT_COMMAND="fd --exclude={.git,.idea,.vscode,.sass-cache,node_modules,build} --type f"
 export FZF_DEFAULT_OPTS="--no-info --no-scrollbar --height 60% --layout=reverse --ansi --border=none"
 export FZF_CTRL_T_OPTS="--no-info --no-scrollbar --height 60% --layout=reverse --ansi --border=none --preview 'bat -n --color=always --line-range=:500 {}'"
 
@@ -72,7 +71,7 @@ alias unproxy='unset all_proxy'
 export PATH="$HOME/go/bin:$PATH"
 export GO111MODULE=on
 export GOPROXY=https://goproxy.cn,direct
-export HOMEBREW_NO_AUTO_UPDATE=1
+
 [ -z $SSH_TTY ] || PS1='\[\e[0;30m\]\[\e[47m\]SSH\[\e[0m\] '$PS1
 
 HISTSIZE=99999
