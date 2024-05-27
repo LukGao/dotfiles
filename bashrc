@@ -95,7 +95,7 @@ alias proxy='export all_proxy=socks5://127.0.0.1:1080'
 alias unproxy='unset all_proxy'
 
 # golang
-if command -v go &> /dev/null
+if command -v go &> /dev/null;then
     export PATH="$HOME/go/bin:$PATH"
     export GO111MODULE=on
     export GOPROXY=https://goproxy.cn,direct
