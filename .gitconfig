@@ -1,16 +1,16 @@
-[http]
+[http "https://github.com"]
     proxy = socks5h://127.0.0.1:1080
 [alias]
     tree = log --graph --all --relative-date --abbrev-commit --format=\"%x09 %h %Cgreen%cd%Creset [%Cblue%cn%Creset] %C(auto)%d%Creset %s\"
     l  = log --graph --oneline --decorate
     ld = log --graph --pretty=format:'%C(yellow)%h%C(bold black white)%d%Creset %s %C(bold green)%cr %Creset%C(white)%an' --abbrev-commit --date=relative
     ll = log --stat --decorate --source -p
+    ls = log --graph --all --pretty=format:'%C(auto)%h%d %s %C(green)(%ar)%Creset %C(blue)<%an>%Creset' --abbrev-commit --date=relative
 [core]
-	editor = nvim
+    editor = nvim
 [credential]
-	helper = store
+    helper = store
 [color]
-  # default in Git ≥ 1.8.4
   ui = auto
 [color "branch"]
   current   = bold white green
@@ -18,10 +18,8 @@
   remote    = bold magenta
   upstream  = bold cyan
 [color "status"]
-  # staged changes
   added     = bold green
   updated   = bold white green
-  # un-staged changes
   changed   = bold yellow
   untracked = bold cyan
   nobranch  = bold red white
@@ -30,7 +28,4 @@
   frag = bold magenta
   old  = bold red
   new  = bold green
-  #NOTE: whitespace is highlighted only on new lines, not removed/old.
-  #Use "git diff -R" to reverse the diff to see removed whitespace.
   whitespace = bold red white
-
