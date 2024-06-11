@@ -1,102 +1,100 @@
 local wezterm = require 'wezterm'
-local hostname = wezterm.hostname()
 
 local format_tab_title = function(tab, tabs, panes, config, hover, max_width)
-
     local symbolic = " ○ "
     if tab.is_active then
         symbolic = "   "
     end
-
     local title = tab.active_pane.title
-    --local title = "\x1b]0;wezterm\x1b\\"
-    --return { { Text = title } }
     return { { Text = symbolic .. title .. " " } }
 end
 
-local update_right_status = function(window, pane)
-
-    local cwd = " " ..pane:get_current_working_dir():sub(8).." "
-
-    local hostname = " "..wezterm.hostname().." "
-
-    local datetime = "   " .. wezterm.strftime("%F %H:%M")
-
-    local weekday = wezterm.strftime("%A")
-
-    local bat = ''
-    for _, b in ipairs(wezterm.battery_info()) do
-        bat = '🔋 ' .. string.format('%.0f%%', b.state_of_charge * 100)
-    end
-
-    window:set_right_status(wezterm.format { { Text = bat .. '    ' .. datetime .. '   |   ' .. weekday ..'  '}, })
-end
 
 local format_windos_title = function(tab, pane, tabs, panes, config)
-
-    local index = tab.tab_index + 1
-
-    return tab.active_pane.title .. " | " .. hostname
+    local datetime = wezterm.strftime("%F %H:%M")
+    return tab.active_pane.title .. " | " .. datetime
 end
 
-wezterm.on('format-window-title',format_windos_title )
+wezterm.on('format-window-title', format_windos_title)
 
-wezterm.on("format-tab-title",format_tab_title)
+wezterm.on("format-tab-title", format_tab_title)
 
-wezterm.on("update-right-status",update_right_status)
+local key_binddings = {
+    { key = 'p', mods = 'ALT', action = wezterm.action.ToggleFullScreen, },
+    { key = 'v', mods = 'ALT', action = wezterm.action.PasteFrom 'Clipboard' },
+    { key = "t", mods = "ALT", action = wezterm.action { SpawnTab = "CurrentPaneDomain" } },
+    -- { key = 'o', mods = 'LEADER|CTRL', action = wezterm.action.SendString '\x0f', },
+}
+
+
+for i = 1, 9 do
+    table.insert(key_binddings, {
+        key = tostring(i),
+        mods = 'ALT',
+        action = wezterm.action.ActivateTab(i - 1),
+    })
+    table.insert(key_binddings, {
+        key = tostring(i),
+        mods = 'LEADER',
+        action = wezterm.action.MoveTab(i - 1),
+    })
+end
+table.insert(key_binddings, {
+    key = 's',
+    mods = 'LEADER',
+    action = wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' },
+})
+table.insert(key_binddings, {
+    key = 'v',
+    mods = 'LEADER',
+    action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' },
+})
+table.insert(key_binddings, {
+    key = 'h', --左侧的分屏窗口
+    mods = 'LEADER',
+    action = wezterm.action.ActivatePaneDirection 'Left',
+})
+table.insert(key_binddings, {
+    key = 'l', --左侧的分屏窗口
+    mods = 'LEADER',
+    action = wezterm.action.ActivatePaneDirection 'Right',
+})
+
+table.insert(key_binddings, {
+    key = 'k', -- 上侧的分屏窗口
+    mods = 'LEADER',
+    action = wezterm.action.ActivatePaneDirection 'Up',
+})
+
+table.insert(key_binddings, {
+    key = 'j', -- 下侧的分屏窗口
+    mods = 'LEADER',
+    action = wezterm.action.ActivatePaneDirection 'Down',
+})
+mouse_bindings = {
+    {
+        event = { Up = { streak = 1, button = "Left" } },
+        mods = "NONE",
+        action = wezterm.action { CompleteSelection = "Clipboard" }
+    },
+    {
+        event = { Up = { streak = 1, button = "Left" } },
+        mods = "CTRL",
+        action = "OpenLinkAtMouseCursor"
+    }
+}
 
 return {
     check_for_updates = false,
     color_scheme = "Dracula",
-    font = wezterm.font("JetBrainsMono Nerd Font"),
-    font_size = 16,
-    window_decorations = "NONE",
+    -- font = wezterm.font("Ubuntu Nerd Font"),
+    font_size = 18,
+    -- window_decorations = "NONE",
     enable_tab_bar = true,
     hide_tab_bar_if_only_one_tab = true,
     window_padding = { left = 0, right = 0, top = 0, bottom = 0 },
     adjust_window_size_when_changing_font_size = false,
-    leader = {key='o', mods='CTRL', timeout_milliseconds=1000},
-    keys = {
-        { key = 'o', mods = 'LEADER|CTRL', action = wezterm.action.SendString '\x0f', },
-        { key = 'p', mods = 'ALT', action = wezterm.action.ToggleFullScreen, },
-        { key = 'v', mods = 'ALT',          action = wezterm.action.PasteFrom 'Clipboard' },
-        { key = 'l', mods = 'ALT', action = wezterm.action.ShowLauncher },
-        { key = "c", mods = "LEADER",       action=wezterm.action{SpawnTab="CurrentPaneDomain"}},
-        { key = "1", mods = "ALT",       action=wezterm.action{ActivateTab=0}},
-        { key = "2", mods = "ALT",       action=wezterm.action{ActivateTab=1}},
-        { key = "3", mods = "ALT",       action=wezterm.action{ActivateTab=2}},
-        { key = "4", mods = "ALT",       action=wezterm.action{ActivateTab=3}},
-        { key = "5", mods = "ALT",       action=wezterm.action{ActivateTab=4}},
-        { key = "6", mods = "ALT",       action=wezterm.action{ActivateTab=5}},
-        { key = "7", mods = "ALT",       action=wezterm.action{ActivateTab=6}},
-        { key = "8", mods = "ALT",       action=wezterm.action{ActivateTab=7}},
-        { key = "9", mods = "ALT",       action=wezterm.action{ActivateTab=8}},
-        {key="1", mods="LEADER", action=wezterm.action{MoveTab=0}},
-        {key="2", mods="LEADER", action=wezterm.action{MoveTab=1}},
-        {key="3", mods="LEADER", action=wezterm.action{MoveTab=2}},
-        {key="4", mods="LEADER", action=wezterm.action{MoveTab=3}},
-        {key="5", mods="LEADER", action=wezterm.action{MoveTab=4}},
-        {key="6", mods="LEADER", action=wezterm.action{MoveTab=5}},
-        {key="7", mods="LEADER", action=wezterm.action{MoveTab=6}},
-        {key="8", mods="LEADER", action=wezterm.action{MoveTab=7}},
-        {key="9", mods="LEADER", action=wezterm.action{MoveTab=8}},
-        {key="0", mods="LEADER", action=wezterm.action{MoveTab=9}},
-    },
-    mouse_bindings = {
-        {
-            event = {Down = {streak = 1, button = "Right"}},
-            mods = "NONE",
-            action = wezterm.action {PasteFrom = "Clipboard"}
-        },
-        {
-            event = {Up = {streak = 1, button = "Left"}},
-            mods = "NONE",
-            action = wezterm.action {CompleteSelection = "Clipboard"}
-        },
-        {
-            event = {Up = {streak = 1, button = "Left"}},
-            mods = "CTRL",
-            action = "OpenLinkAtMouseCursor"
-        }
-    },
+    leader = { key = 'o', mods = 'ALT', timeout_milliseconds = 500 },
+    keys = key_binddings,
+    mouse_bindings = mouse_bindings,
 }
